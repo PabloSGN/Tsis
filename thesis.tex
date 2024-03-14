@@ -35,7 +35,7 @@
  % %%% Z
 
 
-\title{The Title of your PhD Thesis}
+\title{Observing the Sun: From start to finish. }
 \author{Pablo Santamarina Guerrero}
 \date{\today}
 \institution{%
@@ -61,7 +61,7 @@
 \cleardoublepage
 
 \chapter*{Acknowledgements}
-
+dkshfgsidgfisgdfisdfs
 Agradecimientos
 
 \chapter*{Resumen}
@@ -74,8 +74,6 @@ Summary of the thesis
 
 \tableofcontents
 
-
-
 \mainmatter % Now Use Arabic numerals for page numbers
 \chapter{Introduction}
 
@@ -83,16 +81,110 @@ Summary of the thesis
 
 \chapter{Designing and callibrating an instrument.}
 
+\section{Spectropolarimeters: TuMag's design}
+\section{Calibration of TuMag}
+
 \chapter{Operation and data reduction.}
+
+\section{TuMag's Observation modes and data reduction.}
+\section{Challenges in data reduction: Etalon Cavity Map.}
 
 \chapter{Scientific exploitation.}
 
-In this thesis \dots
+
+
+
+\section{Persistent Homology in Solar Magnetograms.}
+
+\subsection{Persistent Homology}
+
+Persistent homology stands out as a prominent technique within the topological data analysis toolkit, primarily for its capacity to capture the shape and distribution information of a dataset. The algorithm is rooted in the mathematical framework of homology groups. In topology, these groups measure the number of $n$-dimensional holes in a data set, or in other words, the number of connected components for a  $0^{th}$ dimensional analysis, holes or rings for a $1^{st}$ dimensional analysis, spherical voids for the $2^{nd}$ dimensional analysis, and so on. 
+
+The primary objective of persistent homology is not only to compute the homology groups of a given dataset but also to study how they vary at different scales. To achieve this, the input data undergoes a process of division into a series of sequential subspaces, with each subspace encompassing the previous one. This sequential process, known as filtration, begins with a starting subspace comprising a single point from the original dataset. Subsequent subspaces are then constructed by incrementally adding points to the previous subspace until the final subspace includes all points of the original dataset. 
+
+After the filtration process is performed, persistent homology algorithms shift their focus to analyzing the evolution of topological features across the different subspaces. Specifically, they record the filtration value at which a new feature appears, meaning that it is absent in the previous subspace, and when it disappears, meaning that it is no longer present in the following subspaces. These two events are known as the birth and death of a topological feature, respectively. 
+
+In a nutshell, the $n$-dimensional persistent homology of a dataset with a given filtration can be described as the aggregation of all n-dimensional features (homology groups) that were created (birth) and subsequently eliminated (death) during the filtration process \citep{ph_filtration}.
+
+When applying persistent homology on a greyscale image, our focus lies in filtering the data according to the pixel values. Multiple filtering approaches exist, with the most extended ones being sublevel and superlevel filtrations, both based on the concept of thresholding. In these filtrations, the image is cropped to a specific value, forming a subspace that includes all pixels with values higher than this value in a superlevel filtration, or lower in a sublevel filtration. This cropping value (i.e. the filtration value) is systematically varied from the lowest to the highest values of the image, or vice versa, thus generating a different subspace for each value. As a result, the persistence homology analysis captures and examines the evolution of topological features across different thresholds, enabling insights into the image's structural properties at various scales \citep{ph_image_filtration}.
+
+A more formal way of defining these filtrations can be done by considering an image as a discrete representation of a function $f$, defined over a two-dimensional space $\mathbb{X}$, such that: 
+\begin{equation}
+    f :  \mathbb{X} \longrightarrow  \mathbb{R} \ \ .
+\end{equation}
+Let $\mathbb{S} _\phi$ be the subspace of $\mathbb{X}$ for a filtration value of $\phi$. In such a case, a filtration can be expressed as:
+\begin{equation}
+    \mathbb{X}: \mathbb{S}_{\phi_0} \subset \mathbb{S}_{\phi_1} \subset \mathbb{S}_{\phi_2}\subset... \subset \mathbb{X}\ \ .
+\end{equation}
+With this formulation, a topological feature with birth-death coordinates:
+\begin{equation}
+(B, D) = (\phi_ I, \phi _ {II}) \ \ ,
+\end{equation} 
+corresponds to a feature that appears for the first time during the filtration process at the subspace $\mathbb{S}_{\phi _ I}$, and \textit{persists} until the subspace $\mathbb{S}_{\phi _ {II}}$, where it ceases to exist.
+
+In a sublevel filtration, each subspace can be expressed as:
+\begin{equation}
+    \mathbb{S} _ \phi = f ^{-1} \left( ( -\infty, \phi ] \right) \ \ ,
+    \label{eq: sublevel}
+\end{equation}
+where $\phi_0$ is selected as the lowest value for any given pixel and its value is increased until the subspace includes all pixels. On the contrary, in a superlevel filtration, the subspaces can be expressed as:
+\begin{equation}
+    \mathbb{S} _ \phi = f ^{-1} \left( [ \phi, \infty ) \right)\ \ , 
+    \label{eq : superlevel}
+\end{equation}
+where $\phi_0$ is selected as the highest value for any given pixel and its value is decreased along the filtration.
+
+Various methods exist for representing the information derived from a persistent homology analysis, including Betti numbers, persistence bars, and persistent diagrams (PDs) (\citealt{pd_stability}, \citealt{pbars}), among many others. For this study, we will utilize the PDs as our chosen approach due to their straightforward interpretation and extended use. A $n$-dimensional PD is a multiset of Birth-Death pairs, ($B _ i, D _ j$), with multiplicity $k$, where each pair measures the number ($k$) of $n$-dimensional components that have been born at the filtration subspace $\mathbb{X}_i$ and died in $\mathbb{X}_j$, that is usually represented in a 2D scatter plot. 
+
+
+\begin{figure}
+    \centering
+     \includegraphics[width=8cm]{figures/PersistentHomology/ImageFiltering_example.pdf}
+    \caption{Sublevel filtration of a greyscale image and PDs of the $0^{th}$ and $1^{st}$ dimensions. Panel a) shows the input data. In panels b), c), d), f), g), and h) different snapshots of the filtration process are shown. The value of the filtration parameter, $\phi$ is shown in the color bar at the right of each image. Only pixels with a value lower than the filtration value (colored pixels) belong to the subspace shown in each snapshot. Different homology groups are represented with different colors at each snapshot. For connected components ($0^{th}$ dimensional homology groups) the whole pixel is shown with the corresponding color. For rings, ($1^{st}$ dimensional homology groups), only the border of each hole is colored. In panel e) the PDs of both dimensions are shown. The color of each point in the diagram is the same as the one used to plot the corresponding topological feature in other panels. An animation depicting the whole filtration process is also provided as part of the article.}
+   \label{fig_ph: Image Filtration Example}
+\end{figure}
+
+
+The process of generating a PD of a greyscale image is as follows. We start by selecting the filtration direction (sublevel or superlevel) and the dimension of the analysis (either 0 or 1). We initialize a threshold as the highest or lowest value from the image, depending on the choice of filtration. We then perform the filtration by systematically adjusting the threshold and creating a binary image for each threshold. This process divides the image into two sets: pixels with values above the threshold and pixels with values below it. The choice of filtering determines which of the two sets makes up the subspace. We then look for the existing topological features within each of these subdivisions. The specific process by which these features are identified is detailed in the next paragraph, where the structures corresponding to both dimensions are illustrated using the example shown in Fig.~\ref{fig_ph: Image Filtration Example}. We repeat this process until the threshold reaches the opposite limit to that from which it started. Along this process, we follow the appearance, merging, and disappearance of connected components. When two components merge, the longer-lived one (\textit{i.e}. the first to appear along the filtration process) absorbs the younger one, thus resulting in the death of the second \citep{eldest}. We determine the birth and death for each component based on the thresholds at which these events occur.  Finally, we construct a scatter plot where the horizontal axis represents the birth values and the vertical axis represents the death values. Each point on this plot corresponds to a persistence point, whose coordinates reveal the scales at which the corresponding topological feature is present.
+
+An example of this process with a sublevel filtration is shown in Fig.~\ref{fig_ph: Image Filtration Example}. Panel a) displays the input data, panels b), c), d), f), g), and h) show some of the key steps of the filtration process, and, lastly, panel e) displays the PD for a $0^{th}$ and $1^{st}$ dimensional analyses. These plots illustrate how connected components and rings are born and then die as we increase the filtration level. As these components (shown in different colors) increase in size and come into contact with other components, one absorbs the other, thus resulting in the death of the second. This phenomenon is shown in panels b) to d), where we observe the progression of the components until only the blue and orange connected components remain. Additionally, the diagrams also reveal the appearance of two rings in the data (panels f) and g)). These rings are found when pixels that do not belong to the subspace are surrounded by a connected component, and die when those pixels are included in the component as the threshold increases (blue ring in panel f)). Finally, the PD (panel e)) displays the birth and death values (i.e. the filtration value) of all the features, of dimensions 0 and 1, that have been identified (birth) and subsequently eliminated (death) throughout the filtration process. 
+
+\subsection{Persistent Images}
+
+The PD displayed in Fig.~\ref{fig_ph: Image Filtration Example} contains only a limited number of points due to the simplicity of the input image. However, when analyzing real data, these diagrams can consist of hundreds or even thousands of birth-death pairs with high multiplicities, simply due to the size of the images. Additionally, features not only representing the genuine behavior of the data but also reflecting the distribution of noise appear on the diagrams. To address this complexity, several strategies have been developed to simplify the information from PDs, such as persistence curves  \citep{persistence_curves}, persistence landscapes \citep{persistence_landscapes}, or persistence images (PI) \citep{persistence_images}. In this study, we will focus on the latter, due to its noise filtering capabilities and because the representation of the results remains in a Birth-Death diagram, allowing for easy interpretation of the results, similar to a persistence diagram.
+
+PIs are a condensed form of a persistence diagram, offering a concise and easy-to-understand representation of its topological features.  They capture the spatial distribution and persistence information of these features, allowing for the enhancement of the most relevant ones and filtering of the others. A PI is constructed using the concept of persistence. Each topological feature, represented by a point in a PD, has a persistence, $\pi$, of:
+
+\begin{equation}
+    \pi = D - B
+    \label{eq: persistence}
+\end{equation}
+
+
+where $(B, D)$ are the corresponding birth-death coordinates in the diagram. A feature with a large persistence is present at different scales in the data and therefore is more likely to represent the real behavior of the data. On the contrary, short-lived features are typically associated with the noise distribution and usually do not provide much information about the data.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=12cm]{figures/PersistentHomology/PI_Example.pdf}
+    \caption{Panel a) shows an example of a persistence diagram as a 2D histogram. The color of each bin represents its multiplicity, with the red spots corresponding to higher values. Panels b), c), and d) show three different examples of PIs. The three parameters given in the legends of the PIs are: the standard deviation ($\sigma$) of the Gaussian kernel ($K (z)$), the weighting function, and the resolution of the image PI in pixels (p).}
+   \label{fig_ph: PI Example}
+\end{figure}
+
+When constructing a PI, a weighting function, $\omega (\pi)$, is employed to assign weights to each point in the diagram, ensuring that longer-lived features have greater weights than shorter-lived ones. There are multiple choices for the shape of the weighting function, which are entirely dependent on the aims of the study and data type. The simplest example is often a linear or power-law relation ($\omega (\pi) = a \pi ^b$), where $a$ and $b$ can be tuned to assign progressively higher weights to higher persistencies, thus focusing the study on the longer-lived components. On the other hand, if the objective is to filter out noise while assigning similar weights to all non-noise points so that all points have a similar relevance in the analysis, the chosen function is usually an arc-tangent.
+
+The PI is then generated by dividing the persistence diagram plane into a grid with a desired resolution. Within each grid region (or pixel), the weighted features of the diagram within the region are added up using a kernel density estimation. The kernel function, $K (z)$, can be tuned to suit the nature and objectives of the analysis, with Gaussian functions being the most common approach. 
+
+The resultant PI is a 2D matrix, wherein each pixel corresponds to a specific area in the persistence diagram, and its value represents the cumulative weight of the topological features found within that area. In Figure \ref{fig_ph: PI Example}, three examples of PI (panels b), c), and d)) are presented for the same persistence diagram (panel a)), where distinct choices of resolution, kernel function, and weighting function have been applied to each image.
+
+
+
+
+All the PDs, PIs, and the rest of the analysis tools presented in this work, have been computed using the Homcloud python package \citep{homcloud}.
 
 
 \chapter{Summary and conclusions}
 
-The conclusions are
+The conclusions are \dots
 
 \appendix
 % \chapter{Appendix: SVS~13 channel maps from ALMA observations}
