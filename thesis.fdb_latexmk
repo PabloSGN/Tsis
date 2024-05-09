@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex thesis"] 1715238188.15274 "thesis.aux" "thesis.bbl" "thesis" 1715238194.82933 0
+["bibtex thesis"] 1715239488.96719 "thesis.aux" "thesis.bbl" "thesis" 1715239512.04333 0
   "./bibliography.bib" 1715172707 5758 a1cbc0dc3996d3a3fbadb083cd5e2cfc ""
   "./mycustom.bst" 1715172707 38609 fa3960a91c26e415ced371115ff934fa ""
-  "thesis.aux" 1715238192 10576 cf2ffb12904a77d08870f0ccab88b942 "pdflatex"
+  "thesis.aux" 1715239510 14651 630745d942c9ffe4e37a0f3c20cfdd71 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1715238188.93458 "c:/Users/pablo/OneDrive/Escritorio/Tésis/Tsis/thesis.tex" "thesis.pdf" "thesis" 1715238194.83182 0
-  "c:/Users/pablo/OneDrive/Escritorio/Tésis/Tsis/thesis.tex" 1715238167 24767 fd9cba3acf51e35884a0d0055aa83146 ""
+["pdflatex"] 1715239508.70752 "c:/Users/pablo/OneDrive/Escritorio/Tésis/Tsis/thesis.tex" "thesis.pdf" "thesis" 1715239512.04427 0
+  "c:/Users/pablo/OneDrive/Escritorio/Tésis/Tsis/thesis.tex" 1715239508 37473 31f469f6f9d25a88f949bc9900b49fed ""
   "c:/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc" 1715178531 2933 9ad527ce78d7c5fa0a642dead095f172 ""
   "c:/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc" 1715178531 2934 a4a9158faed2e9e89c771b4e3b7fc12f ""
   "c:/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_dhi6qf.enc" 1715178531 2914 3d1e3c4123f03ab27df5767d5039d109 ""
@@ -181,18 +181,21 @@
   "c:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1715184212 5529302 90924f286bd62ce7380ad2a7c245cc29 ""
   "c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1715184537 8225107 76049ff30388a2eec360a7833614b9b0 ""
   "c:/texlive/2024/texmf.cnf" 1715184160 713 e69b156964470283e0530f5060668171 ""
+  "figures/PersistentHomology/AR_analysis_v2.pdf" 1715239157 252360 dda10856505ea2f88355f2967a68b5ee ""
+  "figures/PersistentHomology/AR_classification.pdf" 1715239225 228345 a052bcc0e1b847ef427dfc85fb670d08 ""
   "figures/PersistentHomology/ImageFiltering_example.pdf" 1715172707 40605 8f5f2febdafb47f78364d1024392e12d ""
   "figures/PersistentHomology/PI_Example.pdf" 1715172707 94876 88d8aebdb0a3d83f9b19d76d714643e5 ""
   "figures/PersistentHomology/PI_PD_example.pdf" 1715172707 147665 547003800361ba413fb9efddfedf4bcc ""
+  "figures/PersistentHomology/QuietSun.pdf" 1715239044 552021 85cd157a1ece7cb27fec584652e1d0f6 ""
   "figures/PersistentHomology/Regions_anotated.pdf" 1715172707 66366 b9f2ac22e55a9ea4e67bf41663cc0311 ""
   "images/LogosIAA_SO_Color.png" 1715172707 431500 e428a82173a1584a9190c732da19ac4e ""
   "images/UGR-MARCA-02-color.png" 1715172707 193047 a584269e7c3652158a050707a003c3af ""
   "mythesis.cls" 1715172707 25802 1b57b8e02c4ba2de049373ac826a56ac ""
-  "thesis.aux" 1715238192 10576 cf2ffb12904a77d08870f0ccab88b942 "pdflatex"
-  "thesis.bbl" 1715238188 6668 466d812faddffd4409797c40a01348f6 "bibtex thesis"
-  "thesis.out" 1715238192 3456 3663023e93bc8fd6969893e6b50783bd "pdflatex"
-  "thesis.tex" 1715238167 24767 fd9cba3acf51e35884a0d0055aa83146 ""
-  "thesis.toc" 1715238192 1670 8e20f1b337cd3226fc5f93cbb92ea111 "pdflatex"
+  "thesis.aux" 1715239510 14651 630745d942c9ffe4e37a0f3c20cfdd71 "pdflatex"
+  "thesis.bbl" 1715239489 6668 466d812faddffd4409797c40a01348f6 "bibtex thesis"
+  "thesis.out" 1715239510 3802 628eba7c8066be40561c58efafd0a4f3 "pdflatex"
+  "thesis.tex" 1715239508 37473 31f469f6f9d25a88f949bc9900b49fed ""
+  "thesis.toc" 1715239510 1870 efc129efb7e7bff058e8d7b53255f917 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"
