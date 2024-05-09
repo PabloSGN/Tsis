@@ -202,6 +202,36 @@ We employ observations of active regions (ARs) taken by the Helioseismic and Mag
 
 We focus the analysis on a series of newly-emerging ARs identified in \citep{toriumi}. In particular, we employed the 12-minute cadence observations taken during the period from May 2010 to June 2011, which corresponded to a period of low solar activity.
 
+\subsubsection{Analysis and results}
+
+\begin{figure}
+    \centering
+     \includegraphics[width=8cm]{Figures/PersistentHomology/PI_PD_example.pdf}
+    \caption{(a) SDO/HMI magnetogram taken on 2011-02-13 depicting an active region (NOAA AR 11158). (b) The corresponding PD combining superlevel and sublevel filtrations. (c) PI generated from the PD in panel b) with the following configuration: Resolution =  1000 pixels$^2$ ($4\ G$ per pixel), weighting function: $\omega (\pi) = \arctan (5\times 10 ^{-8} \pi ^{3})$ and a gaussian kernel with $\sigma = 40\ G$.}
+   \label{fig: PD+PI_example}
+\end{figure}
+
+
+The application of persistent homology to a specific dataset can vary depending on the aims of the study. Different dimensions of the analysis and various types of filtrations focus on distinct features within the data. It is crucial to have prior knowledge of the expected structures and relevant features to be captured in the analysis in order to determine the appropriate approach. In this section, we aim to outline the most appropriate approach for studying the particular case of solar magnetograms.
+
+The solar magnetograms employed here represent the longitudinal component of the magnetic field on the photosphere and are typically presented as greyscale images, as shown in Figure \ref{fig: PD+PI_example}, panel a). The polarity of the line-of-sight magnetic field is indicated by the sign of each pixel, where positive and negative signals correspond to field lines pointing towards and away from the observer. Applying a single filtration to a greyscale image only displays features corresponding to one polarity (positive or negative) in a PD. However, to conduct a comprehensive study of the magnetic field, both polarities are essential, thus necessitating the use of two separate filtrations with different filtration directions.
+
+\begin{figure}
+    \centering
+     \includegraphics[width=8cm]{Figures/PersistentHomology/Regions_anotated.pdf}
+    \caption{Schematic representation of the PD and the different regions (panel a)). The magnetic structures corresponding to the topological features found in the different regions are shown in panels b) to g), with each feature identified by a ring with the corresponding color.}
+   \label{fig: PD REGIONS}
+\end{figure}
+
+We determined that a combination of superlevel and sublevel filtrations with a $1^{st}$-dimensional persistent homology analysis was the most suitable approach for studying solar magnetograms. This choice is based on two main reasons. Firstly, the $1^{st}$ dimensional analysis allows us to identify the most prominent features in a PD, which is not the case in the $0^{th}$ dimensional analysis where the strongest feature does not appear in the diagram as it never dies (see Fig.~\ref{fig: PD Example Images}). Secondly, by combining superlevel and sublevel filtrations, we can display the results of both filtrations in a single diagram. Features corresponding to different filtrations will have persistencies with opposite signs (features found in a superlevel filtration will be born at higher filtration values than their death, resulting in a negative lifespan). This enables us to construct a PD in which all features displayed above the identity line (with positive persistencies) correspond to the sublevel filtration, and those below the line correspond to the superlevel filtration (see panel b) in Fig.~\ref{fig: PD+PI_example}).
+
+The PDs, and consequently the PIs, offer valuable insights into the magnetic structures present in the magnetograms. The location of a topological feature on the diagram is completely determined by the properties of the corresponding magnetic structure. Specifically, this position is influenced by factors such as the maximum intensity of the magnetic field, its proximity to other magnetic structures, and its geometric shape, including the presence of holes or pores within the structure. These characteristics allow us to partition the diagram into distinct regions, where topological features within each region correspond to different types of magnetic structures.
+
+
+We distinguished between six distinct regions in the diagram. Figure \ref{fig: PD REGIONS} illustrates these regions in panel a) and provides schematic representations of the corresponding magnetic structures in panels b) to g). The regions are as follows: first, topological features located above the identity line (positive persistencies) with birth values close to 0 (region I in the diagram). Features within this region represent isolated magnetic structures of positive polarity, that is, patches of positive magnetic flux fully enclosed by an absence of any magnetic field. The threshold defining what is considered ``close to 0$"$ is determined by the data's properties. To identify isolated structures, we set the threshold as a function of the statistical properties of the background signal (i.e. areas of the magnetogram with little magnetic flux). Specifically, the limits for this region are set as $(-5 \sigma _ {bg}, 5 \sigma _ {bg})$, where $\sigma _ {bg}$ denotes the standard deviation of the background signal found in a $15\times 15$ pixels box devoid of strong magnetic structures.
+
+The second region (II in the diagram) comprises features above the identity line with positive birth values, representing connected structures with positive polarities, that is, positive magnetic field structures in contact with another positive structure but not fully merged. The third region (region III) contains topological features above the identity line with negative birth values, which corresponds to magnetic structures of negative polarity exhibiting a ring-like attribute, namely, structures with pores or holes. These three regions of the diagram have counterparts with negative persistencies. Thus, features associated with isolated structures of negative polarities are found in the region with a birth value close to 0 but below the identity line (region IV), features for connected negative structures are also located below the line but with negative birth values (region V). Lastly, features arising from positive magnetic structures with ring-like attributes are found below the identity line but with positive birth values (region VI).
+
 
 \chapter{Summary and conclusions}
 
