@@ -311,6 +311,7 @@
 \let\la=\lesssim
 \let\ga=\gtrsim 
 
+\newcommand*{\Myitem}{\item[{\includegraphics[width=.3cm]{images/sun_item_1.png}}]}
 
 %-----------
 % Title page 

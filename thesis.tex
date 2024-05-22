@@ -77,9 +77,49 @@ Summary of the thesis
 \mainmatter % Now Use Arabic numerals for page numbers
 \chapter{Introduction}
 
+\section{Background}
+
+In June 2009, the first Sunrise observatory \citep{SunriseI} was launched from Kiruna, Sweden, aboard a stratospheric ballon. Equipped with a 1-m aperture telescope, a multi-wavelength UV filter imager, and IMaX, a Fabry-Pérot-based magnetograph, Sunrise was the most complex payload carried by a solar stratospheric balloon to date. Aimed at studying the magnetic fields of the Sun and the dynamics of solar plasma convective flows, the mission was an outstanding success. It resulted in the publication of over a hundred peer-reviewed scientific articles in numerous high-impact journals, including Astronomy and Astrophysics (A\&A), The Astrophysical Journal (APJ), and Solar Physics, among others.
+
+Following the success of its inaugural flight, Sunrise embarked on a second journey \citep{SunriseII} on June 13, 2013. The primary objective of this subsequent flight was to investigate the active regions of the Sun, as it remained completely *quiet* throughout the entirety of the initial flight. Despite minimal alterations to the instrumentation aboard the observatory, the variance in solar activity during this second flight yielded fresh perspectives and valuable data, ultimately securing the mission success, despite encountering some technical challenges.
+
+Given the success of the first two flights, a third iteration of the Sunrise mission was planned, featuring an updated design. For this third edition, the telescope was equipped with three post-focal instruments: SUSI, a UV spectrograph; SCIP, an infrared spectrograph; and TuMag, the evolution of the IMaX magnetograph. Sunrise III was initially scheduled to fly during the summer of 2020 but was postponed to 2022.
+
+The third launch of Sunrise plays a crucial role in this dissertation. This thesis, initiated in 2020, was centered on the development of the data reduction pipeline for the TuMag instrument, which was entirely developed by the Spanish solar physics consortium. According to the original plan, the first half of the thesis was dedicated to the calibration of the instrument and the preparation of the data pipeline. This way, once the mission was launched, the second half of the thesis could focus on the correction and scientific analysis of the data produced during this third flight. However, this plan (and thus the scope of the thesis) encountered a setback on July 10, 2022, when the third flight of the Sunrise observatory had to be aborted just a few hours after the launch due to a mechanical failure during the ascent phase.
+
+The observatory was recovered days later after a brief stay in the Scandinavian Alps. Both the telescope and the instruments were found to be in good condition, allowing for the recovery of the observatory and providing hope for a second attempt. However, the process of retrieving the instruments, disassembling, calibrating, and verifying their condition before relaunching the mission is lengthy, and it was not until this year, 2024, that a second attempt became feasible.
+
+In the absence of data produced by Sunrise to process, analyze, and exploit, the scientific work conducted within the framework of this thesis has been compelled to slightly shift its focus. Over these years, we have focused on delving deeper into image correction techniques for data obtained from Fabry-Pérot interferometers, such as TuMag and IMaX. As well as conducting several studies using data products from other instruments, such as the Polarimetric and Helioseismic Imager (PHI) aboard Solar Orbiter and HMI. 
+
+In the following chapters, we will present the work undertaken during the calibration and commissioning of TuMag, conducted in 2021, 2022, and 2024. Additionally, the research carried out between the first and second flights of Sunrise III, which has resulted in the publication of two articles as the main author — one published in APJ and the other in A\&A — will also be detailed in this manuscript, as well as other studies that have not yet been published in any scientific journal. 
+
+
 \section{Motivation of our work}
 
+In experimental sciences, there is a very close relationship between technological and scientific advances, in the strict sense of each term. We cannot draw conclusions from what we cannot see. This fact, though evident, is sometimes forgotten. We believe it is important for experimental scientists, or more specifically, observational astronomers, to have an understanding and knowledge of the instruments they use daily.
+
+This philosophy is one of the pillars of this thesis, which covers topics ranging from the design and calibration of instruments to the scientific exploitation of the data they produce. With this thesis, we aim to provide a broad yet detailed view of the various stages of a scientific mission, from its conception and objectives through its design and calibration, data reduction and preparation for scientific exploitation, and finally, the studies and conclusions derived from it.
+
+In particular, we seek to detail this process within the framework of solar physics through the development of TuMag, the magnetograph aboard Sunrise III. We will present the scientific objectives of the mission and attempt to link the design concepts with the scientific results we aim to observe. We will address the challenges encountered in data correction due to the technical or instrumental limitations of our observation methods, which are subjects of ongoing debate within the community and of current relevance. Finally, we also aim to offer an overview of some of the possibilities we have available for exploiting these data and provide some tools for these analyses. 
+
+We could summarize the main objectives of this thesis in the following points:
+
+\begin{itemize}
+  \Myitem Scientific objectives of TuMag.
+  \Myitem Instrumental ways of achieving the scientific purposes
+  \Myitem Open problems for data reduction. Flat-fields, etalon effects in the data. 
+  \Myitem Offering an example of data exploitation with aa study case. Persistent Homology.
+\end{itemize}
+
+
+
+
+
 \chapter{Designing and callibrating an instrument.}
+
+
+
+
 
 \section{Spectropolarimeters: TuMag's design}
 \section{Calibration of TuMag}
@@ -141,7 +181,6 @@ where $\phi_0$ is selected as the highest value for any given pixel and its valu
 
 Various methods exist for representing the information derived from a persistent homology analysis, including Betti numbers, persistence bars, and persistent diagrams (PDs) (\citealt{pd_stability}, \citealt{pbars}), among many others. For this study, we will utilize the PDs as our chosen approach due to their straightforward interpretation and extended use. A $n$-dimensional PD is a multiset of Birth-Death pairs, ($B _ i, D _ j$), with multiplicity $k$, where each pair measures the number ($k$) of $n$-dimensional components that have been born at the filtration subspace $\mathbb{X}_i$ and died in $\mathbb{X}_j$, that is usually represented in a 2D scatter plot. 
 
-
 \begin{figure}
     \begin{minipage}[c]{0.67\textwidth}
       \includegraphics[width=\textwidth]{figures/PersistentHomology/ImageFiltering_example_v.pdf}
@@ -152,8 +191,6 @@ Various methods exist for representing the information derived from a persistent
       } \label{fig_ph: Image Filtration Example}
     \end{minipage}
   \end{figure}
-
-
 
 The process of generating a PD of a greyscale image is as follows. We start by selecting the filtration direction (sublevel or superlevel) and the dimension of the analysis (either 0 or 1). We initialize a threshold as the highest or lowest value from the image, depending on the choice of filtration. We then perform the filtration by systematically adjusting the threshold and creating a binary image for each threshold. This process divides the image into two sets: pixels with values above the threshold and pixels with values below it. The choice of filtering determines which of the two sets makes up the subspace. We then look for the existing topological features within each of these subdivisions. The specific process by which these features are identified is detailed in the next paragraph, where the structures corresponding to both dimensions are illustrated using the example shown in Fig.~\ref{fig_ph: Image Filtration Example}. We repeat this process until the threshold reaches the opposite limit to that from which it started. Along this process, we follow the appearance, merging, and disappearance of connected components. When two components merge, the longer-lived one (\textit{i.e}. the first to appear along the filtration process) absorbs the younger one, thus resulting in the death of the second \citep{eldest}. We determine the birth and death for each component based on the thresholds at which these events occur.  Finally, we construct a scatter plot where the horizontal axis represents the birth values and the vertical axis represents the death values. Each point on this plot corresponds to a persistence point, whose coordinates reveal the scales at which the corresponding topological feature is present.
 
@@ -297,9 +334,10 @@ This issue is illustrated in the analysis carried out in the previous section of
 
 \begin{figure}
     \centering
-     \includegraphics[width=12cm]{figures/PersistentHomology/InteractingDiagram.pdf}
-    \caption{Depiction of the different steps carried out for the generation of the interaction diagram (panel d)) for a zoomed-in region of an SDO/HMI magnetogram of NOAA AR 11158 observed on the 2011-02-13 at 18:34. The crosses point to the position at which each of the ring-like structures die, which is always located inside the perimeter of the hole. Panel a) shows the original magnetogram and the position where rings of positive and negative polarities are found. Panel b) shows the magnitude of the field strength in negative values along with the rings found in this representation. Panel c) shows the original magnetogram again, but now featuring the interaction rings, identified when comparing the position of the rings found in the previous steps. Lastly, panel d) shows the `interaction diagram' generated using only the interacting ring structures.}
-   \label{fig: Interacting_diagram}
+    \includegraphics[width=12cm]{figures/PersistentHomology/InteractingDiagram.pdf}
+    \caption{
+      Depiction of the different steps carried out for the generation of the interaction diagram (panel d)) for a zoomed-in region of an SDO/HMI magnetogram of NOAA AR 11158 observed on the 2011-02-13 at 18:34. The crosses point to the position at which each of the ring-like structures die, which is always located inside the perimeter of the hole. Panel a) shows the original magnetogram and the position where rings of positive and negative polarities are found. Panel b) shows the magnitude of the field strength in negative values along with the rings found in this representation. Panel c) shows the original magnetogram again, but now featuring the interaction rings, identified when comparing the position of the rings found in the previous steps. Lastly, panel d) shows the `interaction diagram' generated using only the interacting ring structures.}
+    \label{fig: Interacting_diagram}
 \end{figure}
 
 We start by tracking the position in the magnetogram where rings are detected. Following this, we modify the magnetogram by inverting the sign of one polarity, ensuring that all pixels are either negative or positive. This way, we construct a second `magnetogram' in which we only have information about the intensity, in absolute value, of the magnetic field. This allows us to identify features formed by any combination of signals, whether they are of the same polarity or opposite. Using this new magnetogram, we repeat the analysis and record the positions in the magnetograms at which we find ring-like features. It is worth noting that in this analysis, all the rings identified in the initial step, which were formed by structures of equal polarities, are still detected, although their position in the persistent diagram may have changed due to the change in polarity, hence the relevance of tracking the pixel in the magnetograms. However, only in this second analysis can we identify rings formed between opposite polarities. By selectively considering the ring-like features exclusively identified in this second analysis, we can effectively identify and characterize the structures that are formed by the interaction between different polarities. 
@@ -330,7 +368,6 @@ The conclusions are \dots
 
 \chapter{Profile derivatvies}
 
-\citep{hale}
 \bibliography{bibliography}
 
 \cleardoublepage

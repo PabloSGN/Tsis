@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex thesis"] 1716206771.67319 "thesis.aux" "thesis.bbl" "thesis" 1716206774.11345 0
-  "./bibliography.bib" 1716202101.36279 6287 e5807601d5238272cb2eb3c8952088b8 ""
+["bibtex thesis"] 1716378085.55987 "thesis.aux" "thesis.bbl" "thesis" 1716378440.41426 0
+  "./bibliography.bib" 1716371593.98172 7162 57126ffe497ff8476c4799898fd9ce65 ""
   "./mycustom.bst" 1710363168 38609 5e2db2193f94f2db3b05dbf8d8576c79 ""
-  "thesis.aux" 1716206773.66081 17053 051c4ca407ac0ba097a65e53bf4fe793 "pdflatex"
+  "thesis.aux" 1716378440.02722 17433 1b17c3e3afe959b6dbc69fbd92fe1ef3 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1716206771.81526 "/home/pablo/Desktop/TESIS/Tsis/thesis.tex" "thesis.pdf" "thesis" 1716206774.11394 0
-  "/home/pablo/Desktop/TESIS/Tsis/thesis.tex" 1716206474.95245 49582 f56284dda18fddd57bab6cee26f3001f ""
+["pdflatex"] 1716378438.32669 "/home/pablo/Desktop/TESIS/Tsis/thesis.tex" "thesis.pdf" "thesis" 1716378440.4145 0
+  "/home/pablo/Desktop/TESIS/Tsis/thesis.tex" 1716378438.18721 55612 ea232fa4cae8a070dcf5eb076d8e340a ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc" 1490131464 2933 9ad527ce78d7c5fa0a642dead095f172 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc" 1490131464 2934 a4a9158faed2e9e89c771b4e3b7fc12f ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_dhi6qf.enc" 1558472472 2914 3d1e3c4123f03ab27df5767d5039d109 ""
@@ -191,12 +191,13 @@
   "figures/PersistentHomology/Regions_anotated.pdf" 1710773137.63024 66366 155ebc6e701811be846b07f7f9e0f082 ""
   "images/LogosIAA_SO_Color.png" 1710363168 431500 fc3ac2ede31491d24b38c39a8e122767 ""
   "images/UGR-MARCA-02-color.png" 1710418624.95451 193047 2a98ca769e79bfc20bb8055ffdef3937 ""
-  "mythesis.cls" 1710363168 25008 1b57b8e02c4ba2de049373ac826a56ac ""
-  "thesis.aux" 1716206773.66081 17053 051c4ca407ac0ba097a65e53bf4fe793 "pdflatex"
-  "thesis.bbl" 1716206771.80881 7464 8c1730d774f0575d3ed3f8c1a50874a3 "bibtex thesis"
-  "thesis.out" 1716206773.66481 4109 529b78ba73abd6be71ad9fc062cbb817 "pdflatex"
-  "thesis.tex" 1716206474.95245 49582 f56284dda18fddd57bab6cee26f3001f ""
-  "thesis.toc" 1716206773.66481 2064 e6a61e90066d16d144162f15df11744b "pdflatex"
+  "images/sun_item_1.png" 1716378184.68648 19142 4412359bf04975a6ca8621abdfe8b273 ""
+  "mythesis.cls" 1716378225.0546 25092 b11c3d5ae57160a3e67dac575662c664 ""
+  "thesis.aux" 1716378440.02722 17433 1b17c3e3afe959b6dbc69fbd92fe1ef3 "pdflatex"
+  "thesis.bbl" 1716378085.68215 8007 7b4d4f1af5412d864bb87530dfc7b9f5 "bibtex thesis"
+  "thesis.out" 1716378440.02722 4214 8725672582e4a6a5f99619178daf525a "pdflatex"
+  "thesis.tex" 1716378438.18721 55612 ea232fa4cae8a070dcf5eb076d8e340a ""
+  "thesis.toc" 1716378440.02722 2134 febf056a127ec7c906f5ede02589ad25 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"
