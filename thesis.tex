@@ -35,7 +35,7 @@
  % %%% Z
 
 
-\title{Observing the Sun: From start to finish. }
+\title{Observing the Sun: from start to finish.}
 \author{Pablo Santamarina Guerrero}
 \date{\today}
 \institution{%
@@ -61,7 +61,7 @@
 \cleardoublepage
 
 \chapter*{Acknowledgements}
-dkshfgsidgfisgdfisdfs
+
 Agradecimientos
 
 \chapter*{Resumen}
@@ -89,20 +89,20 @@ The third launch of Sunrise plays a crucial role in this dissertation. This thes
 
 The observatory was recovered days later after a brief stay in the Scandinavian Alps. Both the telescope and the instruments were found to be in good condition, allowing for the recovery of the observatory and providing hope for a second attempt. However, the process of retrieving the instruments, disassembling, calibrating, and verifying their condition before relaunching the mission is lengthy, and it was not until this year, 2024, that a second attempt became feasible.
 
-In the absence of data produced by Sunrise to process, analyze, and exploit, the scientific work conducted within the framework of this thesis has been compelled to slightly shift its focus. Over these years, we have focused on delving deeper into image correction techniques for data obtained from Fabry-Pérot interferometers, such as TuMag and IMaX. As well as conducting several studies using data products from other instruments, such as the Polarimetric and Helioseismic Imager (PHI) aboard Solar Orbiter and HMI. 
+In the absence of data produced by Sunrise to process, analyze, and exploit, the scientific work conducted within the framework of this thesis has been compelled to slightly shift its focus. Over these years, we have focused on delving deeper into image correction techniques for data obtained from Fabry-Pérot interferometers, such as TuMag and IMaX. As well as conducting several studies using data products from other instruments, such as the Polarimetric and Helioseismic Imager aboard Solar Orbiter (SO/PHI) and HMI. 
 
 In the following chapters, we will present the work undertaken during the calibration and commissioning of TuMag, conducted in 2021, 2022, and 2024. Additionally, the research carried out between the first and second flights of Sunrise III, which has resulted in the publication of two articles as the main author — one published in APJ and the other in A\&A — will also be detailed in this manuscript, as well as other studies that have not yet been published in any scientific journal. 
 
 
 \section{Motivation of our work}
 
-In experimental sciences, there is a very close relationship between technological and scientific advances, in the strict sense of each term. We cannot draw conclusions from what we cannot see. This fact, though evident, is sometimes forgotten. We believe it is important for experimental scientists, or more specifically, observational astronomers, to have an understanding and knowledge of the instruments they use daily.
+In experimental sciences, there is a very strong relation between technological and scientific advances due to the simple fact that we cannot draw conclussions from what we cannot see. We believe it is important for experimental scientists, and more specifically, for observational astronomers, to know the limitations and capabilities and understand the functioning of the instruments we use. 
 
-This philosophy is one of the pillars of this thesis, which covers topics ranging from the design and calibration of instruments to the scientific exploitation of the data they produce. With this thesis, we aim to provide a broad yet detailed view of the various stages of a scientific mission, from its conception and objectives through its design and calibration, data reduction and preparation for scientific exploitation, and finally, the studies and conclusions derived from it.
+This philosophy is one of the pillars of this thesis, which covers topics ranging from the design and calibration of scientific instruments to the exploitation of the data they produce. With this thesis, we aim to provide a broad, yet detailed, view of the various stages of a scientific mission, from its conception and objectives through its design and calibration, data reduction and preparation for scientific exploitation, and finally, the studies and conclusions derived from it.
 
-In particular, we seek to detail this process within the framework of solar physics through the development of TuMag, the magnetograph aboard Sunrise III. We will present the scientific objectives of the mission and attempt to link the design concepts with the scientific results we aim to observe. We will address the challenges encountered in data correction due to the technical or instrumental limitations of our observation methods, which are subjects of ongoing debate within the community and of current relevance. Finally, we also aim to offer an overview of some of the possibilities we have available for exploiting these data and provide some tools for these analyses. 
+In particular, we will detail this process within the framework of solar physics through the development of TuMag, the magnetograph aboard Sunrise III. We will present the scientific objectives of the mission and attempt to link the design concepts with the scientific questions we aim to answerr. We will address the challenges encountered in data correction due to the technical or instrumental limitations, a subject of ongoing debate within the community and of current relevance. And finally, we also aim to offer a brief dip into the scientific explotation that can be carried out with the final data product. 
 
-We could summarize the main objectives of this thesis in the following points:
+With this thesis we aim to clarify the following points:
 
 \begin{itemize}
   \Myitem Scientific objectives of TuMag.
@@ -111,25 +111,63 @@ We could summarize the main objectives of this thesis in the following points:
   \Myitem Offering an example of data exploitation with aa study case. Persistent Homology.
 \end{itemize}
 
+\section{Introduction}
+
+Astronomy is one of the broadest fields of knowledge. It studies everything from the smallest (astronomically speaking) objects, such as the small asteroids that inhabit our solar system, to the global structure and evolution of the universe, including the study of planetary systems, stars, black holes and the galaxies in which they are found. However, despite the diversity of disciplines—ranging from stellar astronomy, radio astronomy, and cosmology, to extragalactic astronomy, astrobiology, and solar physics—they all share a common tool for studying the cosmos: light. Since the very beginning of astronomy, the astronomer's work has been to learn how to modify and measure the properties of the photons that reach us in order to infer the characteristics of the observed object. Although recent advancements have provided astronomers with new lenses to see the cosmos, like gravitational waves (\textbf{REFERENCIA}) or neutrinos (\textbf{REFERENCIA}), among others, light remains as our main resource. Our understanding of the cosmos has always gone hand-in-hand with our ability to design and develop new ways (or more efficient ways) to disect the light, spanning from the first solar clocks or Newton's first telescope to the modern-day spaceborne telescopes like the Hubble, James Webb or Solar Orbiter. 
+
+Solar physics is no different from other astronomical disciplines in this regard. Our main tool to \textit{see} the Sun is through light. Contrary to what one may think, solar physicists are as photon-starved as any other astronomer. Even though our star is closer and (apparently) brighter than any other astronomical object, our requirements regarding resolution and sensitivity are so high we are as dependent on extremely optimized instrumentation as any other discipline. Thus, the development of instrumentation employing state-of-the-art technology and techniques plays an important role in modern solar physics.
+
+
+\chapter{TuMag's design and calibration.}
+
+In this chapter we take the first steps of the journey of developing an instrument to observe the Sun. We will define... 
+
+The SUNRISE III mission aims to study and stablish the relations and couplings between the phenomena ocurring at different layers of the Sun's surface. With this purpose in mind, three different post-focal instruments were included in the design, each of them responsible of observing at different regions of the spectrum. The SUNRISE UV Spectropolarimeter and Imager (SUSI, \textbf{REFERENCIA}), which will observe the spectra between 309 nm and 417 nm; The Sunrise Chromospheric Infrared spectroPolarimeter (SCIP, \textbf{REFERENCIA}), which will observe the near-infrared; and lastly, the Tunable Magnetograph (TuMag), which will observe three spectral lines in the visible, at 525.02 nm, 525.06 nm and 517 nm. 
+
+The design from scratch of an instrument such as this is very complex. There are many things that have to be meticulously designed and tested which span many fields of expertise, like optics, electronics, software, hardware, or thermal design. To avoid undue extension of this thesis, we will focus on the aspects of the design directly related to the \textbf{TO QUE}, that is, regarding the spectral, imaging and polarimetric capabilities of the instrument. 
+
+\section{The science behind spectropolarimeters.}
+
+Spectropolarimeters, as suggested by the name, are devices that measure the spectral and polarimetric properties of light, or in other words, that measure the polarization state of light as a function of wavelength. Their use is widely extended in astrophysics due to the huge amout of information about the light source they provide.  
 
 
 
 
-\chapter{Designing and callibrating an instrument.}
+
+\section{The Tunable magnetograph: TuMag}
+
+TuMag is a wavelength-tunable spectropolarimeter capable of probing the line-of-sight velocity ($v$los) and the vector magnetic field ($\vec{B}$) in the photosphere and the low chromosphere. This means that TuMag must be able to switch between different spectral lines and measure the full stokes vector at each observed wavelength. 
+
+TuMag's design and properties are a direct consequence of the scientific purpose for which it has been conceived and its requirements. 
+
+\subsection{Optical design and image quality.}
+
+
+
+\subsection{Spectral capabilities}
+
+As a spectrograph, TuMag is able to tune the wavelength of the measurements through a Fabry-Pérot interferometer (FPI), and select between three different spectral lines through the different pre-filters located on the filter wheel. 
+
+The FPI, or etalon, is a LiNbO$_3$-based 
+
+
+
+\subsection{Polarimetric capabilities}
 
 
 
 
 
-\section{Spectropolarimeters: TuMag's design}
+
 \section{Calibration of TuMag}
 
-\chapter{Operation and data reduction.}
+\chapter{\label{CH:Pipeline}Operation and data reduction.}
 
-\section{TuMag's Observation modes and data reduction.}
-\section{Challenges in data reduction: Etalon Cavity Map.}
+\section{TuMag's Observation modes and data reduction. Data's pipeline.}
 
-\chapter{Scientific exploitation.}
+\chapter{\label{CH:Challenges}Challenges in data reduction: Etalon Cavity Map.}
+
+\chapter{\label{CH:Science}Scientific exploitation.}
 
 
 
@@ -147,11 +185,6 @@ After the filtration process is performed, persistent homology algorithms shift 
 In a nutshell, the $n$-dimensional persistent homology of a dataset with a given filtration can be described as the aggregation of all n-dimensional features (homology groups) that were created (birth) and subsequently eliminated (death) during the filtration process \citep{ph_filtration}.
 
 When applying persistent homology on a greyscale image, our focus lies in filtering the data according to the pixel values. Multiple filtering approaches exist, with the most extended ones being sublevel and superlevel filtrations, both based on the concept of thresholding. In these filtrations, the image is cropped to a specific value, forming a subspace that includes all pixels with values higher than this value in a superlevel filtration, or lower in a sublevel filtration. This cropping value (i.e. the filtration value) is systematically varied from the lowest to the highest values of the image, or vice versa, thus generating a different subspace for each value. As a result, the persistence homology analysis captures and examines the evolution of topological features across different thresholds, enabling insights into the image's structural properties at various scales \citep{ph_image_filtration}.
-
-hsidihfd
-dlfjhdglh
-kfhgf
-
 
 A more formal way of defining these filtrations can be done by considering an image as a discrete representation of a function $f$, defined over a two-dimensional space $\mathbb{X}$, such that: 
 \begin{equation}
