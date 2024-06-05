@@ -1,17 +1,18 @@
 # Fdb version 4
-["bibtex thesis"] 1717428096.17178 "thesis.aux" "thesis.bbl" "thesis" 1717428103.20323 0
-  "./bibliography.bib" 1716971522.38164 7162 57126ffe497ff8476c4799898fd9ce65 ""
+["bibtex thesis"] 1717583743.71567 "thesis.aux" "thesis.bbl" "thesis" 1717584500.51533 0
+  "./bibliography.bib" 1717492962.80881 7430 0d07c735c47b2637ffe711bdef5a7cf5 ""
   "./mycustom.bst" 1716971522.77364 38609 5e2db2193f94f2db3b05dbf8d8576c79 ""
-  "thesis.aux" 1717428101.98264 18414 cefe98a4a86734b461265c9e0763ee75 "pdflatex"
+  "thesis.aux" 1717584499.96892 18859 d8b9f2b57566a4e72c81acaed5756ec6 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1717428096.53684 "/home/pablo/Desktop/Tesis/Tsis/thesis.tex" "thesis.pdf" "thesis" 1717428103.20375 0
-  "/home/pablo/Desktop/Tesis/Tsis/thesis.tex" 1717428088.46232 60054 09e57150885ef190732eec82c4b16b3a ""
+["pdflatex"] 1717584496.85365 "/home/pablo/Desktop/Tesis/Tsis/thesis.tex" "thesis.pdf" "thesis" 1717584500.51569 0
+  "/home/pablo/Desktop/Tesis/Tsis/thesis.tex" 1717584496.5529 63051 c380c732fcfbe58472b34bfaf62260b9 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc" 1490131464 2933 9ad527ce78d7c5fa0a642dead095f172 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc" 1490131464 2934 a4a9158faed2e9e89c771b4e3b7fc12f ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_dhi6qf.enc" 1558472472 2914 3d1e3c4123f03ab27df5767d5039d109 ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_naooyc.enc" 1490131464 3357 5261ce65ba03aef9faf6135657b9abb6 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_ncsllp.enc" 1490131464 3288 25b5d43be7be8cba51d85b642598b3b0 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_nh77jq.enc" 1490131464 2933 8d808fcabf70c6c809bb14c283ece4da ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.enc" 1490131464 2807 3bc923a7d38598e901b235df221224cb ""
@@ -33,6 +34,8 @@
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/libertine/LinLibertineT-tlf-sc-t1.tfm" 1490131464 15404 b4ba91f16bd331695200640fa8131f38 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/libertine/LinLibertineT-tlf-t1--base.tfm" 1490131464 1740 2943dd2ba1dcd3849599663c1d2693ef ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/libertine/LinLibertineT-tlf-t1.tfm" 1490131464 19504 bdf9fb416f5a91bf56b1ccda887f5b91 ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/libertine/LinLibertineT-tlf-ts1--base.tfm" 1490131464 1488 9b803beb26c181b228c4fde93d4398a3 ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/libertine/LinLibertineT-tlf-ts1.tfm" 1490131464 1516 5e35377e77f0326136c4078d4c186a36 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/libertine/LinLibertineTB-tlf-sc-t1--base.tfm" 1490131464 1704 a9e562d5b5defb02250fc1e66f73bb76 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/libertine/LinLibertineTB-tlf-sc-t1.tfm" 1490131464 14844 d3897f3631ca179c9e67fb2d62219f0d ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/libertine/LinLibertineTB-tlf-t1--base.tfm" 1490131464 1724 248b3a23a2f748bd3089e9d3118d991e ""
@@ -71,6 +74,7 @@
   "/usr/local/texlive/2024/texmf-dist/fonts/vf/public/libertine/LinLibertineT-tlf-ot1.vf" 1490131464 968 b4daf26f130460f16d670da7f3f6963f ""
   "/usr/local/texlive/2024/texmf-dist/fonts/vf/public/libertine/LinLibertineT-tlf-sc-t1.vf" 1354061736 1732 19a98a3416ac208cfc1e8cd877852bec ""
   "/usr/local/texlive/2024/texmf-dist/fonts/vf/public/libertine/LinLibertineT-tlf-t1.vf" 1354061736 1728 b078a050f24d7649619baa987d7216d8 ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/vf/public/libertine/LinLibertineT-tlf-ts1.vf" 1490131464 640 f2633b196ddbd644937d19e300a5024e ""
   "/usr/local/texlive/2024/texmf-dist/fonts/vf/public/libertine/LinLibertineTB-tlf-sc-t1.vf" 1490131464 1772 7f76ee81dccb744f7ac5dc9e1083f6ce ""
   "/usr/local/texlive/2024/texmf-dist/fonts/vf/public/libertine/LinLibertineTB-tlf-t1.vf" 1490131464 1768 5d66dfd9709f1f38b8fb3cb38db46402 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/vf/public/libertine/LinLibertineTI-tlf-t1.vf" 1490131464 1768 b3bfd8ed1fe2dce5fd19610abe4c3dbe ""
@@ -155,6 +159,7 @@
   "/usr/local/texlive/2024/texmf-dist/tex/latex/libertine/OT1LinuxLibertineT-TLF.fd" 1490131464 3019 024cbcf380053dddffd4ac0b44aac808 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/libertine/T1LinuxLibertineMonoT-TLF.fd" 1558472472 2322 d9597586085b54680b8a38ce202c5ca3 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/libertine/T1LinuxLibertineT-TLF.fd" 1490131464 2980 15412b63bb0119ade194e089fff355d4 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/libertine/TS1LinuxLibertineT-TLF.fd" 1490131464 1689 42435c12d9d3dc0c446eb02409690ab9 ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/libertine/libertine.sty" 1713989903 19358 ca0f9b5016a74813fc4f6c85c48d3d5b ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/lineno/lineno.sty" 1684613922 154524 d78e0d3f9a3cdfd2cab61cd321c9281c ""
   "/usr/local/texlive/2024/texmf-dist/tex/latex/mweights/mweights.sty" 1490909540 4953 67f29a12ea26221103fce6bae3433e60 ""
@@ -193,11 +198,11 @@
   "images/UGR-MARCA-02-color.png" 1716971522.71764 193047 2a98ca769e79bfc20bb8055ffdef3937 ""
   "images/sun_item_1.png" 1716971522.77364 19142 4412359bf04975a6ca8621abdfe8b273 ""
   "mythesis.cls" 1716971522.77364 25092 b11c3d5ae57160a3e67dac575662c664 ""
-  "thesis.aux" 1717428101.98264 18414 cefe98a4a86734b461265c9e0763ee75 "pdflatex"
-  "thesis.bbl" 1717428096.51451 8007 7b4d4f1af5412d864bb87530dfc7b9f5 "bibtex thesis"
-  "thesis.out" 1717428101.98664 5197 1ef3fae6346cfe942f9795b857cc7d84 "pdflatex"
-  "thesis.tex" 1717428088.46232 60054 09e57150885ef190732eec82c4b16b3a ""
-  "thesis.toc" 1717428101.99064 2596 6bd4eaefd29fdc56eb7c2809dd5fdefc "pdflatex"
+  "thesis.aux" 1717584499.96892 18859 d8b9f2b57566a4e72c81acaed5756ec6 "pdflatex"
+  "thesis.bbl" 1717583743.92732 8323 a2227f7c59ed0c22cf037510d2fc2312 "bibtex thesis"
+  "thesis.out" 1717584499.97292 5561 7934be3b3d53b1b42b66796b7ff3ec03 "pdflatex"
+  "thesis.tex" 1717584496.5529 63051 c380c732fcfbe58472b34bfaf62260b9 ""
+  "thesis.toc" 1717584499.97292 2842 11c961eb1f5a3efabcbb0a86dd7a28ca "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"

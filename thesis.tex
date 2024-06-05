@@ -126,9 +126,32 @@ The SUNRISE III mission aims to study and stablish the relations and couplings b
 
 The design from scratch of an instrument such as this is very complex. There are many things that have to be meticulously designed and tested which span many fields of expertise, like optics, electronics, software, hardware, or thermal design. To avoid undue extension of this thesis, we will focus on the aspects of the design directly related to the \textbf{TO QUE}, that is, regarding the spectral, imaging and polarimetric capabilities of the instrument. 
 
-\section{The science behind spectropolarimeters.}
+\section{A brief introduction to spectropolarimeters.}
 
-Spectropolarimeters, as suggested by the name, are devices that measure the spectral and polarimetric properties of light, or in other words, that measure the polarization state of light as a function of wavelength. Their use is widely extended in astrophysics due to the huge amout of information about the light source they provide.  
+Spectropolarimeters, as suggested by the name, are devices that measure the spectral and polarimetric properties of light, or in other words, that measure the polarization state of light as a function of wavelength. Their use is widely extended in astrophysics due to the huge amout of information about the light source we can infer from these properties.
+
+In solar physics, it is common to encounter two distinct types of spectropolarimeters, distinguished by their approach to spectroscopy: slit-based spectrographs, such as SUSI and SCIP, and narrow-band tunable filtergraphs, like TuMag. The latter preserve spatial resolution by capturing two-dimensional images of the solar scene at the expense of sacrificing spectral resolution. Conversely, slit-based spectrographs provide excellent spectral resolution but have a limited spatial resolution. 
+
+Regardless of how spectroscopy is carried out, spectropolarimeters must be able to measure the polarization state of light. That is, they must be capable of determining the Stokes parameters  of the incident light. These four parameters, usually grouped in a pseudo-vector: $[I, Q, U, V]$, were defined by Stokes in \cite{Stokes_vector} as a mathematical formalism to completely define to polarization state of light. The first parameter, $I$, represents the total intensity; $Q$ and $U$ provide information about the intensity of linearly-polarized light, at 0º and 90º, respectively; and lastly, $V$, accounts for the intensity of circularly polarized light. 
+
+Excellent polarimetric sensitivity and spectral resolution are wasted if the optical capabilities of the instrument are not up to par. The design of these instruments must achieve diffraction-limited images, with a signal-to-noise ratio ensuring a typical polarimetric sensitivity of 1000, and the best spatial resolution the telescope allows, all without sacrificing spectral resolution and accomplishing this in the shortest possible time.
+
+When designing the instrument, one must balance these three properties: spectral, optical, and polarimetric capabilities, trying to improve the performance in all of them without sacrificing too much. In the following sections, we will delve into each of these aspects in more detail.
+
+\subsection{Spectroscopy}
+
+Narrow-band tunable spectrographs play a significant role in this thesis. They will be extensively discussed in this chapter, particularly in relation to the design and calibration of TuMag, and again in Chapter \ref{CH:Pipeline} when addressing the correction of data produced by these instruments. Therefore, for the sake of simplicity, we will focus exclusively on this type of spectrographs from this point onward.
+
+Fabry-Pérot Interferometers (FPIs), also known as etalons (used interchangeably), represent one of the most prevalent forms of narrow-band tunable spectrographs. Composed by a resonant optical cavity formed by two distinct optical media, these devices permit only the passage of light with wavelengths corresponding to constructive interference within the cavity. By changing the distance between the two reflecting surfaces, or mirrors, or by modifying the refractive index of the material within te cavity, it is posible to select the wavelengths allowed through the cavity.
+
+
+
+\subsection{Imaging}
+
+\subsection{Polarimetry}
+
+
+
 
 
 
@@ -148,7 +171,7 @@ TuMag's design and properties are a direct consequence of the scientific purpose
 
 As a spectrograph, TuMag is able to tune the wavelength of the measurements through a Fabry-Pérot interferometer (FPI), and select between three different spectral lines through the different pre-filters located on the filter wheel. 
 
-The FPI, or etalon, is a LiNbO$_3$-based 
+The FPI, or etalon, is a LiNbO$_3$-based ...
 
 
 
