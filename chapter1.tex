@@ -1,0 +1,41 @@
+\chapter{Introduction}
+
+\section{Background}
+
+In June 2009, the first Sunrise observatory \citep{SunriseI} was launched from Kiruna, Sweden, aboard a stratospheric ballon. Equipped with a 1-m aperture telescope, a multi-wavelength UV filter imager, and IMaX, a Fabry-Pérot-based magnetograph, Sunrise was the most complex payload carried by a solar stratospheric balloon to date. Aimed at studying the magnetic fields of the Sun and the dynamics of solar plasma convective flows, the mission was an outstanding success. It resulted in the publication of over a hundred peer-reviewed scientific articles in numerous high-impact journals, including Astronomy and Astrophysics (A\&A), The Astrophysical Journal (APJ), and Solar Physics, among others.
+
+Following the success of its inaugural flight, Sunrise embarked on a second journey \citep{SunriseII} on June 13, 2013. The primary objective of this subsequent flight was to investigate the active regions of the Sun, as it remained completely *quiet* throughout the entirety of the initial flight. Despite minimal alterations to the instrumentation aboard the observatory, the variance in solar activity during this second flight yielded fresh perspectives and valuable data, ultimately securing the mission success, despite encountering some technical challenges.
+
+Given the success of the first two flights, a third iteration of the Sunrise mission was planned, featuring an updated design. For this third edition, the telescope was equipped with three post-focal instruments: SUSI, a UV spectrograph; SCIP, an infrared spectrograph; and TuMag, the evolution of the IMaX magnetograph. Sunrise III was initially scheduled to fly during the summer of 2020 but was postponed to 2022.
+
+The third launch of Sunrise plays a crucial role in this dissertation. This thesis, initiated in 2020, was centered on the development of the data reduction pipeline for the TuMag instrument, which was entirely developed by the Spanish solar physics consortium. According to the original plan, the first half of the thesis was dedicated to the calibration of the instrument and the preparation of the data pipeline. This way, once the mission was launched, the second half of the thesis could focus on the correction and scientific analysis of the data produced during this third flight. However, this plan (and thus the scope of the thesis) encountered a setback on July 10, 2022, when the third flight of the Sunrise observatory had to be aborted just a few hours after the launch due to a mechanical failure during the ascent phase.
+
+The observatory was recovered days later after a brief stay in the Scandinavian Alps. Both the telescope and the instruments were found to be in good condition, allowing for the recovery of the observatory and providing hope for a second attempt. However, the process of retrieving the instruments, disassembling, calibrating, and verifying their condition before relaunching the mission is lengthy, and it was not until this year, 2024, that a second attempt became feasible.
+
+In the absence of data produced by Sunrise to process, analyze, and exploit, the scientific work conducted within the framework of this thesis has been compelled to slightly shift its focus. Over these years, we have focused on delving deeper into image correction techniques for data obtained from Fabry-Pérot interferometers, such as TuMag and IMaX. As well as conducting several studies using data products from other instruments, such as the Polarimetric and Helioseismic Imager aboard Solar Orbiter (SO/PHI) and HMI. 
+
+In the following chapters, we will present the work undertaken during the calibration and commissioning of TuMag, conducted in 2021, 2022, and 2024. Additionally, the research carried out between the first and second flights of Sunrise III, which has resulted in the publication of two articles as the main author — one published in APJ and the other in A\&A — will also be detailed in this manuscript, as well as other studies that have not yet been published in any scientific journal. 
+
+
+\section{Motivation of our work}
+
+In experimental sciences, there is a very strong relation between technological and scientific advances due to the simple fact that we cannot draw conclussions from what we cannot see. We believe it is important for experimental scientists, and more specifically, for observational astronomers, to know the limitations and capabilities and understand the functioning of the instruments we use. 
+
+This philosophy is one of the pillars of this thesis, which covers topics ranging from the design and calibration of scientific instruments to the exploitation of the data they produce. With this thesis, we aim to provide a broad, yet detailed, view of the various stages of a scientific mission, from its conception and objectives through its design and calibration, data reduction and preparation for scientific exploitation, and finally, the studies and conclusions derived from it.
+
+In particular, we will detail this process within the framework of solar physics through the development of TuMag, the magnetograph aboard Sunrise III. We will present the scientific objectives of the mission and attempt to link the design concepts with the scientific questions we aim to answerr. We will address the challenges encountered in data correction due to the technical or instrumental limitations, a subject of ongoing debate within the community and of current relevance. And finally, we also aim to offer a brief dip into the scientific explotation that can be carried out with the final data product. 
+
+With this thesis we aim to clarify the following points:
+
+\begin{itemize}
+  \Myitem Scientific objectives of TuMag.
+  \Myitem Instrumental ways of achieving the scientific purposes
+  \Myitem Open problems for data reduction. Flat-fields, etalon effects in the data. 
+  \Myitem Offering an example of data exploitation with aa study case. Persistent Homology.
+\end{itemize}
+
+\section{Introduction}
+
+Astronomy is one of the broadest fields of knowledge. It studies everything from the smallest (astronomically speaking) objects, such as the small asteroids that inhabit our solar system, to the global structure and evolution of the universe, including the study of planetary systems, stars, black holes and the galaxies in which they are found. However, despite the diversity of disciplines—ranging from stellar astronomy, radio astronomy, and cosmology, to extragalactic astronomy, astrobiology, and solar physics—they all share a common tool for studying the cosmos: light. Since the very beginning of astronomy, the astronomer's work has been to learn how to modify and measure the properties of the photons that reach us in order to infer the characteristics of the observed object. Although recent advancements have provided astronomers with new lenses to see the cosmos, like gravitational waves (\textbf{REFERENCIA}) or neutrinos (\textbf{REFERENCIA}), among others, light remains as our main resource. Our understanding of the cosmos has always gone hand-in-hand with our ability to design and develop new ways (or more efficient ways) to disect the light, spanning from the first solar clocks or Newton's first telescope to the modern-day spaceborne telescopes like the Hubble, James Webb or Solar Orbiter. 
+
+Solar physics is no different from other astronomical disciplines in this regard. Our main tool to \textit{see} the Sun is through light. Contrary to what one may think, solar physicists are as photon-starved as any other astronomer. Even though our star is closer and (apparently) brighter than any other astronomical object, our requirements regarding resolution and sensitivity are so high we are as dependent on extremely optimized instrumentation as any other discipline. Thus, the development of instrumentation employing state-of-the-art technology and techniques plays an important role in modern solar physics.

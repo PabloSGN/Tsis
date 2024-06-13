@@ -1,0 +1,53 @@
+\chapter{\label{CH:}Challenges in data reduction: Etalon Cavity Map.}
+
+\section{\label{ch3: cavity map}Cavity map retrieval from flat-field observations}
+
+
+
+\subsection{One device, two configurations}
+
+GRAFICA EN CONJUNTO.
+
+\subsubsection{Collimated configuration}
+
+Collimated mounts are characterized by having the etalon located at the pupil plane and therefore receive a collimated beam from each point of the observed object. In this setup, light coming from any point of the object will fall upon the same area of the etalon. Consequently, any local defects on the etalon crystals or on the plates' parallelism is averaged all over the clear aperture, thus making the optical quality constant along the FoV. However, the angle of incidence of the light beam varies along the FoV, thus shifting the transmission profile.  
+
+ The transmission profile for an ideal collimated etalon tuned at wavelength $\lambda _ s$ takes the following form:
+\begin{equation}
+\Psi ^{\lambda _ s} (\lambda, \theta) = \frac{1}{1 + F \sin ^2 a_s (\lambda,\theta) },
+\end{equation}
+where
+\begin{equation}
+a_s (\lambda, \theta) =\frac{2  \pi}{\lambda} nd\cos \theta  \ ,
+\label{eq: a-def}
+\end{equation}
+with the subscript $s$ indicating that the etalon is tuned at the wavelength $\lambda_s$.
+
+The shape of the transmission profile depends on its physical properties. Firstly, the width of the resonance peaks is determined by the parameter $F$, $F \equiv 4R (1 - R )^{-2}$, which depends exclusively on the reflectivity $R$ of its mirrors. Secondly, the spectral behavior of the transmission profile is governed by $a_s(\lambda,\theta)$, which is a function of the refractive index of the etalon cavity, $n$; the distance between mirrors, $d$; and the angle of the incident beam, $\theta$. 
+
+Local defects in the collimated configuration are averaged out, which means that $d$ and $n$ respectively represent the mean values of the thickness and refractive index across the clear aperture of the FPI. Yet, they produce a broadening of the transmission profile and worsen the optical quality of the instrument. The differing angles of incidence over the FoV produce shifts of the transmission that vary quadratically with $\theta$.
+
+\subsubsection{Telecentric configuration}
+
+In the telecentric configuration, the etalon is placed very close to an intermediate focal plane, while the pupil is focused at infinity. This way, the etalon is illuminated by cones of rays that are parallel to each other and reach different sections of the interferometer. Local inhomogeneities (defects or cavities) on the etalon produce differences in the transmission profile across the FoV, which are directly mapped into the image plane. This means that the optical response and the transmission profile shift locally on the image sensor. 
+
+The transmission profile of the etalon tuned at a wavelength $\lambda _s $ is, in this case, given by \citep{franIV}:
+\begin{equation}
+\Psi ^{\lambda _ s} (\lambda) =  \mathfrak{Re}\left[E(a_s (\lambda, n, d, \theta), b) \right] ^2 + \mathfrak{Im}\left[E(a_s(\lambda, n, d, \theta), b) \right] ^2 ,
+\label{Eqn: Tel_first}
+\end{equation}
+with $E(a,b)$ being:
+\begin{multline}
+E(a, b) = 2 \sqrt{\tau}\ \Biggl\{ \int_0^1 \frac{\varrho \cos \left(a\left[1-b \varrho^2\right]\right)}{1+F \sin ^2\left(a\left[1-b \varrho^2\right]\right)} \mathrm{d} \varrho \ + \\
+\mathrm{i} \frac{1+R}{1-R} \int_0^1 \frac{\varrho \sin \left(a\left[1-b \varrho^2\right]\right)}{1+F+ \sin ^2\left(a\left[1-b \varrho^2\right]\right)} \mathrm{d} \varrho\Biggr\} ,
+\end{multline}
+where $\tau$ is the transmission factor of the etalon at normal incidence, $\varrho$ is the radial coordinate of the pupil normalized to the pupil radius of the instrument, $a$ is defined by Eq. \eqref{eq: a-def} and $b$ is given by
+\begin{equation}
+b = \frac{1}{8 (nf\#) ^2}.
+\end{equation}
+
+This parameter accounts for the contribution of the focal ratio, $f\#$, and has an impact on the spectral resolution and the apodization of the pupil as seen from the etalon \citep{beckers}. Thus, the resolution is now affected by both $F$ and $f\#$, through the parameters $a$ and $b$.
+
+Contrary to the collimated case, $a$ now has an explicit dependence on the spatial coordinates of the image plane, as $n$ and $d$ change from pixel to pixel. These variations compose the "cavity error" of the etalon and need to be corrected when employing telecentric configurations.
+
+\section{Sunspot observation simulation.}

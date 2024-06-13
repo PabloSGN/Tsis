@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex thesis"] 1718274951.8635 "thesis.aux" "thesis.bbl" "thesis" 1718274954.82039 0
+["bibtex thesis"] 1718277477.31187 "thesis.aux" "thesis.bbl" "thesis" 1718277480.01603 0
   "./bibliography.bib" 1718269537.48391 8435 ea331fc2f787bde263ea38d6bae203ae ""
   "./mycustom.bst" 1716971522.77364 38609 5e2db2193f94f2db3b05dbf8d8576c79 ""
-  "thesis.aux" 1718274954.37199 20843 c9c93b8275d89f27ed9813a040a6f03e "pdflatex"
+  "thesis.aux" 1718277479.52711 5037 7907c03c9f66a8f9a9c9d2c5fea89440 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1718274952.05787 "/home/pablo/Desktop/Tesis/Tsis/thesis.tex" "thesis.pdf" "thesis" 1718274954.82059 0
-  "/home/pablo/Desktop/Tesis/Tsis/thesis.tex" 1718274948.288 70274 0c90041e3c62cc0354e556467eb4e15c ""
+["pdflatex"] 1718277477.46573 "/home/pablo/Desktop/Tesis/Tsis/thesis.tex" "thesis.pdf" "thesis" 1718277480.01653 0
+  "/home/pablo/Desktop/Tesis/Tsis/thesis.tex" 1718277471.93906 2275 b77cc7440434345cdc9df64fcf6cc2b9 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc" 1490131464 2933 9ad527ce78d7c5fa0a642dead095f172 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc" 1490131464 2934 a4a9158faed2e9e89c771b4e3b7fc12f ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_dhi6qf.enc" 1558472472 2914 3d1e3c4123f03ab27df5767d5039d109 ""
@@ -186,24 +186,18 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1716975811 5483668 9e45798515b35c9eab0413928a3e8881 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1716976020 8225723 540efa72cb392ae813ccd1e581bd2cf6 ""
   "/usr/local/texlive/2024/texmf.cnf" 1716975800.74334 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
+  "chapter2.tex" 1718277339.26213 8755 05fd3972d6fa07a3426f9b8e0c1a1ccb ""
+  "chapter3.tex" 1718277369.49835 58 f3059b49125300abb6610c231805e6cd ""
+  "chapter4.tex" 1718277374.05438 4465 c63a2b048a0682349e86bca76617a841 ""
   "figures/Introduction_to_spectropolarimeters/Etalon_and_prefilter_example.pdf" 1718111482.6747 45273 b936bbfbdac4670341ad9e79b4067554 ""
-  "figures/PersistentHomology/AR_analysis_v2.pdf" 1716971522.46164 252360 c972064283b61a44558b1a45cd200856 ""
-  "figures/PersistentHomology/AR_classification.pdf" 1716971522.46564 233102 d0a4a08a484f7641e5616bb404601a05 ""
-  "figures/PersistentHomology/ImageFiltering_example_v.pdf" 1716971522.47764 40605 8f5f2febdafb47f78364d1024392e12d ""
-  "figures/PersistentHomology/InteractingDiagram.pdf" 1716971522.48164 274006 cfeeb6689542890cdb5d2ec7731ad7de ""
-  "figures/PersistentHomology/PI_Example.pdf" 1716971522.48164 94876 5efd13a684cc3c3ca3f2f87f70bc2df7 ""
-  "figures/PersistentHomology/PI_PD_example.pdf" 1716971522.48164 173426 78c49549a968f27d789a6a1ae36b4f97 ""
-  "figures/PersistentHomology/QuietSun.pdf" 1716971522.48964 552021 1ada071f3c4867c2249e0629b490d3db ""
-  "figures/PersistentHomology/Regions_anotated.pdf" 1716971522.48964 66366 155ebc6e701811be846b07f7f9e0f082 ""
   "images/LogosIAA_SO_Color.png" 1716971522.54964 431500 fc3ac2ede31491d24b38c39a8e122767 ""
   "images/UGR-MARCA-02-color.png" 1716971522.71764 193047 2a98ca769e79bfc20bb8055ffdef3937 ""
-  "images/sun_item_1.png" 1716971522.77364 19142 4412359bf04975a6ca8621abdfe8b273 ""
   "mythesis.cls" 1716971522.77364 25092 b11c3d5ae57160a3e67dac575662c664 ""
-  "thesis.aux" 1718274954.37199 20843 c9c93b8275d89f27ed9813a040a6f03e "pdflatex"
-  "thesis.bbl" 1718274952.044 9442 d76e2bbbe919382649585f402346c4cd "bibtex thesis"
-  "thesis.out" 1718274954.37599 6492 f4d81615047bc8cabc03a27aba9ffcf9 "pdflatex"
-  "thesis.tex" 1718274948.288 70274 0c90041e3c62cc0354e556467eb4e15c ""
-  "thesis.toc" 1718274954.37599 3264 a8944dcd0d6f5ffceed7c4a6b4fbc45a "pdflatex"
+  "thesis.aux" 1718277479.52711 5037 7907c03c9f66a8f9a9c9d2c5fea89440 "pdflatex"
+  "thesis.bbl" 1718277477.4511 1858 45cd6496b467b5b971efe7f7928bbf6e "bibtex thesis"
+  "thesis.out" 1718277479.52711 3947 4de286a7dabf2b2ed4a07ebd7a201edb "pdflatex"
+  "thesis.tex" 1718277471.93906 2275 b77cc7440434345cdc9df64fcf6cc2b9 ""
+  "thesis.toc" 1718277479.53111 1886 3a1d9501b58965a72eee40b6538456fa "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"
