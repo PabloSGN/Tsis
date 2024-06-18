@@ -17,7 +17,7 @@ def fts_spectra(wli,wlf):
     """'Kitt Peak FTS-Spectral-Atlas'"""
     # print('Enter end wavelength (3290 - 12508 A)')
     #path = '/Users/dorozco/Dropbox (IdAdA)/Python/'
-    file = 'fts.npz'
+    file = 'Plots/fts.npz'
     # np.savez('fts.npz', fts=fts, fts_w=fts_w)
     data = np.load(file)
     fts = data['fts']

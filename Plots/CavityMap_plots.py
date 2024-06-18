@@ -8,6 +8,9 @@ from scipy.special import erf
 
 from scipy.integrate import simps, nquad
 
+from scipy.interpolate import interp1d
+
+
 import etalon_funtions as etf
 import functions_matricial as ft
 import functions_tele as ft_tele
@@ -123,3 +126,95 @@ axs.grid(True, c = 'k', alpha = 0.3)
 plt.tight_layout()
 plt.savefig(f"Plots/plots/etalon_setups_profiles.pdf", bbox_inches = "tight")
 
+# ============================================================ #
+
+plt.close("all")
+fig, axs = plt.subplots(figsize = (10.5, 5))
+
+Et = {
+      'R' : 0.925,
+      'n' : 2.2926446,
+      'd' : 251.63e-6,
+      'theta' : 0.0,
+      'cos_th' : np.cos(np.deg2rad(0)),
+      'fnum' : 56.6,
+      'angle' : 0
+      }
+
+Spectrum, Wavelengths = ft.fts_spectra(6172.5, 6175)
+Spectrum = Spectrum / np.max(Spectrum)
+Wavelengths_increased = np.arange(6172.5, 6174.3, 0.0005)
+spc_interp = interp1d(Wavelengths, Spectrum, kind = 'cubic')
+spc_increased = spc_interp(Wavelengths_increased)
+Wavelengths = Wavelengths_increased
+Spectrum = spc_increased
+
+l0 = 6173.344
+
+axs.plot(Wavelengths - l0, Spectrum, c = 'k', lw = '3', label = 'Solar spectrum')
+
+wls = list(np.linspace(-120, 120, 5))
+wls.append(300)
+wls = np.array(wls) * 1E-3 + l0
+
+colors = ["crimson", "darkorange", "deeppink", "indigo", "dodgerblue", "forestgreen"]
+
+profile = []
+
+for ind, wl in enumerate(wls):
+    etalon = etalon_funct(Wavelengths * 1E-10, wl * 1E-10, Et, 0)
+    axs.plot(Wavelengths - l0, etalon * Spectrum, lw = 2, c = colors[ind])
+    
+    profile.append(np.sum(etalon * Spectrum))
+
+profile = np.array(profile) / profile[-1]
+
+for ind, wl in enumerate(wls):
+    axs.scatter(wl - l0, profile[ind], s = 120, marker = 'P', c = colors[ind], zorder = 10)
+
+
+axs.scatter(10, 0.5, s = 75, marker = 'P', c = 'k', label = 'Measured Intensity')
+axs.plot([10, 11], [0.5, 0.5], c = 'k', lw = 2)
+
+
+axs.plot(wls - l0, profile, marker ='x', ls = "--", color = 'indigo', zorder = 0)
+axs.set_xlim(-0.2, 0.4)
+axs.set_ylabel("Intensity [Norm.]")
+axs.set_xlabel(r"$\lambda - \lambda _ 0$ [$\AA$]")
+axs.grid(True, c = 'k', alpha = 0.3)
+
+# Multicolored legend
+from matplotlib.collections import PatchCollection
+class MulticolorPatch(object):
+    def __init__(self, colors):
+        self.colors = colors
+        
+# define a handler for the MulticolorPatch object
+class MulticolorPatchHandler(object):
+    def legend_artist(self, legend, orig_handle, fontsize, handlebox):
+        width, height = handlebox.width, handlebox.height
+        height *=0.35
+        patches = []
+        for i, c in enumerate(orig_handle.colors):
+            patches.append(plt.Rectangle([width/len(orig_handle.colors) * i - handlebox.xdescent, 
+                                          -handlebox.ydescent],
+                           width / len(orig_handle.colors),
+                           height, 
+                           facecolor=c, 
+                           edgecolor='none'))
+
+        patch = PatchCollection(patches,match_original=True)
+
+        handlebox.add_artist(patch)
+        return patch
+
+
+h, l = axs.get_legend_handles_labels()
+h.append(MulticolorPatch(colors))
+l.append(r"$\psi ^{\lambda _ s} (\lambda)\times\mathcal{O}(\lambda)$")
+
+
+axs.legend(h, l, loc='lower right', edgecolor = 'k' ,
+         handler_map={MulticolorPatch: MulticolorPatchHandler()})
+plt.tight_layout()
+plt.savefig(f"Plots/plots/ProfileMeasurement.pdf", bbox_inches = "tight")
