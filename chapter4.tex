@@ -1,5 +1,10 @@
 \chapter{\label{CH:challenges}Challenges in data reduction. Etalon Cavity Map.}
 
+PRIMERO HABLAR DE LA MANCHA -> Exponer los problemas del mapa de cavidad. 
+
+Luego ya paper de ajuste.
+
+
 \section{\label{eta_corr_susec: etalon_transmission}Etalon transmission profile}
 
 The intensity distribution observed at the focal plane of any etalon-based instrument tuned to a wavelength $\lambda_s$ obeys the following expression \citep{franI}:
@@ -101,13 +106,13 @@ Additionally, we included the presence of defects arising from irregularities or
 We let $n _ i ^{\lambda_s}$ be the  noise contribution at the $i$-th pixel and wavelength $\lambda_s$. Thus, the observed intensity at that pixel when the etalon is tuned at $\lambda _s$, $I ^{\lambda _ s} _ {{\rm obs}, i}$ is given by 
 \begin{equation}
 I ^{\lambda _ s} _ {{\rm obs}, i} = g_i \frac{\int_{\lambda_0 - \Delta \lambda}^{\lambda_0 + \Delta \lambda} O(\lambda)\Psi^{\lambda _ s} (\lambda , \Delta a _i)  d\lambda}{\int_{\lambda_0 - \Delta \lambda}^{\lambda_0 + \Delta \lambda} O(\lambda)\Psi^{\lambda _ c} (\lambda, \Delta a _ i)  d\lambda} + n _ i ^{\lambda_s}    ,
-\label{eq: Profile - General}
+\label{eq_eta_corr: Profile - General}
 \end{equation}
 with $\lambda _ c$ being the continuum wavelength. From a practical point of view, the integration limits are set in such a way that only a single resonance (or order) of the etalon is included with the limits, thus, acting akin to the sorting pre-filter commented on previously. We note that the denominator strictly corresponds to the intensity at the continuum of the line in the absence of the transmission profile or if the continuum wavelength is far enough from the spectral line. In any other case, the transmission should be taken into account as well to normalize the observations to the local continuum, which is necessary since we work with relative measurements. An example of a spectral line measurement is displayed in Fig.~\ref{fig_etalon_corr: Prof-Measure}.
 \begin{figure}
     \centering
     \includegraphics[width = \textwidth]{figures/EtalonPaper/ProfileMeasurement.pdf}
-    \caption{Simulated observation of the Fe I spectral line ($\lambda _ 0 = 6173.3$\r{A}) using a collimated mount and a total of $N_ \lambda = 6$ wavelengths that have been equally distributed along the spectral line, with the exception of the continuum measurement (light blue), which is selected at $300$ m\r{A} from the blue of the line core. The measured intensity is the result of computing the value given by Eq.~\ref{eq: Profile - General} at each wavelength and with $g = 1$.
+    \caption{Simulated observation of the Fe I spectral line ($\lambda _ 0 = 6173.3$\r{A}) using a collimated mount and a total of $N_ \lambda = 6$ wavelengths that have been equally distributed along the spectral line, with the exception of the continuum measurement (light blue), which is selected at $300$ m\r{A} from the blue of the line core. The measured intensity is the result of computing the value given by Eq.~\ref{eq_eta_corr: Profile - General} at each wavelength and with $g = 1$.
     } \label{fig_etalon_corr: Prof-Measure}
 \end{figure}
 
@@ -126,7 +131,142 @@ We modeled the etalon defects as changes in $\Delta a$ in such a way that the ma
     \end{minipage}
     \end{figure}
 
+\section{\label{eta_corr_susec: fitting algorithm}Fitting algorithm}
+
+We have developed an algorithm able to extract the distribution of the etalon defects and the gain map from data taken by etalon-based instruments, which enables the correction of the two contributions separately. The algorithm works by minimizing a given merit function that depends on the gain and the etalon defects. 
+
+In particular, we have defined an error metric, $\varepsilon  ^\lambda$, at each tuned wavelength, computed by comparing the measured intensity with the theoretical prediction. If we let $I_ {i, {\rm obs}} ^{\lambda _s}$ be the measured intensity at a given $i$ pixel for an etalon tuned to the wavelength $\lambda_s$, the error metric at each wavelength is given by
+\begin{equation}
+\varepsilon ^{\lambda _s} (\Delta a _i, g _ i) =  I _ {i, {\rm obs}} ^{\lambda _ s} - g_i \frac{\int_{\lambda_p}^{\lambda_q} O(\lambda)\Psi^{\lambda _ s} (\lambda, \Delta a _ i)  d\lambda}{\int_{\lambda_p}^{\lambda_q} O(\lambda)\Psi^{\lambda _ c} (\lambda, \Delta a _ i)  d\lambda}
+\label{eq_eta_corr: Error metric}.
+\end{equation}
+
+The merit function we employed is then the quadratic summation of the error metric over all tuned wavelengths:
+
+\begin{equation}
+f(\Delta a _i, g _ i) = \sum _ {s = 0} ^ {N_\lambda} \left( \varepsilon ^{\lambda _s} (\Delta a _i, g _ i) \right) ^ 2.  
+\label{eq_eta_corr: Merit Function}
+\end{equation}
+Both the camera gain and the defects of the etalon change from one pixel to another, which is why we address each pixel independently, but they remain constant at every wavelength. Hence, the transmission profile of the etalon varies at different points of the FoV; but at a given pixel, it is constant at all tuned wavelengths. Therefore, the algorithm is able to better obtain the etalon properties as we increase the number of wavelengths.
+
+Figure \ref{fig_etalon_corr: Derivatives} shows the derivatives of the error metric, Eq.~\eqref{eq_eta_corr: Error metric}, as a function of wavelength, that is, before computing the summation over $s$ of the merit function, with respect to the gain, the reflectivity, and $\Delta $a. The curve corresponding to the $\Delta a$ derivative is different from the others, whereas the derivatives of both the gain and the reflectivity exhibit similar shapes. Hence, variations in either the reflectivity or the gain introduce similar changes in the merit function, which can produce a trade-off between these two parameters, especially when the spectral line is sampled in only a few points. Given that discrepancies arising from errors in reflectivity are assimilated by gain maps, we did not take into account reflectivity errors when computing our simulations, as they have no impact on cavity map calculations.
+
+\begin{figure}
+\centering
+\includegraphics{figures/EtalonPaper/Derivadas.pdf}
+\caption{Derivatives of the error metric as a function of wavelength. The derivative with respect to $\Delta a$ has been normalized in order to fit the three curves in the same plot.}
+\label{fig_etalon_corr: Derivatives}
+\end{figure}
 
 
+A few key aspects arise when analyzing the merit function and its applicability on real data. The first point to bear in mind is that the shape of the object, $O(\lambda)$, is not known a priory. Therefore, we needed to provide a guess for it. The method works by assuming that differences between the prediction and the observation are caused exclusively by the etalon defects or the gain. If the object used during the fitting process differs considerably from the real one, the prediction and observation will have differences that will erroneously be identified as etalon defects or gain variations. This is the main source of errors for the method when applied to real data. Two approaches can be followed in order to address this issue. The first one consists of assuming the solar atlas profile as the object. This is a good approximation, provided the data to which the algorithm is applied to lack information about solar structure, either because they are observations of long integration times of the quiet sun or produced by averaging several quiet sun observations (flat fields). If this condition cannot be met, this approach is not valid. The second approach involves deriving an approximated object from the data themselves by deconvolving the mean profile of the observation with the etalon's transmission profile. This approach can account for any difference the real object may have with the solar atlas and thus has a greater resemblance to the real object. Nevertheless, the process of deconvolving is prone to errors when the sampling is insufficient and can introduce additional noise into the problem. We have tested both approaches to compare their performances on different scenarios in order to assess when to use one or the other.
 
-\section{Sunspot observation simulation.}
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{figures/EtalonPaper/Deconvolution.pdf}
+\caption{Deconvolution of the object with a measurement of the Fe I spectral line using $N_\lambda = 9$. All points of the FoV have been used to compute the average profiles (red crosses). The deconvolution (blue) is the result of deconvolving the mean profile interpolation (dashed line) with the displayed etalon transmission profile (green). }
+\label{fig_etalon_corr:Deconvolution}
+\end{figure}
+
+We employed Newton's method to minimize the merit function, Eq.~\eqref{eq_eta_corr: Merit Function}, as it has been proven to quickly converge (in five iterations or fewer, usually). The method begins by assuming an initial guess for the gain $g_j$ and $\Delta a_j$ parameters. Then, provided the initial guess is sufficiently close to the solution and that the merit function is continuous and differentiable, the gain $g_j$ and $\Delta a_j$ encoded in the vector, $\mathbf{x}_j$, can be updated iteratively at each iteration, $j$, as
+
+\begin{equation}
+\mathbf{x} _ {j + 1} = \mathbf{x} _ j - \mathcal{H} ^ {- 1} \mathcal{J} ^ T f(\mathbf{x}_j) \ , 
+\end{equation}
+
+where $\mathcal{H}$ and $\mathcal{J}$ are the Hessian and Jacobian matrices of the merit function $f$, respectively, calculated for $\mathbf{x}_j = [g_j,\Delta a_j]^T$, and $T$ stands for the transpose. Hence, the transmission profile of the etalon and its derivatives have to be computed for every wavelength and every pixel at each iteration. This can be computationally costly, especially when using imperfect telecentric configurations, where numerical integrals are involved. All derivatives needed for the algorithm are calculated analytically, except when simulating imperfect telecentrism. A detailed formulation of these derivatives is provided in the appendix.
+
+Regarding the object $O(\lambda)$, if we assume it is given by the solar atlas, no additional computations are needed. However, when using the deconvolution approach, the object has to be calculated in each iteration. In this case, the algorithm works as follows: First, we compute the average profile across the whole FoV, and we force the continuum intensity to be the same on both sides of the spectral range to reduce the boundary effects of the deconvolution. This step is only necessary in case the spectral line is sampled in only a few positions, as is the case of the SO/PHI, IMaX, or TuMag instruments, where only a continuum point, either at the red or the blue side of the spectrum, is recorded. Both the object and transmission profile require a good spectral sampling to accurately compute the integrals of Eq.~\eqref{eq_eta_corr: Error metric}. Second, a cubic spline interpolation is applied to the generated average profile to artificially improve the spectral sampling, if necessary. Finally, the interpolated profile is then deconvolved by means of a Wiener filter with the etalon's transmission profile. The result of this deconvolution is the object, $O(\lambda)$, used in the minimization algorithm. The deconvolution of the object is done every time the etalon defects are updated in order to improve the resemblance of the deconvolved object to the real one. Figure \ref{fig_etalon_corr:Deconvolution} shows an example of this process in a simulated observation using nine scanned points and a collimated configuration. The deconvolution manages to reproduce the original signal, with only some minor differences in the line core and the beginning of the wings.
+
+\subsection{\label{eta_corr_susec: results}Test scenarios and results}
+
+The aim of the simulations carried out in this section was to characterize the role of the noise $\delta _ i ^ {\lambda_s}$, the spectral sampling, the selection of the object $O(\lambda)$, and the accuracy of the method for both the collimated and telecentric configurations. All simulations were run for different choices of the number of scanned wavelengths, ranging from $N_\lambda=5$ to $N_\lambda=21$. 
+
+\subsubsection{Impact of the noise level}
+We first assumed that the spectrum of the observed object is given by the solar atlas. This way, all errors in the derivation of the gain and etalon defects only come from the noise introduced into the measurement. We refer to this as the "ideal case." Since we were combining different measurements taken at different wavelengths, we considered a worst-case scenario and simulated three different signal-to-noise ratios: 100, 150, and 200. 
+
+We restricted imperfections in the telecentrism to arise only for one scenario, S/N~$=200$, since simulating imperfections requires a high computational effort due to the lack of a theoretical expression for both the transmission profile and its derivatives. We also assumed that the degree of telecentrism ($0.3 ^\circ $) is known in this case.
+
+\begin{figure}
+    \begin{minipage}[c]{0.6\textwidth}
+      \includegraphics[width=\textwidth]{figures/EtalonPaper/SNR_plot_imperfect.pdf}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.37\textwidth}
+      \caption{
+        Absolute errors of the gain (top) and etalon defect (bottom) derivations averaged over all the FoV. The number of wavelengths corresponds to the parameter $N_\lambda$ of wavelengths used to scan the profile.
+      } \label{fig_etalon_corr:SNR_both}
+    \end{minipage}
+  \end{figure}
+
+Figure \ref{fig_etalon_corr:SNR_both} shows the average absolute error in $g$ (top panel) and in $\Delta a$ (bottom panel) over the whole FoV as a function of the wavelength sampling, $N_\lambda$. The error in $g$ is expressed as a percentage of its real value. Errors in $\Delta a$ are given in meters per second since they are mostly responsible for shifting the profile. Errors in $\Delta a$ can be translated into velocity errors with the center-of-gravity method  \citep{center_of_gravity} through the expression
+\begin{equation}
+    v_{\rm los} = \frac{c\Delta \lambda}{\lambda_s},
+\label{eq_eta_corr:vlos}
+\end{equation}
+where $\Delta\lambda$ is the spectral shift of the transmission peak produced by the error in $\Delta a$.
+
+All the scenarios exhibit a similar behavior as far as their dependence on the spectral sampling is concerned, namely, the absolute errors decrease monotonically when the wavelength sampling increases. The reason for this is simply that a larger number of wavelength samples increases the amount of available information that the algorithm can use, thus making the fitting for $g$ and $\Delta a$ more precise. These results highlight the importance of properly sampling the targeted spectral line. A modest sampling of only $N_\lambda=5$ can produce errors as large as $120 \, {\rm ms^{-1}}$ in the worst-case scenario (S/N = 100). 
+
+The noise level also plays an important role in the accuracy of the results. Scenarios with a lower S/N always have larger errors, for a given $N_\lambda$, in both the gain and $\Delta a $ computations. The difference in the performance of the algorithm due to the noise also changes with the spectral sampling; scenarios with a poor spectral sampling suffer from larger differences in the accuracy between the different S/N (50 ms$^{-1}$ for $N_\lambda$ = 5 between S/N = 200 and S/N = 100) than those with higher samplings (35 ms$^{-1}$ for $N_\lambda = 21$).
+
+The optical configuration of the etalon has a very small impact on the accuracy of the algorithm. Results for the three setups are very similar, particularly in the gain calculation, for which the results are almost identical for all configurations. Retrieval of $\Delta a$ is slightly better for the collimated mount, though.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/EtalonPaper/Maps_Fov_Hist.pdf}
+    \caption{Distribution of the errors in the $\Delta a$ computation for the three configurations (first three rows) and different spectral samplings (columns). In the bottom panels of each column, the error distribution for the corresponding spectral sampling is shown for the three configurations. }
+   \label{fig_etalon_corr:FOV}
+\end{figure}
+
+Figure \ref{fig_etalon_corr:FOV} shows the spatial distribution of the errors in the retrieval of $\Delta a$ for different choices of $N_\lambda$. There are no signs of a radial distribution in the maps shown in the figure, contrary to the actual distribution of the $\Delta a$ parameter, as shown in Fig.~\ref{fig_etalon_corr:Inputs}, bottom panel. This means that the precision of the method is similar no matter the amplitude of the defects, that is, we achieve the same accuracy in the retrieval of defects associated with shifts of 3 pm ($\sim$ 1450 ms$^{-1}$, near the corners of our FoV), which correspond to cavity errors of around 1.5 nm or incidence angles of approximately 0.4 degrees, and in the retrieval of regions where no defect is present (radius of 20 pixels from the center of the FoV approximately). Instead of a radial distribution, the errors follow a Gaussian-like distribution (shown at the bottom panels in \ref{fig_etalon_corr:FOV}) similar to the one followed by the noise contribution.
+
+The standard deviation of the errors for both the gain and $\Delta a$ computations are also reduced with an increase in spectral sampling. The last row of Fig. \ref{fig_etalon_corr:FOV} displays the error distributions in the calculation of  $\Delta a$ for the three optical configurations and different spectral samplings. These results illustrate how the three configurations yield practically identical results and how the distribution narrows as $N_\lambda$ increases, thereby improving the results. Specifically, the standard deviation decreases from 50 ms$^{-1}$ for $N_\lambda = 5$ to 20 ms$^{-1}$ for $N_\lambda = 21$. In the case of the gain determination, the standard deviation ranges between 0.2 \% and 0.1\% for the scenarios with the poorest and highest spectral sampling, respectively.
+
+\subsubsection{Impact of the object approximation}
+
+To infer the error of the algorithm when the object is unknown, we compared the performance of the ideal case, that is, when the object used to generate the observations is known, with the one achieved when deconvolving the object from the data. Only the collimated setup was simulated in order to focus exclusively on the errors introduced by the deconvolution. The data has been degraded by Gaussian noise with an S/N = 200 in both scenarios. 
+
+\begin{figure}
+    \centering
+     \includegraphics[width=12cm]{figures/EtalonPaper/Deconvolution_results.pdf}
+    \caption{Errors in gain determination and etalon properties averaged over all the FoV with a signal-to-noise ratio of 200 and a collimated configuration.}
+    \label{fig_etalon_corr:Deconvolution-results}
+\end{figure}
+
+Figure \ref{fig_etalon_corr:Deconvolution-results} shows the results for the two approaches. Interestingly, the error in the gain for the deconvolution approach does not decrease with a larger number of wavelengths, unlike the ideal case. Nevertheless, the average error of the calculation is below 0.4~\%, with a dispersion (1 $\sigma$) of $\pm$ 0.3~\%. The deconvolution approach is prone to higher errors when deriving the gain due to the normalization of the profiles. The reason for this is two-fold. first, if the continuum is far enough from the spectral line, the normalization is strictly the integral over the transmission profile because the object is flat along the integration interval. However, this is not strictly true since the wings of the transmission profile can reach the spectral line (see Fig.~\ref{fig_etalon_corr:Prof-Measure}), hence modifying the normalization of the profile when the object changes at each iteration. Second, should the continuum intensity of the derived object vary with respect to its real value due to the deconvolution process (e.g., due to boundary effects), there will be a shift in the intensity of the whole profile induced by the normalization process. These two effects seem to dominate the accuracy on the gain determination, regardless of the chosen sampling.
+
+For $\Delta a$, the performance of the method is slightly worse than for the ideal case when using the deconvolution approach. Unlike the gain determination, errors in the $\Delta a$ derivation show a strong dependence on the spectral sampling. Differences between both approaches range from $10$~ms$^{-1}$ to $40$~ms$^{-1}$ and increase with decreasing $N_\lambda$. The sensitivity with $N_\lambda$ is especially high up to $N_\lambda = 8$. A modest increase of $N_\lambda$ from five to six improves the determination of $\Delta a \sim$ 20 ms$^{-1}$, whereas at better spectral samplings, the difference between each simulation decreases more slowly, without any relevant improvement as the sampling increases. In any case, differences are all well within $\pm 1\sigma$.
+
+\subsection{The crossover case}
+
+The fact that the sensitivity of the model to the gain and to the $\Delta a$ parameters are different guarantees (to some extent) that the parameters can be separated from each other. The treatment of the problem is very different between etalon configurations, and therefore full knowledge of the setup is critical. However, this is not always feasible due to the unavoidable presence of errors, misalignment, and imperfections on the instrument. Approximations to describe the optical setup are also common in the pipeline of an FPI instrument because they reduce computational efforts. For instance, telecentric mounts are usually simplified as collimated setups, as the f-numbers employed in solar instruments are usually very large. Imperfections of telecentrism are commonly neglected, too. In this section, we analyze the impact of assuming an incorrect etalon mounting. To do so, we repeated the previous exercise, starting from a perfect and imperfect telecentric configuration but assuming that the transmission profile shape corresponds to a collimated one.    
+
+\begin{figure}
+    \begin{minipage}[c]{0.6\textwidth}
+      \includegraphics[width=\textwidth]{figures/EtalonPaper/histograms.pdf}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.37\textwidth}
+      \caption{
+        Distribution of the errors in the determination of $\Delta a$ for the crossover scenarios (different configuration in the observation generation and minimization algorithm) for both perfect and imperfect configurations. Only results for the two extreme spectral samplings ($N_ \lambda = 5$ and $N_\lambda = 21$) are shown.
+      } \label{fig_etalon_corr:Crossover_histograms}
+    \end{minipage}
+  \end{figure}
+
+In this exercise, we assumed that we have an instrument with an FPI in a telecentric mount, as in the previous sections, in both perfect and imperfect configurations and an S/N~$=200$. We also considered that the object is given by the spectral solar atlas. The shift of the perfect telecentric transmission profile with respect to the collimated one was corrected using Eq.52 from \cite{franI} to avoid the emergence of spurious velocity signals. Imperfections in the telecentrism shift the profile more. This additional displacement was left uncorrected intentionally so we could study its effects.
+
+Figure \ref{fig:Crossover_histograms} shows the error distributions for $\Delta a$ when the model assumes a collimated configuration for $N_\lambda=5$ and $N_\lambda=21$ and for both perfect and imperfect configurations. The amplitude and dispersion of the error distributions are very similar for the two mounts and are comparable to the results obtained in the ideal case (Fig.~\ref{fig_etalon_corr:FOV}, bottom panel). The main difference between the perfect and imperfect scenarios is a shift of $130$ ms$^{-1}$ for the reason mentioned above. We note that this shift can easily be accounted for since it is a known and measurable effect. 
+
+The similarity in the error distributions for the calculation of $\Delta a$ in the two scenarios demonstrates that the error incurred when assuming a collimated etalon does not significantly impact the determination of the cavity maps of the etalon. This is because changes in $\Delta a$ mostly induce a shift of the transmission peak by an equal amount in both cases.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=12cm]{figures/EtalonPaper/means.pdf}
+    \caption{Average errors of the gain (top panel) and etalon defect (bottom panel) calculations over all the FoV for the two crossover cases and the standard case (also shown in Fig.~ \ref{fig_etalon_corr:SNR_both} as the collimated case with S/N = 200) for reference. All $\Delta a$ errors have been computed by correcting differential offsets of the transmission profile between the different mounts}  \label{fig_etalon_corr:crossover}
+\end{figure}
+
+We note, however, that the amplitude, width, and shape of the transmission profile differ significantly between the telecentric and collimated configurations, leading to an expected higher error in gain calculation. Figure \ref{fig_etalon_corr:crossover} shows the absolute errors in gain and $\Delta a$ calculations for both crossover scenarios and the ideal case after correcting the wavelength shift between the different mounts. For $\Delta_a$, the performance of the method is very similar in the three setups, as also observed earlier. This behavior is nevertheless anticipated since the properties selected for simulating the imperfect etalon were chosen to mirror those of the SO-PHI etalon, which were adjusted to closely resemble the behavior of a collimated etalon to the greatest extent possible.
+
+The differences are larger for the gain determination. Not only are the errors higher in the crossover cases, but the trend is entirely different. Instead of decreasing when increasing the number of wavelengths, gain errors remain the same for the perfect case and increase with the number of samples for the imperfect case. Similar to the deconvolution case (Fig.~\ref{fig_etalon_corr:Deconvolution-results}), the difference between transmission profiles introduces an error in the normalization process that systematically affects the rest of the measurements. This effect becomes more pronounced as the number of wavelengths increases, given that this error is introduced more frequently, and it is even more prominent in the imperfect case, as not only are the profiles different in this scenario, but they are also asymmetric. This asymmetry results in an imbalance in the measurement of the profile, as one wing of the spectral line has a higher transmissivity and is observed with greater intensity than the other.
+
+Our results suggest that assuming an etalon in a collimated configuration for instruments with telecentric mounts can be a good first-order approximation for cavity map calculations, provided that the level of asymmetry of the transmission profile is known. However, achieving an accurate knowledge of the degree of telecentrism is often challenging in real instruments, as it usually varies across the FoV. Meanwhile, the results highlight that this approximation leads to a considerable increase in the error in the gain determination, which increases when increasing the spectral sampling. This contrasts with the standard philosophy of solar instrumentation, which requires a high number of points to better scan the spectral line.
