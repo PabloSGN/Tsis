@@ -1,19 +1,31 @@
 \chapter{\label{CH:challenges}Challenges in data reduction. Etalon Cavity Map.}
 
-PRIMERO HABLAR DE LA MANCHA -> Exponer los problemas del mapa de cavidad. 
+INTRO.
 
-Luego ya paper de ajuste.
+\section{One device, two configurations.}
+
+We established in section \ref{susec_spectropolarimeters: Imaging} that the observed intensity distribution at the coordinates $\xi$, $\eta$ of the focal plane of any etalon-based instrument tuned to a wavelength $\lambda_s$ obeys the following expression \citep{franI}: 
+
+\begin{equation}
+    I\left(\xi, \eta ; \lambda_{s}\right)=g(\xi, \eta)\int_{0}^{\infty} T(\lambda) \iint  O\left(\xi_0, \eta_0 ; \lambda\right)  S\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)  \mathrm{d} \xi_{0} \mathrm{~d} \eta_{0}\mathrm{d} \lambda ,
+    \label{eq_eta_corr: General}
+\end{equation}
+where $T(\lambda)$ accounts for the presence of an order-sorting pre-filter, $O\left(\xi_0, \eta_0 ; \lambda\right)$ represents the brightness distribution of the observed object at the point $\left(\xi_0, \eta_0\right)$, $S\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)$ accounts for the imaging response of the instrument when tuned at the wavelength $\lambda_{s}$, and $g(\xi, \eta)$ represents a spatial gain factor that accounts for wavelength independent pixel-to-pixel intensity fluctuations ocurring in the focal plane due to differences in the detectors' sensitivity. 
+
+The imaging response of the instrument coincides with the PSF of the instrument when the optical response is invariant against translations. In such a case, we can substitute the last two integrals by the convolution operator, but this is not strictly true in etalon-based instruments, where the response varies pixel to pixel either because of etalon irregularities or because of variations in the illumination across its clear aperture. The spectral and spatial behavior of S depends on how the etalon is illuminated, whether it is in a collimated or telecentric configuration. Each configuration has distinct qualities, and determining which is better remains a subject of debate that depends on the instrument's requirements.
+
+\begin{figure}
+    \centering
+    \includegraphics[width = \textwidth]{figures/EtalonChallenges/EtalonConfigurations.pdf}
+    \caption{Schematic representation of the two optical setups of an FPI, collimated (left) and telecentric (right).
+    } \label{fig_etalon_corr: Prof-Measure}
+\end{figure}
 
 
-\section{\label{eta_corr_susec: etalon_transmission}Etalon transmission profile}
+\section{Fitting algorithm}
+\subsection{\label{eta_corr_susec: etalon_transmission}Initial approximations}
 
 The intensity distribution observed at the focal plane of any etalon-based instrument tuned to a wavelength $\lambda_s$ obeys the following expression \citep{franI}:
-
-\begin{multline}
-    I\left(\xi, \eta ; \lambda_{s}\right)=g(\xi, \eta)\int_{0}^{\infty} T(\lambda) \iint  O\left(\xi_0, \eta_0 ; \lambda\right) \\ S\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)  \mathrm{d} \xi_{0} \mathrm{~d} \eta_{0}\mathrm{d} \lambda ,
-    \label{eq_eta_corr: General}
-\end{multline}
-where $\xi, \eta$ are the coordinates in the image plane, $T(\lambda)$ accounts for the presence of an order-sorting pre-filter, $O\left(\xi_0, \eta_0 ; \lambda\right)$ represents the brightness distribution of the observed object at the point $\left(\xi_0, \eta_0\right)$, and $S\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)$ accounts for the imaging response of the instrument when tuned at the wavelength $\lambda_{s}$. The latter coincides with the point spread function (PSF) of the instrument when the optical response is invariant against translations. In such a case, we can substitute the last two integrals by the convolution operator, but this is not strictly true in etalon-based instruments, where the response varies pixel to pixel either because of etalon irregularities or because of variations in the illumination across its clear aperture. We have included a new parameter, $g(\xi, \eta)$, that does not appear in the original work by \cite{franI} since pixel-to-pixel differences in the detectors' sensitivity are not considered in the original expression. Therefore, $g(\xi, \eta)$ represents a spatial gain factor that accounts for these wavelength independent pixel-to-pixel intensity fluctuations occurring in the focal plane.
 
 As a first approximation, we assumed a spatial dependence of the imaging response in the form of a Dirac delta in order to simplify the equations. If we let the imaging response follow the expression 
 \begin{equation}
@@ -34,7 +46,8 @@ Although, in practice, it is not often possible to fully characterize the pre-fi
 \end{equation}
 
 The explicit shape of $\Psi$  is different depending on the optical configuration of the instrument, that is, collimated or telecentric.
-\subsection{One device, two configurations}
+
+
 
 file:///home/pablo/Downloads/s10509-023-04212-3.pdf
 
