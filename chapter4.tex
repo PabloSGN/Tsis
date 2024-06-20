@@ -12,7 +12,7 @@ We established in section \ref{susec_spectropolarimeters: Imaging} that the obse
 \end{equation}
 where $T(\lambda)$ accounts for the presence of an order-sorting pre-filter, $O\left(\xi_0, \eta_0 ; \lambda\right)$ represents the brightness distribution of the observed object at the point $\left(\xi_0, \eta_0\right)$, $S\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)$ accounts for the imaging response of the instrument when tuned at the wavelength $\lambda_{s}$, and $g(\xi, \eta)$ represents a spatial gain factor that accounts for wavelength independent pixel-to-pixel intensity fluctuations ocurring in the focal plane due to differences in the detectors' sensitivity. 
 
-The imaging response of the instrument coincides with the PSF of the instrument when the optical response is invariant against translations. In such a case, we can substitute the last two integrals by the convolution operator, but this is not strictly true in etalon-based instruments, where the response varies pixel to pixel either because of etalon irregularities or because of variations in the illumination across its clear aperture. The spectral and spatial behavior of S depends on how the etalon is illuminated, whether it is in a collimated or telecentric configuration. Each configuration has distinct qualities, and determining which is better remains a subject of debate that depends on the instrument's requirements.
+The imaging response of the instrument coincides with the PSF of the instrument when the optical response is invariant against translations. In such a case, we can substitute the last two integrals by the convolution operator, but this is not strictly true in etalon-based instruments, where the response varies pixel to pixel either because of etalon irregularities or because of variations in the illumination across its clear aperture. The spectral and spatial behavior of S depends on how the etalon is illuminated, whether it is in a collimated or telecentric setup. Each configuration has distinct qualities, and determining which is better remains a subject of debate that depends on the instrument's requirements.
 
 \begin{figure}
     \centering
@@ -22,11 +22,9 @@ The imaging response of the instrument coincides with the PSF of the instrument 
 \end{figure}
 
 \subsection{Collimated configuration}
-Collimated mounts are characterized by having the etalon located at the pupil plane and therefore receive a collimated beam from each point of the observed object. As shown in the schematic representation of this setup, depicted in fig.~{\ref{fig_etalon_theory: Etalon configuration}}, light coming from any point of the object will fall upon the same area of the etalon (). Consequently, any local defects on the etalon crystals or on the plates' parallelism is averaged all over the clear aperture, thus making the optical quality constant along the FoV. However, the angle of incidence of the light beam varies along the FoV, thus shifting the transmission profile.  
+Collimated mounts are characterized by having the etalon located at the pupil plane and therefore receive a collimated beam from each point of the observed object. As illustrated in the schematic on the left side of fig.~{\ref{fig_etalon_theory: Etalon configurations}}, light from any point on the object will fall on the same area of the etalon. Consequently, any local defects on the etalon crystals or on the plates' parallelism is averaged all over the clear aperture, thus making the optical quality constant along the FoV. However, the angle of incidence of the light beam varies along the FoV, thus shifting the spectral transmission profile.  
 
-The spatial dependence of the imaging response of an FPI is typically ALGO ASÍ.
-
-The transmission profile for an ideal collimated etalon tuned at wavelength $\lambda _ s$ takes the following form:
+It is easy to demonstrate \citep{franI} that the spectral transmission profile of an ideal collimated etalon tuned at wavelength $\lambda _ s$ takes the following form:
 \begin{equation}
 \Psi ^{\lambda _ s} (\lambda, \theta) = \frac{1}{1 + F \sin ^2 a_s (\lambda,\theta) },
 \label{eq_etalon_theory: Psi-collimated}
@@ -38,13 +36,15 @@ a_s (\lambda, \theta) =\frac{2  \pi}{\lambda} nd\cos \theta  \ ,
 \end{equation}
 with the subscript $s$ indicating that the etalon is tuned at the wavelength $\lambda_s$.
 
-The shape of the transmission profile depends on its physical properties. Firstly, the width of the resonance peaks is determined by the parameter $F$, $F \equiv 4R (1 - R )^{-2}$, which depends exclusively on the reflectivity $R$ of its mirrors. Secondly, the spectral behavior of the transmission profile is governed by $a_s(\lambda,\theta)$, which is a function of the refractive index of the etalon cavity, $n$; the distance between mirrors, $d$; and the angle of the incident beam, $\theta$. 
+The spatial dependence of $\Psi$ arises naturally as $\theta$ changes from pixel to pixel. In fact, the spectral behaviour of the transmission prodile is encoded in the parameter $a_s(\lambda,\theta)$, which is a function of the refractive index of the etalon cavity, $n$; the distance between mirrors, $d$; and the angle of the incident beam, $\theta$. The reflectivity $R$ of the mirrors determines the width of the resonance peadfsaks through the parameter $F$, $F \equiv 4R (1 - R )^{-2}$.
 
-Local defects in the collimated configuration are averaged out, which means that $d$ and $n$ respectively represent the mean values of the thickness and refractive index across the clear aperture of the FPI. Yet, they produce a broadening of the transmission profile and worsen the optical quality of the instrument. The differing angles of incidence over the FoV produce shifts of the transmission that vary quadratically with $\theta$.
+Local defects in the collimated configuration are averaged out, which means that $d$ and $n$ respectively represent the mean values of the thickness and refractive index across the clear aperture of the FPI, and thus remain constant for every pixel. Yet, they produce a broadening of the transmission profile and worsen the optical quality of the instrument. 
+
+\textcolor{red}{Assessing the spatial PSF of the FPI is more challenging, as it can only be determined analytically for monochromatic light and in the absence of defects. In all other cases, the PSF must be evaluated numerically due to the lack of analytical solutions to the integrals. We will not delve into the equations as it lies beyond the scope of this thesis. However, interested readers are referred to the work of \cite{franI}, where this topic is extensively discussed.}
 
 \subsection{\label{susec_etalon_theory: Tele-perfe}Telecentric configuration}
 
-In the telecentric configuration, the etalon is placed very close to an intermediate focal plane, while the pupil is focused at infinity. This way, the etalon is illuminated by cones of rays that are parallel to each other and reach different sections of the interferometer. Local inhomogeneities (defects or cavities) on the etalon produce differences in the transmission profile across the FoV, which are directly mapped into the image plane. This means that the optical response and the transmission profile shift locally on the image sensor. 
+In the telecentric configuration, the etalon is placed very close to an intermediate focal plane, while the pupil is focused at infinity. As shown in the sketch on the right side of fig.~{\ref{fig_etalon_theory: Etalon configurations}}, in this setup, the etalon is illuminated by cones of rays that are parallel to each other, thus passing through different sections of the interferometer. Local inhomogeneities (defects or cavities) on the etalon produce differences in the transmission profile across the FoV, which are directly mapped into the image plane. This means that the optical response and the transmission profile shift locally on the image sensor. 
 
 The transmission profile of the etalon tuned at a wavelength $\lambda _s $ is, in this case, given by \citep{franIV}:
 \begin{equation}
