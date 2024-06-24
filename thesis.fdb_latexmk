@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex thesis"] 1718871946.72872 "thesis.aux" "thesis.bbl" "thesis" 1718871950.64935 0
+["bibtex thesis"] 1718871946.72872 "thesis.aux" "thesis.bbl" "thesis" 1719214222.61745 0
   "./bibliography.bib" 1718781943 9545 d3b533373bf05456bb35615e9ed719fe ""
   "./mycustom.bst" 1716208304 38609 fa3960a91c26e415ced371115ff934fa ""
-  "thesis.aux" 1718871949 18384 e8faa838187ba1adec24728b77328704 "pdflatex"
+  "thesis.aux" 1719214221 18384 e8faa838187ba1adec24728b77328704 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1718871947.19305 "c:/Users/pablo/OneDrive/Escritorio/Tésis/.git/Tsis/thesis.tex" "thesis.pdf" "thesis" 1718871950.65027 0
+["pdflatex"] 1719214218.17458 "c:/Users/pablo/OneDrive/Escritorio/Tésis/.git/Tsis/thesis.tex" "thesis.pdf" "thesis" 1719214222.61843 0
   "c:/Users/pablo/OneDrive/Escritorio/Tésis/.git/Tsis/thesis.tex" 1718608697 2381 b77cc7440434345cdc9df64fcf6cc2b9 ""
   "c:/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc" 1715178531 2933 9ad527ce78d7c5fa0a642dead095f172 ""
   "c:/texlive/2024/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc" 1715178531 2934 a4a9158faed2e9e89c771b4e3b7fc12f ""
@@ -192,7 +192,7 @@
   "c:/texlive/2024/texmf.cnf" 1715184160 713 e69b156964470283e0530f5060668171 ""
   "chapter2.tex" 1718804407 9002 84e00876d8acd76fa10c6d81dda93ba0 ""
   "chapter3.tex" 1718608697 220 19b23fed6b524c98afe0ba7d0c67b6bd ""
-  "chapter4.tex" 1718871941 44659 8c7874d4b2536e8ed0c12cb37280416e ""
+  "chapter4.tex" 1719214216 44676 5a818a38310b09773bd36c9ed2148942 ""
   "figures/EtalonChallenges/EtalonConfigurations.pdf" 1718804407 13005 f29b75a11e8165089f009864a15af714 ""
   "figures/EtalonPaper/Deconvolution.pdf" 1718780578 23916 2d1ab2c4c80ab9b6eba468553b2fab26 ""
   "figures/EtalonPaper/Deconvolution_results.pdf" 1718781863 23946 1867c3f1c9bf1edbb107b721f3c6bb36 ""
@@ -208,11 +208,11 @@
   "images/LogosIAA_SO_Color.png" 1716208303 431500 e428a82173a1584a9190c732da19ac4e ""
   "images/UGR-MARCA-02-color.png" 1716208304 193047 a584269e7c3652158a050707a003c3af ""
   "mythesis.cls" 1718003857 25887 b11c3d5ae57160a3e67dac575662c664 ""
-  "thesis.aux" 1718871949 18384 e8faa838187ba1adec24728b77328704 "pdflatex"
+  "thesis.aux" 1719214221 18384 e8faa838187ba1adec24728b77328704 "pdflatex"
   "thesis.bbl" 1718871947 2777 cbdff283646be60a4e026172b4d8e885 "bibtex thesis"
-  "thesis.out" 1718871949 5850 3a1ef3c0c871c0093a84ed8cdc6e7b5a "pdflatex"
+  "thesis.out" 1719214221 5850 3a1ef3c0c871c0093a84ed8cdc6e7b5a "pdflatex"
   "thesis.tex" 1718608697 2381 b77cc7440434345cdc9df64fcf6cc2b9 ""
-  "thesis.toc" 1718871949 2946 7e205a73f1fd63b84f9002c5b2be6f8c "pdflatex"
+  "thesis.toc" 1719214221 2946 7e205a73f1fd63b84f9002c5b2be6f8c "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"

@@ -12,7 +12,7 @@ We established in section \ref{susec_spectropolarimeters: Imaging} that the obse
 \end{equation}
 where $T(\lambda)$ accounts for the presence of an order-sorting pre-filter, $O\left(\xi_0, \eta_0 ; \lambda\right)$ represents the brightness distribution of the observed object at the point $\left(\xi_0, \eta_0\right)$, $S\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)$ accounts for the imaging response of the instrument when tuned at the wavelength $\lambda_{s}$, and $g(\xi, \eta)$ represents a spatial gain factor that accounts for wavelength independent pixel-to-pixel intensity fluctuations ocurring in the focal plane due to differences in the detectors' sensitivity. 
 
-The imaging response of the instrument coincides with the PSF of the instrument when the optical response is invariant against translations. In such a case, we can substitute the last two integrals by the convolution operator, but this is not strictly true in etalon-based instruments, where the response varies pixel to pixel either because of etalon irregularities or because of variations in the illumination across its clear aperture. The spectral and spatial behavior of S depends on how the etalon is illuminated, whether it is in a collimated or telecentric setup. Each configuration has distinct qualities, and determining which is better remains a subject of debate that depends on the instrument's requirements.
+The imaging response of the instrument coincides with the PSF of the instrument when the optical response is invariant against translations. In such a case, we can substitute the last two integrals by the convolution operator, but this is not strictly true in etalon-based instruments, where the response varies pixel to pixel either because of etalon irregularities or because of variations in the illumination across its clear aperture. \textcolor{red}{The spectral and spatial behavior of S depends on how the etalon is illuminated, whether it is in a collimated or telecentric setup. Each configuration has distinct qualities, and determining which is better remains a subject of debate that depends on the instrument's requirements.}
 
 \begin{figure}
     \centering
@@ -26,7 +26,7 @@ Collimated mounts are characterized by having the etalon located at the pupil pl
 
 It is easy to demonstrate \citep{franI} that the spectral transmission profile of an ideal collimated etalon tuned at wavelength $\lambda _ s$ takes the following form:
 \begin{equation}
-\Psi ^{\lambda _ s} (\lambda, \theta) = \frac{1}{1 + F \sin ^2 a_s (\lambda,\theta) },
+\psi ^{\lambda _ s} (\lambda, \theta) = \frac{1}{1 + F \sin ^2 a_s (\lambda,\theta) },
 \label{eq_etalon_theory: Psi-collimated}
 \end{equation}
 where
@@ -36,7 +36,7 @@ a_s (\lambda, \theta) =\frac{2  \pi}{\lambda} nd\cos \theta  \ ,
 \end{equation}
 with the subscript $s$ indicating that the etalon is tuned at the wavelength $\lambda_s$.
 
-The spatial dependence of $\Psi$ arises naturally as $\theta$ changes from pixel to pixel. In fact, the spectral behaviour of the transmission prodile is encoded in the parameter $a_s(\lambda,\theta)$, which is a function of the refractive index of the etalon cavity, $n$; the distance between mirrors, $d$; and the angle of the incident beam, $\theta$. The reflectivity $R$ of the mirrors determines the width of the resonance peadfsaks through the parameter $F$, $F \equiv 4R (1 - R )^{-2}$.
+The spatial dependence of $\psi$ arises naturally as $\theta$ changes from pixel to pixel. In fact, the spectral behaviour of the transmission prodile is encoded in the parameter $a_s(\lambda,\theta)$, which is a function of the refractive index of the etalon cavity, $n$; the distance between mirrors, $d$; and the angle of the incident beam, $\theta$. The reflectivity $R$ of the mirrors determines the width of the resonance peadfsaks through the parameter $F$, $F \equiv 4R (1 - R )^{-2}$.
 
 Local defects in the collimated configuration are averaged out, which means that $d$ and $n$ respectively represent the mean values of the thickness and refractive index across the clear aperture of the FPI, and thus remain constant for every pixel. Yet, they produce a broadening of the transmission profile and worsen the optical quality of the instrument. 
 
