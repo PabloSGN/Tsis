@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex thesis"] 1719221335.61369 "thesis.aux" "thesis.bbl" "thesis" 1719221337.77448 0
+["bibtex thesis"] 1719221876.88456 "thesis.aux" "thesis.bbl" "thesis" 1719221879.13542 0
   "./bibliography.bib" 1718788707.58047 9258 d3b533373bf05456bb35615e9ed719fe ""
   "./mycustom.bst" 1710363168 38609 5e2db2193f94f2db3b05dbf8d8576c79 ""
-  "thesis.aux" 1719221337.37483 18384 e8faa838187ba1adec24728b77328704 "pdflatex"
+  "thesis.aux" 1719221878.72402 18384 e8faa838187ba1adec24728b77328704 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1719221335.73953 "/home/pablo/Desktop/TESIS/Tsis/thesis.tex" "thesis.pdf" "thesis" 1719221337.77466 0
-  "/home/pablo/Desktop/TESIS/Tsis/thesis.tex" 1719221212.28259 2275 b77cc7440434345cdc9df64fcf6cc2b9 ""
+["pdflatex"] 1719221877.0387 "/home/pablo/Desktop/TESIS/Tsis/thesis.tex" "thesis.pdf" "thesis" 1719221879.13592 0
+  "/home/pablo/Desktop/TESIS/Tsis/thesis.tex" 1719221872.0681 2275 b77cc7440434345cdc9df64fcf6cc2b9 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc" 1490131464 2933 9ad527ce78d7c5fa0a642dead095f172 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc" 1490131464 2934 a4a9158faed2e9e89c771b4e3b7fc12f ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/libertine/lbtn_dhi6qf.enc" 1558472472 2914 3d1e3c4123f03ab27df5767d5039d109 ""
@@ -208,11 +208,11 @@
   "images/LogosIAA_SO_Color.png" 1710363168 431500 fc3ac2ede31491d24b38c39a8e122767 ""
   "images/UGR-MARCA-02-color.png" 1710418624.95451 193047 2a98ca769e79bfc20bb8055ffdef3937 ""
   "mythesis.cls" 1716378225.0546 25092 b11c3d5ae57160a3e67dac575662c664 ""
-  "thesis.aux" 1719221337.37483 18384 e8faa838187ba1adec24728b77328704 "pdflatex"
-  "thesis.bbl" 1719221335.73082 2777 cbdff283646be60a4e026172b4d8e885 "bibtex thesis"
-  "thesis.out" 1719221337.37483 5850 3a1ef3c0c871c0093a84ed8cdc6e7b5a "pdflatex"
-  "thesis.tex" 1719221212.28259 2275 b77cc7440434345cdc9df64fcf6cc2b9 ""
-  "thesis.toc" 1719221337.37483 2946 7e205a73f1fd63b84f9002c5b2be6f8c "pdflatex"
+  "thesis.aux" 1719221878.72402 18384 e8faa838187ba1adec24728b77328704 "pdflatex"
+  "thesis.bbl" 1719221877.03204 2777 cbdff283646be60a4e026172b4d8e885 "bibtex thesis"
+  "thesis.out" 1719221878.72802 5850 3a1ef3c0c871c0093a84ed8cdc6e7b5a "pdflatex"
+  "thesis.tex" 1719221872.0681 2275 b77cc7440434345cdc9df64fcf6cc2b9 ""
+  "thesis.toc" 1719221878.72802 2946 7e205a73f1fd63b84f9002c5b2be6f8c "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.log"
