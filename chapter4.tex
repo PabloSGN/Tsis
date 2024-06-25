@@ -42,28 +42,23 @@ The transmission profile of the etalon ($S$) is defined as the average ratio bet
 
 Collimated mounts are characterized by having the etalon located at the pupil plane and therefore receive a collimated beam from each point of the observed object. As illustrated in the schematic on the left side of fig.~{\ref{fig_etalon_theory: Etalon configurations}}, light from any point on the object will fall on the same area of the etalon. Consequently, any local defects on the etalon crystals or on the plates' parallelism is averaged all over the clear aperture, thus making the optical quality constant along the FoV. However, the angle of incidence of the light beam varies along the FoV, thus shifting the spectral transmission profile.  
 
-However, in an ideal collimated etalon $delta$ loses its dependence on the coordinates and takes the following shape:
+Analytical solutions of equation \eqref{eq_etalon_theory: electric_image_plane} are imposible to obtain if $\delta$ has a dependence on the pupil coordinates, as is the case of etalon with a presence of local defects. In that case, the transmssion profile of the etalon has to be evaluated numerically. 
+
+However, in order to study the spectral behavior of the transmission profile, we can, as a first-order approximation, disregard the spatial PSF and focus solely on the spectral transmission profile $(\psi)$. Under this assumption, the phase difference between the incident and transmitted rays of an ideal collimated etalon can be expressed as:  
+
 \begin{equation}
-  \delta (\xi, \eta, \lambda) = \frac{4\pi d}{\lambda}\sqrt{n ^{\prime 2}  - n ^2 + \frac{(nf) ^2}{\xi ^2 + \eta ^2 + f ^2}}.
+  \delta (\xi, \eta, \lambda) = \frac{4\pi}{\lambda}nd\cos (\theta(\xi, \eta)),
   \label{eq_etalon_theory: collimated_delta}
 \end{equation}
-
-In such a case, it can be shown that the local PSF of the etalon tuned at the wavelength $\lambda _ s$ follows the expression:
+where $n$ stands for the refractive indx of the etalon cavity, $d$ is the distance between the mirrors and $\theta$ is the angle of incidence. In such a case, it can be shown that the spectral transmission profile follows the expression: 
 
 \begin{equation}
-  \mathcal{S}\left(\xi_0, \eta_0; \xi , \eta; \lambda _ s\right) = \frac{\tau}{1 + F \sin ^2 (\delta(\xi_0, \eta_0, \lambda _s) / 2)}\left( \frac{2 J_1 (\delta(\xi, \eta, \lambda _s) - \delta(\xi _ 0, \eta _ 0, \lambda _s)) }{\delta(\xi, \eta, \lambda _s) - \delta(\xi _ 0, \eta _ 0, \lambda _s)}\right) ^2,
-\end{equation}
-where the variable $z$ is defined as:
-\begin{equation}
-  z = \frac{2 \pi}{\lambda}R_{pup}\frac{\sqrt{\eta ^2 + \nu ^2}}{f}
+  \psi\left(\xi, \eta, \lambda \right) = \frac{\tau}{1 + F \sin ^2 (\delta(\xi, \eta, \lambda) / 2)}.
 \end{equation}
 
+The spectral behaviour of the transmission profile is encoded in the parameter $\delta$, which is a function of the refractive index of the etalon cavity, the distance between mirrors, and the angle of the incident beam. The reflectivity $R$ of the mirrors determines the width of the resonance peaks through the parameter $F$, $F \equiv 4R (1 - R )^{-2}$.
 
-The spatial dependence of $\psi$ arises naturally as $\theta$ changes from pixel to pixel. In fact, the spectral behaviour of the transmission profile is encoded in the parameter $a_s(\lambda,\theta)$, which is a function of the refractive index of the etalon cavity, $n$; the distance between mirrors, $d$; and the angle of the incident beam, $\theta$. The reflectivity $R$ of the mirrors determines the width of the resonance peadfsaks through the parameter $F$, $F \equiv 4R (1 - R )^{-2}$.
-
-Local defects in the collimated configuration are averaged out, which means that $d$ and $n$ respectively represent the mean values of the thickness and refractive index across the clear aperture of the FPI, and thus remain constant for every pixel. Yet, they produce a broadening of the transmission profile and worsen the optical quality of the instrument. 
-
-Analytical solutions of equation \eqref{eq_etalon_theory: electric_image_plane} are imposible to obtain if $\delta$ has a dependence on the pupil coordinates, as is the case of etalon with a presence of local defects. In that case, the transmssion profile of the etalon has to be evaluated numerically. 
+Local defects in the collimated configuration are averaged out, which means that $d$ and $n$ respectively represent the mean values of the thickness and refractive index across the clear aperture of the FPI, and thus remain constant for every pixel. Yet, they produce a broadening of the transmission profile and worsen the optical quality of the instrument. However, the spatial dependence of $\psi$ naturally arises from $\theta$, which vcaries from pixel to pixel. 
 
 
 \textcolor{red}{Assessing the spatial PSF of the FPI is more challenging, as it can only be determined analytically for monochromatic light and in the absence of defects. In all other cases, the PSF must be evaluated numerically due to the lack of analytical solutions to the integrals. We will not delve into the equations as it lies beyond the scope of this thesis. However, interested readers are referred to the work of \cite{franI}, where this topic is extensively discussed.}
