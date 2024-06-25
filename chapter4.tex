@@ -42,7 +42,7 @@ The transmission profile of the etalon ($S$) is defined as the average ratio bet
 
 Collimated mounts are characterized by having the etalon located at the pupil plane and therefore receive a collimated beam from each point of the observed object. As illustrated in the schematic on the left side of fig.~{\ref{fig_etalon_theory: Etalon configurations}}, light from any point on the object will fall on the same area of the etalon. Consequently, any local defects on the etalon crystals or on the plates' parallelism is averaged all over the clear aperture, thus making the optical quality constant along the FoV. However, the angle of incidence of the light beam varies along the FoV, thus shifting the spectral transmission profile.  
 
-Analytical solutions of equation \eqref{eq_etalon_theory: electric_image_plane} are imposible to obtain if $\delta$ has a dependence on the pupil coordinates, as is the case of etalon with a presence of local defects. In that case, the transmssion profile of the etalon has to be evaluated numerically. 
+Analytical solutions of equation \eqref{eq_etalon_theory: electric_image_plane} are imposible to obtain if $\delta$ has a dependence on the pupil coordinates, as is the case of collimated etalons with a presence of local defects. In that case, the transmssion profile of the etalon has to be evaluated numerically. 
 
 However, in order to study the spectral behavior of the transmission profile, we can, as a first-order approximation, disregard the spatial PSF and focus solely on the spectral transmission profile $(\psi)$. Under this assumption, the phase difference between the incident and transmitted rays of an ideal collimated etalon can be expressed as:  
 
@@ -56,46 +56,59 @@ where $n$ stands for the refractive indx of the etalon cavity, $d$ is the distan
   \psi\left(\xi, \eta, \lambda \right) = \frac{\tau}{1 + F \sin ^2 (\delta(\xi, \eta, \lambda) / 2)}.
 \end{equation}
 
-The spectral behaviour of the transmission profile is encoded in the parameter $\delta$, which is a function of the refractive index of the etalon cavity, the distance between mirrors, and the angle of the incident beam. The reflectivity $R$ of the mirrors determines the width of the resonance peaks through the parameter $F$, $F \equiv 4R (1 - R )^{-2}$.
+The spectral behaviour of the transmission profile, such as the spectral position of the resonance peaks and the distance between them (the free spectral range), is encoded in the parameter $\delta$, which is a function of the refractive index of the etalon cavity, the distance between mirrors, and the angle of the incident beam. The reflectivity $R$ of the mirrors determines the width of the resonance peaks through the parameter $F$, $F \equiv 4R (1 - R )^{-2}$.
 
 Local defects in the collimated configuration are averaged out, which means that $d$ and $n$ respectively represent the mean values of the thickness and refractive index across the clear aperture of the FPI, and thus remain constant for every pixel. Yet, they produce a broadening of the transmission profile and worsen the optical quality of the instrument. However, the spatial dependence of $\psi$ naturally arises from $\theta$, which vcaries from pixel to pixel. 
 
-
-\textcolor{red}{Assessing the spatial PSF of the FPI is more challenging, as it can only be determined analytically for monochromatic light and in the absence of defects. In all other cases, the PSF must be evaluated numerically due to the lack of analytical solutions to the integrals. We will not delve into the equations as it lies beyond the scope of this thesis. However, interested readers are referred to the work of \cite{franI}, where this topic is extensively discussed.}
+Assessing the spatial PSF of the FPI is more challenging, as it can only be determined analytically for monochromatic light and in the absence of defects. We will not delve into the equations for this specific scenario as it lies beyond the scope of this thesis. However, interested readers are referred to the work of \cite{franI}, where this topic is extensively discussed.
 
 \subsection{\label{susec_etalon_theory: Tele-perfe}Telecentric configuration}
 
 In the telecentric configuration, the etalon is placed very close to an intermediate focal plane, while the pupil is focused at infinity. As shown in the sketch on the right side of fig.~{\ref{fig_etalon_theory: Etalon configurations}}, in this setup, the etalon is illuminated by cones of rays that are parallel to each other, thus passing through different sections of the interferometer. Local inhomogeneities (defects or cavities) on the etalon produce differences in the transmission profile across the FoV, which are directly mapped into the image plane. This means that the optical response and the transmission profile shift locally on the image sensor. 
 
-The transmission profile of the etalon tuned at a wavelength $\lambda _s $ is, in this case, given by \citep{franIV}:
+In telecentric configurations, $\delta$ always depends on the coordinates of the pupil, even in the absence of defects, since each point in the etaon sees a cone of rays coming from different parts of the pupil. Thus, as stated before, solutions to equation \eqref{eq_etalon_theory: electric_image_plane} are to be found numerically. Nonetheless, if we neglect the spatial PSF once again, we can derive an analytical expression for an ideal telecentric etalon, where all light cones impact perpendicularly.
+
+After some messy algebra and clever variable changes, one can recast eq. \eqref{eq_etalon_theory: electric_image_plane} in terms of the radial coordinates of the pupil and anallytically solve the equations. The resulting spectral transmission profile of an ideal telecentric etalon  is given by \citep{franIV}:
 \begin{equation}
-\Psi ^{\lambda _ s} (\lambda) =  \mathfrak{Re}\left[E(a_s (\lambda, n, d, \theta), b) \right] ^2 + \mathfrak{Im}\left[E(a_s(\lambda, n, d, \theta), b) \right] ^2 ,
+\Psi \left(\xi, \eta, \lambda \right) =  \mathfrak{Re}\left[E(a\left(\xi, \eta, \lambda \right), b\left(\xi, \eta, \lambda \right)) \right] ^2 + \mathfrak{Im}\left[E(a\left(\xi, \eta, \lambda \right), b\left(\xi, \eta, \lambda \right)) \right] ^2 ,
 \label{eq_etalon_theory: Tel_first}
 \end{equation}
-with $E(a,b)$ being:
+with $E(a\left(\xi, \eta, \lambda \right), b\left(\xi, \eta \right))$ being:
 \begin{multline}
-E(a, b) = 2 \sqrt{\tau}\ \Biggl\{ \int_0^1 \frac{\varrho \cos \left(a\left[1-b \varrho^2\right]\right)}{1+F \sin ^2\left(a\left[1-b \varrho^2\right]\right)} \mathrm{d} \varrho \ + \\
-\mathrm{i} \frac{1+R}{1-R} \int_0^1 \frac{\varrho \sin \left(a\left[1-b \varrho^2\right]\right)}{1+F+ \sin ^2\left(a\left[1-b \varrho^2\right]\right)} \mathrm{d} \varrho\Biggr\} ,
+E(a\left(\xi, \eta, \lambda \right), b\left(\xi, \eta \right)) = 2\sqrt{\tau}\Biggl\{ \frac{1}{\alpha_1}\left[\arctan(\gamma _ 1) - \arctan(\gamma_2)\right] + \\
+\mathrm{i} \frac{1+R}{1-R} \frac{1}{\alpha_2}\left[\ln \left(\frac{(1 + \gamma _ 3) ^2 + \gamma _ 4 ^2}{(1 - \gamma _ 3) ^2 + \gamma _ 4 ^2} \right) - \ln \left(\frac{(1 + \gamma_ 3) ^2 + \gamma _ 5 ^ 2}{(1 - \gamma _ 3) ^2 + \gamma _ 5 ^2} \right)\right]\Biggr\},  
 \end{multline}
-where $\tau$ is the transmission factor of the etalon at normal incidence, $\varrho$ is the radial coordinate of the pupil normalized to the pupil radius of the instrument, $a$ is defined by Eq. \eqref{eq_etalon_theory: a-def} and $b$ is given by
+where, the auxiliary functions are defined as:
 \begin{equation}
-b = \frac{1}{8 (nf\#) ^2}.
+\begin{split}
+a\left(\xi, \eta, \lambda \right) &\equiv \frac{2 \pi}{\lambda}n\left(\xi, \eta\right)d\left(\xi, \eta\right) \ , \\
+b\left(\xi, \eta\right) &\equiv \frac{1}{8n\left(\xi, \eta\right)^2(f\#) ^2}\ ,  \\
+\alpha _ 1 &\equiv 2ab\sqrt{F}\ ,  \\
+\alpha _ 2 &\equiv 2\alpha_ 1\sqrt{F + 1}\ ,  \\
+\gamma _ 1 &\equiv \sqrt{F} \sin a\ ,  \\
+\gamma _ 2 &\equiv \sqrt{F} \sin (a[1 - b])\ ,  \\
+\gamma _ 3 &\equiv \sqrt{\frac{F}{F + 1}} \ ,  \\
+\gamma _ 4 &\equiv \frac{\tan \left( a/2 [1 - b] \right)}{\sqrt{F + 1}}\ ,  \\
+\gamma _ 5 &\equiv \frac{\tan (a/2)}{\sqrt{F + 1}}\ .
+\end{split}
 \end{equation}
 
-This parameter accounts for the contribution of the focal ratio, $f\#$, and has an impact on the spectral resolution and the apodization of the pupil as seen from the etalon \citep{beckers}. Thus, the resolution is now affected by both $F$ and $f\#$, through the parameters $a$ and $b$.
+The parameter $a$ has the same role as $\delta$ for the collimated case. However, the dependence on the image plane coordinates in this case is caused by potential variations in n and/or d, as each light beam traverses different sections of the etalon. These variations constitute the "cavity map" of a telecentric etalon and must always be taken into account during data reduction processes.
 
-Contrary to the collimated case, $a$ now has an explicit dependence on the spatial coordinates of the image plane, as $n$ and $d$ change from pixel to pixel. These variations compose the "cavity error" of the etalon and need to be corrected when employing telecentric configurations.
+The parameter $b$ accounts for the contribution of the focal ratio, $f\#$, and has an impact on the spectral resolution and the apodization of the pupil as seen from the etalon \citep{beckers}. Thus, the resolution is now affected by both $F$ and $f\#$, through the parameters $a$ and $b$.
 
 \subsubsection{\label{etalon_theory: Tele-imperfe}Telecentric imperfect configuration}
 The equations shown in Sect.~\ref{susec_etalon_theory: Tele-perfe} are valid whenever the incident cone of rays is perpendicular to the etalon mirrors. We refer to this situation hereinafter as "perfect telecentrism". However, real instruments are likely to present deviations from such an ideal case. These deviations can be caused by an intentional tilt of the etalon to suppress ghost images on the detector \citep{ghosts-etalon}, by an accidental tilted angle of incidence caused by deviations from the ideal paraxial propagation of rays within the instrument, or simply because of misalignment of the optical components. In the three cases, the incident cone of rays is no longer perpendicular to the etalon, and hence, we consider these scenarios to have imperfections in the telecentrism degree. One important consequence of the loss of telecentrism is an asymmetrization of the transmission profile that must be accounted for when modeling the instrument response.
 
-The transmission profile in this case is influenced by the angle of incidence of the chief ray at each point of the clear aperture of the etalon, in addition to the parameters mentioned in the previous sections. Unfortunately, the equations for the transmission profile in these configurations are much more complicated than in the ideal telecentric case, with no analytical solution to the integrals of the transmission profile. The integrals and their corresponding derivatives can only be obtained via numerical methods \citep{franI}. 
+The transmission profile in this case is influenced by the angle of incidence of the chief ray at each point of the clear aperture of the etalon, in addition to the parameters mentioned in the previous sections. Unfortunately, the equations for the transmission profile in these configurations are much more complicated than in the ideal case, and can no longer be anallytically solved. We must revisit equation \eqref{eq_etalon_theory: electric_image_plane} and solve the integrals numerically. We highlight the distinction between perfect and imperfect telecentrism because any real instrument will exhibit such deviations. This difference is especially significant in the subsequent sections, where the impact of asymmetries on solar observations is analyzed.
+
 \begin{figure}
     \centering
-    \includegraphics[width = \textwidth]{figures/EtalonPaper/etalon_setups_profiles.pdf}
-    \caption{Central peak of the etalon's transmission profile for the three different configurations. The parameters of the etalon are $R = 0.92$, $n = 2.29$, $d = 251 \, \mu \mathrm{m}$, $f\#=56$, $\theta = 0 ^{\circ}$ (collimated and perfect telecentric), and $\Theta = 0.3\,^{\circ}$ (imperfect telecentric)}
+    \includegraphics[width = \textwidth]{figures/EtalonChallenges/etalon_setups_profiles.pdf}
+    \caption{\textit{Left}: central peak of the etalon's spectral transmission profile for the three different configurations. \textit{Right}: Spatial PSF of the imperfect telecentric etalon at $\lambda _ 0$. The parameters of the etalon are $R = 0.92$, $n = 2.29$, $d = 251 \, \mu \mathrm{m}$, $f\#=56$, $\theta = 0 ^{\circ}$ (collimated and perfect telecentric), and $\Theta = 0.3\,^{\circ}$ (imperfect telecentric).}
     \label{fig_etalon_theory:Profiles-configs}
 \end{figure}
+
 Figure \ref{fig_etalon_theory:Profiles-configs} shows the transmission profile corresponding to the three different scenarios we have considered: collimated illumination of the etalon, perfect telecentrism, and imperfect telecentrism. The etalon parameters have been selected to coincide with those of SO/PHI's etalon. In both the collimated and perfect telecentric configurations, a normal incidence  ($\theta = 0$) scenario is shown, whereas in the imperfect telecentric case, we assumed an angle of incidence of the chief ray, $\Theta$, of $0.3^{\circ}$. The parameter $a$ has been adjusted slightly in order to tune the transmission profile at $\lambda _ 0$.
 
 We observed that the telecentric configurations achieve lower peak transmissions than the collimated case. In addition, the telecentric profiles are wider due to the different incidence angles across the illuminating cone of rays. Such a broadening increases with decreasing f-ratios. Lastly, non-normal incidence of the chief ray in the telecentric configuration further widens and shifts ($\sim 4$~m\r{A}

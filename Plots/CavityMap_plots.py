@@ -9,11 +9,13 @@ from scipy.special import erf
 from scipy.integrate import simps, nquad
 
 from scipy.interpolate import interp1d
+from scipy.signal import savgol_filter
 
 
 import etalon_funtions as etf
 import functions_matricial as ft
 import functions_tele as ft_tele
+import etalon as et
 # ======================================================================== #
 # CONFIG
 plt.style.use("default")
@@ -33,7 +35,10 @@ Et = {
       }
 # ======================================================================== #
 # Etalon Profiles Plot
-fig, axs = plt.subplots(figsize = (10.5, 5))
+
+mosaic = """AAB"""
+
+fig, axs = plt.subplot_mosaic(mosaic, figsize = (15, 5))
 
 def etalon_funct(wvls, l0, Et, dn):
     m  = round(2 * Et['n'] * Et['d'] / l0)    
@@ -106,29 +111,53 @@ def PSF(wvls, l0, angle1, angle2, xi, eta, Da, Et):
     return Inum
 
 
-wavelengths = np.linspace(6173, 6174, 1000)
-l0 = 6173.5
+etalon_model = et.Etalon(checkpoint='Plots/2024-01-10-09_25_54.best.pth', gpu=0, verbose=True)
+
+l0 = 6173.5 
+wavelengths = np.arange(-500, 505, 1.5) * 1E-3 + l0
 
 collimated = etalon_funct(wavelengths * 1E-10, l0 * 1E-10, Et, 0)
 tele_perfe = ft_tele.Psi_single(wavelengths * 1E-10, 1, l0*1E-10, Et)
 
-tele_imperfe = PSF(wavelengths * 1E-10, l0 * 1E-10, 0, 0.3, 0, 0, 1, Et)
+npix = 50
+n_models = npix * npix
 
-axs.plot(wavelengths - l0, collimated, c = 'crimson', lw = 3, label = "Collimated")
-axs.plot(wavelengths - l0, tele_perfe, c = 'orange', lw = 3, label = "Perfect telecentric")
-axs.plot(wavelengths - l0, tele_imperfe, c = 'indigo', lw = 3, label = "Imperfect telecentric")
+s = 300e-6
+angle2 = np.ones(n_models) * 0
+xi, eta = np.meshgrid(np.linspace(-s, s, npix), np.linspace(-s, s, npix))
+Da  =    np.ones(n_models) * 1
 
-axs.legend(edgecolor = "k")
-axs.set_xlim(-0.25, 0.25)
-axs.set_ylabel("Amplitude")
-axs.set_xlabel(r"$\lambda$ - $\lambda _ 0$ [$\AA$]")
-axs.grid(True, c = 'k', alpha = 0.3)
+et_asym_mod = etalon_model.evaluate(np.ones(n_models) * 0.3, np.ones(n_models) * 0.0, xi.flatten(), eta.flatten(), Da, wavelengths)
+
+tele_imperfe = et_asym_mod.reshape(npix, npix , len(wavelengths))# PSF(wavelengths * 1E-10, l0 * 1E-10, 0, 0.3, 0, 0, 1, Et)
+print('k?')
+axs["A"].plot(wavelengths - l0, collimated, c = 'crimson', lw = 3, label = "Collimated")
+axs["A"].plot(wavelengths - l0, tele_perfe, c = 'orange', lw = 3, label = "Perfect telecentric")
+axs["A"].plot(wavelengths - l0,  savgol_filter(tele_imperfe[24, 24], 15, 3) , c = 'indigo', lw = 3, label = "Imperfect telecentric")
+
+axs["A"].legend(edgecolor = "k")
+axs["A"].set_xlim(-0.25, 0.25)
+axs["A"].set_ylabel("Amplitude")
+axs["A"].set_xlabel(r"$\lambda$ - $\lambda _ 0$ [$\AA$]")
+axs["A"].grid(True, c = 'k', alpha = 0.3)
+
+im = axs["B"].imshow(tele_imperfe[:, :, len(wavelengths) // 2], norm = 'log', cmap = 'inferno')
+plt.colorbar(im, fraction = 0.046, pad = 0.04, label = "Amplitude")
+
+axs["B"].set_xticks([])
+axs["B"].set_yticks([])
+
+axs["A"].set_title("Spectral PSFs")
+axs["B"].set_title(r"Imperfect telecentric spatial PSF at $\lambda _ 0$")
+
 plt.tight_layout()
 plt.savefig(f"Plots/plots/etalon_setups_profiles.pdf", bbox_inches = "tight")
+plt.show()
 
 # ============================================================ #
+"""
+#plt.close("all")
 
-plt.close("all")
 fig, axs = plt.subplots(figsize = (10.5, 5))
 
 Et = {
@@ -217,4 +246,7 @@ l.append(r"$\psi ^{\lambda _ s} (\lambda)\times\mathcal{O}(\lambda)$")
 axs.legend(h, l, loc='lower right', edgecolor = 'k' ,
          handler_map={MulticolorPatch: MulticolorPatchHandler()})
 plt.tight_layout()
-plt.savefig(f"Plots/plots/ProfileMeasurement.pdf", bbox_inches = "tight")
+
+plt.show()
+#plt.savefig(f"Plots/plots/ProfileMeasurement.pdf", bbox_inches = "tight")
+"""
