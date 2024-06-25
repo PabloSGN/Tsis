@@ -19,4 +19,6 @@ readme.txt
 *.lof
 *.glo
 *.toc
+*fdb_latexmk
+*.gz
 templates/

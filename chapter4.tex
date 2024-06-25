@@ -100,7 +100,7 @@ The parameter $b$ accounts for the contribution of the focal ratio, $f\#$, and h
 \subsubsection{\label{etalon_theory: Tele-imperfe}Telecentric imperfect configuration}
 The equations shown in Sect.~\ref{susec_etalon_theory: Tele-perfe} are valid whenever the incident cone of rays is perpendicular to the etalon mirrors. We refer to this situation hereinafter as "perfect telecentrism". However, real instruments are likely to present deviations from such an ideal case. These deviations can be caused by an intentional tilt of the etalon to suppress ghost images on the detector \citep{ghosts-etalon}, by an accidental tilted angle of incidence caused by deviations from the ideal paraxial propagation of rays within the instrument, or simply because of misalignment of the optical components. In the three cases, the incident cone of rays is no longer perpendicular to the etalon, and hence, we consider these scenarios to have imperfections in the telecentrism degree. One important consequence of the loss of telecentrism is an asymmetrization of the transmission profile that must be accounted for when modeling the instrument response.
 
-The transmission profile in this case is influenced by the angle of incidence of the chief ray at each point of the clear aperture of the etalon, in addition to the parameters mentioned in the previous sections. Unfortunately, the equations for the transmission profile in these configurations are much more complicated than in the ideal case, and can no longer be anallytically solved. We must revisit equation \eqref{eq_etalon_theory: electric_image_plane} and solve the integrals numerically. We highlight the distinction between perfect and imperfect telecentrism because any real instrument will exhibit such deviations. This difference is especially significant in the subsequent sections, where the impact of asymmetries on solar observations is analyzed.
+The transmission profile in this case is influenced by the angle of incidence of the chief ray at each point of the clear aperture of the etalon, in addition to the parameters mentioned in the previous sections. Unfortunately, the equations for the transmission profile in these configurations are much more complicated than in the ideal case, and can no longer be anallytically solved. We must revisit equation \eqref{eq_etalon_theory: electric_image_plane} and solve the integrals numerically.
 
 \begin{figure}
     \centering
@@ -109,11 +109,17 @@ The transmission profile in this case is influenced by the angle of incidence of
     \label{fig_etalon_theory:Profiles-configs}
 \end{figure}
 
-Figure \ref{fig_etalon_theory:Profiles-configs} shows the transmission profile corresponding to the three different scenarios we have considered: collimated illumination of the etalon, perfect telecentrism, and imperfect telecentrism. The etalon parameters have been selected to coincide with those of SO/PHI's etalon. In both the collimated and perfect telecentric configurations, a normal incidence  ($\theta = 0$) scenario is shown, whereas in the imperfect telecentric case, we assumed an angle of incidence of the chief ray, $\Theta$, of $0.3^{\circ}$. The parameter $a$ has been adjusted slightly in order to tune the transmission profile at $\lambda _ 0$.
+Figure \ref{fig_etalon_theory:Profiles-configs} shows on the left the transmission profile corresponding to the three different scenarios: collimated illumination of the etalon, perfect telecentrism, and imperfect telecentrism. The etalon parameters have been selected to coincide with those of SO/PHI's etalon. In both the collimated and perfect telecentric configurations, a normal incidence  ($\theta = 0$) scenario is shown, whereas in the imperfect telecentric case, we assumed an angle of incidence of the chief ray, $\Theta$, of $0.3^{\circ}$. The parameter $a$ has been adjusted slightly in order to tune the transmission profile at $\lambda _ 0$. 
 
-We observed that the telecentric configurations achieve lower peak transmissions than the collimated case. In addition, the telecentric profiles are wider due to the different incidence angles across the illuminating cone of rays. Such a broadening increases with decreasing f-ratios. Lastly, non-normal incidence of the chief ray in the telecentric configuration further widens and shifts ($\sim 4$~m\r{A}
+Regarding the properties of each profile, note that the telecentric configurations achieve lower peak transmissions than the collimated case. In addition, the telecentric profiles are wider due to the different incidence angles across the illuminating cone of rays. Such a broadening increases with decreasing f-ratios. Lastly, non-normal incidence of the chief ray in the telecentric configuration further widens and shifts ($\sim 4$~m\r{A}
 for $\Theta=0.3^\circ$) the profile, making it asymmetrical. 
 
+\section{Sunspot observation simulation}
+INTRO sunspot. Challenges in data reduction, unknown effects etc. 
+
+\subsection{Observations simulation.}
+
+\subsection{etyc}
 
 
 \section{Fitting algorithm}
