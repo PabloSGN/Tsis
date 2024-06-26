@@ -111,7 +111,7 @@ def PSF(wvls, l0, angle1, angle2, xi, eta, Da, Et):
     return Inum
 
 
-etalon_model = et.Etalon(checkpoint='Plots/2024-01-10-09_25_54.best.pth', gpu=0, verbose=True)
+"""etalon_model = et.Etalon(checkpoint='Plots/2024-01-10-09_25_54.best.pth', gpu=0, verbose=True)
 
 l0 = 6173.5 
 wavelengths = np.arange(-500, 505, 1.5) * 1E-3 + l0
@@ -150,15 +150,15 @@ axs["B"].set_yticks([])
 axs["A"].set_title("Spectral PSFs")
 axs["B"].set_title(r"Imperfect telecentric spatial PSF at $\lambda _ 0$")
 
-plt.tight_layout()
-plt.savefig(f"Plots/plots/etalon_setups_profiles.pdf", bbox_inches = "tight")
-plt.show()
+plt.tight_layout()"""
+#plt.savefig(f"Plots/plots/etalon_setups_profiles.pdf", bbox_inches = "tight")
+
 
 # ============================================================ #
-"""
+
 #plt.close("all")
 
-fig, axs = plt.subplots(figsize = (10.5, 5))
+fig, axs = plt.subplots(figsize = (10, 3.5))
 
 Et = {
       'R' : 0.925,
@@ -247,6 +247,6 @@ axs.legend(h, l, loc='lower right', edgecolor = 'k' ,
          handler_map={MulticolorPatch: MulticolorPatchHandler()})
 plt.tight_layout()
 
-plt.show()
-#plt.savefig(f"Plots/plots/ProfileMeasurement.pdf", bbox_inches = "tight")
-"""
+
+plt.savefig(f"Plots/plots/ProfileMeasurement.pdf", bbox_inches = "tight")
+plt.savefig(f"figures/EtalonPaper/ProfileMeasurement.pdf", bbox_inches = "tight")

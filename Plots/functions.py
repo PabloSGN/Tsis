@@ -62,7 +62,7 @@ def fts_spectra(wli : float, wlf : float):
     """
     """'Kitt Peak FTS-Spectral-Atlas'"""
 
-    file = 'fts.npz'
+    file = 'Plots/fts.npz'
     data = np.load(file)
     fts = data['fts']
     fts_w = data['fts_w']

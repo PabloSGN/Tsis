@@ -9,7 +9,7 @@ We established in section \ref{susec_spectropolarimeters: Imaging} that the obse
 
 \begin{equation}
     I\left(\xi, \eta ; \lambda_{s}\right)=g(\xi, \eta)\int_{0}^{\infty} T(\lambda) \iint  O\left(\xi_0, \eta_0 ; \lambda\right)  \mathcal{S}\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)  \mathrm{d} \xi_{0} \mathrm{~d} \eta_{0}\mathrm{d} \lambda ,
-    \label{eq_etalon_theory: General}
+    \label{eq_etalon_theory: General_Intensity}
 \end{equation}
 where $T(\lambda)$ accounts for the presence of an order-sorting pre-filter, $O\left(\xi_0, \eta_0 ; \lambda\right)$ represents the brightness distribution of the observed object at the point $\left(\xi_0, \eta_0\right)$, $S\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)$ accounts for the imaging response of the instrument when tuned at the wavelength $\lambda_{s}$, and $g(\xi, \eta)$ represents a spatial gain factor that accounts for wavelength independent pixel-to-pixel intensity fluctuations ocurring in the focal plane due to differences in the detectors' sensitivity. 
 
@@ -31,7 +31,7 @@ where $\tau$ is the transmission factor for normal incidence, $R$ stands for the
 
 The transmission profile of the etalon ($S$) is defined as the average ratio between the transmitted and incident intensities, calculated from the complex conjugate of the corresponding electric fields. The shape of $\delta$ varies depending on the illumination setup of the etalon, whether collimated or telecentric. Consequently, each configuration has unique solutions and characteristics and is differently affected by inhomogeneities (defects) in the etalon's properties.
 
-\subsection{Collimated configuration}
+\subsection{\label{susec_etalon_theory: collimated}Collimated configuration}
 
 \begin{figure}
   \centering
@@ -54,6 +54,7 @@ where $n$ stands for the refractive indx of the etalon cavity, $d$ is the distan
 
 \begin{equation}
   \psi\left(\xi, \eta, \lambda \right) = \frac{\tau}{1 + F \sin ^2 (\delta(\xi, \eta, \lambda) / 2)}.
+  \label{eq_eta_theory : Collimated_profile}
 \end{equation}
 
 The spectral behaviour of the transmission profile, such as the spectral position of the resonance peaks and the distance between them (the free spectral range), is encoded in the parameter $\delta$, which is a function of the refractive index of the etalon cavity, the distance between mirrors, and the angle of the incident beam. The reflectivity $R$ of the mirrors determines the width of the resonance peaks through the parameter $F$, $F \equiv 4R (1 - R )^{-2}$.
@@ -125,18 +126,15 @@ INTRO sunspot. Challenges in data reduction, unknown effects etc.
 \section{Fitting algorithm}
 \subsection{\label{eta_corr_susec: etalon_transmission}Initial approximations}
 
-The intensity distribution observed at the focal plane of any etalon-based instrument tuned to a wavelength $\lambda_s$ obeys the following expression \citep{franI}:
-
-As a first approximation, we assumed a spatial dependence of the imaging response in the form of a Dirac delta in order to simplify the equations. If we let the imaging response follow the expression 
+As an initial approximation, we will disregard the spatial PSF and assume that the spatial dependence can be represented by a Dirac delta function to simplify the equations. Therefore, if we assume that the image response of the FPI follows the expression:
 \begin{equation}
 S\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)=\delta(\xi_0-\xi,\eta_0-\eta)\Psi(\xi,\eta,\lambda-\lambda_s),
 \end{equation}
-where $\Psi\left(\xi, \eta ; \lambda-\lambda_{0}\right) $ is the transmission profile of the etalon, Eq. \eqref{eq_eta_corr: General} can be simplified as
+equation \eqref{eq_etalon_theory: General_Intensity} simplifies into:
 \begin{equation}
     I\left(\xi, \eta ; \lambda_{s}\right)=g(\xi, \eta)\int_{0}^{\infty} T(\lambda)  O\left(\xi, \eta ; \lambda\right) \Psi\left(\xi, \eta ; \lambda-\lambda_{s}\right)  \mathrm{d} \lambda.
     \label{eq_eta_corr: intensity}
 \end{equation}
-The transmission profile has a spatial dependence across the image that arises naturally from the different illumination of the etalon across the FoV in the collimated configuration and from the direct mapping of the local inhomogeneities into the detector in the telecentric configuration. 
 
 Although, in practice, it is not often possible to fully characterize the pre-filter, we assumed it has a rectangular shape centered at the wavelength of the observed spectral line ($\lambda _ {0}$) and a width of $2\Delta \lambda$ such that only one order of the etalon passes through. We note that including a different shape of the pre-filter in the current model is straightforward, provided it can be modeled analytically or even numerically. With this consideration, equation \eqref{eq_eta_corr: intensity} can be written as follows:
 
@@ -145,13 +143,7 @@ Although, in practice, it is not often possible to fully characterize the pre-fi
     \label{eq_eta_corr: Intensity-final}
 \end{equation}
 
-The explicit shape of $\Psi$  is different depending on the optical configuration of the instrument, that is, collimated or telecentric.
-
-
-
-
-
-
+The explicit shape of $\Psi$ is different depending on the optical configuration of the instrument, that is, collimated or telecentric.
 
 \subsection{\label{eta_corr_susec: simulating obs} Simulated observations}
   
@@ -159,7 +151,7 @@ All the instruments built around the use of an etalon as a wavelength filtering 
 
 We carried out a series of simulations of a spectral line observation in different conditions. We used the Kitt Peak FTS-Spectral-Atlas as the reference \citep{fts} and, specifically, the Fe I spectral line at 6173.3~\r{A}. Each observation was composed of $N_\lambda$ wavelengths, where the measured intensity was recorded. At every wavelength $\lambda_s$, the corresponding transmission profile of the etalon $\Psi^{\lambda_s}$ was computed, and the "observed" intensity $I ^{\lambda _ s} _ {{\rm obs}, i}$ corresponding to a specific spatial location $(\xi, \eta)$, represented hereinafter by the pixel $i$, was calculated using Eq.~\eqref{eq_eta_corr: Intensity-final}. Additionally, we took into account the presence of additive Gaussian noise. This noise does not necessarily respond to any parameter fluctuation within our analytical expressions or photon noise but comes from any unexpected variations that may not have been modeled in the theoretical scheme.
 
-Additionally, we included the presence of defects arising from irregularities or inhomogeneities on either the cavity thickness $d$, the refractive index $n$, or from deviations of the angle of incidence $\theta$. In order to simulate this, we introduced a relative perturbation $\Delta a$ into the etalon equation that accounts for any local deviation of the value of $a$ with respect to its nominal value. This parameter changes from pixel to pixel differently for the collimated and telecentric configurations. In the former, the profile shifts across the FoV only because of the different incidence angles of the light beam on the etalon. In the latter, local variations of $n$ and/or $d$ are mapped directly onto the detector. We also note that variations in the incidence angle must be considered as well when the degree of telecentrism varies along the detector. Analytically, the parameter $a$ at each $i$-th pixel is given by $a' _ i = a \Delta a _ i$, where $a = (2\pi/\lambda) n d\cos\theta$ is constant along the FoV.
+Additionally, we included the presence of defects arising from irregularities or inhomogeneities on either the cavity thickness $d$, the refractive index $n$, or from deviations of the angle of incidence $\theta$. In order to simulate this, we introduced a relative perturbation $\Delta a$ into the etalon equation that accounts for any local deviation of the value of $a$ with respect to its nominal value. This parameter changes from pixel to pixel differently for the collimated and telecentric configurations. In the former, the profile shifts across the FoV only because of the different incidence angles of the light beam on the etalon. In the latter, local variations of $n$ and/or $d$ are mapped directly onto the detector. We also note that variations in the incidence angle must be considered as well when the degree of telecentrism varies along the detector. Analytically, the parameter $a$ at each $i$-th pixel is given by $a' _ i = a \Delta a _ i$, where $a = (2\pi/\lambda) n d\cos\theta$ is constant along the FoV. Note that rewriting the equations for the transmission profiles (sections \ref{susec_etalon_theory: collimated} and \ref{susec_etalon_theory: Tele-perfe}) using this definition of $a$ is straightforward. In collimated configurations, the parameter $\delta$ (eq. \eqref{eq_etalon_theory: collimated_delta}) is simply $2a$. In perfect telecentric configurations, $\theta$ is always 0, so the given transmission profile is already expressed in terms of $a$.   
 
 We let $n _ i ^{\lambda_s}$ be the  noise contribution at the $i$-th pixel and wavelength $\lambda_s$. Thus, the observed intensity at that pixel when the etalon is tuned at $\lambda _s$, $I ^{\lambda _ s} _ {{\rm obs}, i}$ is given by 
 \begin{equation}
@@ -179,15 +171,12 @@ For both the collimated and telecentric configurations, we modeled etalon and ga
 We modeled the etalon defects as changes in $\Delta a$ in such a way that the maximum displacement reaches $3$ pm. The spatial distribution of the values of  $\Delta a $ follows an increasing radial distribution, as shown in Fig.~ \ref{fig_etalon_corr: Inputs} (bottom panel). Such a spatial distribution coincides with the expected one in collimated etalons due to the change in the incidence angle across the FoV. Telecentric mounts do not exhibit a spatial distribution of their defects such as this, but using the same spatial distribution in the two cases allowed us to compare the performance of the method for both setups in a systematic way. Since $\Delta a$ accounts for relative perturbations, it is by definition an adimensional parameter. However, to grant it a physical meaning, we express the values of $\Delta a$ in \r{A}, representing the associated shift of the transmission profile with respect to the original position determined by $a$.
 
 \begin{figure}
-    \begin{minipage}[c]{0.5\textwidth}
-        \includegraphics[width=\textwidth]{figures/EtalonPaper/Gain_Da_Inputs.pdf}
-    \end{minipage}\hfill
-    \begin{minipage}[c]{0.47\textwidth}
-        \caption{
-            Input maps introduced when simulating the observations. The top panel represents the gain generated as white Gaussian noise, with values ranging from 0.8 to 1.2. A dust speck was introduced by creating a group of four pixels with low values of $g=0.2$ for the gain. The bottom panel shows the spatial distribution of the defects in the etalon. The distribution follows a radial pattern starting from the center of the FoV. The defects vary from $0\,\%$ deviation to up to $5\times 10 ^{-4}\,\%$, which corresponds to a shift of 3~pm. Both possible directions for the deviations have been considered. The sign of the deviation is negative at the very center, which introduces a redshift, while it is positive at the corners, causing a shift of the profile into the blue.
-        } \label{fig_etalon_corr: Inputs}
-    \end{minipage}
-    \end{figure}
+  \centering
+    \includegraphics[width=\textwidth]{figures/EtalonPaper/Gain_Da_Inputs.pdf}
+    \caption{
+      Input maps introduced when simulating the observations. The left panel represents the gain generated as white Gaussian noise, with values ranging from 0.8 to 1.2. A dust speck was introduced by creating a group of four pixels with low values of $g=0.2$ for the gain. The right panel shows the spatial distribution of the defects in the etalon. The distribution follows a radial pattern starting from the center of the FoV. The defects vary from $0\,\%$ deviation to up to $5\times 10 ^{-4}\,\%$, which corresponds to a shift of 3~pm. Both possible directions for the deviations have been considered. The sign of the deviation is negative at the very center, which introduces a redshift, while it is positive at the corners, causing a shift of the profile into the blue.
+      \label{fig_etalon_corr: Inputs}}
+\end{figure}
 
 \section{\label{eta_corr_susec: fitting algorithm}Fitting algorithm}
 
@@ -210,10 +199,13 @@ Both the camera gain and the defects of the etalon change from one pixel to anot
 Figure \ref{fig_etalon_corr: Derivatives} shows the derivatives of the error metric, Eq.~\eqref{eq_eta_corr: Error metric}, as a function of wavelength, that is, before computing the summation over $s$ of the merit function, with respect to the gain, the reflectivity, and $\Delta $a. The curve corresponding to the $\Delta a$ derivative is different from the others, whereas the derivatives of both the gain and the reflectivity exhibit similar shapes. Hence, variations in either the reflectivity or the gain introduce similar changes in the merit function, which can produce a trade-off between these two parameters, especially when the spectral line is sampled in only a few points. Given that discrepancies arising from errors in reflectivity are assimilated by gain maps, we did not take into account reflectivity errors when computing our simulations, as they have no impact on cavity map calculations.
 
 \begin{figure}
-\centering
-\includegraphics{figures/EtalonPaper/Derivadas.pdf}
-\caption{Derivatives of the error metric as a function of wavelength. The derivative with respect to $\Delta a$ has been normalized in order to fit the three curves in the same plot.}
-\label{fig_etalon_corr: Derivatives}
+  \begin{minipage}[c]{0.6\textwidth}
+    \includegraphics[width=\textwidth]{figures/EtalonPaper/Derivadas.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.37\textwidth}
+    \caption{
+      Derivatives of the error metric as a function of wavelength. The derivative with respect to $\Delta a$ has been normalized in order to fit the three curves in the same plot. \label{fig_etalon_corr: Derivatives}} 
+  \end{minipage}
 \end{figure}
 
 
@@ -221,9 +213,8 @@ A few key aspects arise when analyzing the merit function and its applicability 
 
 \begin{figure}
 \centering
-\includegraphics[width=12cm]{figures/EtalonPaper/Deconvolution.pdf}
-\caption{Deconvolution of the object with a measurement of the Fe I spectral line using $N_\lambda = 9$. All points of the FoV have been used to compute the average profiles (red crosses). The deconvolution (blue) is the result of deconvolving the mean profile interpolation (dashed line) with the displayed etalon transmission profile (green). }
-\label{fig_etalon_corr:Deconvolution}
+\includegraphics[width=\textwidth]{figures/EtalonPaper/Deconvolution.pdf}
+\caption{Deconvolution of the object with a measurement of the Fe I spectral line using $N_\lambda = 9$. All points of the FoV have been used to compute the average profiles (blue crosses). The deconvolution (orange) is the result of deconvolving the mean profile interpolation (dashed line) with the displayed etalon transmission profile (red).\label{fig_etalon_corr:Deconvolution} }
 \end{figure}
 
 We employed Newton's method to minimize the merit function, Eq.~\eqref{eq_eta_corr: Merit Function}, as it has been proven to quickly converge (in five iterations or fewer, usually). The method begins by assuming an initial guess for the gain $g_j$ and $\Delta a_j$ parameters. Then, provided the initial guess is sufficiently close to the solution and that the merit function is continuous and differentiable, the gain $g_j$ and $\Delta a_j$ encoded in the vector, $\mathbf{x}_j$, can be updated iteratively at each iteration, $j$, as
@@ -246,15 +237,10 @@ We first assumed that the spectrum of the observed object is given by the solar 
 We restricted imperfections in the telecentrism to arise only for one scenario, S/N~$=200$, since simulating imperfections requires a high computational effort due to the lack of a theoretical expression for both the transmission profile and its derivatives. We also assumed that the degree of telecentrism ($0.3 ^\circ $) is known in this case.
 
 \begin{figure}
-    \begin{minipage}[c]{0.6\textwidth}
-      \includegraphics[width=\textwidth]{figures/EtalonPaper/SNR_plot_imperfect.pdf}
-    \end{minipage}\hfill
-    \begin{minipage}[c]{0.37\textwidth}
-      \caption{
-        Absolute errors of the gain (top) and etalon defect (bottom) derivations averaged over all the FoV. The number of wavelengths corresponds to the parameter $N_\lambda$ of wavelengths used to scan the profile.
-      } \label{fig_etalon_corr:SNR_both}
-    \end{minipage}
-  \end{figure}
+    \centering
+     \includegraphics[width=\textwidth]{figures/EtalonPaper/SNR_plot_imperfect.pdf}
+    \caption{Absolute errors of the gain (left) and etalon defect (right) derivations averaged over all the FoV. The number of wavelengths corresponds to the parameter $N_\lambda$ of wavelengths used to scan the profile.\label{fig_etalon_corr:SNR_both}}
+\end{figure}
 
 Figure \ref{fig_etalon_corr:SNR_both} shows the average absolute error in $g$ (top panel) and in $\Delta a$ (bottom panel) over the whole FoV as a function of the wavelength sampling, $N_\lambda$. The error in $g$ is expressed as a percentage of its real value. Errors in $\Delta a$ are given in meters per second since they are mostly responsible for shifting the profile. Errors in $\Delta a$ can be translated into velocity errors with the center-of-gravity method  \citep{center_of_gravity} through the expression
 \begin{equation}
@@ -286,7 +272,7 @@ To infer the error of the algorithm when the object is unknown, we compared the 
 
 \begin{figure}
     \centering
-     \includegraphics[width=12cm]{figures/EtalonPaper/Deconvolution_results.pdf}
+     \includegraphics[width=\textwidth]{figures/EtalonPaper/Deconvolution_results.pdf}
     \caption{Errors in gain determination and etalon properties averaged over all the FoV with a signal-to-noise ratio of 200 and a collimated configuration.}
     \label{fig_etalon_corr:Deconvolution-results}
 \end{figure}
@@ -318,9 +304,8 @@ The similarity in the error distributions for the calculation of $\Delta a$ in t
 
 
 \begin{figure}
-    \centering
-    \includegraphics[width=12cm]{figures/EtalonPaper/means.pdf}
-    \caption{Average errors of the gain (top panel) and etalon defect (bottom panel) calculations over all the FoV for the two crossover cases and the standard case (also shown in Fig.~ \ref{fig_etalon_corr:SNR_both} as the collimated case with S/N = 200) for reference. All $\Delta a$ errors have been computed by correcting differential offsets of the transmission profile between the different mounts}  \label{fig_etalon_corr:crossover}
+  \includegraphics[width=\textwidth]{figures/EtalonPaper/means.pdf}
+  \caption{Average errors of the gain (left) and etalon defect (right) calculations over all the FoV for the two crossover cases and the standard case (also shown in Fig.~ \ref{fig_etalon_corr:SNR_both} as the collimated case with S/N = 200) for reference. All $\Delta a$ errors have been computed by correcting differential offsets of the transmission profile between the different mounts.\label{fig_etalon_corr:crossover}}  
 \end{figure}
 
 We note, however, that the amplitude, width, and shape of the transmission profile differ significantly between the telecentric and collimated configurations, leading to an expected higher error in gain calculation. Figure \ref{fig_etalon_corr:crossover} shows the absolute errors in gain and $\Delta a$ calculations for both crossover scenarios and the ideal case after correcting the wavelength shift between the different mounts. For $\Delta_a$, the performance of the method is very similar in the three setups, as also observed earlier. This behavior is nevertheless anticipated since the properties selected for simulating the imperfect etalon were chosen to mirror those of the SO-PHI etalon, which were adjusted to closely resemble the behavior of a collimated etalon to the greatest extent possible.
