@@ -15,7 +15,7 @@ from scipy.signal import savgol_filter
 import etalon_funtions as etf
 import functions_matricial as ft
 import functions_tele as ft_tele
-import etalon as et
+#import etalon as et
 # ======================================================================== #
 # CONFIG
 plt.style.use("default")
@@ -158,7 +158,7 @@ plt.tight_layout()"""
 
 #plt.close("all")
 
-fig, axs = plt.subplots(figsize = (10, 3.5))
+fig, axs = plt.subplots(figsize = (10.5, 5))
 
 Et = {
       'R' : 0.925,
