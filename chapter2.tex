@@ -8,9 +8,6 @@ The design from scratch of an instrument such as this is very complex. There are
 
 \section{A brief introduction to spectropolarimeters.}
 
-
-Mirar file:///home/pablo/Downloads/s10509-023-04212-3.pdf.
-
 Spectropolarimeters, as suggested by the name, are devices that measure the spectral and polarimetric properties of light, or in other words, that measure the polarization state of light as a function of wavelength. Their use is widely extended in astrophysics due to the huge amout of information about the light source we can infer from these properties.
 
 In solar physics, it is common to encounter two distinct types of spectropolarimeters, distinguished by their approach to spectroscopy: slit-based spectrographs, such as SUSI and SCIP, and narrow-band tunable filtergraphs, like TuMag. The latter preserve spatial resolution by capturing two-dimensional images of the solar scene at the expense of sacrificing spectral resolution. Conversely, slit-based spectrographs provide excellent spectral resolution but have a limited spatial resolution. 
@@ -61,13 +58,45 @@ Aquí que va? PSFs Phase diversity?
 
 \subsection{Polarimetry}
 
+\textcolor{red}{As previously noted, determining the polarization state of light requires the determination of the components of the Stokes vector. However, these parameters cannot be measured directly since we only know how to measure intensities. Since they are  Thus, measuring the polarization of light always involves multiple measurements at once. Specifically, a number equal to the number of elements to be determineed: four for the complete Stokes vector, or two, if only the circular polarization and total intensity are to be measured. This is the root of the difficulties in measuring polarization, as the need for multiple measurements makes them much more susceptible to spurious effects compared to individual measurements.} Cambiar que es un jaleo. 
 
-XIXA. 
+Mathematically, the effect on polarization of a linear and finite system can be treated as a combination of linear transformations on the Stokes vector and, therefore, can be represented by a matrix in $\mathbb{R}^4$, known as the \textit{Mueller Matrix}. Let $\textbf{M}$ be the matrix that describes these transformations, then the polarization state that reaches the detector follows:
 
-Polatimetros, IQUV bien. Etc. 
+\begin{equation}
+  \textbf{I}_{out} = \textbf{M}\textbf{I}_{in},
+\end{equation}
+where $\textbf{I}_{in}$ and $\textbf{I}_{out}$ are the Stokes vectors of the light that reaches the instrument, and the detector, respectively. However, since we only know how to measure intensities, the actual quantity measured by our CCD is: 
 
-S/N y eficiencia. 
+\begin{equation}
+  I_{obs} = m_{00}I_{in} + m_{01}Q_{in} + m_{02}U_{in} + m_{03}V_{in} \ \ ,
+\end{equation}
+where $m_{0i}$ is the i-th element of the first row of the Mueller Matrix. This means that the intensity we measure is a linear combination of the different polarization states of the incoming light. To determine the values of the individual parameters $I_{in}$, $Q_{in}$, $U_{in}$, and $V_{in}$, further independent measurements are necessary, which can be achieved by modifying the Mueller matrix. In particular, it is easy to see that four independent measurements are required in order to construct a system of equations that allows us to determine the full Stokes vector. This process is known as modulation, and the four independent measurements are referred to as modulations.
 
+If we denote each of the modulations by $I _ j$ with $j \in \left\{ 1, 2, 3, 4\right\}$, we can construct the following system of equations:
+
+\begin{equation}
+  \begin{pmatrix}
+  I _ 1 \\
+  I _ 2 \\
+  I _ 3 \\
+  I _ 4
+  \end{pmatrix} = 
+  \underbrace{\begin{pmatrix} 
+      m ^ 1 _ {01} & m ^ 1 _ {02} & m ^ 1 _ {03} & m ^ 1 _ {04} \\ 
+      m ^ 2 _ {01} & m ^ 2 _ {02} & m ^ 2 _ {03} & m ^ 2 _ {04} \\
+      m ^ 3 _ {01} & m ^ 3 _ {02} & m ^ 3 _ {03} & m ^ 3 _ {04} \\
+      m ^ 4 _ {01} & m ^ 4 _ {02} & m ^ 4 _ {03} & m ^ 4 _ {04} 
+  \end{pmatrix}}_ {\textbf{O}}
+  \begin{pmatrix}
+    I _ {in} \\
+    U _ {in} \\
+    Q _ {in} \\
+    V _ {in}
+    \end{pmatrix} \, 
+\end{equation}
+where the superindex in $m ^j _{oi}$ denotes the values of the Mueller Matrix for each modulation. Through straightforward algebra, it is easy to see that the stokes vector of the incoming light can be determined by $\textbf{I}_{in} = \textbf{D}\textbf{I}_{obs}$, where $\textbf{D}$ is the demodulation matrix, the inverse of the modulation matrix, $\textbf{O}$, and $\textbf{I}_{obs}$ is the vector containing the 4 measured modulations. Accurately determining $\textbf{O}$ during the instrument calibration process is crucial, as the determination of the Stokes components depends entirely upon it.
+
+ 
 \subsection{What for? Zeeman effect.}
 
 
