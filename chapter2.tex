@@ -107,13 +107,31 @@ where $T(\lambda)$ accounts for the presence of the order-sorting pre-filter, $S
 
 Determining the imaging response of the instrument can be quite complex , as it is influenced not only by their physical characteristics but also by their optical configuration, whether collimated or telecentric. In Chapter 2, we provide a detailed overview of the properties of each configuration, their differences, and the challenges involved in using these devices for data correction.
 
+\textcolor{red}{ADD noise Discussion?}
  
+\subsection{What do spectrpolarimeters tell us about the Sun?}
 
- 
-\subsection{What for? Zeeman effect.}
+Spectropolarimeters are often referred to as magnetographs (\textit{e.g.}, TuMag), suggesting they measure magnetic fields directly. However, this is not entirely accurate. In astrophysics, the physical properties of the light source are inferred by correlating them with the observed properties of the light, rather than measuring them directly. By evaluating the polarization of sunlight at different wavelengths, spectropolarimeters enable us to infer the magnetic field and estimate plasma velocities on the solar surface. 
 
+The simplest calculation we can carry out that provides us with physical quantities of the Sun is that of the line-of-sight (LOS) velocities. Given the spectral shift of a specific absorption or emission spectral line, $\Delta \lambda$, with respect to its rest position, $\lambda _ 0$ , the LOS velocities can be computed with the Doppler formula: 
+\begin{equation}
+  v_{LOS} = \frac{\Delta \lambda}{\lambda _ 0}c\ \ ,
+  \label{eq_spectro: Doppler}
+\end{equation}
+where $c$ stands for the speed of light in vacuum. 
 
+The polarization properties of light come into play when determining the magnetic fields. Due to Zeeman and Hanle effects, the polarity and spetcroscopy of spectral lines can be altered when formed in the presence of magnetic fields. Due to the Zeeman effect, the spectral lines widen or split into different polarized components when a strong magnetic field is present \citep{libro_JoseCarlos}, such as in the surroundings of sunspots and active regions. In the other hand, the Hanle effect is sensitive to weaker fields, and can be used to study the magnetic structure of solar prominences or turbulent fields in the solar photosphere \citep{hanle}. 
 
+One simple strategy to employ polarization and spectral data to derive the magnetic fields is through the center-of-gravity method. According to \cite{center_of_gravity}, the LOS strength of the magnetic field can be obtained through:
+\begin{equation}
+  B_{LOS} = \frac{\lambda _ {+} - \lambda _ -}{2}\frac{4\pi m c}{eg_{L}\lambda_0 ^2}\ \ ,
+\end{equation}  
+where $m$ and $e$ are the electron mass and charge respectively, $g_L$ stands for the Landé factor and $\lambda _ {+}$ and $\lambda _ {-}$ are the centroids of the right and left circularly polarized line components, respectively, and are computed by:
+\begin{equation}
+  \lambda _ {\pm} = \frac{\int \lambda \left[I_{cont} - (I \pm V)\right]d\lambda}{\int \left[I_{cont} - (I \pm V)\right]d\lambda} \ .
+\end{equation} 
+
+The vector magnetic field (\textit{i.e.}, strength, azimuth and inclination), and not only the LOS strength can also be derived. However, the derivation of these quantities has to be achieved through inversions of the radiative transfer equation (RTE). The applicability of the different methods to carry out this inversion is an extensive topic as there may be some assumptions that can be applied in some cases but not in others, such as the weak-field or  Milne-Eddington approximations, among others. For an extended discussion of this topic, we refer the interested reader to \cite{del2016inversion}.   
 
 
 \section{The Tunable magnetograph: TuMag}
