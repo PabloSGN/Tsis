@@ -128,32 +128,19 @@ One simple strategy to employ polarization and spectral data to derive the magne
 \end{equation}  
 where $m$ and $e$ are the electron mass and charge respectively, $g_L$ stands for the Landé factor and $\lambda _ {+}$ and $\lambda _ {-}$ are the centroids of the right and left circularly polarized line components, respectively, and are computed by:
 \begin{equation}
-  \lambda _ {\pm} = \frac{\int \lambda \left[I_{cont} - (I \pm V)\right]d\lambda}{\int \left[I_{cont} - (I \pm V)\right]d\lambda} \ .
+  \lambda _ {\pm} = \frac{\int \lambda \left[I_{cont} - (I \pm V)\right]d\lambda}{\int \left[I_{cont} - (I \pm V)\right]d\lambda} \ ,
+  \label{eq_spectro: Blos-cog}
 \end{equation} 
 
-The vector magnetic field (\textit{i.e.}, strength, azimuth and inclination), and not only the LOS strength can also be derived. However, the derivation of these quantities has to be achieved through inversions of the radiative transfer equation (RTE). The applicability of the different methods to carry out this inversion is an extensive topic as there may be some assumptions that can be applied in some cases but not in others, such as the weak-field or  Milne-Eddington approximations, among others. For an extended discussion of this topic, we refer the interested reader to \cite{del2016inversion}.   
-
+where the subindex "$cont$" stands for the wavelength at the continuum. The vector magnetic field (\textit{i.e.}, strength, azimuth and inclination), and not only the LOS strength can also be derived. However, the derivation of these quantities has to be achieved through inversions of the radiative transfer equation (RTE). The applicability of the different methods to carry out this inversion is an extensive topic as there may be some assumptions that can be applied in some cases but not in others, such as the weak-field or  Milne-Eddington approximations, among others. For an extended discussion of this topic, we refer the interested reader to \cite{del2016inversion}.   
 
 \section{The Tunable magnetograph: TuMag}
 
-TuMag is a wavelength-tunable spectropolarimeter capable of probing the line-of-sight velocity ($v$los) and the vector magnetic field ($\vec{B}$) in the photosphere and the low chromosphere. This means that TuMag must be able to switch between different spectral lines and measure the full stokes vector at each observed wavelength. 
+Among many examples of spectropolarimeters, one that has special relevance for this thesis is TuMag. The Tunable magnetograph (TuMag) is a wavelength-tunable spectropolarimeter that observes in the photosphere and the low chromosphere. 
 
-TuMag's design and properties are a direct consequence of the scientific purpose for which it has been conceived and its requirements. 
+TuMag is a filtergraph that employs a solid LiNbO$_3$-based FPI to scan the spectral lines. This kind of etalons are able to change the refractive index of the matierial inside the cavity by applying a voltage difference between the two mirrors. This design advantageously eliminates moving parts from the tuning process, though it requires high voltages for operation. 
 
-\subsection{Optical design and image quality.}
-
-
-
-\subsection{Spectral capabilities}
-
-As a spectrograph, TuMag is able to tune the wavelength of the measurements through a Fabry-Pérot interferometer (FPI), and select between three different spectral lines through the different pre-filters located on the filter wheel. 
-
-The FPI, or etalon, is a LiNbO$_3$-based ...
-
-
-
-\subsection{Polarimetric capabilities}
-
+In order to be able to carry out observations of both the photosphere and low cromosphere, TuMag must be able to switch between different spectral lines. For this purpose, TuMag is equipped with three different pre-filters centered at the wavelengths of three different spectral lines: The FeI line at $5250.2$ \r{A}, the FeI line at $5250.6$ \r{A}, and the Mg line at $5172.7$ \r{A}.  
 
 
 \section{Calibration of TuMag}
