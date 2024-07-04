@@ -121,11 +121,21 @@ INTRO sunspot. Challenges in data reduction, unknown effects etc.
 \subsection{Simulated data.}
 
 blabla
+\subsection{Simulated data.}
+
+blabla
 \subsection{Observations simulation.}
 
 All the instruments built around the use of an etalon as a wavelength filtering element operate in a very similar way. They scan a spectral line by tuning the etalon (by changing the distance between mirrors and/or modifying the refractive index) to a desired number of wavelengths along the spectral line. At each spectral position, the solar scene is recorded. The measured intensity is approximately given by Eq.~\eqref{eq_etalon_theory: General_Intensity}, with the etalon's transmission profile centered at the desired wavelength.
 
 We have carried out two sets of simulations, one with a perfect telecentric configuration, where the incidence is normal, and one with an angle of incidence of the chief ray is $0.5^\circ$. For each of these sets, a simulated observation of the sunspot has been carried out employing 45 wavelengths for the scan of the line. A flat-field observation has also been computed with the same configuration than the one employed for the suspot observation. For the flat-field observations we have generated an \textit{ideal} flat-field where the average profile computed in quiet-sun was replicated at every pixel of the generated image.
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{figures/Mancha/Inputs_mancha.pdf}
+    \caption{
+      HOla :)
+      \label{fig_mancha: Inputs}}
+\end{figure}
 
 Although, in practice, it is not often possible to fully characterize the pre-filter, we assumed it has a rectangular shape centered at the wavelength of the observed spectral line ($\lambda _ {0}$) and a width of $2\Delta \lambda$ such that only one order of the etalon passes through. With this consideration, equation \eqref{eq_eta_corr: intensity} can be written as follows:
 
@@ -159,6 +169,7 @@ equation \eqref{eq_etalon_theory: General_Intensity} simplifies into:
 The explicit shape of $\Psi$ is different depending on the optical configuration of the instrument, that is, collimated or telecentric.
 
 \subsection{\label{eta_corr_susec: simulating obs} Simulated observations}
+  
   
 We carried out a series of simulations of a spectral line observation in different conditions. We used the Kitt Peak FTS-Spectral-Atlas as the reference \citep{fts} and, specifically, the Fe I spectral line at 6173.3~\r{A}. Each observation was composed of $N_\lambda$ wavelengths, where the measured intensity was recorded. At every wavelength $\lambda_s$, the corresponding transmission profile of the etalon $\Psi^{\lambda_s}$ was computed, and the "observed" intensity $I ^{\lambda _ s} _ {{\rm obs}, i}$ corresponding to a specific spatial location $(\xi, \eta)$, represented hereinafter by the pixel $i$, was calculated using Eq.~\eqref{eq_eta_corr: Intensity-final}. Additionally, we took into account the presence of additive Gaussian noise. This noise does not necessarily respond to any parameter fluctuation within our analytical expressions or photon noise but comes from any unexpected variations that may not have been modeled in the theoretical scheme.
 
@@ -253,6 +264,7 @@ We restricted imperfections in the telecentrism to arise only for one scenario, 
     \caption{Absolute errors of the gain (left) and etalon defect (right) derivations averaged over all the FoV. The number of wavelengths corresponds to the parameter $N_\lambda$ of wavelengths used to scan the profile.\label{fig_etalon_corr:SNR_both}}
 \end{figure}
 
+Figure \ref{fig_etalon_corr:SNR_both} shows the average absolute error in $g$ (left panel) and in $\Delta a$ (right panel) over the whole FoV as a function of the wavelength sampling, $N_\lambda$. The error in $g$ is expressed as a percentage of its real value. Errors in $\Delta a$ are given in meters per second since they are mostly responsible for shifting the profile. Errors in $\Delta a$ can be translated into velocity errors by computing the doppler velocity (Eq. \eqref{eq_spectro: Doppler}) associated to the spectral shift of the transmission ppeak produce by the error in $\Delta a$.
 Figure \ref{fig_etalon_corr:SNR_both} shows the average absolute error in $g$ (left panel) and in $\Delta a$ (right panel) over the whole FoV as a function of the wavelength sampling, $N_\lambda$. The error in $g$ is expressed as a percentage of its real value. Errors in $\Delta a$ are given in meters per second since they are mostly responsible for shifting the profile. Errors in $\Delta a$ can be translated into velocity errors by computing the doppler velocity (Eq. \eqref{eq_spectro: Doppler}) associated to the spectral shift of the transmission ppeak produce by the error in $\Delta a$.
 
 All the scenarios exhibit a similar behavior as far as their dependence on the spectral sampling is concerned, namely, the absolute errors decrease monotonically when the wavelength sampling increases. The reason for this is simply that a larger number of wavelength samples increases the amount of available information that the algorithm can use, thus making the fitting for $g$ and $\Delta a$ more precise. These results highlight the importance of properly sampling the targeted spectral line. A modest sampling of only $N_\lambda=5$ can produce errors as large as $120 \, {\rm ms^{-1}}$ in the worst-case scenario (S/N = 100). 
