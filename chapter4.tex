@@ -118,9 +118,27 @@ for $\Theta=0.3^\circ$) the profile, making it asymmetrical.
 \section{Sunspot observation simulation}
 INTRO sunspot. Challenges in data reduction, unknown effects etc. 
 
+\subsection{Simulated data.}
+
+blabla
 \subsection{Observations simulation.}
 
-\subsection{etc}
+All the instruments built around the use of an etalon as a wavelength filtering element operate in a very similar way. They scan a spectral line by tuning the etalon (by changing the distance between mirrors and/or modifying the refractive index) to a desired number of wavelengths along the spectral line. At each spectral position, the solar scene is recorded. The measured intensity is approximately given by Eq.~\eqref{eq_etalon_theory: General_Intensity}, with the etalon's transmission profile centered at the desired wavelength.
+
+We have carried out two sets of simulations, one with a perfect telecentric configuration, where the incidence is normal, and one with an angle of incidence of the chief ray is $0.5^\circ$. For each of these sets, a simulated observation of the sunspot has been carried out employing 45 wavelengths for the scan of the line. A flat-field observation has also been computed with the same configuration than the one employed for the suspot observation. For the flat-field observations we have generated an \textit{ideal} flat-field where the average profile computed in quiet-sun was replicated at every pixel of the generated image.
+
+Although, in practice, it is not often possible to fully characterize the pre-filter, we assumed it has a rectangular shape centered at the wavelength of the observed spectral line ($\lambda _ {0}$) and a width of $2\Delta \lambda$ such that only one order of the etalon passes through. With this consideration, equation \eqref{eq_eta_corr: intensity} can be written as follows:
+
+\begin{equation}
+  I\left(\xi, \eta ; \lambda_{s}\right)=g(\xi, \eta)\int_{\lambda _ 0 - \Delta \lambda}^{\lambda _ 0 - \Delta \lambda} \iint  O\left(\xi_0, \eta_0 ; \lambda\right)  \mathcal{S}\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)  \mathrm{d} \xi_{0} \mathrm{~d} \eta_{0}\mathrm{d} \lambda \ .
+  \label{eq_mancha: Intensity}
+\end{equation}
+
+For every tuned wavelength, the instensity in a given pixel is given by equation \eqref{eq_mancha: Intensity}, where the observed object is the sunspot simulation or the generated \textit{ideal} flat-field. 
+
+The imaging response of the FPI is computed by solving the integrals in equation \eqref{eq_etalon_theory: electric_image_plane}. Given that we will account for the PSF in these simulations, numerical methods are necessary to evaluate the integrals. The computational burden is significant, as the integrals must be evaluated $N_{pixel} ^2 N_{\lambda} N_{mods} N_{sets} > 10 ^8$ times\footnote{$N_{pixels} = 561$, $N_{\lambda} = 45$, $N_{mods} = 2$, $N_{sets} = 2$} for both sunspot and flat field observations. This extensive computation results in excessively long simulation times. To address this issue, a neural network was developed to reduce the computational time from \textcolor{red}{X to X}. The neural network was trained with known solutions to the integrals for a fixed set of etalon parameters, ensuring that its outputs are accurate to within 0.01\% for parameters within the training set.
+
+In real-world scenarios, variations in pixel sensitivities (gain) and etalon imperfections (cavity map) are unavoidable. Including the effect of the gain into the simulation is straigghtforward as it only acts as a multiplicative factor that modifies the final intensity. In contrast, the effects of the cavity map are more cumbersome. Pixel-to-pixel variations in etalon defects shift the transmission profile of the Fabry-Perot Interferometer (FPI) and must be accounted for when computing the imaging response. Both the gain and cavity map introduced in the simulations have been selected to resemble the real-case scenario of the SO/PHI instrument. The gain map (Figure XXX a) utilized in the simulations is derived from a flat field of the High Resolution Telescope (HRT) instrument, while the cavity map employed (Figure XXX a) is sourced from the cavity map of PHI's etalon.
 
 
 \section{Fitting algorithm}
@@ -136,19 +154,12 @@ equation \eqref{eq_etalon_theory: General_Intensity} simplifies into:
     \label{eq_eta_corr: intensity}
 \end{equation}
 
-Although, in practice, it is not often possible to fully characterize the pre-filter, we assumed it has a rectangular shape centered at the wavelength of the observed spectral line ($\lambda _ {0}$) and a width of $2\Delta \lambda$ such that only one order of the etalon passes through. We note that including a different shape of the pre-filter in the current model is straightforward, provided it can be modeled analytically or even numerically. With this consideration, equation \eqref{eq_eta_corr: intensity} can be written as follows:
 
-\begin{equation}
-    I(\xi, \eta ; \lambda_{s})=g(\xi, \eta)\int_{\lambda _{0} - \Delta \lambda}^{\lambda _ {0} + \Delta \lambda}  O(\xi, \eta ; \lambda)  \Psi(\xi, \eta ; \lambda-\lambda_{s})  \mathrm{d} \lambda .
-    \label{eq_eta_corr: Intensity-final}
-\end{equation}
 
 The explicit shape of $\Psi$ is different depending on the optical configuration of the instrument, that is, collimated or telecentric.
 
 \subsection{\label{eta_corr_susec: simulating obs} Simulated observations}
   
-All the instruments built around the use of an etalon as a wavelength filtering element operate in a very similar way. They scan a spectral line by tuning the etalon (by changing the distance between mirrors and/or modifying the refractive index) to a desired number of wavelengths along the spectral line. At each spectral position, the solar scene is recorded. The measured intensity is approximately given by Eq.~\eqref{eq_eta_corr: Intensity-final}, with the etalon's transmission profile centered at the desired wavelength.
-
 We carried out a series of simulations of a spectral line observation in different conditions. We used the Kitt Peak FTS-Spectral-Atlas as the reference \citep{fts} and, specifically, the Fe I spectral line at 6173.3~\r{A}. Each observation was composed of $N_\lambda$ wavelengths, where the measured intensity was recorded. At every wavelength $\lambda_s$, the corresponding transmission profile of the etalon $\Psi^{\lambda_s}$ was computed, and the "observed" intensity $I ^{\lambda _ s} _ {{\rm obs}, i}$ corresponding to a specific spatial location $(\xi, \eta)$, represented hereinafter by the pixel $i$, was calculated using Eq.~\eqref{eq_eta_corr: Intensity-final}. Additionally, we took into account the presence of additive Gaussian noise. This noise does not necessarily respond to any parameter fluctuation within our analytical expressions or photon noise but comes from any unexpected variations that may not have been modeled in the theoretical scheme.
 
 Additionally, we included the presence of defects arising from irregularities or inhomogeneities on either the cavity thickness $d$, the refractive index $n$, or from deviations of the angle of incidence $\theta$. In order to simulate this, we introduced a relative perturbation $\Delta a$ into the etalon equation that accounts for any local deviation of the value of $a$ with respect to its nominal value. This parameter changes from pixel to pixel differently for the collimated and telecentric configurations. In the former, the profile shifts across the FoV only because of the different incidence angles of the light beam on the etalon. In the latter, local variations of $n$ and/or $d$ are mapped directly onto the detector. We also note that variations in the incidence angle must be considered as well when the degree of telecentrism varies along the detector. Analytically, the parameter $a$ at each $i$-th pixel is given by $a' _ i = a \Delta a _ i$, where $a = (2\pi/\lambda) n d\cos\theta$ is constant along the FoV. Note that rewriting the equations for the transmission profiles (sections \ref{susec_etalon_theory: collimated} and \ref{susec_etalon_theory: Tele-perfe}) using this definition of $a$ is straightforward. In collimated configurations, the parameter $\delta$ (eq. \eqref{eq_etalon_theory: collimated_delta}) is simply $2a$. In perfect telecentric configurations, $\theta$ is always 0, so the given transmission profile is already expressed in terms of $a$.   
