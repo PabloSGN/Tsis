@@ -159,7 +159,7 @@ In principle, flat-field correction is straightforward: first, the measured flat
   \end{minipage}\hfill
   \begin{minipage}[c]{0.27\textwidth}
     \caption{
-      The top row shows the flat-fields observed at the core of the line for both the simulations without (left) and with (right) cavity. The bottom row shows the spectral profile of the pixels marked with an "X" of the corresponding color, for both scenarios, and before and after the normalization.      
+      The top row shows the observed flat-fields at the core of the line for both the simulations without (left) and with (right) cavity. The bottom row shows the spectral profile of the pixels marked with an "X" of the corresponding color, for both scenarios, and before and after the normalization.      
     \label{fig_mancha: flat_field normalization}} 
   \end{minipage}
 \end{figure}
@@ -174,11 +174,56 @@ From the normalized profiles, it is also evident that the normalized flats with 
   \end{minipage}\hfill\hfill
   \begin{minipage}[c]{0.27\textwidth}
     \caption{
-          Hola:)
+          The top panel shows four spectral profiles after the flat-field correction for the two scenarios, with and without cavity, and for the symmetric FPI. The selected pixels are the same than in Fig. ~\ref{fig_mancha: flat_field normalization}, and correspond to different values of the cavity map. The bottom panel shows the difference between the profiles with and witout cavities.
     \label{fig_mancha: Profiles_differences}} 
   \end{minipage}
 \end{figure}
 
+The challenges associated with flat-field correction are illustrated in Fig.~\ref{fig_mancha: Profiles_differences}, which displays the profiles after flat-field correction for both simulations, with and without the cavity map. Ideally, if the flat-field correction effectively compensates for the cavity errors of the FPI, the profiles from both scenarios should be identical or at least very similar. However, upon comparison, notable differences emerge, particularly for pixels with high cavity map values (light and dark lines). These profiles are not only shifted but also exhibit changes in shape. 
+
+This challenge is why some data reduction pipelines adopt a different approach. Instead of using the flat-fields of the corresponding wavelengths, only the continuum flat-field is employed for correction. When the continuum is measured sufficiently far from the spectral line, it remains unaffected by any spectral shift. By using this measurement, one can correct for spurious effects unrelated to spectral shifts, such as pixel sensitivity variations or dust grains. However, this method does not correct for the effects of the cavity.
+
+If the cavity map is thought to be known, the velocity associated with the spectral shift caused by the cavity can be calculated. This "velocity-error" map can then be used to correct the Doppler velocity map derived from the observations that have not been corrected for the cavity map. Theoretically, this approach should address the cavity effects in velocity calculations. Nonetheless, potential impacts of the cavity map on magnetic field calculations remain uncorrected, as the relationship between wavelength shifts and magnetic fields is not as straightforward as in the case of velocity.
+
+\subsection{Velocity maps}
+
+We begin our analysis by studying the LOS velocities nd the errors associated with their computation. These velocities are derived from the spectral shift of each profile relative to the rest position of the spectral line, using the Doppler formula (Eq.~\eqref{eq_spectro: Doppler}). Given that this computation relies exclusively on the spectral shift, it is particularly susceptible to errors caused by cavity effects.
+
+According to the center-of-gravity method \citep{center_of_gravity}, the central wavelength of a given spectral profile, $\lambda _ {COG}$ can be computed from:
+
+\begin{equation}
+  \lambda _ {COG} = \frac{\int \lambda \left( I _{cont} - I\right)d\lambda}{\int \left( I _{cont} - I\right)d\lambda}. 
+\end{equation}
+
+Once $\lambda _ {COG}$ has been determined, the spectral shift of the corresponding profile will be given by $\Delta \lambda = \lambda _ 0 - \lambda _ {COG}$. 
+
+We have computed the velocities employing the two flat-field correction strategies mentioned in the previos section: the "standard" approach, where each observation is corrected with the flat-field of the corresponding wavelength; and the "continuum" approach, where only the continuum flat-field is employed. Figure \ref{fig_mancha: int_and_vlos_examples} shows the continuum intensity and the velocity maps obtained for both strategies in the top row.  
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/Mancha/intensity_and_vlos_examples.pdf}
+  \caption{
+    The top row shows, from left to right, the observed intensity in the continuum, the LOS velocity for for the standard approach and the LOS velocity for the continuum aproach, all three for the symmetric FPI and belonging to the simulations with cavity map. The bottom row shows, again from left to right, the velocity error associated with the cavity map, the error for the LOS velocity for the standard approach and the error for the LOS velocity of the continuum approach. All representations show the boundaries of the umbra and penumbra for an easier identification of the regions in the velocity and cavity maps.   
+    \label{fig_mancha: int_and_vlos_examples}}
+\end{figure}
+
+At first glance, the velocities derived for each approach might look identical, but under closer inspection, some differences arise. In order to highlight these differences and to asses the accuaracy of the obtained velocities we will compare them to the velocity obtained in the scenario where no cavity map was introduced. Figure \ref{fig_mancha: int_and_vlos_examples} shows this comparisons in the bottom row, along with the cavity map with the umbra and penumbra overplotted to be able to align the error with the cavity.   
+
+The error in the velocity computation shows that the effects of the cavity map remain uncorrected in the observations. Both correction approaches exhibit errors with structures corresponding to the cavity map. For the standard correction, this effect is pervasive throughout the field of view (FoV), whereas for the continuum approach, it is primarily concentrated in the umbra, although other regions also exhibit this behavior.
+
+Moreover, the errors are notable, given that regions of the penumbra show errors of around 10\%. Errors in the umbra are similarly significant in percentage terms; however, studies of these regions are less frequent due to their low signal-to-noise ratio resulting from their inherent darkness. Conversely, extensive research exists on the flows observed in the penumbra (Ref XX??), prompting us to prioritize investigation in this area.
+
+A more quantitative analysis is shown in Fig. \ref{fig_mancha: verror_circular_cut}, where the velocity error in a circular cut is shown along with the corresponding value of the cavity map. 
+
+\begin{figure}
+  \begin{minipage}[c]{0.7\textwidth}
+    \includegraphics[width=\textwidth]{figures/Mancha/circular_cut_standard_cont.pdf}
+  \end{minipage}\hfill\hfill
+  \begin{minipage}[c]{0.27\textwidth}
+    \caption{
+      The top row shows the velocity error maps for both the standard and continuum approaches, along with the cut position and an overlay of the degrees for easier interpretation of the plotted profiles. The bottom panel shows the velocities along the cut for both aproaches along with the value of the cavity map at the corresponding position.          
+    \label{fig_mancha: verror_circular_cut}} 
+  \end{minipage}
+\end{figure}
 
 
 
