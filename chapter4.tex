@@ -125,12 +125,12 @@ blabla
 
 All the instruments built around the use of an etalon as a wavelength filtering element operate in a very similar way. They scan a spectral line by tuning the etalon (by changing the distance between mirrors and/or modifying the refractive index) to a desired number of wavelengths along the spectral line. At each spectral position, the solar scene is recorded. The measured intensity is approximately given by Eq.~\eqref{eq_etalon_theory: General_Intensity}, with the etalon's transmission profile centered at the desired wavelength.
 
-We have carried out two sets of simulations, one with a perfect telecentric configuration, where the incidence is normal, and one with an angle of incidence of the chief ray is $0.5^\circ$. For each of these sets, a simulated observation of the sunspot has been carried out employing 45 wavelengths for the scan of the line. A flat-field observation has also been computed with the same configuration than the one employed for the suspot observation. For the flat-field observations we have generated an \textit{ideal} flat-field where the average profile computed in quiet-sun was replicated at every pixel of the generated image.
+We have carried out two sets of simulations, one with a perfect telecentric configuration, where the incidence is normal, and one with an angle of incidence of the chief ray is $0.5^\circ$. For each of these sets, a simulated observation of the sunspot has been carried out employing 45 wavelengths for the scan of the line. A flat-field observation has also been computed with the same configuration than the one employed for the sunspot observation. For the flat-field observations we have generated an \textit{ideal} flat-field where the average profile computed in quiet-sun was replicated at every pixel of the generated image. One of the primary objectives of these simulations is to assess the effects of cavity errors in telecentric setups. Therefore, we conducted these simulations under two scenarios: one incorporating a cavity map and another assuming a defect-free etalon, which serves as our reference.  
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figures/Mancha/Inputs_mancha.pdf}
     \caption{
-      Inputs for the simulation of the sunspot observation. The top row shows, from left to right, the continuum of the MHD simulation, the cavity map expressed as the corresponding shift in \r{A} and the gain map. The bottom row shows, again from left to right, a representation of the quiet-sun average profile with all the scanned wavelengths, and the transmission profile of the two different FPI configurations, the symmetric (perfect telecentric) and asymmetric (imperfect telecentric). The parametets employed for the etalon are: XXXXX.
+      Inputs for the simulation of the sunspot observation. The top row shows, from left to right, the continuum of the MHD simulation, the cavity map expressed as the corresponding shift in \r{A} and the gain map. The bottom row shows, again from left to right, a representation of the quiet-sun average profile with all the scanned wavelengths, and the transmission profile of the two different FPI configurations, the symmetric (perfect telecentric) and asymmetric (imperfect telecentric). The parametets employed for the etalon are: $R=0.892$, $n = 2.3268$, $d = 281$ $\mu m$, $f = 60$, $\Theta = 0^{\circ}$ (symmetric), $\Theta = 0.5^{\circ} (asymmetric)$.
       \label{fig_mancha: Inputs}}
 \end{figure}
 
@@ -143,9 +143,44 @@ Although, in practice, it is not often possible to fully characterize the pre-fi
 
 For every tuned wavelength, the instensity in a given pixel is given by equation \eqref{eq_mancha: Intensity}, where the observed object is the sunspot simulation or the generated \textit{ideal} flat-field. 
 
-The imaging response of the FPI is computed by solving the integrals in equation \eqref{eq_etalon_theory: electric_image_plane}. Given that we will account for the PSF in these simulations, numerical methods are necessary to evaluate the integrals. The computational burden is significant, as the integrals must be evaluated $N_{pixel} ^2 N_{\lambda} N_{mods} N_{sets} > 10 ^8$ times\footnote{$N_{pixels} = 561$, $N_{\lambda} = 45$, $N_{mods} = 2$, $N_{sets} = 2$} for both sunspot and flat field observations. This extensive computation results in excessively long simulation times. To address this issue, a neural network was developed to reduce the computational time from \textcolor{red}{X to X}. The neural network was trained with known solutions to the integrals for a fixed set of etalon parameters, ensuring that its outputs are accurate to within 0.01\% for parameters within the training set.
+The imaging response of the FPI is computed by solving the integrals in equation \eqref{eq_etalon_theory: electric_image_plane}. Given that we will account for the PSF in these simulations, numerical methods are necessary to evaluate the integrals. The computational burden is significant, as the integrals must be evaluated $N_{pixel} ^2 N_{\lambda} N_{mods} N_{sets} N_{cavities} > 2\times10 ^8$ times\footnote{$N_{pixels} = 561$, $N_{\lambda} = 45$, $N_{mods} = 2$, $N_{sets} = 2$, $N_{cavities} = 2$} for both sunspot and flat field observations. This extensive computation results in excessively long simulation times. To address this issue, a neural network was developed to reduce the computational time from \textcolor{red}{X to X}. The neural network was trained with known solutions to the integrals for a fixed set of etalon parameters, ensuring that its outputs are accurate to within 0.01\% for parameters within the training set.
 
-In real-world scenarios, variations in pixel sensitivities (gain) and etalon imperfections (cavity map) are unavoidable. Including the effect of the gain into the simulation is straigghtforward as it only acts as a multiplicative factor that modifies the final intensity. In contrast, the effects of the cavity map are more cumbersome. Pixel-to-pixel variations in etalon defects shift the transmission profile of the Fabry-Perot Interferometer (FPI) and must be accounted for when computing the imaging response. Both the gain and cavity map introduced in the simulations have been selected to resemble the real-case scenario of the SO/PHI instrument. The gain map (Figure XXX a) utilized in the simulations is derived from a flat field of the High Resolution Telescope (HRT) instrument, while the cavity map employed (Figure XXX a) is sourced from the cavity map of PHI's etalon.
+In real-world scenarios, variations in pixel sensitivities (gain) and etalon imperfections (cavity map) are unavoidable. Including the effect of the gain into the simulation is straigghtforward as it only acts as a multiplicative factor that modifies the final intensity. In contrast, the effects of the cavity map are more cumbersome. Pixel-to-pixel variations in etalon defects shift the transmission profile of the FPI and must be accounted for when computing the imaging response. Both the gain and cavity map introduced in the simulations have been selected to resemble the real-case scenario of the SO/PHI instrument. The gain map (Fig. ~\ref{fig_mancha: Inputs} top right panel) utilized in the simulations is derived from a flat field of the High Resolution Telescope (HRT) instrument, while the cavity map employed (Fig. ~\ref{fig_mancha: Inputs} top central panel) is sourced from the cavity map of PHI's etalon.
+
+
+\subsection{Flat-field correction.}
+
+In principle, flat-field correction is straightforward: first, the measured flat fields are normalized to preserve the spectral line information; second, the observations for all tuned wavelengths are divided by the corresponding normalized flat field. However, in telecentric setups, this process is more challenging because flat-field observations are influenced by cavity errors, which can introduce additional artifacts into the measurements rather than (or in addition to) correcting them.
+
+
+\begin{figure}
+  \begin{minipage}[c]{0.7\textwidth}
+    \includegraphics[width=\textwidth]{figures/Mancha/Flat_field_normalization.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.27\textwidth}
+    \caption{
+      The top row shows the flat-fields observed at the core of the line for both the simulations without (left) and with (right) cavity. The bottom row shows the spectral profile of the pixels marked with an "X" of the corresponding color, for both scenarios, and before and after the normalization.      
+    \label{fig_mancha: flat_field normalization}} 
+  \end{minipage}
+\end{figure}
+
+Figure \ref{fig_mancha: flat_field normalization} shows the flat-fields observed at the core of the line for the simulations with and wihout cavity and the spectral profiles for a series of pixels. The effect of the cavity map in the flat-field observations is clearly displayed in both representations. In the flat-field itself, higher values of the cavity map appear brighter, as any displacement from the line core to either the blue or the red will result in an increase of the final intensity. In the spectral profiles, the pixels corresponding to higher values of the cavity error show a noticeably shift with respect to the rest position of the line core.   
+
+From the normalized profiles, it is also evident that the normalized flats with cavity error will modify the spectral profile of the observations. Nevertheless, in order to correct for the effects of the cavity, the flat-field's spectral profiles cannot be flat as in the case without cavity, since we need to change the spectral information of the observations (shift the measured profile to the "correct" position). The problem arises when these flat-field not only shift the observed profiles but also (and very noticeably) modify their shape. 
+
+\begin{figure}
+  \begin{minipage}[c]{0.7\textwidth}
+    \includegraphics[width=\textwidth]{figures/Mancha/flatfield_norm_differences.pdf}
+  \end{minipage}\hfill\hfill
+  \begin{minipage}[c]{0.27\textwidth}
+    \caption{
+          Hola:)
+    \label{fig_mancha: Profiles_differences}} 
+  \end{minipage}
+\end{figure}
+
+
+
 
 
 \section{Fitting algorithm}
