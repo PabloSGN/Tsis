@@ -50,7 +50,7 @@ However, in order to study the spectral behavior of the transmission profile, we
   \delta (\xi, \eta, \lambda) = \frac{4\pi}{\lambda}nd\cos (\theta(\xi, \eta)),
   \label{eq_etalon_theory: collimated_delta}
 \end{equation}
-where $n$ stands for the refractive indx of the etalon cavity, $d$ is the distance between the mirrors and $\theta$ is the angle of incidence. In such a case, it can be shown that the spectral transmission profile follows the expression: 
+where $n$ stands for the refractive index of the etalon cavity, $d$ is the distance between the mirrors and $\theta$ is the angle of incidence. In such a case, it can be shown that the spectral transmission profile follows the expression: 
 
 \begin{equation}
   \psi\left(\xi, \eta, \lambda \right) = \frac{\tau}{1 + F \sin ^2 (\delta(\xi, \eta, \lambda) / 2)}.
@@ -130,7 +130,7 @@ We have carried out two sets of simulations, one with a perfect telecentric conf
 \begin{figure}
     \includegraphics[width=\textwidth]{figures/Mancha/Inputs_mancha.pdf}
     \caption{
-      Inputs for the simulation of the sunspot observation. The top row shows, from left to right, the continuum of the MHD simulation, the cavity map expressed as the corresponding shift in \r{A} and the gain map. The bottom row shows, again from left to right, a representation of the quiet-sun average profile with all the scanned wavelengths, and the transmission profile of the two different FPI configurations, the symmetric (perfect telecentric) and asymmetric (imperfect telecentric). The parametets employed for the etalon are: $R=0.892$, $n = 2.3268$, $d = 281$ $\mu m$, $f = 60$, $\Theta = 0^{\circ}$ (symmetric), $\Theta = 0.5^{\circ} (asymmetric)$.
+      Inputs for the simulation of the sunspot observation. The top row shows, from left to right, the continuum of the MHD simulation, the cavity map expressed as the corresponding shift in \r{A} and the gain map. The bottom row shows, again from left to right, a representation of the quiet-sun average profile with all the scanned wavelengths, and the transmission profile of the two different FPI configurations, the symmetric (perfect telecentric) and asymmetric (imperfect telecentric). The parametets employed for the etalon are: $R=0.892$, $n = 2.3268$, $d = 281$ $\mu m$, $f = 60$, $\Theta = 0^{\circ}$ (symmetric), $\Theta = 0.5^{\circ}$ (asymmetric).
       \label{fig_mancha: Inputs}}
 \end{figure}
 
@@ -145,7 +145,7 @@ For every tuned wavelength, the instensity in a given pixel is given by equation
 
 The imaging response of the FPI is computed by solving the integrals in equation \eqref{eq_etalon_theory: electric_image_plane}. Given that we will account for the PSF in these simulations, numerical methods are necessary to evaluate the integrals. The computational burden is significant, as the integrals must be evaluated $N_{pixel} ^2 N_{\lambda} N_{mods} N_{sets} N_{cavities} > 2\times10 ^8$ times\footnote{$N_{pixels} = 561$, $N_{\lambda} = 45$, $N_{mods} = 2$, $N_{sets} = 2$, $N_{cavities} = 2$} for both sunspot and flat field observations. This extensive computation results in excessively long simulation times. To address this issue, a neural network was developed to reduce the computational time from \textcolor{red}{X to X}. The neural network was trained with known solutions to the integrals for a fixed set of etalon parameters, ensuring that its outputs are accurate to within 0.01\% for parameters within the training set.
 
-In real-world scenarios, variations in pixel sensitivities (gain) and etalon imperfections (cavity map) are unavoidable. Including the effect of the gain into the simulation is straigghtforward as it only acts as a multiplicative factor that modifies the final intensity. In contrast, the effects of the cavity map are more cumbersome. Pixel-to-pixel variations in etalon defects shift the transmission profile of the FPI and must be accounted for when computing the imaging response. Both the gain and cavity map introduced in the simulations have been selected to resemble the real-case scenario of the SO/PHI instrument. The gain map (Fig. ~\ref{fig_mancha: Inputs} top right panel) utilized in the simulations is derived from a flat field of the High Resolution Telescope (HRT) instrument, while the cavity map employed (Fig. ~\ref{fig_mancha: Inputs} top central panel) is sourced from the cavity map of PHI's etalon.
+In real-world scenarios, variations in pixel sensitivities (gain) and etalon imperfections (cavity map) are unavoidable. Including the effect of the gain into the simulation is straigghtforward as it only acts as a multiplicative factor that modifies the final intensity. In contrast, the effects of the cavity map are more cumbersome. Pixel-to-pixel variations in etalon defects shift the transmission profile of the FPI and must be accounted for when computing the imaging response. Both the gain and cavity map introduced in the simulations have been selected to resemble the real-case scenario of the SO/PHI instrument. The gain map (Fig. ~\ref{fig_mancha: Inputs} top right panel) utilized in the simulations is derived from a flat field of the SO/PHI-HRT instrument, and the cavity map employed (Fig. ~\ref{fig_mancha: Inputs} top central panel) is sourced from the cavity map of PHI's etalon.
 
 
 \subsection{Flat-field correction.}
@@ -187,9 +187,9 @@ If the cavity map is thought to be known, the velocity associated with the spect
 
 \subsection{Velocity maps}
 
-We begin our analysis by studying the LOS velocities nd the errors associated with their computation. These velocities are derived from the spectral shift of each profile relative to the rest position of the spectral line, using the Doppler formula (Eq.~\eqref{eq_spectro: Doppler}). Given that this computation relies exclusively on the spectral shift, it is particularly susceptible to errors caused by cavity effects.
+We begin our analysis by studying the LOS velocities and the errors associated with their computation. These velocities are derived from the spectral shift of each profile relative to the rest position of the spectral line, using the Doppler formula (Eq.~\eqref{eq_spectro: Doppler}). Given that this computation relies exclusively on the spectral shift, it is particularly susceptible to errors caused by cavity effects.
 
-According to the center-of-gravity method \citep{center_of_gravity}, the central wavelength of a given spectral profile, $\lambda _ {COG}$ can be computed from:
+According to the center-of-gravity method \citep{center_of_gravity}, the central wavelength of a given spectral profile, $\lambda _ {COG}$, can be computed from:
 
 \begin{equation}
   \lambda _ {COG} = \frac{\int \lambda \left( I _{cont} - I\right)d\lambda}{\int \left( I _{cont} - I\right)d\lambda}. 
@@ -210,7 +210,7 @@ At first glance, the velocities derived for each approach might look identical, 
 
 The error in the velocity computation shows that the effects of the cavity map remain uncorrected in the observations. Both correction approaches exhibit errors with structures corresponding to the cavity map. For the standard correction, this effect is pervasive throughout the field of view (FoV), whereas for the continuum approach, it is primarily concentrated in the umbra, although other regions also exhibit this behavior.
 
-Moreover, the errors are notable, given that regions of the penumbra show errors of around 10\%. Errors in the umbra are similarly significant in percentage terms; however, studies of these regions are less frequent due to their low signal-to-noise ratio resulting from their inherent darkness. Conversely, extensive research exists on the flows observed in the penumbra (\textcolor{red}{Ref XX??}), prompting us to prioritize investigation in this area.
+Moreover, the errors are notable, given that regions of the penumbra show errors of around 10\%. Errors in the umbra are similarly significant in percentage terms; however, studies of these regions are less frequent due to their low SNR resulting from their inherent darkness. Conversely, extensive research exists on the flows observed in the penumbra (\textcolor{red}{Ref XX??}), prompting us to prioritize investigation in this area.
 
 \begin{figure}
   \begin{minipage}[c]{0.7\textwidth}
@@ -222,7 +222,19 @@ Moreover, the errors are notable, given that regions of the penumbra show errors
   \end{minipage}
 \end{figure}
 
-A more quantitative analysis is shown in Fig. \ref{fig_mancha: verror_circular_cut}, where the velocity error along a circular cut is shown in addition to the corresponding value of the cavity map. The error in both scenarios follows the structure of the cavity map, with increasing errors where the associated spectral shift is increases. However, the correlationbetween bothcurves is stronger in the standard case.     
+A more quantitative analysis is shown in Fig. \ref{fig_mancha: verror_circular_cut}, where the velocity error along a circular path is shown. Additionally, the associated spectral shift corresponding to the cavity map values at identical positions is also depicted. This representation clearly demonstrates the correlation between the structural features of the cavity map and the velocity error. For both approaches, with a more pronounced effect observed in the standard approach, the absolute value of the error escalates with increasing spectral shifts of the cavity.
+
+It is evident from the previous analyses that the approach of flat-field correction affects the resulst as differences are observed between correction approaches, but what about the FPI's ytransmission profile?  It is common practice to neglect the assymetric nature of real telecentric mounts in most data reduction pipelines beacuse the possible effects of the assymetries of the profiles are assumed to be negligible. 
+
+GRAFICA DE DIFERENCIA DE VELOCIDADES ENTRE SYM Y ASYM. 
+
+Figure X depicts the differences in the computed velocities for the symmetric and assymetric FPIs. The main effect of the assymetry is a systematic shift of the profile measurements towards the red wing of the spectral profile, due to its higher transmissivity than its blue counterpart. This shift results in an average difference of around $0.2$ $km$ $s^{-1}$ that can be seen over the whole FoV. 
+
+This systematic shift can be removed from the velocities computed with the assymetric FPI by substracting the average difference between symmetric and assymetric velocities. The panel XX of figure XX, shows the difference following this correction has been carried out. Despite accounting for the systematic shift, discrepancies are still present, predominantly within the umbra, though they are observed across the entire FoV. The umbra is again more sensible than other regions, displaying the highest error in the whole map, mainly exhibiting a shift towards the \textcolor{red}{BLUE?}, for the assymetric scenario. Outside the umbra, differences are smaller, reaching up to 100 $m$ $s^{-1}$, typically trending towards the red.
+
+\subsection{Magnetic field maps.}
+
+Hola
 
 
 \section{Fitting algorithm}
