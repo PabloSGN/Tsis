@@ -125,11 +125,12 @@ The polarization properties of light come into play when determining the magneti
 One simple strategy to employ polarization and spectral data to derive the magnetic fields is through the center-of-gravity method. According to \cite{center_of_gravity}, the LOS strength of the magnetic field can be obtained through:
 \begin{equation}
   B_{LOS} = \frac{\lambda _ {+} - \lambda _ -}{2}\frac{4\pi m c}{eg_{L}\lambda_0 ^2}\ \ ,
+  \label{eq_spectro: Blos-cog}
 \end{equation}  
 where $m$ and $e$ are the electron mass and charge respectively, $g_L$ stands for the Landé factor and $\lambda _ {+}$ and $\lambda _ {-}$ are the centroids of the right and left circularly polarized line components, respectively, and are computed by:
 \begin{equation}
   \lambda _ {\pm} = \frac{\int \lambda \left[I_{cont} - (I \pm V)\right]d\lambda}{\int \left[I_{cont} - (I \pm V)\right]d\lambda} \ ,
-  \label{eq_spectro: Blos-cog}
+  \label{eq_spectro: lambda_plus_minus}
 \end{equation} 
 
 where the subindex "$cont$" stands for the wavelength at the continuum. The vector magnetic field (\textit{i.e.}, strength, azimuth and inclination), and not only the LOS strength can also be derived. However, the derivation of these quantities has to be achieved through inversions of the radiative transfer equation (RTE). The applicability of the different methods to carry out this inversion is an extensive topic as there are some assumptions that can be applied in some cases but not in others, such as the weak-field or Milne-Eddington approximations, among others. For an extended discussion of this topic, we refer the interested reader to \cite{del2016inversion}.   
