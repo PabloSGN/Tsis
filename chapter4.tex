@@ -1,7 +1,19 @@
-\chapter{\label{CH:challenges}Challenges in data reduction. Etalon Cavity Map.}
+\chapter{\label{CH:challenges}Challenges in data reduction.\\Etalon Cavity Map.}
 
 INTRO.
 https://link.springer.com/article/10.1007/s10509-023-04212-3
+
+Thus far, we have focused on TuMag, its properties, and the correction of its data due to its central role in this thesis. However, other tunable magnetographs exist, each with its own specific characteristics, advantages, and challenges. In this chapter, we shift our focus away from TuMag (partially) and turn our attention to another class of magnetographs, specifically those with their etalon in a telecentric configuration.
+
+Currently, there is an ongoing debate within the scientific community regarding the optimal optical configuration for an etalon, whether it should be collimated or telecentric. This debate has garnered significant interest, as evidenced by numerous studies addressing the topic, such as: ETC. The reality is that it is challenging to provide a definitive answer to this question, as each configuration has its own advantages and disadvantages.
+
+La principal desventaja de la configuración colimada es probablemente la amplificacion de los errores producidos por los defectos de los espejos. La huella de gran tamaño de la luz incidente sobre los cristales, atraviesa multitud de defectos de pequeña y gran escala que se traducen en una reducción de la calidad óptica del etalón. Por el contrario, los etalones en configuración telecéntrica son iluminados por haces de luz cuya huella es muy inferior a la del colimado y por tanto no se ven afectados por los defectos a gran escala.  
+
+Despite its potential benefits, 
+
+the telecentric configuration introduces a unique challenge known as cavity error. This phenomenon arises due to the fact that, in a telecentric system, the etalon is illuminated by converging or diverging beams rather than strictly parallel ones. As a result, the optical path difference varies across the field of view, leading to deviations in the interference fringes and, consequently, inaccuracies in the data.
+
+This chapter aims to provide a comprehensive examination of telecentric configurations for Fabry-Perot interferometers within the context of solar physics. We will begin by exploring the fundamental principles of telecentric optics and their application to FPIs. Following this, we will delve into the nature of cavity error, its implications for solar observations, and the strategies employed to mitigate its effects. Through a combination of theoretical analysis and practical insights, this chapter seeks to elucidate the complexities of implementing telecentric configurations in solar physics and to highlight their potential for enhancing the accuracy and depth of solar measurements.
 
 \section{One device, two configurations.}
 
@@ -116,9 +128,24 @@ Regarding the properties of each profile, note that the telecentric configuratio
 for $\Theta=0.3^\circ$) the profile, making it asymmetrical. 
 
 \section{Sunspot observation simulation}
+
+??
+
+Fabry-Pérot interferometers (FPIs) are widely employed in the field of solar physics. Their spectroscopic and tunability properties make them especially suitable for selecting a narrow spectral band of incoming light. They also offer a two-dimensional view of the solar scene, hence allowing for the implementation of powerful and widespread image post-processing reconstruction techniques, such as phase diversity \citep{PD_etalon} and multi-object multi-frame blind deconvolution (MOMFBD; \citealt{mombfd}), which are difficult to implement in slit-based spectrographs (\citealt{image_spectro}, \citealt{image_spectro_2}). Many state-of-the-art instruments use FPIs as narrowband tunable filters. Among others, these instruments include the spaceborne Polarimetric and Helioseismic Imager \citep[][]{PHI} aboard the Solar Orbiter mission \citep[][]{SO} (SO/PHI); the Imaging Magnetograph Experiment (IMaX) instrument \citep[][]{IMaX}, which flew on the first two flights of the balloon-born SUNRISE observatory (\citealt{SunriseI}, \citealt{SunriseII}); and the Tunable Magnetograph (TuMag) instrument for its third edition. These instruments are based on solid LiNbO$_3$ etalons. Regarding ground-based instruments, some examples include the Crisp Imaging Spectro-Polarimeter (CRISP) at the Swedish 1-m Solar telescope \citep[][]{crisp} at the Observatorio del Roque de los Muchachos in La Palma, Canary Islands; the GREGOR Fabry-Perot Interferometer (GFPI; \citealt{GFPI}, \citealt{GREGOR}) at the Observatorio del Teide in Tenerife, Canary Islands; the Visible Tunable Filter \citep[VTF;][]{VTF} developed for the \textit{Daniel K. Inouye} Solar Telescope \citep[DKIST;][]{DKIST} of the Haleakal\=a Observatory in Hawaii; and the future Tunable Imaging Spectropolarimeter (TIS) of the European Solar Telescope \citep{EST}, all of which are based on air-gapped etalons. 
+
+The optical and spectral properties of the FPIs are fully dependent on the etalon's physical attributes. In particular, the position and width of their resonance peaks vary with the reflectivity, distance between mirrors, refractive index, and angle of the incident beam. Any small and local variation of these parameters with respect to the nominal values alters the transmission profile, shifting it in wavelength and/or widening the bandpass. Such deviations across the clear aperture of the etalon also have a very strong impact on the imaging quality of the instrument (\citealt{ghosts-etalon}, \citealt{franIV}). It is therefore crucial to characterize how different deviations in the interferometer's physical properties affect the transmission profile and the resulting image quality in order to be able to correct the data for any of these effects.
+
+Artifacts such as the ones originating from pixel-to-pixel differences in the sensitivity of the detector, instrumental artificial intensity gradients, bright spots, or interference fringe patterns, among others, are corrected via data flat fielding. A flat-field image is built by averaging many images taken with homogeneous illumination or, in the case of solar physics, by averaging many images taken over a region without solar activity, that is, without active regions while continuously moving the telescope to different positions. This way, flat fields can measure the effect of all defects mentioned above. In instruments with FPIs in telecentric configurations, it is not possible to fully reproduce the same illumination, and therefore after the flat-field correction, second-order residuals are expected.
+
+
+
 INTRO sunspot. Challenges in data reduction, unknown effects etc. 
 
 \subsection{Simulated data.}
+
+
+
+
 
 MHD? From where.  
 
@@ -244,7 +271,7 @@ Figure X depicts the differences in the computed velocities for the symmetric an
 
 This systematic shift can be removed from the velocities computed with the assymetric FPI by substracting the average difference between symmetric and assymetric velocities. The panel XX of figure XX, shows the difference following this correction has been carried out. Despite accounting for the systematic shift, discrepancies are still present, predominantly within the umbra, though they are observed across the entire FoV. The umbra is again more sensible than other regions, displaying the highest error in the whole map, mainly exhibiting a shift towards the \textcolor{red}{BLUE?}, for the assymetric scenario. Outside the umbra, differences are smaller, reaching up to 100 ms$^{-1}$, typically trending towards the red.
 
-The observation that the umbra exhibits different behavior compared to other regions of the FoV in both previous analyses suggests that the amplitude and behavior of these effects are sensitive to the shape of the spectral profile and the FPI's transmission profile. Therefore etalons with different properties may offer different performances. 
+The fact that the umbra exhibits different behaviors compared to the rest of the FoV, along with the difference nted between the two types of FPIs, suggests that the amplitude and behavior of these effects are sensitive to the shape of the spectral profile and the FPI's transmission profile. 
 
 \subsection{Magnetic field maps.}
 
@@ -267,6 +294,13 @@ However, for both correction strategies, the errors remain relatively small, rea
 
 
 \section{Fitting algorithm}
+
+Different approaches have been taken to address these additional corrections. Typically, each instrument has a specific data reduction pipeline where the corrections are carried out taking into account the individual properties of the instruments, hence giving rise to different methods. For example, instruments with a collimated FPI require a specific correction addressing the wavelength blueshift of the profiles due to the variation in the angle of incidence of the incident beam along the field of view (FoV). Meanwhile, for telecentric setups, local inhomogeneities in the flatness of the interferometer's mirrors (cavity errors) are translated into local shifts of the transmission profile. Some pipelines address these deviations by correcting them only at first order through a flat-fielding procedure with no further computations, and some others take additional steps that take into account the specific properties of the instrument. An example of a more detailed calibration pipeline can be found in \cite{crisp-method}. By using a simplified analytical expression for the etalon transmission profile, Schnerr et al. were able to extract from the flat fields the contributions caused by the FPI cavity errors and variations in reflectivity for the CRISP instrument, which are then taken into account in the data calibration.
+
+For the first order, this is a good approximation, but since asymmetries in the transmission profiles naturally arise in telecentric instruments \citep{franI}, deviations originating from them cannot be fully corrected. Thus, knowledge of the exact shape of the transmission profile is necessary to fully account for these deviations. \cite{schamer_method} already allowed asymmetries to be dealt with in the pipeline of the CRISP instrument, but the asymmetries originated from wavelength shifts induced by two distinct etalons, or from an angular dependence along the FoV introduced to approximate the behavior in telecentric setups.  
+
+In this work, we aim to further extend and generalize the strategy employed in \cite{crisp-method} and \cite{schamer_method} by including the exact shape of the transmission profile for the telecentric configuration in the analysis. By doing so, we can fit and take into account the presence of asymmetries in the profile that arise in these setups due to an asymmetric pupil apodization. We have developed a method for deriving the etalon properties from the data in such a way that prior knowledge of the distribution and magnitude of the defects is not needed. We do not make any distinction between defects associated with the mirror's flatness or separation, refraction index, or cavities. This way, we ensure the applicability of the algorithm to all types of FPIs (air and solid). Our technique also differentiates the effects associated with the etalon from other corrections not related to it, such as pixel-to-pixel variations of the gain across the detector. By comparing the theoretical prediction, obtained through the analytical expressions of the transmission profile, with the measured data, we can disentangle the etalon properties from the flat-field observations. In Sect. \ref{seq:Trans-prof}, we present the analytical expressions for modeling FPIs.
+
 \subsection{\label{eta_corr_susec: etalon_transmission}Initial approximations}
 
 As an initial approximation, we will disregard the spatial PSF and assume that the spatial dependence can be represented by a Dirac delta function to simplify the equations. Therefore, if we assume that the image response of the FPI follows the expression:
