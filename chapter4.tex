@@ -130,18 +130,20 @@ The analytical formulations equip us with the tools necessary to investigate the
 
 We have chosen to employ a sunspot for this study since they are one of our main \textit{laboratories} for the study of the magnetic field and dynamics of the solar photosphere. Sunspots are dark regions of the solar surface where strong magnetic fields gather. The innermost part of the spot, the umbra, with a brightness around the 20$\%$ of its surroundings, hosts very strong magnetic fields oriented almost perpendicular to the solar's surface. Surrounding the umbra in fully developed sunspots is the penumbra, a brighter region characterized by a radial filamentary structure with a nearly horizontal outflow of the plasma known as the Evershed flow \citep{evershed}.
 
-The physical mechanisms driving the phenomena in these regions are not yet fully understood and have been a topic of discussion for many years. Processes such as the Evershed flow lack a universally accepted theoretical model, and numerous studies attempt to provide a theoretical basis for the observations, often presenting conflicting interpretations. Some examples of these works are \citep{evershed_magnetic_flux}, or \citep{evershed_magnetic_2}, where they interpret the evershed flow as a hot gas confinded to magnetic flux tubes that rises due to convecion processes; other models, such a the ones proposed by \citealt{evershed_model_scharmer} and \citealt{evershed_model_spruit}, and later updated in \citealt{evershed_magnetic_scharmer}, suggest that filaments are field-free gaps where regular convection takes place. These convective cells are elongated when the upflow is deflected by the inclined magnetic field, characteristic of the penumbra, thus generating the outward flow. 
+The physical mechanisms driving the phenomena in these regions are not yet fully understood and have been a topic of discussion for many years. Processes such as the Evershed flow lack a universally accepted theoretical model, and numerous studies attempt to provide a theoretical basis for the observations, often presenting conflicting interpretations. Some examples of these works are \citep{evershed_magnetic_flux}, or \citep{evershed_magnetic_2}, where they interpret the evershed flow as a hot gas confinded to magnetic flux tubes that rises due to convecion processes. In contrast, alternative models proposed by \citealt{evershed_model_scharmer} and \citealt{evershed_model_spruit}, and later updated in \citealt{evershed_magnetic_scharmer}, suggest that the observed filaments are field-free gaps where standard convection occurs. According to these models, the convective cells are elongated as the upward flow is redirected by the inclined magnetic field characteristic of the penumbra, resulting in the outward flow.  
+
+Accurate measurements of velocities and magnetic fields are of paramount importance for deciphering these processes, as the weak and small-scale manifestations of these effects may be crucial for their understanding. Examples for this are the works of \citealt{lateral_downflows_2} or \citealt{lateral_downflows}, where they found and study lateral downflows at the edge of penumbral filaments, supporting the model of penumbral convection from filament dynamics. However, these downflows are very challenging to detect, and require very high spatial resolution and accurate velocity measurements. For this reason, we will focus on the study of the spurious effects of the cavity error in the measurements of velocities and magnetic fields, with a special emphasis on penumbral flows. 
+
+The target of our observations will be a Magnetohydrodynamic (MHD) simulation of a sunspot in the photosphere. We will observe it through the eyes of a telescope of \textcolor{red}{XX meters of aperture} and an FPI similar to the one flying aboard the SO as part of the PHI instrument. This section begins with an overview of the simulated data (Sect. \ref{sect: mancha_sim_data}), followed by a detailed explanation of the observation simulation (Sect. \ref{sect: mancha_obs_sim}). Subsequently, we present and discuss the different flat-fielding strategies in section \ref{sect: mancha_ff_corr}. The section conludes with the discussion of the measurments of the LOS velocities and magnetic field strength in sections \ref{sect: mancha_vlos} and \ref{sect: mancha_blos}, respectively.  
 
 
-INTRO sunspot. Challenges in data reduction, unknown effects etc. 
-
-\subsection{Simulated data.}
+\subsection{\label{sect: mancha_sim_data}Simulated data.}
 
 MHD? From where.  
 
 In order to obtain the magnetic field, we first need to simulate a modulation-demodulation scheme as the ones employed in spectropolarimeters like TuMag or SO/PHI. For this purpose, four different modulations have been generated with etc. 
 
-\subsection{Observations simulation.}
+\subsection{\label{sect: mancha_obs_sim}Observations simulation.}
 
 All the instruments built around the use of an etalon as a wavelength filtering element operate in a very similar way. They scan a spectral line by tuning the etalon (by changing the distance between mirrors and/or modifying the refractive index) to a desired number of wavelengths along the spectral line. At each spectral position, the solar scene is recorded. The measured intensity is approximately given by Eq.~\eqref{eq_etalon_theory: General_Intensity}, with the etalon's transmission profile centered at the desired wavelength.
 
@@ -168,7 +170,7 @@ The imaging response of the FPI is computed by solving the integrals in equation
 In real-world scenarios, variations in pixel sensitivities (gain) and etalon imperfections (cavity map) are unavoidable. Including the effect of the gain into the simulation is straigghtforward as it only acts as a multiplicative factor that modifies the final intensity. In contrast, the effects of the cavity map are more cumbersome. Pixel-to-pixel variations in etalon defects shift the transmission profile of the FPI and must be accounted for when computing the imaging response. Both the gain and cavity map introduced in the simulations have been selected to resemble the real-case scenario of the SO/PHI instrument. The gain map (Fig. ~\ref{fig_mancha: Inputs} top right panel) utilized in the simulations is derived from a flat field of the SO/PHI-HRT instrument, and the cavity map employed (Fig. ~\ref{fig_mancha: Inputs} top central panel) is sourced from the cavity map of PHI's etalon.
 
 
-\subsection{Flat-field correction.}
+\subsection{\label{sect: mancha_ff_corr}Flat-field correction.}
 
 In principle, flat-field correction is straightforward: first, the measured flat fields are normalized to preserve the spectral line information; second, the observations for all tuned wavelengths are divided by the corresponding normalized flat field. However, in telecentric setups, this process is more challenging because flat-field observations are influenced by cavity errors, which can introduce additional artifacts into the measurements rather than (or in addition to) correcting them.
 
@@ -205,7 +207,7 @@ This challenge is why some data reduction pipelines adopt a different approach. 
 
 If the cavity map is thought to be known, the velocity associated with the spectral shift caused by the cavity can be calculated. This "velocity-error" map can then be used to correct the Doppler velocity map derived from the observations that have not been corrected for the cavity map. Theoretically, this approach should address the cavity effects in velocity calculations. Nonetheless, potential impacts of the cavity map on magnetic field calculations remain uncorrected, as the relationship between wavelength shifts and magnetic fields is not as straightforward as in the case of velocity.
 
-\subsection{Velocity maps}
+\subsection{\label{sect: mancha_vlos}Velocity maps}
 
 We begin our analysis by studying the LOS velocities and the errors associated with their computation. These velocities are derived from the spectral shift of each profile relative to the rest position of the spectral line, using the Doppler formula (Eq.~\eqref{eq_spectro: Doppler}). Given that this computation relies exclusively on the spectral shift, it is particularly susceptible to errors caused by cavity effects.
 
@@ -262,7 +264,7 @@ This systematic shift can be removed from the velocities computed with the assym
 
 The fact that the umbra exhibits different behaviors compared to the rest of the FoV, along with the difference nted between the two types of FPIs, suggests that the amplitude and behavior of these effects are sensitive to the shape of the spectral profile and the FPI's transmission profile. 
 
-\subsection{Magnetic field maps.}
+\subsection{\label{sect: mancha_blos}Magnetic field maps.}
 
 It is expected that cavity errors significantly impact velocity calculations, as these are derived solely from the analysis of spectral shifts. However, the effect of these errors on the calculation of the magnetic field is not as straightforward as its determination involves not only the spectroscopy, but also polarization. 
 
@@ -306,7 +308,7 @@ equation \eqref{eq_etalon_theory: General_Intensity} simplifies into:
 
 The explicit shape of $\Psi$ is different depending on the optical configuration of the instrument, that is, collimated or telecentric.
 
-\subsection{\label{eta_corr_susec: simulating obs} Simulated observations}
+\subsection{\label{eta_corr_susec: simulating obs}Simulated observations}
   
   
 We carried out a series of simulations of a spectral line observation in different conditions. We used the Kitt Peak FTS-Spectral-Atlas as the reference \citep{fts} and, specifically, the Fe I spectral line at 6173.3~\r{A}. Each observation was composed of $N_\lambda$ wavelengths, where the measured intensity was recorded. At every wavelength $\lambda_s$, the corresponding transmission profile of the etalon $\Psi^{\lambda_s}$ was computed, and the "observed" intensity $I ^{\lambda _ s} _ {{\rm obs}, i}$ corresponding to a specific spatial location $(\xi, \eta)$, represented hereinafter by the pixel $i$, was calculated using Eq.~\eqref{eq_eta_corr: Intensity-final}. Additionally, we took into account the presence of additive Gaussian noise. This noise does not necessarily respond to any parameter fluctuation within our analytical expressions or photon noise but comes from any unexpected variations that may not have been modeled in the theoretical scheme.
@@ -338,7 +340,7 @@ We modeled the etalon defects as changes in $\Delta a$ in such a way that the ma
       \label{fig_etalon_corr: Inputs}}
 \end{figure}
 
-\section{\label{eta_corr_susec: fitting algorithm}Fitting algorithm}
+\subsection{\label{eta_corr_susec: fitting algorithm}Fitting algorithm}
 
 We have developed an algorithm able to extract the distribution of the etalon defects and the gain map from data taken by etalon-based instruments, which enables the correction of the two contributions separately. The algorithm works by minimizing a given merit function that depends on the gain and the etalon defects. 
 
@@ -418,11 +420,11 @@ The optical configuration of the etalon has a very small impact on the accuracy 
    \label{fig_etalon_corr:FOV}
 \end{figure}
 
-Figure \ref{fig_etalon_corr:FOV} shows the spatial distribution of the errors in the retrieval of $\Delta a$ for different choices of $N_\lambda$. There are no signs of a radial distribution in the maps shown in the figure, contrary to the actual distribution of the $\Delta a$ parameter, as shown in Fig.~\ref{fig_etalon_corr:Inputs}, bottom panel. This means that the precision of the method is similar no matter the amplitude of the defects, that is, we achieve the same accuracy in the retrieval of defects associated with shifts of 3 pm ($\sim$ 1450 ms$^{-1}$, near the corners of our FoV), which correspond to cavity errors of around 1.5 nm or incidence angles of approximately 0.4 degrees, and in the retrieval of regions where no defect is present (radius of 20 pixels from the center of the FoV approximately). Instead of a radial distribution, the errors follow a Gaussian-like distribution (shown at the bottom panels in \ref{fig_etalon_corr:FOV}) similar to the one followed by the noise contribution.
+Figure \ref{fig_etalon_corr:FOV} shows the spatial distribution of the errors in the retrieval of $\Delta a$ for different choices of $N_\lambda$. There are no signs of a radial distribution in the maps shown in the figure, contrary to the actual distribution of the $\Delta a$ parameter, as shown in Fig.~\ref{fig_etalon_corr: Inputs}, bottom panel. This means that the precision of the method is similar no matter the amplitude of the defects, that is, we achieve the same accuracy in the retrieval of defects associated with shifts of 3 pm ($\sim$ 1450 ms$^{-1}$, near the corners of our FoV), which correspond to cavity errors of around 1.5 nm or incidence angles of approximately 0.4 degrees, and in the retrieval of regions where no defect is present (radius of 20 pixels from the center of the FoV approximately). Instead of a radial distribution, the errors follow a Gaussian-like distribution (shown at the bottom panels in \ref{fig_etalon_corr:FOV}) similar to the one followed by the noise contribution.
 
 The standard deviation of the errors for both the gain and $\Delta a$ computations are also reduced with an increase in spectral sampling. The last row of Fig. \ref{fig_etalon_corr:FOV} displays the error distributions in the calculation of  $\Delta a$ for the three optical configurations and different spectral samplings. These results illustrate how the three configurations yield practically identical results and how the distribution narrows as $N_\lambda$ increases, thereby improving the results. Specifically, the standard deviation decreases from 50 ms$^{-1}$ for $N_\lambda = 5$ to 20 ms$^{-1}$ for $N_\lambda = 21$. In the case of the gain determination, the standard deviation ranges between 0.2 \% and 0.1\% for the scenarios with the poorest and highest spectral sampling, respectively.
 
-\subsubsection{Impact of the object approximation}
+\subsubsection{\label{sect: fitting_deconv}Impact of the object approximation}
 
 To infer the error of the algorithm when the object is unknown, we compared the performance of the ideal case, that is, when the object used to generate the observations is known, with the one achieved when deconvolving the object from the data. Only the collimated setup was simulated in order to focus exclusively on the errors introduced by the deconvolution. The data has been degraded by Gaussian noise with an S/N = 200 in both scenarios. 
 
@@ -433,11 +435,11 @@ To infer the error of the algorithm when the object is unknown, we compared the 
     \label{fig_etalon_corr:Deconvolution-results}
 \end{figure}
 
-Figure \ref{fig_etalon_corr:Deconvolution-results} shows the results for the two approaches. Interestingly, the error in the gain for the deconvolution approach does not decrease with a larger number of wavelengths, unlike the ideal case. Nevertheless, the average error of the calculation is below 0.4~\%, with a dispersion (1 $\sigma$) of $\pm$ 0.3~\%. The deconvolution approach is prone to higher errors when deriving the gain due to the normalization of the profiles. The reason for this is two-fold. first, if the continuum is far enough from the spectral line, the normalization is strictly the integral over the transmission profile because the object is flat along the integration interval. However, this is not strictly true since the wings of the transmission profile can reach the spectral line (see Fig.~\ref{fig_etalon_corr:Prof-Measure}), hence modifying the normalization of the profile when the object changes at each iteration. Second, should the continuum intensity of the derived object vary with respect to its real value due to the deconvolution process (e.g., due to boundary effects), there will be a shift in the intensity of the whole profile induced by the normalization process. These two effects seem to dominate the accuracy on the gain determination, regardless of the chosen sampling.
+Figure \ref{fig_etalon_corr:Deconvolution-results} shows the results for the two approaches. Interestingly, the error in the gain for the deconvolution approach does not decrease with a larger number of wavelengths, unlike the ideal case. Nevertheless, the average error of the calculation is below 0.4~\%, with a dispersion (1 $\sigma$) of $\pm$ 0.3~\%. The deconvolution approach is prone to higher errors when deriving the gain due to the normalization of the profiles. The reason for this is two-fold. first, if the continuum is far enough from the spectral line, the normalization is strictly the integral over the transmission profile because the object is flat along the integration interval. However, this is not strictly true since the wings of the transmission profile can reach the spectral line (see Fig.~\ref{fig_etalon_corr: Prof-Measure}), hence modifying the normalization of the profile when the object changes at each iteration. Second, should the continuum intensity of the derived object vary with respect to its real value due to the deconvolution process (e.g., due to boundary effects), there will be a shift in the intensity of the whole profile induced by the normalization process. These two effects seem to dominate the accuracy on the gain determination, regardless of the chosen sampling.
 
 For $\Delta a$, the performance of the method is slightly worse than for the ideal case when using the deconvolution approach. Unlike the gain determination, errors in the $\Delta a$ derivation show a strong dependence on the spectral sampling. Differences between both approaches range from $10$~ms$^{-1}$ to $40$~ms$^{-1}$ and increase with decreasing $N_\lambda$. The sensitivity with $N_\lambda$ is especially high up to $N_\lambda = 8$. A modest increase of $N_\lambda$ from five to six improves the determination of $\Delta a \sim$ 20 ms$^{-1}$, whereas at better spectral samplings, the difference between each simulation decreases more slowly, without any relevant improvement as the sampling increases. In any case, differences are all well within $\pm 1\sigma$.
 
-\subsection{The crossover case}
+\subsubsection{The crossover case}
 
 The fact that the sensitivity of the model to the gain and to the $\Delta a$ parameters are different guarantees (to some extent) that the parameters can be separated from each other. The treatment of the problem is very different between etalon configurations, and therefore full knowledge of the setup is critical. However, this is not always feasible due to the unavoidable presence of errors, misalignment, and imperfections on the instrument. Approximations to describe the optical setup are also common in the pipeline of an FPI instrument because they reduce computational efforts. For instance, telecentric mounts are usually simplified as collimated setups, as the f-numbers employed in solar instruments are usually very large. Imperfections of telecentrism are commonly neglected, too. In this section, we analyze the impact of assuming an incorrect etalon mounting. To do so, we repeated the previous exercise, starting from a perfect and imperfect telecentric configuration but assuming that the transmission profile shape corresponds to a collimated one.    
 
@@ -458,14 +460,47 @@ Figure \ref{fig_etalon_corr:Crossover_histograms} shows the error distributions 
 
 The similarity in the error distributions for the calculation of $\Delta a$ in the two scenarios demonstrates that the error incurred when assuming a collimated etalon does not significantly impact the determination of the cavity maps of the etalon. This is because changes in $\Delta a$ mostly induce a shift of the transmission peak by an equal amount in both cases.
 
-
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/EtalonPaper/means.pdf}
   \caption{Average errors of the gain (left) and etalon defect (right) calculations over all the FoV for the two crossover cases and the standard case (also shown in Fig.~ \ref{fig_etalon_corr:SNR_both} as the collimated case with S/N = 200) for reference. All $\Delta a$ errors have been computed by correcting differential offsets of the transmission profile between the different mounts.\label{fig_etalon_corr:crossover}}  
 \end{figure}
 
-We note, however, that the amplitude, width, and shape of the transmission profile differ significantly between the telecentric and collimated configurations, leading to an expected higher error in gain calculation. Figure \ref{fig_etalon_corr:crossover} shows the absolute errors in gain and $\Delta a$ calculations for both crossover scenarios and the ideal case after correcting the wavelength shift between the different mounts. For $\Delta_a$, the performance of the method is very similar in the three setups, as also observed earlier. This behavior is nevertheless anticipated since the properties selected for simulating the imperfect etalon were chosen to mirror those of the SO-PHI etalon, which were adjusted to closely resemble the behavior of a collimated etalon to the greatest extent possible.
+We note, however, that the amplitude, width, and shape of the transmission profile differ significantly between the telecentric and collimated configurations, leading to an expected higher error in gain calculation. Figure \ref{fig_etalon_corr:crossover} shows the absolute errors in gain and $\Delta a$ calculations for both crossover scenarios and the ideal case after correcting the wavelength shift between the different mounts. For $\Delta a$, the performance of the method is very similar in the three setups, as also observed earlier. This behavior is nevertheless anticipated since the properties selected for simulating the imperfect etalon were chosen to mirror those of the SO-PHI etalon, which were adjusted to closely resemble the behavior of a collimated etalon to the greatest extent possible.
 
 The differences are larger for the gain determination. Not only are the errors higher in the crossover cases, but the trend is entirely different. Instead of decreasing when increasing the number of wavelengths, gain errors remain the same for the perfect case and increase with the number of samples for the imperfect case. Similar to the deconvolution case (Fig.~\ref{fig_etalon_corr:Deconvolution-results}), the difference between transmission profiles introduces an error in the normalization process that systematically affects the rest of the measurements. This effect becomes more pronounced as the number of wavelengths increases, given that this error is introduced more frequently, and it is even more prominent in the imperfect case, as not only are the profiles different in this scenario, but they are also asymmetric. This asymmetry results in an imbalance in the measurement of the profile, as one wing of the spectral line has a higher transmissivity and is observed with greater intensity than the other.
 
 Our results suggest that assuming an etalon in a collimated configuration for instruments with telecentric mounts can be a good first-order approximation for cavity map calculations, provided that the level of asymmetry of the transmission profile is known. However, achieving an accurate knowledge of the degree of telecentrism is often challenging in real instruments, as it usually varies across the FoV. Meanwhile, the results highlight that this approximation leads to a considerable increase in the error in the gain determination, which increases when increasing the spectral sampling. This contrasts with the standard philosophy of solar instrumentation, which requires a high number of points to better scan the spectral line.
+
+\subsubsection{Real data}
+
+While simulated tests are crucial for understanding the algorithm's behavior as a function of the different parameters of the problem, tests with real data are required to validate the effectiveness of the method. In this section, we evaluate the results obtained by the algorithm when implemented on observations acquired using the High-Resolution Telescope (HRT) of the SO/PHI instrument. 
+
+The observation we used corresponds to a flat-field observation employing six points to scan the 6173 \r{A} line (five along the spectral line and an additional continuum measurement) conducted on March 9, 2022. The FPI aboard SO/PHI is illuminated in a telecentric mount, with an expected degree of telecentrism of about $0.3^\circ$. The tests conducted with this dataset have the same procedure as the ones employed for simulated data, that is, we only fit the gain and $\Delta a$ parameters, and we employed the deconvolution approach (Sect. \ref{sect: fitting_deconv}).
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/EtalonPaper/Comparison_HRT.pdf}
+  \caption{Comparison between the observed flat-field and cavity map (top row, left and center columns, respectively) and the derived flat-field (gain) and cavity map ($\Delta a$; bottom row, left and center columns, respectively). The right column in both rows showcases a zoomed-in region of each cavity map. The area corresponding to the zoomed-in region is indicated with a black square in the full cavity map to its left. The properties used to simulate SO/PHI's etalon are $R = 0.925$, $n=2.29$, $d = 251.63\ \mu m$, $f\# = 60$, $\Theta = 0.23 ^{\circ}$.\label{fig_etalon_corr:HRT}}  
+\end{figure}
+
+Figure \ref{fig_etalon_corr:HRT} shows the results obtained when applying the algorithm to HRT-SO/PHI data. The top row shows, from left to right, the observed flat at the continuum, the cavity map measured under laboratory conditions (on ground), and a selected region of the cavity map. In the bottom row, the same cases are shown but for the results inferred by the algorithm. That is, the flat-field (i.e., the gain) and the cavity map (i.e., $\Delta a$).
+
+The results obtained for the cavity map closely resemble the laboratory measurements. The overall structure is preserved, maintaining the gradient from the upper left to the lower right. Similar structures are also discernible, such as the vertical line in the lower-right corner and the ring-like patterns evident in the lower section of the image. However, closer scrutiny of the observed structures revealed some differences. This deviation between results and measurements is expected, considering that the experiment conducted here represents a first-order approximation to assess the algorithm's capability to generate coherent results. Several factors contribute to these differences. Firstly, the spatial resolution of the cavity measured on ground is lower. Secondly, the degree of telecentrism has a predicted variation of $0.23^\circ$ across the FoV. Thirdly, we expected an error for the six-point scan, employing the deconvolution strategy, as large as a hundred meters per second.
+
+Concerning the results for the gain determination, the comparison depicted in Fig.~ \ref{fig_etalon_corr:HRT} suggests that pixel-to-pixel gain variations can also be determined accurately with our method, as both small-scale and large-scale variations are reproduced with detail. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figures/EtalonPaper/fitting_chisq_hor.pdf}
+  \caption{Comparison between the measured (solid lines) and fitted profiles (dashed lines) for three pixels, each representing varying degrees of accuracy (top panel). The FTS is shown as a reference. The bottom panel displays the distribution of $\chi^2$ values for all pixels. Among the three selected cases, one demonstrates an average fit (depicted in pink, with $\chi^2$ close to the mean value), while the other two correspond with extreme cases—one with a notably good fit and the other with a poor fit (depicted in yellow and blue, respectively). The value for $\chi ^2$ has been computed employing equation \eqref{eq_eta_corr: Merit Function}\label{fig_etalon_corr: xisq_hrt}}  
+\end{figure}
+
+A more quantitative analysis of the results is depicted in Fig.~\ref{fig_etalon_corr: xisq_hrt}. The upper panel shows a comparison between the fitted and observed profiles for three distinct cases with varying degrees of precision, while the bottom panel shows the distribution of $\chi^2$ for all pixels. In the worst-case scenario, small differences between the real profile and the fit can be seen in both the line wing and the line core. In any other case, the fittings are rather satisfactory.
+
+
+\subsection{Mancha with the algorithm?¿?}
+
+
+
+\section{Conclusions. }
+
+
