@@ -138,7 +138,9 @@ The target of our observations will be a Magnetohydrodynamic (MHD) simulation of
 
 \subsection{\label{sect: mancha_sim_data}Simulated data.}
 
-MHD? From where.  
+Description of the simulation. 
+
+Structure of the simulation.
 
 In order to obtain the magnetic field, we first need to simulate a modulation-demodulation scheme as the ones employed in spectropolarimeters like TuMag or SO/PHI. For this purpose, four different modulations have been generated with etc. 
 
@@ -166,9 +168,9 @@ Although, in practice, it is not often possible to fully characterize the pre-fi
 
 For every tuned wavelength, the instensity in a given pixel is given by equation \eqref{eq_mancha: Intensity}, where the observed object is the sunspot simulation or the generated \textit{ideal} flat-field. 
 
-The imaging response of the FPI is computed by solving the integrals in equation \eqref{eq_etalon_theory: electric_image_plane}. Given that we will account for the PSF in these simulations, numerical methods are necessary to evaluate the integrals. The computational burden is significant, as the integrals must be evaluated $N_{pixel} ^2 N_{\lambda} N_{mods} N_{sets} N_{cavities} > 2\times10 ^8$ times\footnote{$N_{pixels} = 561$, $N_{\lambda} = 45$, $N_{mods} = 2$, $N_{sets} = 2$, $N_{cavities} = 2$} for both sunspot and flat field observations. This extensive computation results in excessively long simulation times. To address this issue, a neural network was developed to reduce the computational time from \textcolor{red}{X to X}. The neural network was trained with known solutions to the integrals for a fixed set of etalon parameters, ensuring that its outputs are accurate to within 0.01\% for parameters within the training set.
+The imaging response of the FPI is computed by solving the integrals in equation \eqref{eq_etalon_theory: electric_image_plane}. Given that we will account for the PSF in these simulations, numerical methods are necessary to evaluate the integrals. The computational burden is significant, as the integrals must be evaluated $N_{pixel} ^2 N_{\lambda} N_{mods} N_{sets} N_{cavities} > 2\times10 ^8$ times\footnote[2]{$N_{pixels} = 561$, $N_{\lambda} = 45$, $N_{mods} = 2$, $N_{sets} = 2$, $N_{cavities} = 2$} for both sunspot and flat field observations. This extensive computation results in excessively long simulation times. To address this issue, a neural network was developed to reduce the computational time from 12 s to 5 ms, more than a factor $2\times10 ^3$ faster. The neural network was trained with known solutions to the integrals for a fixed set of etalon parameters, ensuring that its outputs are accurate to within 0.01\% for parameters within the training set.
 
-In real-world scenarios, variations in pixel sensitivities (gain), in addition to the etalon imperfections (cavity map) are unavoidable. Including the effect of the gain into the simulation is straigghtforward as it only acts as a multiplicative factor that modifies the final intensity. In contrast, the effects of the cavity map are more cumbersome. Pixel-to-pixel variations in etalon defects shift the transmission profile of the FPI and must be accounted for when computing the imaging response. Both the gain and cavity map introduced in the simulations have been selected to resemble the real-case scenario of the SO/PHI instrument. The gain map (Fig. ~\ref{fig_mancha: Inputs} top right panel) utilized in the simulations is derived from a flat field of the SO/PHI-HRT instrument, and the cavity map employed (Fig. ~\ref{fig_mancha: Inputs} top central panel) is sourced from the cavity map of PHI's etalon.
+In real-world scenarios, variations in pixel sensitivities (gain), in addition to the etalon imperfections (cavity map), are unavoidable. Including the effect of the gain into the simulation is straigghtforward as it only acts as a multiplicative factor that modifies the final intensity. In contrast, the effects of the cavity map are more cumbersome. Pixel-to-pixel variations in etalon defects shift the transmission profile of the FPI and must be accounted for when computing the imaging response. Both the gain and cavity map introduced in the simulations have been selected to resemble the real-case scenario of the SO/PHI instrument. The gain map (Fig. ~\ref{fig_mancha: Inputs} top right panel) utilized in the simulations is derived from a flat field of the SO/PHI-HRT instrument, and the cavity map employed (Fig. ~\ref{fig_mancha: Inputs} top central panel) is sourced from the cavity map of PHI's etalon.
 
 
 \subsection{\label{sect: mancha_ff_corr}Flat-field correction.}
@@ -189,7 +191,7 @@ In principle, the flat-field correction is straightforward: first, the measured 
 
 Figure \ref{fig_mancha: flat_field normalization} shows the flat-fields observed at the core of the line for the simulations with and wihout cavity and the spectral profiles for a series of pixels. The effect of the cavity map in the flat-field observations is clearly displayed in both representations. In the flat-field itself, higher values of the cavity map appear brighter, as any displacement from the line core to either the blue or the red will result in an increase of the final intensity. In the spectral profiles, the pixels corresponding to higher values of the cavity error show a noticeably shift with respect to the rest position of the line core.   
 
-From the normalized profiles, it is also evident that the normalized flats with cavity error will modify the profile of the observations once the division is carried out. Nevertheless, in order to correct for the effects of the cavity, the flat-field's spectral profiles cannot be flat as in the case without cavity, since we need to change the spectral information of the observations (shift the measured profile to the "correct" position). The problem arises when these flat-field not only shift the observed profiles but also (and very noticeably) modify their shape. 
+From the normalized profiles for the scenario involving a cavity, it is evident that the flat-field profiles are not flat, as expected, given their role in correcting the observed profiles from the cavity-induced shift. However, the amplitude of the variations from flatness in these profiles is excessively large. This significant deviation presents a problem, as it will not only shift the other profiles but also alter their shape
 
 \begin{figure}
   \begin{minipage}[c]{0.7\textwidth}
@@ -202,11 +204,11 @@ From the normalized profiles, it is also evident that the normalized flats with 
   \end{minipage}
 \end{figure}
 
-This problem is illustrated in Fig.~\ref{fig_mancha: Profiles_differences}, which displays the profiles after flat-field correction for both simulations, with and without the cavity map. Ideally, if the flat-field correction effectively compensates for the cavity errors of the FPI, the profiles from both scenarios should be identical or at least very similar. However, upon comparison, notable differences emerge, particularly for pixels with high cavity map values (light blue and dark blue lines). These profiles are not only shifted but also exhibit changes in shape. 
+This issue is illustrated in Fig.~\ref{fig_mancha: Profiles_differences}, which displays the profiles after flat-field correction for both simulations, with and without the cavity map. Ideally, if the flat-field correction effectively compensates for the FPI cavity errors, the profiles from both scenarios should be identical or at least very similar. However, upon comparison, significant differences emerge, particularly for pixels with high cavity map values (light blue and dark blue lines). These profiles are not only shifted but also exhibit alterations in their shape. 
 
 This challenge is why some data reduction pipelines adopt a different approach. Instead of using the flat-fields of the corresponding wavelengths, only the continuum flat-field is employed for the correction. When the continuum is measured sufficiently far from the spectral line, it remains unaffected by any spectral shift. By using this measurement, one can correct for spurious effects unrelated to spectral shifts, such as pixel sensitivity variations or dust grains. However, this method does not correct for the effects of the cavity.
 
-If the cavity map is thought to be known, the velocity associated with the spectral shift caused by the cavity can be calculated. This "velocity-error" map can then be used to correct the Doppler velocity map derived from the observations that have not been corrected for the cavity map. Theoretically, this approach should address the cavity effects in velocity calculations. Nonetheless, potential impacts of the cavity map on magnetic field calculations remain uncorrected, as the relationship between wavelength shifts and magnetic fields is not as straightforward as in the case of velocity.
+If the cavity map is known, the velocity associated with the spectral shift caused by the cavity can be calculated. This "velocity-error" map can then be used to correct the Doppler velocity map derived from the observations that have not been corrected for the cavity map. Theoretically, this approach should address the cavity effects in velocity calculations. Nonetheless, potential impacts of the cavity map on magnetic field calculations remain uncorrected, as the relationship between wavelength shifts and magnetic fields is not as straightforward as in the case of velocity.
 
 \subsection{\label{sect: mancha_vlos}Velocity maps}
 
@@ -233,7 +235,7 @@ At first glance, the velocities derived for each approach might look identical, 
 
 The error in the velocity computation shows that the effects of the cavity map remain uncorrected in the observations. Both correction approaches exhibit errors with structures corresponding to the cavity map. For the standard correction, this effect is pervasive throughout the field of view (FoV), whereas for the continuum approach, it is primarily concentrated in the umbra, although other regions also exhibit this behavior.
 
-Moreover, the errors are notable, given that regions of the penumbra show errors of around 10\%. Errors in the umbra are similarly significant in percentage terms; however, studies of these regions are less frequent due to their low SNR resulting from their inherent darkness. Conversely, extensive research exists on the flows observed in the penumbra (\textcolor{red}{Ref XX??}), prompting us to prioritize investigation in this area.
+Moreover, the errors are significant, given that regions of the penumbra show errors of around 10\%. Errors in the umbra are similarly significant in percentage terms, if not worse; however, studies of these regions are less frequent due to their low SNR resulting from their inherent darkness. Conversely, as discussed in the introduction, penumbral flows are of particular interest, prompting us to prioritize our discussion on the results in that area.
 
 \begin{figure}
   \begin{minipage}[c]{0.7\textwidth}
@@ -247,7 +249,7 @@ Moreover, the errors are notable, given that regions of the penumbra show errors
 
 A more quantitative analysis is shown in Fig. \ref{fig_mancha: verror_circular_cut}, where the velocity error along a circular path is shown, for both approaches, in addition to the associated spectral shift of the cavity values at identical positions. This representation clearly demonstrates the correlation between the structural features of the cavity map and the velocity error. For both approaches, with a more pronounced effect observed in the standard approach, the absolute value of the error escalates with increasing spectral shifts of the cavity.
 
-\textcolor{red}{It is evident from the previous analyses that the approach of flat-field correction affects the resulst as differences are observed between correction approaches, but what about the FPI's transmission profile? It is common practice to neglect the assymetric nature of real telecentric mounts in most data reduction pipelines beacuse the possible effects of the assymetries of the profiles are assumed to be negligible.} 
+It is evident from the previous analyses that the flat-field correction approach significantly affects the results, as differences are observed between various correction methods. However, the impact of the FPI's transmission profile remains to be addressed. It is common practice to neglect the asymmetric nature of real telecentric mounts in most data reduction pipelines, as the potential effects of profile asymmetries are typically assumed to be negligible.
 
 \begin{figure}
   \begin{minipage}[c]{0.5\textwidth}
@@ -259,9 +261,9 @@ A more quantitative analysis is shown in Fig. \ref{fig_mancha: verror_circular_c
   \end{minipage}
 \end{figure}
 
-Figure X depicts the differences in the computed velocities for the symmetric and assymetric FPIs. The main effect of the assymetry is a systematic shift of the profile measurements towards the red wing of the spectral profile, due to its higher transmissivity than its blue counterpart. This shift results in an average difference of around $0.2$ km s$^{-1}$ that can be seen over the whole FoV. 
+ The main effect of the assymetry is a systematic shift of the profile measurements towards the blue wing of the spectral profile, due to its higher transmissivity than its blue counterpart. This shift results in an average difference of around $-0.2$ km s$^{-1}$ that can be seen over the whole FoV. 
 
-This systematic shift can be removed from the velocities computed with the assymetric FPI by substracting the average difference between symmetric and assymetric velocities. The panel XX of figure XX, shows the difference following this correction has been carried out. Despite accounting for the systematic shift, discrepancies are still present, predominantly within the umbra, though they are observed across the entire FoV. The umbra is again more sensible than other regions, displaying the highest error in the whole map, mainly exhibiting a shift towards the \textcolor{red}{BLUE?}, for the assymetric scenario. Outside the umbra, differences are smaller, reaching up to 100 ms$^{-1}$, typically trending towards the red.
+This systematic shift can be removed from the velocities computed with the assymetric FPI by substracting the average difference between symmetric and assymetric velocities. Figure \ref{fig_mancha: vlos_asym_vs_sym} depicts the differences in the computed velocities for the symmetric and assymetric FPIs, after applying this correction. Despite accounting for the systematic shift, discrepancies are still present, predominantly within the umbra, though they are observed across the entire FoV. The umbra is again more sensible than other regions, displaying the highest error in the whole map, mainly exhibiting a global shift showing smaller velocities for the assymetric scenario. Outside the umbra, differences are smaller but still prevalent throughout the entire FoV. These differences can reach up to 100 m s$^{-1}$ and typically exhibit a trend towards higher velocities in the case of the asymmetric scenario.
 
 The fact that the umbra exhibits different behaviors compared to the rest of the FoV, along with the difference nted between the two types of FPIs, suggests that the amplitude and behavior of these effects are sensitive to the shape of the spectral profile and the FPI's transmission profile. 
 
@@ -269,7 +271,7 @@ The fact that the umbra exhibits different behaviors compared to the rest of the
 
 It is expected that cavity errors significantly impact velocity calculations, as these are derived solely from the analysis of spectral shifts. However, the effect of these errors on the calculation of the magnetic field is not as straightforward as its determination involves not only the spectroscopy, but also polarization. 
 
-To calculate $B_{LOS}$, we need to determine the circularly polarized component of the light. This requires demodulating the simulated observation using a process analogous to that described in the TuMag pipeline (ref XXX). Once the stokes components have been determined, the LOS strength of the magnetic field is computed using the center-of-gravity method  (eq.~\eqref{eq_spectro: Blos-cog}). 
+To calculate $B_{LOS}$, we need to determine the circularly polarized component of the light. This requires demodulating the simulated observation using a process analogous to that described in the TuMag pipeline (ref ??). Once the stokes components have been determined, the LOS strength of the magnetic field is computed using the center-of-gravity method  (eq.~\eqref{eq_spectro: Blos-cog}). 
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/Mancha/blos_errors.pdf}
@@ -280,9 +282,7 @@ To calculate $B_{LOS}$, we need to determine the circularly polarized component 
 
 Figure \ref{fig_mancha: blos_errors} shows the LOS strength of the magentic field for the simulation with no cavity (the one employed as reference) and the errors in its calculation for both flat-fielding approaches.  In the continuum approach, the structures observed in the error map closely resemble those in the cavity map. This similarity is expected since no correction has been applied to account for the cavity error. While it is possible to compute the velocities associated with the spectral shift caused by the cavity map, this is not feasible for the magnetic field. Consequently, any effect of the cavity remains in the data when using the continuum approach.
 
-As a result, errors in the magnetic field computation appear larger or more prevalent across the entire field of view (FoV) for the continuum approach. Although small, these residuals of the cavity map in the magnetic field map are one of the main problems of employing the continuum apprach in real data. 
-
-However, for both correction strategies, the errors remain relatively small, reaching values of approximately 3 G, compared to magnetic field signals of around $\pm 100$ G. 
+As a result, errors in the magnetic field computation appear larger or more prevalent across the entire field of view (FoV) for the continuum approach. However, for both correction strategies, the errors remain relatively small, reaching values of approximately 3 G, compared to magnetic field signals of around $\pm 100$ G. Although small, these residuals of the cavity map in the magnetic field maps are one of the main problems of employing the continuum apprach in real data.
 
 \section{\label{sect: etalon_corr_fitting}Fitting algorithm}
 
@@ -296,7 +296,7 @@ In this section, we introduce the algorithm and evaluate its performance. We beg
 
 \subsection{\label{eta_corr_susec: approx and simulations}Initial approximations and observations simulation.}
 
-As initial approximations, we will adopt the same assumption regarding the prefilter as used in the sunspot simulation; specifically, that it has a rectangular shape with a width such that only one order of the etalon is let through. Additionally, we will disregard the spatial PSF of the FPI and assume that the spatial dependence can be represented by a Dirac delta function to simplify the equations. Therefore, if we assume that the image response of the FPI follows the expression:
+As initial approximations, we will adopt the same assumption regarding the prefilter as the one employed for the sunspot simulation; specifically, that it has a rectangular shape with a width such that only one order of the etalon is let through. Additionally, we will disregard the spatial PSF of the FPI and assume that the spatial dependence can be represented by a Dirac delta function to simplify the equations. Therefore, if we assume that the image response of the FPI follows the expression:
 \begin{equation}
 S\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)=\delta(\xi_0-\xi,\eta_0-\eta)\Psi(\xi,\eta,\lambda-\lambda_s),
 \end{equation}
@@ -306,7 +306,7 @@ equation \eqref{eq_mancha: Intensity} simplifies into:
     \label{eq_eta_corr: intensity}
 \end{equation}
 
-The explicit shape of $\Psi$ varies depending on the optical configuration of the instrument, whether collimated or telecentric. Specifically, we will employ three types of transmission profiles: one for the collimated configuration, one for a perfect telecentric setup (normal incidence), and one for an imperfect telecentric setup. The first two have analytical expressions for the transmission profile in the absence of the spatial PSF, as detailed in Sections \ref{susec_etalon_theory: collimated} and \ref{susec_etalon_theory: Tele-perfe}, respectively. For the imperfect telecentric configuration, the transmission profile must be determined numerically (see Section \ref{etalon_theory: Tele-imperfe}).
+The explicit shape of $\Psi$ varies depending on the optical configuration of the instrument, whether collimated or telecentric. In particular, we will employ three types of transmission profiles: one for the collimated configuration, one for a perfect telecentric setup (normal incidence), and one for an imperfect telecentric setup. The first two have analytical expressions for the transmission profile in the absence of the spatial PSF, as detailed in Sections \ref{susec_etalon_theory: collimated} and \ref{susec_etalon_theory: Tele-perfe}, respectively. For the imperfect telecentric configuration, the transmission profile must be determined numerically (see Section \ref{etalon_theory: Tele-imperfe}).
   
 We have tested the perforamnce of the algorithm on a series of simulations of a spectral line observation in different conditions. We used the Kitt Peak FTS-Spectral-Atlas as the reference \citep{fts} and, specifically, the Fe I spectral line at 6173.3~\r{A}. Each observation was composed of $N_\lambda$ wavelengths, where the measured intensity was recorded. At every wavelength $\lambda_s$, the corresponding transmission profile of the etalon $\Psi^{\lambda_s}$ was computed, and the "observed" intensity $I ^{\lambda _ s} _ {{\rm obs}, i}$ corresponding to a specific spatial location $(\xi, \eta)$, represented hereinafter by the pixel $i$, was calculated using Eq.~\eqref{eq_eta_corr: intensity}. Additionally, we took into account the presence of additive Gaussian noise. This noise does not necessarily respond to any parameter fluctuation within our analytical expressions or photon noise but comes from any unexpected variations that may not have been modeled in the theoretical scheme.
 
@@ -496,11 +496,11 @@ A more quantitative analysis of the results is depicted in Fig.~\ref{fig_etalon_
 
 \subsection{Algorithm applied at the Sunspot}
 
-.
+No estoy seguro de añadir esto. En principio sale algo mejor pero los resultados no son muy distintos y tampoco quería alargar demasiado el capítulo. 
 
 \section{Conclusions.}
 
-In this chapter we have highlighted the relevance of carefully addressing the data reduction of etalon-based instruments, specifically those with the FPI in telecentric setups. Equipped with the analytical modelling of the FPIs, we have been able to address the impact of the etalon defects on the observations through a series of simulations. We have quantified the error commited in the computations of LOS velocities and magentic fields when the cavity errors are (only) partially corrected through the simulation of an observation of a Sunspot. Additionally, we have provided a new strategy for the data correction of etalon-based spectrometers that separates the effects of the FPIs on the flat-fields from other effects in order to improve the flat-field correction. Lastly, we have tested the performance of this new method on a series of simulated observations and real data to verify its applicability. 
+In this chapter we have highlighted the relevance of carefully addressing the data reduction of etalon-based instruments, specifically those with the FPI in telecentric setups. Equipped with the analytical modelling of the FPIs, we have been able to address the impact of the etalon defects on the observations. We have quantified the error commited in the computations of LOS velocities and magentic fields when the cavity errors are (only) partially corrected through the simulation of an observation of a Sunspot. Additionally, we have provided a new strategy for the data correction of etalon-based spectrometers that separates the effects of the FPIs on the flat-fields from other effects in an attempt to improve the flat-field correction. Lastly, we have tested the performance of this new method on a series of simulated observations and real data to verify its applicability. 
 
 The simulation of the sunspot observation in section \ref{sect: Mancha_obs} demonstrates the significant impact of improperly corrected cavity errors on the physical measurements. The discussion is centered around the flat-fielding procedure, which presents one of the main challenges in these setups, as cavity errors also affect flat-field observations. We show that these flat-fields alter and distort the observed spectral profiles when applied. The correlation between the structures found in the velocity calculation errors after flat-field correction and those of the cavity map suggests that the flat-fielding has not (fully) corrected these errors. In the penumbra, errors can reach up to 400 ms$^{-1}$ for both flat-fielding approaches, which would invalidate any measurements, as penumbral flows are of similar magnitudes.
 

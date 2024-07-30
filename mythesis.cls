@@ -97,6 +97,8 @@
 % layout – View the layout of a document
 \RequirePackage{layout}
 
+%Footnotes
+\usepackage[symbol]{footmisc}
 
 %-------------------------
 % Headers and footers

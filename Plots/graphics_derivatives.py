@@ -63,7 +63,7 @@ Da = AngleMap * wavelength
 fig, axs = plt.subplots(1, 2, figsize = (10.5, 5))
 
 axs[1].set_title(r'$\Delta a$ [$\AA$]')
-im = axs[1].imshow(Da, cmap = 'Spectral')
+im = axs[1].imshow(Da, cmap = 'Spectral_r')
 
 divider = make_axes_locatable(axs[1])
 cax = divider.append_axes("right", size="5%", pad=0.05)
