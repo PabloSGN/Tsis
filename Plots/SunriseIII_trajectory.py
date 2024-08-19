@@ -34,6 +34,7 @@ def plot_polar_azimuthal(lat_range, lon_range, projection='npstere', bounding_la
 plot_polar_azimuthal(lat_range=(10, 90), lon_range=(-180, 180), projection='npstere', bounding_lat=10)
 
 
+
 plt.show()
 
 
