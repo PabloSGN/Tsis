@@ -10,7 +10,7 @@ The design from scratch of an instrument such as this is very complex. There are
 
 \section{The Tunable magnetograph: TuMag}
 
-The Tunable Magnetograph (TuMag) is a tunable imaging spectropolarimeter specifically designed to deliver high spatial resolution images across multiple spectral lines in four distinct polarization states. Consequently, TuMag is capable of measuring the four Stokes parameters, thus enabling the inference of the three components of the magnetic field and the LOS velocities at each observed spectral line. Moreover, this data must be acquired following a series of strict requiremets regarding optical quality, polarimetric efficiencies, required SNR, spectral performance and time limitations. A summary of these requirements is provided in Table \ref{table: Tumags requirements}. 
+The Tunable Magnetograph (TuMag) is a tunable imaging spectropolarimeter designed to deliver high spatial resolution images across multiple spectral lines in four distinct polarization states. Consequently, TuMag is capable of measuring the four Stokes parameters, thus enabling the inference of the three components of the magnetic field and the LOS velocities at all the selected spectral lines. Moreover, this data must be acquired following a series of strict requiremets regarding optical quality, polarimetric efficiencies, required SNR, spectral performance and time limitations. A summary of these requirements is provided in Table \ref{table: Tumags requirements}. 
 
 \begin{table}
     \centering
@@ -19,10 +19,10 @@ The Tunable Magnetograph (TuMag) is a tunable imaging spectropolarimeter specifi
     \hline
     Requirements & Value \\
     \hline
-    Field of view & 63'' x 63'' \\
-    RMS wavefront error & $W \approx \lambda / 14$\\
+    Field of view & $63''$ x $63''$ \\
+    RMS wavefront error & $W \sim \lambda / 14$\\
     Spatial sampling & $3 \times 3 $ pixels \\
-    Plate scale & 0.0378'' / pixel \\
+    Plate scale & $0.0378''$ / pixel \\
     Polarimetric efficiencies & $\epsilon _ {1, 2, 3} \lessapprox \frac{1}{\sqrt{3}}$\\
     SNR ratio & $\left(\frac{S}{N}\right) _ 0 \gtrapprox 1700$ \\
     Spectral resolution & $< 9$ pm\\  
@@ -35,7 +35,24 @@ The Tunable Magnetograph (TuMag) is a tunable imaging spectropolarimeter specifi
     \label{table: Tumags requirements}
 \end{table}
 
+\subsection{TuMag's design.}
+
+Light is delivered to TuMag by the ISLiD system and subsequently re-imaged onto two cameras where the images are recorded. Before reaching the cameras, the light passes through all the different subsystems of the optical unit. The first components encountered by the light are a blocking prefilter and a the filter wheels. The blocking prefilter, with a wide bandpass centered at 520 nm, is employed to eliminate unwanted spectral ranges. The filter wheels  are comprised by a double-disk system \citep{filter-wheels} that houses the prefilters for selecting specific spectral lines and a series of calibration modules. Specifically, three prefilters are mounted on the second disk of the filter wheel, corresponding to the spectral lines Fe I 5250.2 \r{A}, Fe I 5250.6 \r{A}, and Mg I $b_2$ 5172.7 \r{A}. A detailed overview of the spectral properties of these prefilters will be provided in Section \textcolor{red}{XX}. Additionally, the filter wheel includes a PD plate, which is used to introduce a known defocus into the final image to facilitate image reconstruction techniques, along with a linear polarizer, a plate of micropolarizers, and a pinhole set.
+
+After passing through the filter wheels, the light is directed into the Polarization Modulation Package (PMP), a subsystem derived from the SO/PHI instrument (\citealt{pmp1}, \citealt{PHI}). The PMP's primary function is to modulate the light to produce the different polarization states required to deduce the Stokes components. This is achieved using two liquid crystal variable retarders (LCVRs), which are oriented with their fast axes at 45$^\circ$ relative to each other. These LCVRs induce a retardance on the transmitted light that varies with the voltage applied across the crystals. The system can operate in two distinct modulation schemes: a vector modulation scheme, which generates four independent linear combinations of equally-weighted Stokes components across consecutive observations, allowing for the retrieval of the full Stokes vector after demodulation; and a longitudinal modulation scheme, which generates only two modulations, providing information solely on the intensity and circular polarization.
+
+Following modulation, the light is directed into a $LiNbO_3$ Fabry-Pérot etalon, that likewise IMaX, is in a collimated setup and with a double pass configuration \citep{etalon-doublepass}. In this setup, after traversing the etalon once, the light is redirected by a pair of mirrors to pass through the etalon a second time. This double-pass configuration significantly enhances spectral resolution by narrowing the transmission profile. The $LiNbO_3$ etalon achieves wavelength tuning by varying the refractive index of the cavity through the application of high voltages (ranging from $-4000$ V to $4000$ V) to the mirrors. Compared to air-gapped etalons, $LiNbO_3$ etalons offer the advantage of having no moving parts, which is particularly beneficial for spaceborne or balloon-borne instruments. However, this advantage comes with the need for precautions to prevent discharges caused by air ionization.
+
+The last element light encounters before reaching the cameras is a polarizing beam-splitter. In this point the light beam is divided into its two orthogonal components of linear polarization, and each of these beams is directed towrds a different camera.    
+
+
+
+
 \subsection{Imaging performance.}
 
-TuMag measures the photons through two custom-made cameras \citep{tumag-cams} based on the GPIXEL back-illuminated GSENSE400BSI $2k \times 2k$ pixel detector. The reason for the existance of two cameras instead of one is the dual-beam  
+TuMag captures photons using two custom-made cameras \citep{tumag-cams} equipped with GPIXEL back-illuminated GSENSE400BSI detectors, each featuring a $2k \times 2k$ pixel array. The use of two cameras, rather than a single one, is required by the dual-beam polarimetric scheme, in which each camera records \textcolor{red}{two opposed orthogonal states of polarization}. These cameras provide a broad FoV of $63'' \times 63''$, sufficient to encompass an entire medium-sized active region, with a plate scale of $0.0378''$/pixel.
+
+In order to fulfill the requirement of the wavefront error of $W \sim \lambda / 14$, the instrument must have means to correct for the additional aberrations introduced by the telescope, the image stabilization and light distribution (ISLiD) system and uncorrected jittering. For this purpose, TuMag is equipped with PD plates that allow to aply image reconstruction  techniques to the final images. 
+
+
 
