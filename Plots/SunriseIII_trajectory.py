@@ -1,7 +1,15 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
+import matplotlib as mp
+import numpy as np
 
-def plot_polar_azimuthal(lat_range, lon_range, projection='npstere', bounding_lat=60):
+
+plt.rc('font', family='serif')
+plt.rc('xtick', labelsize='small')
+plt.rc('ytick', labelsize='small')
+mp.rcParams["font.size"] = "12.5"
+
+def plot_polar_azimuthal(lat_range, lon_range, trajectory, projection='npstere', bounding_lat=60):
     """
     Plot a polar map with a given latitude and longitude range using a Polar Azimuthal Equidistant Projection.
     
@@ -11,7 +19,7 @@ def plot_polar_azimuthal(lat_range, lon_range, projection='npstere', bounding_la
     projection (str): The type of polar projection ('npstere' for North Pole, 'spstere' for South Pole).
     bounding_lat (float): The bounding latitude for the polar stereographic projection.
     """
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(5.5, 5.5))
     
     # Set up the Basemap
     if projection == 'npstere':
@@ -28,14 +36,44 @@ def plot_polar_azimuthal(lat_range, lon_range, projection='npstere', bounding_la
     m.drawparallels(range(int(lat_range[0]), int(lat_range[1]), 10))
     m.drawmeridians(range(int(lon_range[0]), int(lon_range[1]), 30))
     
-    plt.title(f'Polar Azimuthal Equidistant Projection\nLatitude range: {lat_range}, Longitude range: {lon_range}')
+    x, y = m(trajectory[:, 1], trajectory[:, 0])
+
+    m.plot(x, y, color = 'crimson', lw = 4)
+
+    plt.title("Sunrise III  trajectory.")
+
+    return m
 
 # Example: Plot North Polar region with latitude range 60 to 90 and longitude range -180 to 180
-plot_polar_azimuthal(lat_range=(10, 90), lon_range=(-180, 180), projection='npstere', bounding_lat=10)
+
+coords = np.loadtxt("Track740N_mod.txt", usecols = (0, 1))
+
+print(np.shape(coords))
+print(coords[:, 1])
+
+mapp = plot_polar_azimuthal(lat_range=(10, 90), lon_range=(-180, 180), trajectory=coords, projection='npstere', bounding_lat=10)
+
+
+labels = [r"Esrange, $10^{th}$ of June 2024", r"Landing Point, $16^{th}$ of June 2024"]
+
+lab_lat = [coords[0, 0], coords[-1, 0]]
+lab_lon = [coords[0, 1], coords[-1, 1]]
+
+colors = ["indigo", "darkorange"]
+
+for i, label in enumerate(labels):
+
+    x, y = mapp(lab_lon[i], lab_lat[i])
+    
+    mapp.plot(x, y, color = colors[i], marker = 'X', markersize = 10, ls = '', label = labels[i])
+    
+
+
+plt.legend(edgecolor = 'k')
+
 
 
 
 plt.show()
-
 
 
