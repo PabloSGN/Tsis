@@ -49,6 +49,24 @@ Light then reaches the cameras, where images from both are recorded and stored. 
 
 \section{Instrument performance and verification.}
 
+All subsystems within the TuMag light path function collaboratively to deliver high-resolution spectroscopic data of the solar spectrum. To ensure data quality, TuMag underwent multiple verification and calibration processes, during which its spectral, polarimetric, and imaging properties were meticulously tested. These procedures, commonly referred to as end-to-end (E2E) calibration tests, were conducted at various stages of the mission. Specifically, they were performed during the assembly, integration, and verification (AIV) activities with the stand-alone instrument at INTA facilities in Madrid, Spain; during the AIV phase of the post-focus instrument (PFI) platform at MPS facilities in Göttingen, Germany; and during the TuMag AIV phase in the Sunrise III mission at ESRANGE facilities in Kiruna, Sweden. These tests were designed not only to validate the instrument's capabilities but also to measure critical parameters such as the tuning constant of the etalon, modulation matrices, and best-focus position—each of which is vital for the optimal operation of TuMag and the subsequent data processing (see \citealt{e2e-tests-inta} for a detailed description of the tests). We will now delve into the details of the imaging, spectral and polarimetric properties of the instrument as well as the verification processes and results, as the two are intimately related.  
+
+\subsection{Imaging performance.}
+TuMag captures photons using two custom-made cameras \citep{tumag-cams} equipped with GPIXEL back-illuminated GSENSE400BSI detectors, each featuring a $2k \times 2k$ pixel array, and specifically designed to meet TuMag's scientific requirements. These cameras provide a broad FoV of $63'' \times 63''$, sufficient to encompass an entire medium-sized active region, with a plate scale of $0.0378''$/pixel.
+
+In order to fulfill the requirement of the wavefront error of $W \sim \lambda / 14$, the instrument must have means to correct for the additional aberrations introduced by the telescope, the image stabilization and light distribution (ISLiD) system and uncorrected jittering. For this purpose, TuMag is equipped with a PD plate in the filter wheel that allow to apply image reconstruction techniques to the final images. 
+
+The imaging E2E tests involved projecting several targets at the F4 focus, including a USAF test target, star targets, and a grid, observed both with and without the PD plate. These targets were utilized to evaluate the MTF and to assess the resolving power of TuMag. The PD measurements enabled verification of the wavefront error (WFE) derived from the MTF and an evaluation of the image quality following image restoration. The MTF functions (see Figure XXX) indicate that the performance of the 517 nm pre-filter and the horizontal behavior of the 525 nm pre-filters align well with expectations, corresponding to WFE values better than $\lambda /10$. However, the vertical performance of the iron pre-filters appears to be degraded. This observed astigmatism is attributed to the etalon and physical deformations of the pre-filters caused by the mechanical method used to secure and tilt them. This effect is particularly noticeable in the iron pre-filters due to the higher angles of incidence required for their tuning.
+
+
+
+
+
+
+\subsection{Verification}
+
+
+
 \subsection{Spectral performance.}
 
 TuMag filters wavelengths through a sequential process, beginning with a broad blocking pre-filter that eliminates unwanted portions of the solar spectrum, and followed by a second narrow-band pre-filter that is tuned to the three selected spectral lines. Finally, the LiNbO$_3$ Fabry-Pérot etalon is encharged of selecting a very narrow band around specific wavelengths along the spectral lines. The narrow-band pre-filter and the etalon are critical to TuMag's spectroscopic performance and require careful evaluation during calibration.
@@ -90,14 +108,6 @@ TuMag's etalon (see Table \ref{table: Tumags etalon}) operates in a collimated s
       \label{fig_tumag:second-order_cont}}
 \end{figure}
 
-
-An observtion of the solar spectrum with the 517 nm pre-filter carried out at INTA facilities on December 2021 during the end-to-end calibration tests is shown in Fig.~\ref{fig_tumag:second-order_cont}, along with the pre-filter mesurement. The magnesium line core is measured at -2200 V aprroximately, with the primary order of the etalon, and can be measured again at approximately 3750 V with a secondary order. A fitting of the solar spectrum \footnote{referencia} is also shown, for both orders. These results reveal substantial contamination from the secondary order near the pre-filter's minimum transmittance. Around 0 volts, the observed spectrum (orange line) combines contributions from both the primary (red line) and secondary (green line) orders. This contamination is particularly significant for data processing because continuum measurements of the magnesium line are generally conducted at -80 V. The contamination predominantly affects the magnesium line, as its broader profile necessitates continuum measurements farther from the line core. In contrast, iron lines, which are narrower, do not require continuum measurements at such significant offsets from the line core.
-
-
-\subsection{Imaging performance.}
-TuMag captures photons using two custom-made cameras \citep{tumag-cams} equipped with GPIXEL back-illuminated GSENSE400BSI detectors, each featuring a $2k \times 2k$ pixel array. These cameras provide a broad FoV of $63'' \times 63''$, sufficient to encompass an entire medium-sized active region, with a plate scale of $0.0378''$/pixel.
-
-In order to fulfill the requirement of the wavefront error of $W \sim \lambda / 14$, the instrument must have means to correct for the additional aberrations introduced by the telescope, the image stabilization and light distribution (ISLiD) system and uncorrected jittering. For this purpose, TuMag is equipped with a PD plate in the filter wheel that allow to apply image reconstruction techniques to the final images. 
-
+An observation of the solar spectrum with the 517 nm pre-filter, conducted at INTA facilities in December 2021 during the end-to-end calibration tests, is presented in Fig.~\ref{fig_tumag:second-order_cont}, along with the corresponding pre-filter measurement. The magnesium line core is detected at approximately -2200 V using the primary order of the etalon and reappears around 3750 V with a secondary order. A fitting of the solar spectrum\footnote{Reference} is also shown for both orders. These results reveal significant contamination from the secondary order near the pre-filter's minimum transmittance. At around 0 volts, the observed spectrum (orange line) is a composite of contributions from both the primary (red line) and secondary (green line) orders. This contamination is particularly relevant for data processing, as continuum measurements of the magnesium line are typically conducted at -80 V. The broader profile of the magnesium line necessitates continuum measurements farther from the line core, making it more susceptible to this contamination. In contrast, the narrower iron lines do not require such extensive offsets for continuum measurements and are thus less affected.
 
 
