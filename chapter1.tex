@@ -14,6 +14,14 @@ The observatory was recovered days later after a brief stay in the Scandinavian 
 
 In the absence of data produced by Sunrise to process, analyze, and exploit, the scientific work conducted within the framework of this thesis has been compelled to slightly shift its focus. Over these years, we have focused on delving deeper into image correction techniques for data obtained from Fabry-Pérot interferometers, such as TuMag and IMaX. As well as conducting several studies using data products from other instruments, such as the Polarimetric and Helioseismic Imager aboard Solar Orbiter (SO/PHI) and HMI. 
 
+\begin{figure}
+  \centering
+  \includegraphics[width = \textwidth]{figures/Introduction/SunriseIII_trajectory.pdf}
+  \caption{Sunrise III trajectory.} 
+  \label{fig_intro: sunrise_trajectory}
+\end{figure}
+
+
 It wasn't until the $10th$ of July of 2024 that Sunrise III got its second chance to fly, and this time, the opportunity was not wasted. After a very succesful flight that lasted 6 days, the observatory landed in the northern region of Canadá on the XX of July. Figure XX shows the trajectory our favourite solar observcatory followed over this days. The recovery process started immediately after landing, and we were able to lay hands on the data for the first time on September 2024. 
 
 In the following chapters, we will present the work undertaken during the calibration and commissioning of TuMag, conducted in 2021, 2022, and 2024. Additionally, the research carried out between the first and second flights of Sunrise III, which has resulted in the publication of two articles as the main author — one published in APJ and the other in A\&A — will also be detailed in this manuscript, as well as other studies that have not yet been published in any scientific journal. 
@@ -54,6 +62,58 @@ Regardless of how spectroscopy is carried out, spectropolarimeters must be able 
 Excellent polarimetric sensitivity and spectral resolution are wasted if the optical capabilities of the instrument are not up to par. The design of these instruments must achieve diffraction-limited imaging, with a signal-to-noise ratio ensuring a polarimetric sensitivity of 1000 (typically), and the best spatial resolution the telescope allows, all without sacrificing spectral resolution and accomplishing this in the shortest possible time.
 
 When designing the instrument, one must balance these three properties: spectral, optical, and polarimetric capabilities, trying to improve the performance in all of them without sacrificing too much. In the following sections, we will delve into each of these aspects in more detail.
+
+\subsection{Imaging}
+
+Filtergraphs are, first and foremost, imagers. The high-resolution imaging that filtergraph instruments are capable of is one of the pivotal reasons for their extended use. The ability to capture a two-dimensional scene of the solar surface makes them ideal for studying solar plasma structures, which require resolutions close to 100 km on the solar photosphere. These instruments must be able to ensure an image quality and resolving power enough to measure these structures. For this reason, we will begin our description of the filtergraphs with a brief explanaiton of image formation and image quality assessment. 
+
+Let us assume that the extended source we are observing has a instensity distribution in the image plane given by $O(\xi _ 0, \eta _ 0)$. Then, if we assume a linear optical system and incoherent illumination, the intensity distribution measured at a point $\xi, \eta$ of the image is given by : 
+
+\begin{equation}
+  I_ j\left(\xi, \eta ; \lambda_{s}\right)= \iint  O\left(\xi_0, \eta_0\right)  \mathcal{S}\left(\xi_0, \eta_0; \xi , \eta;\right)  \mathrm{d} \xi_{0} \mathrm{~d} \eta_{0},
+  \label{eq_spectro: intensity_simple}
+\end{equation}
+where $\mathcal{S}\left(\xi_0, \eta_0; \xi , \eta;\right)$ represents the imaging response of the instrument, also referred to as the Point Spread Function (PSF). The PSF describes the normalized intensity distribution in the image plane when observing a point source, which, due to diffraction and inherent imperfections in any imaging system, cannot be imaged as an ideal point.
+
+The PSF is crucial in the assessment of image quality and resolving power of an instrument since it defines how fine detail will be imaged into the detector. One particularly relevant metric for image quality assessment that can be derived from the PSF is the modulation transfer function (MTF). The MTF, in turn, is obtained from the optical transfer function (OTF), which is the Fourier transform of the PSF. 
+
+\begin{equation}
+  OTF(\nu) = \mathcal{F}\left[\mathcal{S}\left(\xi_0, \eta_0; \xi , \eta;\right)\right],
+\end{equation}
+where the operator $\mathcal{F}$ is the Fourier transform, and $\nu$ the spatial frequencies.
+
+The OTF describes how different spatial frequencies are transferred from the object to the image, thus providing a comprehensive characterization of the system's ability to resolve fine details. However, since imaging systems measure intensities, we are primarily concerned with how the intensity pattern of an object is transferred to the image. A key metric for quantifying this transfer is modulation, or contrast, which is defined as the ratio between the peaks and valleys of intensity at a given spatial frequency:
+
+\begin{equation}
+  M _ {\nu} = \frac{I_{max} ^{\nu} - I_{min} ^{\nu}}{I_{max} ^{\nu} + I_{min} ^{\nu}},
+\end{equation}
+
+which is strictly related to the OTF as the ratio of the modulation of the object $MTF_{obj}$ and that of the image $MTF_{im} $can be computed from the magnude of the OTF \citep{OTF}:
+
+\begin{equation}
+  \frac{MTF_{im}(\nu)}{MTF_{obj}(\nu)} = | OTF(\nu) |.
+\end{equation}
+
+From this definition, it is evident that a perfect optical system would have an $MTF=1$ at all spatial frequencies, meaning that all details are perfectly transferred from the object to the image. However, real optical systems exhibit a decrease in MTF as spatial frequency increases. In practice, the resolution of an optical system can, and is often defined as the spatial frequency at which both the MTF and, consequently, the OTF reach zero \citep{wfes}. This threshold frequency marks the limit beyond which the system can no longer resolve finer details. 
+
+Another key concepts for assessing the imaging performance are the phase error or wavefront. The wavefront, or phase error of an optical system, is defined as the phase deviation at any point of the image from that of an ideal spherical wavefront \citep{WFE_def}. These deviations arise from a variety of optical imperfections in the imaging system and their effect on the image depends on its nature. Some examples are imperfections of the mirror shape or lenses, that can cause spherical phase aberrations where the PSF is broadened, thus worsening the reolution, or astigmatism, where there is a focus difference between different directions, leading to distorted images; comatic aberrations, or coma, can be caused by a misalignment of optical elements, and create distorted images of sources where they appear to have a tail-like structure. 
+
+One very common metric of the optical quality is th root mean square (rms) of the variance of the wavefront, $\Delta \phi (\xi, \eta)$, usually refered to as RMS wavefront error WFE or simply WFE: 
+
+\begin{equation}
+  RMS WFE = \sqrt{\frac{1}{A}\int _ {A} \left( \Delta \phi \right) ^2 \mathrm{d \xi}\mathrm{d \eta}},
+\end{equation}
+where $A$ is the area of the aperture. 
+
+This value, which is basically the standard deviation of the wavefront across the FoV, is strictly related to beam propagation quality. In fact, in can be shown that the variance of the wavefront can be computed from the Strehl ratio (or viceversa). The Strehl ratio is the ratio between the peak intensity of a point source and the peak ratio of the observed PSF. It is one of the most widely employed metrics to evaluate the optical quality of an optical system. It varies from 1 to 0, where the former corresponds to an ideal unaberrated system, that is, a system operating in the difraction limit. If the aberrations are small, the strehl ratio (St) and the WFE are related through the expression \citep{WFE_def}:
+
+\begin{equation}
+  St \simeq \exp \left[ - \left(\frac{2\pi WFE}{\lambda}\right) ^2 \right].
+\end{equation}
+
+The wavefront can be represented as a two-dimensional map on the image plane. ETC ETC Zernikes. 
+
+PD
 
 \subsection{Spectroscopy}
 
