@@ -63,7 +63,7 @@ Excellent polarimetric sensitivity and spectral resolution are wasted if the opt
 
 When designing the instrument, one must balance these three properties: spectral, optical, and polarimetric capabilities, trying to improve the performance in all of them without sacrificing too much. In the following sections, we will delve into each of these aspects in more detail.
 
-\subsection{Imaging}
+\subsection{Imaging.}
 
 Filtergraphs are, first and foremost, imagers. The high-resolution imaging that filtergraph instruments are capable of is one of the pivotal reasons for their extended use. The ability to capture a two-dimensional scene of the solar surface makes them ideal for studying solar plasma structures, which require resolutions close to 100 km on the solar photosphere. These instruments must be able to ensure an image quality and resolving power enough to measure these structures. For this reason, we will begin our description of the filtergraphs with a brief explanaiton of image formation and image quality assessment. 
 
@@ -75,14 +75,14 @@ Let us assume that the extended source we are observing has a instensity distrib
 \end{equation}
 where $\mathcal{S}\left(\xi_0, \eta_0; \xi , \eta;\right)$ represents the imaging response of the instrument, also referred to as the Point Spread Function (PSF). The PSF describes the normalized intensity distribution in the image plane when observing a point source, which, due to diffraction and inherent imperfections in any imaging system, cannot be imaged as an ideal point.
 
-The PSF is crucial in the assessment of image quality and resolving power of an instrument since it defines how fine detail will be imaged into the detector. One particularly relevant metric for image quality assessment that can be derived from the PSF is the modulation transfer function (MTF). The MTF, in turn, is obtained from the optical transfer function (OTF), which is the Fourier transform of the PSF. 
+The PSF is crucial in the assessment of image quality and resolving power of an instrument since it defines how fine detail will be imaged into the detector. One particularly relevant metric for image quality assessment that can be derived from the PSF is the modulation transfer function (MTF). The MTF, in turn, is obtained from the optical transfer function (OTF), which is the Fourier transform of the PSF \citep{vargas_tesis}. 
 
 \begin{equation}
   OTF(\nu) = \mathcal{F}\left[\mathcal{S}\left(\xi_0, \eta_0; \xi , \eta;\right)\right],
 \end{equation}
 where the operator $\mathcal{F}$ is the Fourier transform, and $\nu$ the spatial frequencies.
 
-The OTF describes how different spatial frequencies are transferred from the object to the image, thus providing a comprehensive characterization of the system's ability to resolve fine details. However, since imaging systems measure intensities, we are primarily concerned with how the intensity pattern of an object is transferred to the image. A key metric for quantifying this transfer is modulation, or contrast, which is defined as the ratio between the peaks and valleys of intensity at a given spatial frequency:
+The OTF describes how different spatial frequencies are transferred from the object to the image, thus characterizing the system's ability to resolve fine details. However, since imaging systems measure intensities, we are primarily concerned with how the intensity pattern of an object is transferred to the image. A key metric for quantifying this transfer is modulation, or contrast, which is defined as the ratio between the peaks and valleys of intensity at a given spatial frequency:
 
 \begin{equation}
   M _ {\nu} = \frac{I_{max} ^{\nu} - I_{min} ^{\nu}}{I_{max} ^{\nu} + I_{min} ^{\nu}},
@@ -96,24 +96,35 @@ which is strictly related to the OTF as the ratio of the modulation of the objec
 
 From this definition, it is evident that a perfect optical system would have an $MTF=1$ at all spatial frequencies, meaning that all details are perfectly transferred from the object to the image. However, real optical systems exhibit a decrease in MTF as spatial frequency increases. In practice, the resolution of an optical system can, and is often defined as the spatial frequency at which both the MTF and, consequently, the OTF reach zero \citep{wfes}. This threshold frequency marks the limit beyond which the system can no longer resolve finer details. 
 
-Another key concepts for assessing the imaging performance are the phase error or wavefront. The wavefront, or phase error of an optical system, is defined as the phase deviation at any point of the image from that of an ideal spherical wavefront \citep{WFE_def}. These deviations arise from a variety of optical imperfections in the imaging system and their effect on the image depends on its nature. Some examples are imperfections of the mirror shape or lenses, that can cause spherical phase aberrations where the PSF is broadened, thus worsening the reolution, or astigmatism, where there is a focus difference between different directions, leading to distorted images; comatic aberrations, or coma, can be caused by a misalignment of optical elements, and create distorted images of sources where they appear to have a tail-like structure. 
+Another key concept for assessing the imaging performance is the phase error or wavefront. The wavefront of an optical system is defined as the deviation in phase at any point within the image from that of an ideal spherical wavefront \citep{WFE_def}. Such deviations arise from various optical imperfections within the imaging system, and their impact on image quality depends on the specific nature of the aberration. For instance, imperfections in mirror shape or lens configuration can result in spherical aberrations, leading to a broadening of the point spread function (PSF) and a subsequent reduction in resolution. Other common aberrations include astigmatism, where the focal point varies along different axes, producing distorted images, and comatic aberrations (coma), which can occur due to misalignment of optical elements and manifest as tail-like distortions in the images of point sources.
 
-One very common metric of the optical quality is th root mean square (rms) of the variance of the wavefront, $\Delta \phi (\xi, \eta)$, usually refered to as RMS wavefront error WFE or simply WFE: 
+It is common to see requirements or assessment of the optical quality in terms of the root mean square (rms) of the variance of the wavefront, $\Delta \phi (\xi, \eta)$, usually refered to as wavefront error (rms WFE) or simply WFE:
 
 \begin{equation}
-  RMS WFE = \sqrt{\frac{1}{A}\int _ {A} \left( \Delta \phi \right) ^2 \mathrm{d \xi}\mathrm{d \eta}},
+  WFE = \sqrt{\frac{1}{A}\int _ {A} \left( \Delta \phi (\xi, \eta) \right) ^2 \mathrm{d \xi}\mathrm{d \eta}},
 \end{equation}
 where $A$ is the area of the aperture. 
 
-This value, which is basically the standard deviation of the wavefront across the FoV, is strictly related to beam propagation quality. In fact, in can be shown that the variance of the wavefront can be computed from the Strehl ratio (or viceversa). The Strehl ratio is the ratio between the peak intensity of a point source and the peak ratio of the observed PSF. It is one of the most widely employed metrics to evaluate the optical quality of an optical system. It varies from 1 to 0, where the former corresponds to an ideal unaberrated system, that is, a system operating in the difraction limit. If the aberrations are small, the strehl ratio (St) and the WFE are related through the expression \citep{WFE_def}:
+This value, essentially the standard deviation of the wavefront across the FoV, is closely tied to beam propagation quality. In fact, it can be demonstrated that the wavefront variance can be derived from the Strehl ratio, or conversely, the Strehl ratio can be computed from the wavefront error. The Strehl ratio is defined as the ratio of the peak intensity of a point source in an aberrated system to that of an ideal system operating at the diffraction limit. It is one of the most widely used metrics for assessing the optical quality of a system, ranging from 1, for a perfect, unaberrated system, to 0. For small aberrations, the Strehl ratio (SR) and WFE are related by the following expression \citep{WFE_def}: 
 
 \begin{equation}
-  St \simeq \exp \left[ - \left(\frac{2\pi WFE}{\lambda}\right) ^2 \right].
+  SR \simeq \exp \left[ - \left(\frac{2\pi WFE}{\lambda}\right) ^2 \right].
 \end{equation}
 
-The wavefront can be represented as a two-dimensional map on the image plane. ETC ETC Zernikes. 
+Although the Strehel ratio and rms WFE provide a concise measure of the optical quality of a system, the WFE contains additional information that can further elucidate imaging performance. Rather than relying solely on a single averaged value (such as the standard deviation), the wavefront can be represented as a two-dimensional map projected onto a plane normal to the light path, typically the image plane. To carry out such a representation analytically, it is essential to select an appropriate mathematical framework. Given the widespread use of circular apertures in telescopes, mirrors, lenses, and other optical components, it is advantageous to approach the problem using polar coordinates, and in particular, to employ an orthonormal basis for theinterpretability of the results. Among the multiple (infinite) sets of polynomials that fullfill these requirements, the Zernike polynimals \citep{Zernike} offer some distinct advantages. The Zernike polynomials are a sequence of polynomials that compose an orthonormal basis over a unit circle. Given an arbitrary wavefront, ($W(\rho, \theta)$), the expansion in terms of the Zernike polynomials can be expressed as \citep{Zernike_guide}:
+\begin{equation}
+  W(\rho, \theta) = \sum_{n, m} C _n ^m Z _ n ^m(\rho, \theta),
+\end{equation}
+where $Z _n ^m$ are the Zernike polinomyals, $C_n ^m$ are the amplitues of the coeffiecients in the expansion and $n$ and $m$ are the radial order and angular frequency, repectively. 
 
-PD
+This represntation of the wavefront is of special interest since each mode (a particular value for $n$ and $m$) corrsponds to a specific aberration of the wavefront, and the value of the coefficient represents the rms WFE associated to that specific aberration. Additionally, the orthogonality of the basis ensures that the addition of terms into the expansion does not affect the value of the previous. Therefore, the Zernike polynomial expansion allow us to describe the wavefront as the sum of all the individual aberrations. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width = \textwidth]{figures/Introduction/zernikes_combined.pdf}
+  \caption{Sunrise III trajectory.} 
+  \label{fig_intro: sunrise_trajectory}
+\end{figure}
 
 \subsection{Spectroscopy}
 
