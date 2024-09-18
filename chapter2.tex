@@ -49,18 +49,53 @@ Light then reaches the cameras, where images from both are recorded and stored. 
 
 \section{Instrument performance and verification.}
 
-All subsystems within the TuMag light path function collaboratively to deliver high-resolution spectroscopic data of the solar spectrum. To ensure data quality, TuMag underwent multiple verification and calibration processes, during which its spectral, polarimetric, and imaging properties were meticulously tested. These procedures, commonly referred to as end-to-end (E2E) calibration tests, were conducted at various stages of the mission. Specifically, they were performed during the assembly, integration, and verification (AIV) activities with the stand-alone instrument at INTA facilities in Madrid, Spain; during the AIV phase of the post-focus instrument (PFI) platform at MPS facilities in Göttingen, Germany; and during the TuMag AIV phase in the Sunrise III mission at ESRANGE facilities in Kiruna, Sweden. These tests were designed not only to validate the instrument's capabilities but also to measure critical parameters such as the tuning constant of the etalon, modulation matrices, and best-focus position—each of which is vital for the optimal operation of TuMag and the subsequent data processing (see \citealt{e2e-tests-inta} for a detailed description of the tests). We will now delve into the details of the imaging, spectral and polarimetric properties of the instrument as well as the verification processes and results, as the two are intimately related.  
+All subsystems within the TuMag light path function collaboratively to deliver high-resolution spectroscopic data of the solar spectrum. To ensure data quality, TuMag underwent multiple verification and calibration processes, during which its spectral, polarimetric, and imaging properties were meticulously tested. These procedures, commonly referred to as end-to-end (E2E) calibration tests, were conducted at various stages of the mission. Specifically, they were performed during the assembly, integration, and verification (AIV) activities with the stand-alone instrument at INTA facilities in Madrid, Spain; during the AIV phase of the post-focus instrument (PFI) platform at MPS facilities in Göttingen, Germany; and during the TuMag AIV phase in the Sunrise III mission at ESRANGE facilities in Kiruna, Sweden. These tests were designed not only to validate the instrument's capabilities but also to measure critical parameters such as the tuning constant of the etalon, modulation matrices, and best-focus position—each of which is vital for the optimal operation of TuMag and the subsequent data processing (see \cite{e2e-tests-inta} for a detailed description of the tests). We will now delve into the details of the imaging, spectral and polarimetric properties of the instrument as well as the verification processes and results, as the two are intimately related.  
 
 \subsection{Imaging performance.}
 TuMag captures photons using two custom-made cameras \citep{tumag-cams} equipped with GPIXEL back-illuminated GSENSE400BSI detectors, each featuring a $2k \times 2k$ pixel array, and specifically designed to meet TuMag's scientific requirements. These cameras provide a broad FoV of $63'' \times 63''$, sufficient to encompass an entire medium-sized active region, with a plate scale of $0.0378''$/pixel.
 
 In order to fulfill the requirement of the wavefront error of $W \sim \lambda / 14$, the instrument must have means to correct for the additional aberrations introduced by the telescope, the image stabilization and light distribution (ISLiD) system and uncorrected jittering. For this purpose, TuMag is equipped with a PD plate in the filter wheel that allow to apply image reconstruction techniques to the final images. 
 
-The imaging E2E tests involved projecting several targets at the F4 focus, including a USAF test target, star targets, and a grid, observed both with and without the PD plate. These targets were utilized to evaluate the MTF and to assess the resolving power of TuMag. The PD measurements enabled verification of the wavefront error (WFE) derived from the MTF and an evaluation of the image quality following image restoration. The MTF functions (see Figure XXX) indicate that the performance of the 517 nm pre-filter and the horizontal behavior of the 525 nm pre-filters align well with expectations, corresponding to WFE values better than $\lambda /10$. However, the vertical performance of the iron pre-filters appears to be degraded. This observed astigmatism is attributed to the etalon and physical deformations of the pre-filters caused by the mechanical method used to secure and tilt them. This effect is particularly noticeable in the iron pre-filters due to the higher angles of incidence required for their tuning.
+The imaging E2E tests involved projecting several targets at the F4 focus, including a USAF test target, star targets, and a grid, observed both with and without the PD plate. These targets were utilized to evaluate the MTF and to assess the resolving power of TuMag. The PD measurements enabled verification of the wavefront error (WFE) derived from the MTF and an evaluation of the image quality following image restoration. 
+
+The USAF target \footnote{The 1951 USAF target from Thorlabs Inc, model: R1DS1N.} consists on a series of horizontal and vertical line pairs (lp) aranged in sets of three with varying resolutions. Identifying the highest resolution group allows for a fast diagnostic of the instruments resolution and performance. In fig.~ref{tumag : USAF}, measurements of group 4 and 5 of the USAF target are shown for all cameras and prefilters. The set 2 of the group 5 (highlighted in a white box), which corresponds to 35.9 lp/mm in the target and 24.3 lp/mm in the image, is of special interest since its close to the Airy disk radius (26.4 lp/mm) and therefore close to TuMag's resolution limit. 
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{figures/TuMag/USAF_E2E.pdf}
+    \caption{
+      USAF target measurements for both cameras and the three pre-filters performed during E2E tests at INTA facilities on December 2021. The white boxes highlight the second element of the test group 5 (35.9 lp/mm). The scale of the images is set in digital counts.}
+      \label{tumag : USAF}
+\end{figure}
+
+The results show a better optical performance for the 517 nm pre-filter than the other two pre-filters. The USAF 5.2 set is clearly resolved fo this pre-filter in both cameras showing almost no differene between vertical and hiorizontal resolutions. However, results for the 525 nm prefilters exhibit a worsening of the resolution, with the same set being hardly resolved in the horizontal direction in both prefilters. 
+
+However, a more precise evaluation of the optical performance can be achieved from the MTFs. Figure XX shows the MTFs computed with a slit target (see \cite{slanted-method} for a description of the MTF computation) during the E2E tests performed in December 2021 at INTA facilities. These results agree with the diagnostic carried with the USAF tests: the 517 nm pre-filter shows a good performance in both directions, with values above the expected behaviour. Meanwhile, 525 pre-flters exhibit a large difference between different directions with an important drop in vertical resolution in both cases. This observed astigmatism is attributed to the etalon and physical deformations of the pre-filters caused by the mechanical method used to secure and tilt them. This effect is particularly noticeable in the iron pre-filters due to the higher angles of incidence required for their tuning.
+
+The comparison of the obtained MTF and the difraction-limited one allows for an estimation of the Strehl ratio, and consequently the wavefront error (see section \ref{sec: intro-imaging}).
+
+Table \ref{table: Optical-performance} shows the results for the Strehl ratios and WFE derived from this computation. All values, except for the horizontal resolution in camera 1 of the 517 nm prefiter are lower than the $\lambda/14$ set as a requirement. However, images can always be restored if $WFE \gtrapprox \lambda / 5$ \citep{restoration-limit} if the PSF is known, thus the need for the inclusion of PD capabilities in the instrument. Furthermore, PD techniques not only allow us to enhance the optical performance of the instrument but also evaluate the optical performance during the calibrations in order to verify the results obtained through the computation of the MTF. 
 
 
-
-
+\begin{table}
+    \centering
+   \begin{tabular}{ccccc}
+    \hline
+    \hline
+    Pre-filter and & Strehl ratio & Strehl ratio & WFE& WFE\\
+    camera & Vertical & Horizontal & Vertical & Horizontal\\
+    \hline
+    517 nm - Cam 1 & 0.782 & 0.826 & $\lambda/12.7$ & $\lambda/14.5$ \\
+    517 nm - Cam 2 & 0.761 & 0.806 & $\lambda/12.1$ & $\lambda/13.5$ \\
+    525.02 nm - Cam 1 & 0.436 & 0.725 & $\lambda/6.9$ & $\lambda/11.1$ \\
+    525.02 nm - Cam 2 & 0.405 & 0.726 & $\lambda/6.6$ & $\lambda/11.1$ \\
+    525.06 nm - Cam 1 & 0.451 & 0.764 & $\lambda/7$ & $\lambda/12.1$ \\
+    525.06 nm - Cam 2 & 0.444 & 0.736 & $\lambda/7$ & $\lambda/11.3$ \\
+    \hline
+    \hline
+    \end{tabular}
+    \caption{Optical performance evaluated from the MTFs obtained with the slit target at December 2021 E2E tests.}
+    \label{table: Optical-performance}
+\end{table}
 
 
 \subsection{Verification}

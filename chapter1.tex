@@ -63,7 +63,7 @@ Excellent polarimetric sensitivity and spectral resolution are wasted if the opt
 
 When designing the instrument, one must balance these three properties: spectral, optical, and polarimetric capabilities, trying to improve the performance in all of them without sacrificing too much. In the following sections, we will delve into each of these aspects in more detail.
 
-\subsection{Imaging and optical quality.}
+\subsection{Imaging and optical quality.\label{sec: intro-imaging}}
 
 Filtergraphs are, first and foremost, imagers. The high-resolution imaging that filtergraph instruments are capable of is one of the pivotal reasons for their extended use. The ability to capture a two-dimensional scene of the solar surface makes them ideal for studying solar plasma structures, which require resolutions close to 100 km on the solar photosphere. These instruments must be able to ensure an image quality and resolving power enough to measure these structures. For this reason, we will begin our description of the filtergraphs with a brief explanaiton of image formation and image quality assessment. 
 
@@ -71,7 +71,7 @@ Let us assume that the extended source we are observing has a instensity distrib
 
 \begin{equation}
   I_ j\left(\xi, \eta ; \lambda_{s}\right)= \iint  O\left(\xi_0, \eta_0\right)  \mathcal{S}\left(\xi_0, \eta_0; \xi , \eta;\right)  \mathrm{d} \xi_{0} \mathrm{~d} \eta_{0},
-  \label{eq_spectro: intensity_simple}
+  \label{eq_imaging: intensity_simple}
 \end{equation}
 where $\mathcal{S}\left(\xi_0, \eta_0; \xi , \eta;\right)$ represents the imaging response of the instrument, also referred to as the Point Spread Function (PSF). The PSF describes the normalized intensity distribution in the image plane when observing a point source, which, due to diffraction and inherent imperfections in any imaging system, cannot be imaged as an ideal point.
 
@@ -144,12 +144,32 @@ Figure~\ref{fig_intro: zernikes} presents an example of a simulated wavefront, i
 
 Although properties such as the PSF and WFE provide us with a lot of information to evaluate the instruments performance they are not known a priori. Instruments need to be equipped with means to measure these quantitites in order to assees the performance and correct for any defects. The strategy to follow depends on the properties of the instrument, for instance, onground instruments may be equpiided with adaptive optics technology where the wavefront is directly measured and corrected for in real time. (REFERENCIAS). However, this approach is not feasble in all instruments, such as space-born instruments, for example, thus, other methods are required. One apprach  of special relevance for this purpose is the phase diversity technique.
 
-The phase diversity algorithm \citep{PD_original} is a method to infer the aberrations present in an optical system by obtaining (at least) two simultaneous, or quasi-simutaneous, images of the same object introducing an additional and known aberration to one of the images. 
+The phase diversity algorithm \citep{PD_original} is a method to infer the aberrations present in an optical system by obtaining, at least, two simultaneous, or quasi-simutaneous, images of the same object introducing an additional and known aberration to one of the images.  
 
+The algorithm works by minimizing a cost function that depends on the OTF of the system which can be parametrized by the Zernike expanison \citep{pd_cost}: 
 
+\begin{equation}
+  \mathcal{L} (C) = \sum _ {k} \frac{|I_1 (u) S_2 (u, C) - I_2(u) S_1(u, C)| ^2}{|S_1(u, C)| ^2 + |S_2(u, C)| ^2} , 
+\end{equation}
+where k represents the pairs of aberrated (subindex 1) and unaberrated (subindex 2) images, u is the frequency vector in the Fourier domain, I stands for the intensity distributions, S for the system's OTF expressed in terms of a Zernike expansion with coeffiecients C. 
 
+By finding the coefficients of the zernike expansion that minimize $\mathcal{L}$, we are able to characterize the wavefront and identify the aberrations present in the optical system. Thus, determining the OTF, and consequently the PSF. 
 
-Image reconstruction techniques .. deconvolution, etc... 
+We are interested in determining the wavefront and OTF not only as a quality indicator of the instrument but also because it allows us to restore the image and remove the effects that the aberrations introduce into the image. 
+
+The process of removing the effects of the aberrations consists on extracting the effects of the PSF into the final intensity, or in other words, we need to \textit{deconvolve} the PSF from the image. Coming back to \eqref{eq_imaging: intensity_simple}, we can simplify the integrals to a convolution operator in the Fourier domain assuming an spatial invariance of the PSF. In that case, the observed intensity can be expressed by:
+
+\begin{equation}
+  I(\xi, \eta) = O(\xi, \eta) * S(\xi, \eta) + \nu (\xi, \eta)
+  \label{eq_imaging: conv} 
+\end{equation}  
+where we added a term accounting for the noise present in real meaurmeents $\nu (\xi, \eta)$. 
+
+The determination of $O(\xi, \eta)$ is easier to compute in the fourier domain, since the convolution operator can be expressed as the product of the corresponding fourier transformation. Taking this into account and doing a simple rearrangement of equation \eqref{eq_imaging: conv}, we can determine the object through:
+
+FILTRO OPTIMO?
+
+RESUMEN? 
 
 
 \subsection{Spectroscopy}
