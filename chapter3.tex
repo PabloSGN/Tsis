@@ -1,7 +1,44 @@
 \chapter{\label{CH:Pipeline}TuMag's pipeline and data.}
+INtro? tumag flew on bla vla. The data was recovered bla bla,
+The reduction process started on bla bla and is ongoing right now bla bla. 
 
-\section{TuMag's Pipeline}
+\section{TuMag's observing modes}
 
+TuMag operates through a series of so-called observing modes. The observing modes are a list of pre-configured settings for the observations that fullfill different scientific puprposes and are meant to allow an almost automatic operation of the instrument during flight. 
+
+\begin{table}
+    \centering
+   \begin{tabular}{cccccccc}
+    \hline
+    \hline
+    Observing mode & Spectral lines  & $N_\lambda$ & $N_P$ & $N_a$& $N_c$ & $t_{eff} (s)$ & (S/N) \\
+    \hline
+    0s & Mg I $b_2$ 5172.7 \r{A} & 12 & 1 & 2 & 1 & 6.3 & 500\\ 
+    0p & Mg I $b_2$ 5172.7 \r{A} & 12 & 4 & 16 & 1 & 37.62 & 1000\\
+    1  & Mg I $b_2$ 5172.7 \r{A} &  10 & 4 & 16 & 1 & 31.81 & 1000\\
+    2  & Fe I 5250.2 \r{A}, Fe I 5250.6 \r{A} &  8 & 4 & 16 & 1 & 23.4 & 1000\\
+    3  & Fe I 5250.2 \r{A}, Fe I 5250.6 \r{A} & 5 & 2 & 20 & 1 & 10.04 & 1000\\
+    4  & Mg I $b_2$ 5172.7 \r{A} & 3 & 4 & 10 & 10 & 54.01 & 2500\\
+    5  & Fe I 5250.2 \r{A}, Fe I 5250.6 \r{A} & 3 & 4 & 10 & 10 & 53.60 & 2500\\ 
+    \hline
+    \hline
+    \end{tabular}
+    \caption{Scientific observing modes. From left to righ, the columns are: observing mode identiicator, measured spectral lines, number of wavelengths, of modulations, of accumulations, of cycles, the total timeand the polarimetric SNR.}
+    \label{table: scientific observing modes}
+\end{table}
+
+
+A summary of the properties for each observing mode is provided in Table \ref{table: scientific observing modes}. There are four distinct modes designed to observe the magnesium line. Mode 0s performs a fast, extended scan of the spectral line using 12 wavelength samples: [-40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 65]\footnote{Sampling positions are given relative to the line core.}, with one modulation and two accumulations to maximize scanning speed. Mode 0p is similar to mode 0s but employs a full-vector modulation scheme, requiring 16 accumulations to ensure the required SNR. Mode 1 provides a shortened scan of the magnesium line, with measurements taken at [-30, -20, -10, -5, 0, 5, 10, 20, 30, 65], also utilizing a vectorial modulation scheme. Finally, mode 4 is a "deep" magnetic mode, featuring a highly reduced scan with only three samples at [-10, 0, 10], but with increased accumulations and cycles to enhance polarimetric sensitivity. 
+
+Three observing modes are configured for the iron lines. Mode 2 employs a vectorial modulation scheme applicable to both iron lines, with sampling at [-12, -8, -4, 0, 4, 8, 12, 22] pm. Mode 3 uses a longitudinal modulation scheme, measuring only Stokes I and V, with samples taken at [-8, -4, 4, 8, 22] pm. Lastly, mode 5 closely resembles mode 4, but is configured for the iron lines, with sampling at [-8, 0, 8] pm. The only difference between these two modes is the sampling scheme.
+
+
+\subsection{Calibration modes}
+
+
+
+
+\section{Pipeline}
 \subsection{Darks and flat fields}
 \subsection{Blueshift}
 \subsection{Demodulation and dual beam}

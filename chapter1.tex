@@ -157,7 +157,7 @@ By finding the coefficients of the zernike expansion that minimize $\mathcal{L}$
 
 We are interested in determining the wavefront and OTF not only as a quality indicator of the instrument but also because it allows us to restore the image and remove the effects that the aberrations introduce into the image. 
 
-The process of removing the effects of the aberrations consists on extracting the effects of the PSF into the final intensity, or in other words, we need to \textit{deconvolve} the PSF from the image. Coming back to \eqref{eq_imaging: intensity_simple}, we can simplify the integrals to a convolution operator in the Fourier domain assuming an spatial invariance of the PSF. In that case, the observed intensity can be expressed by:
+The process of removing the effects of the aberrations consists on extracting the effects of the PSF into the final intensity, or in other words, we need to \textit{deconvolve} the PSF from the image. Coming back to equation \eqref{eq_imaging: intensity_simple}, we can simplify the integrals to a convolution operator in the Fourier domain assuming an spatial invariance of the PSF. In that case, the observed intensity can be expressed by:
 
 \begin{equation}
   I(\xi, \eta) = O(\xi, \eta) * S(\xi, \eta) + \nu (\xi, \eta)
