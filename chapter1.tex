@@ -242,7 +242,26 @@ If we denote each of the modulations by $I _ j$ with $j \in \left\{ 1, 2, 3, 4\r
     \end{pmatrix} \, 
     \label{eq_spectro_theory: stokes_linear_comb}
 \end{equation}
-where the superindex in $m ^j _{oi}$ denotes the values of the Mueller Matrix for each modulation. Through straightforward algebra, it is easy to see that the stokes vector of the incoming light can be determined by $\textbf{I}_{in} = \textbf{D}\textbf{I}_{obs}$, where $\textbf{D}$ is the demodulation matrix, the inverse of the modulation matrix, $\textbf{O}$, and $\textbf{I}_{obs}$ is the vector containing the 4 measured modulations. Accurately determining $\textbf{O}$ during the instrument calibration process is crucial, as the determination of the Stokes components depends entirely upon it.
+where the superindex in $m ^j _{oi}$ denotes the values of the Mueller Matrix for each modulation. Through straightforward algebra, it is easy to see that the stokes vector of the incoming light can be determined by $\textbf{I}_{in} = \textbf{D}\textbf{I}_{obs}$, where $\textbf{D}$ is the demodulation matrix, the inverse of the modulation matrix, $\textbf{O}$, and $\textbf{I}_{obs}$ is the vector containing the 4 measured modulations. 
+
+Carefully determining $\textbf{O}$, and consequently $\textbf{D}$, during the instrument calibration process is crucial, as the accuracy of the determination of the Stokes components depends entirely upon it. It can be proven \citep{optimum_modulation} that the optimum modulation scheme—the values of $\textbf{D}$ that enable the Stokes vector to be computed with minimal uncertainty—satisfies the conditions:
+
+\begin{equation}
+  \varepsilon _ 1 \leqslant 1 \text{     , and     }, \sum _ {i = 2} ^4 \varepsilon _ i ^2 \leqslant 1,
+  \label{eq_intro:optimum_efficiencies}
+\end{equation}
+where the polarimetric efficiencies for each stokes parameter (i = 1, 2, 3, 4), $\varepsilon _ i$, are defined as:
+\begin{equation}
+  \varepsilon _ i = \left( N_p \sum _ {j = 1} ^ {N_p} D _ {i, j} ^2\right) ^{-1/2},
+  \label{eq_intro: polarimetric_efficiencies_definition}
+\end{equation}
+where $N_p$ is the number of independend modulations. 
+When designing the modulation scheme for a given instrument, it is essential to satisfy the efficiency conditions given in Equation~\eqref{eq_intro:optimum_efficiencies} to ensure optimal polarimetric accuracy for all Stokes components. Furthermore, for equal sensitivities in the measurements of Stokes parameters Q, U, and V, the corresponding efficiencies should all be equal, with a value of $1/\sqrt{3}$. This is a very important result beacause polarimetric efficiencies are directly related to the smallest measurable polarimetric signals, the polarimetric sensitivity—essentially the inverse of the signal-to-noise ratio (SNR). This relation can be expressed as \citep{optimum_modulation}:
+\begin{equation}
+  \left( \frac{S}{N}\right)_i = \frac{\varepsilon _ i}{\varepsilon _ 1} \left(\frac{S}{N}\right)_1 \text{,    } i = 2, 3, 4 .
+  \label{eq_intro: sn_and_efficiencies}
+\end{equation}
+From equations \eqref{eq_intro: sn_and_efficiencies} and \eqref{eq_intro:optimum_efficiencies} it is clear that the sensitivities for computing Stokes Q, U, and V will always be lower than that of Stokes I, as their corresponding efficiencies are smaller. To achieve an SNR of $10^3$ in Stokes measurements, which is the sensitivity required to detect weak polarization signals, an SNR of at least $ \left(S/N \right)_0 \gtrapprox 1700$ is necessary in the measurement of Stokes I for a quasi-optimal modulation scheme.
 
 \subsection{\label{susec_spectropolarimeters: Imaging}Imaging}
 

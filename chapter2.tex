@@ -8,6 +8,11 @@ The SUNRISE III mission aims to study and stablish the relations and couplings b
 
 The design from scratch of an instrument such as this is very complex. There are many things that have to be meticulously designed and tested which span many fields of expertise, like optics, electronics, software, hardware, or thermal design. To avoid undue extension of this thesis, we will focus on the aspects of the design directly related to the optical properties, that is, regarding the spectral, imaging and polarimetric capabilities of the instrument. 
 
+\section{Sunrise III}
+
+Sunrise III description.
+
+
 \section{The Tunable magnetograph: TuMag}
 
 The Tunable Magnetograph (TuMag) is a tunable imaging spectropolarimeter designed to deliver high spatial resolution images across multiple spectral lines in four distinct polarization states. Consequently, TuMag is capable of measuring the four Stokes parameters, thus enabling the inference of the three components of the magnetic field and the LOS velocities at all the selected spectral lines. Moreover, this data must be acquired following a series of strict requiremets regarding optical quality, polarimetric efficiencies, required SNR, spectral performance and time limitations. A summary of these requirements is provided in Table \ref{table: Tumags requirements}. 
@@ -58,7 +63,7 @@ In order to fulfill the requirement of the wavefront error of $W \sim \lambda / 
 
 The imaging E2E tests involved projecting several targets at the F4 focus, including a USAF test target, star targets, and a grid, observed both with and without the PD plate. These targets were utilized to evaluate the MTF and to assess the resolving power of TuMag. The PD measurements enabled verification of the wavefront error (WFE) derived from the MTF and an evaluation of the image quality following image restoration. 
 
-The USAF target \footnote{The 1951 USAF target from Thorlabs Inc, model: R1DS1N.} consists on a series of horizontal and vertical line pairs (lp) aranged in sets of three with varying resolutions. Identifying the highest resolution group allows for a fast diagnostic of the instruments resolution and performance. In fig.~ref{tumag : USAF}, measurements of group 4 and 5 of the USAF target are shown for all cameras and prefilters. The set 2 of the group 5 (highlighted in a white box), which corresponds to 35.9 lp/mm in the target and 24.3 lp/mm in the image, is of special interest since its close to the Airy disk radius (26.4 lp/mm) and therefore close to TuMag's resolution limit. 
+The USAF target \footnote{The 1951 USAF target from Thorlabs Inc, model: R1DS1N.} consists on a series of horizontal and vertical line pairs (lp) aranged in sets of three with varying resolutions. Identifying the highest resolution group observable with TuMag allows for a fast diagnostic of the instrument resolution and performance. In fig.~\ref{tumag : USAF}, measurements of group 4 and 5 (and higher) of the USAF target are shown for both cameras and the three pre-filters. The set 2 of group 5 (highlighted in a white box), which corresponds to 35.9 lp/mm in the target and 24.3 lp/mm in the image, is of special interest since its close to the Airy disk radius (26.4 lp/mm) and therefore close to TuMag's resolution limit. 
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figures/TuMag/USAF_E2E.pdf}
