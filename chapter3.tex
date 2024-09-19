@@ -27,13 +27,30 @@ TuMag operates through a series of so-called observing modes. The observing mode
     \label{table: scientific observing modes}
 \end{table}
 
-
 A summary of the properties for each observing mode is provided in Table \ref{table: scientific observing modes}. There are four distinct modes designed to observe the magnesium line. Mode 0s performs a fast, extended scan of the spectral line using 12 wavelength samples: [-40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 65]\footnote{Sampling positions are given relative to the line core.}, with one modulation and two accumulations to maximize scanning speed. Mode 0p is similar to mode 0s but employs a full-vector modulation scheme, requiring 16 accumulations to ensure the required SNR. Mode 1 provides a shortened scan of the magnesium line, with measurements taken at [-30, -20, -10, -5, 0, 5, 10, 20, 30, 65], also utilizing a vectorial modulation scheme. Finally, mode 4 is a "deep" magnetic mode, featuring a highly reduced scan with only three samples at [-10, 0, 10], but with increased accumulations and cycles to enhance polarimetric sensitivity. 
 
 Three observing modes are configured for the iron lines. Mode 2 employs a vectorial modulation scheme applicable to both iron lines, with sampling at [-12, -8, -4, 0, 4, 8, 12, 22] pm. Mode 3 uses a longitudinal modulation scheme, measuring only Stokes I and V, with samples taken at [-8, -4, 4, 8, 22] pm. Lastly, mode 5 closely resembles mode 4, but is configured for the iron lines, with sampling at [-8, 0, 8] pm. The only difference between these two modes is the sampling scheme.
 
+Some parameters are however changed through the configuration of the observing mode in order to allow for some flexibility during operations. The parameters that can be configured are:
+
+Solo estos? o había más? 
+\begin{itemize}
+    \Myitem $\lambda _ {\text{rep}}$ : A parameter that allows to rpeat all the observations carried out at every spectral position before changing wavelength. This parameter is employed for flat-field observations (see the following section). By default is set to 1.
+    \Myitem Etalon offset : Although the sampling of the scan is set by the observing mode, a global shift could be applied to change the absolute voltages (wavelengths) of the scan. This parameter was employed to center the spectral line in shorter modes in observations affected by solar rotation or other effects that may shift the spectral position. The default value is set to 0 V.
+    \Myitem $N_a$ : Although the number of accumulations is fixed in nominal observing modes, this parameter was set as configurable in order to allow modifications for faster observations when needed. The  default value depends on the observing mode.  
+\end{itemize}
 
 \subsection{Calibration modes}
+An additional type of observing modes are also designed aimed at carrying out calibration observations. These calibration observing modes are more flexible than scientific ones, and allow for the configuration of several parameters to match the observations to the aim of the scientific observation. The calibration observing modes are the following:
+
+First, the flat-field observations, a modified version of the nominal observing modes whith a $\lambda _ {rep} = 4$, where usually multiple instances of the same mode are run consecutively. These observations, meant to be averaged over all the repetitions and $\lambda_{rep}$s, measure the intensity variation along the FoV originated from sources different than the observed object, and allow for the correction of these spurious effects in the reduction of the data. 
+
+Second, the dark-current observations, where a series of 50 images with 50 accumulations each are captured for each camera with the telescope obscured. These observations aim at measuring the intrinsic current measured by the camera in absence of light that needs to be removed from every measured image.
+
+Third, PD observations, a set of focused-defocused pair of images obtained quasi-simultaneously. These observations consist on sets of 40 or 32 standard (focused) images captured without modulating and accumulating at the continuum of the spectral line followed by another equal set of images but using the PD plate (defocused) images. During observations, two sets are typically obtained before and after the scientific observing blocks and employing the same pre-filters as the ones used in the nominal observing modes.
+
+Fourth, polarizers and micropolarizers observations, where images are measured at the continuum of the three spectral lines and employing the corresponding pre-filter. For each observation the same modulation scheme than the one employed in the scientific observing block is employed, thus obtaining the 4 modulations for each pre-filter for a vecorial scheme and 2 for the longitudinal one.  
+
 
 
 
