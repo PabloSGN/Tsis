@@ -42,13 +42,19 @@ The Tunable Magnetograph (TuMag) is a tunable imaging spectropolarimeter designe
 
 \section{TuMag's design and light path.}
 
+\begin{figure}
+    \includegraphics[width=\textwidth]{figures/TuMag/Scheme.pdf}
+    \caption{Hola      
+      \label{fig_tumag:scheme}}
+\end{figure}
+
 Light is delivered to TuMag by the ISLiD system and subsequently re-imaged onto two cameras where the images are recorded. Before reaching the cameras, the light passes through all the different subsystems of the optical unit. The first components encountered by the light are a blocking prefilter and a the filter wheels. The blocking prefilter, with a wide bandpass centered at 520 nm, is employed to eliminate unwanted spectral ranges. The filter wheels  are comprised by a double-disk system \citep{filter-wheels} that houses the prefilters for selecting specific spectral lines and a series of calibration modules. Specifically, three prefilters are mounted on the second disk of the filter wheel, corresponding to the spectral lines Fe I 5250.2 \r{A}, Fe I 5250.6 \r{A}, and Mg I $b_2$ 5172.7 \r{A}. A detailed overview of the spectral properties of these prefilters will be provided in Section \textcolor{red}{XX}. Additionally, the filter wheel includes a PD plate, which is used to introduce a known defocus into the final image to facilitate image reconstruction techniques, along with a linear polarizer, a plate of micropolarizers, and a pinhole set.
 
 After passing through the filter wheels, the light is directed into the Polarization Modulation Package (PMP), a subsystem derived from the SO/PHI instrument (\citealt{pmp1}, \citealt{PHI}). The PMP's primary function is to modulate the light to produce the different polarization states required to deduce the Stokes components. This is achieved using two liquid crystal variable retarders (LCVRs), which are oriented with their fast axes at 45$^\circ$ relative to each other. These LCVRs induce a retardance on the transmitted light that varies with the voltage applied across the crystals. The system can operate in two distinct modulation schemes: a vector modulation scheme, which generates four independent linear combinations of equally-weighted Stokes components across consecutive observations, allowing for the retrieval of the full Stokes vector after demodulation; and a longitudinal modulation scheme, which generates only two modulations, providing information solely on the intensity and circular polarization.
 
 Following modulation, the light is directed into a LiNbO$_3$ Fabry-Pérot etalon, that likewise IMaX, is in a collimated setup and with a double pass configuration \citep{etalon-doublepass}. In this setup, after traversing the etalon once, the light is redirected by a pair of mirrors to pass through the etalon a second time. This double-pass configuration significantly enhances spectral resolution by narrowing the transmission profile. The LiNbO$_3$ etalon achieves wavelength tuning by varying the refractive index of the cavity through the application of high voltages (ranging from $-4000$ V to $4000$ V) to the mirrors. Compared to air-gapped etalons, these kind of etalons offer the advantage of having no moving parts, which is particularly beneficial for spaceborne or balloon-borne instruments. However, this advantage comes with the need for precautions to prevent discharges caused by air ionization.
 
-The final optical element the light encounters before reaching the cameras is a polarizing beam splitter. At this stage, the light beam is divided into two orthogonal, linearly polarized components, each directed towards a different camera. This dual-beam configuration \citep{lites-doublebeam} is designed to minimize spurious signals induced by jitter of the gondola, as it effectively cancels fluctuations from Stokes I to the other Stokes parameters that may arise due to image motion or solar evolution (\textit{i.e.} cross-talk).
+The final optical element the light encounters before reaching the cameras is a polarizing beam splitter. At this stage, the light beam is divided into two orthogonal, linearly polarized components, each directed towards a different camera. This dual-beam configuration \citep{lites-doublebeam} is designed to minimize spurious signals induced by jitter of the gondola (see \cite{libro_JoseCarlos} for an extended discussion), as it effectively cancels fluctuations from Stokes I to the other Stokes parameters that may arise due to image motion or solar evolution (\textit{i.e.} cross-talk).
 
 Light then reaches the cameras, where images from both are recorded and stored. After mission recovery, the data is processed on-ground to combine images from the different cameras, modulation states, and spectral lines, ultimately deriving the scientific products. This processing and reduction of the data is accomplished using software specifically developed for TuMag, which will be extensively discussed in Section XX. 
 
@@ -74,7 +80,14 @@ The USAF target \footnote{The 1951 USAF target from Thorlabs Inc, model: R1DS1N.
 
 The results show a better optical performance for the 517 nm pre-filter than the other two pre-filters. The USAF 5.2 set is clearly resolved fo this pre-filter in both cameras showing almost no differene between vertical and hiorizontal resolutions. However, results for the 525 nm prefilters exhibit a worsening of the resolution, with the same set being hardly resolved in the horizontal direction in both prefilters. 
 
-However, a more precise evaluation of the optical performance can be achieved from the MTFs. Figure XX shows the MTFs computed with a slit target (see \cite{slanted-method} for a description of the MTF computation) during the E2E tests performed in December 2021 at INTA facilities. These results agree with the diagnostic carried with the USAF tests: the 517 nm pre-filter shows a good performance in both directions, with values above the expected behaviour. Meanwhile, 525 pre-flters exhibit a large difference between different directions with an important drop in vertical resolution in both cases. This observed astigmatism is attributed to the etalon and physical deformations of the pre-filters caused by the mechanical method used to secure and tilt them. This effect is particularly noticeable in the iron pre-filters due to the higher angles of incidence required for their tuning.
+\begin{figure}
+    \includegraphics[width=\textwidth]{figures/TuMag/mtfs.pdf}
+    \caption{Hola      
+      \label{fig_tumag:mtfs}}
+\end{figure}
+
+
+However, a more precise evaluation of the optical performance can be achieved from the MTFs. Figure \ref{fig_tumag:mtfs} shows the MTFs computed with a slit target (see \cite{slanted-method} for a description of the MTF computation) during the E2E tests performed in December 2021 at INTA facilities. These results agree with the diagnostic carried with the USAF tests: the 517 nm pre-filter shows a good performance in both directions, with values above the expected behaviour. Meanwhile, 525 pre-flters exhibit a large difference between different directions with an important drop in vertical resolution in both cases. This observed astigmatism is attributed to the etalon and physical deformations of the pre-filters caused by the mechanical method used to secure and tilt them. This effect is particularly noticeable in the iron pre-filters due to the higher angles of incidence required for their tuning.
 
 \begin{table}
     \centering
@@ -112,15 +125,11 @@ Figure \ref{tumag : PD} shows the measurements and results of the PD analysis fo
 
 The PD analysis indicates a small amplitude for most aberrations, with coefficients beyond Z15 approaching zero. Except for the spherical aberration ($Z_{11}$, $Z_4 ^0$) which is the dominant contribution to the rms wfe. However, the results exhibit significant dispersion, as reflected by error bars that reach values up to 0.025$\lambda$ for the first coefficients. Both the defocus and astigmatism are pretty low (Zernike indexes 4, 5 and 6, $Z _ 2 ^0$, $Z _ 2 ^{-2}$ and $Z _ 2 ^2$, respectively), agreeing with the results obtained from the MTF analysis which showed a good resolution in both vertical and horizontal directions. The overall rms WFE obtained from this analysis is $\lambda / 11.4$. It is important to note that the PD analysis and the modulation transfer function (MTF) determination were conducted at different stages of calibration, under varying conditions, which accounts for the observed differences. Nevertheless, both analyses agree on a WFE better than $\lambda / 10$, indicating very high optical quality, despite the fact that the FPIof TuMag operates in a collimated configuration, which is known to degrade optical performance \citep{ghosts-etalon}.
 
-\subsection{Verification}
-
-
-
 \subsection{Spectral performance.}
 
 TuMag filters wavelengths through a sequential process, beginning with a broad blocking pre-filter that eliminates unwanted portions of the solar spectrum, and followed by a second narrow-band pre-filter that is tuned to the three selected spectral lines. Finally, the LiNbO$_3$ Fabry-Pérot etalon is encharged of selecting a very narrow band around specific wavelengths along the spectral lines. The narrow-band pre-filter and the etalon are critical to TuMag's spectroscopic performance and require careful evaluation during calibration.
 
-The three TuMag pre-filters were custom-manufactured by Materion$^{TM}$ and have a full width at half maximum (FWHM) close to 1 nm. They are centered near the rest wavelength of the three spectral lines at normal incidence, with a peak transmission exceeding 80\% in all cases. Each pre-filter was tuned by adjusting the incidence angle to align the peak transmission wavelength with the spectral line core, a process carried out using a coelostat at the INTA facilities. While this tuning was successful, particularly for the iron lines, the spectral position of the pre-filters was found to be highly sensitive to illumination conditions. This sensitivity was evident from the shifts observed in the pre-filter measurements during the various stages of the assembly process. As illustrated in the left column of Fig.~\ref{fig_tumag: spectroscopic_results}, the variation in the spectral position of the pre-filters is not sufficient to cause the spectral line to be blocked by the pre-filter, but it may result in the spectral line falling on the wing of the pre-filter during observations.
+The three TuMag pre-filters were custom-manufactured by Materion$^{TM}$ and have a full width at half maximum (FWHM) close to 1 nm. They are centered near the rest wavelength of the three spectral lines at normal incidence, with a peak transmission exceeding 80\% in all cases. Each pre-filter was tuned by adjusting the incidence angle to align the peak transmission wavelength with the spectral line core. This process was performed using a coelostat at the INTA facilities, where the rest positions in volts of the spectral lines were determined. The Fe I 5250.2 \r{A} line was found at 2129 V, the Fe I 5250.6 \r{A} line at -2507 V, and the Mg I $b_2$ 5172.7 \r{A} line at -2245 V. While this tuning was successful, particularly for the iron lines, the spectral position of the pre-filters was found to be highly sensitive to illumination conditions. This sensitivity was evident from the shifts observed in the pre-filter measurements during the various stages of the assembly process. As illustrated in the left column of Fig.~\ref{fig_tumag: spectroscopic_results}, the variation in the spectral position of the pre-filters is not sufficient to cause the spectral line to be blocked by the pre-filter, but it may result in the spectral line falling on the wing of the pre-filter during observations.
 
 \begin{table}
     \centering
@@ -149,9 +158,6 @@ The three TuMag pre-filters were custom-manufactured by Materion$^{TM}$ and have
 
 TuMag's etalon (see Table \ref{table: Tumags etalon}) operates in a collimated setup with a transmission profile with a FWHM of 0.87 pm (in the double-passs configuration), thus achieving a spectral resolution that exceeds the required 9 pm. Observations of an iodine cell illuminated with a diode were conducted to verify the transmission profile's shape and accurately assess the tuning constant. The right column of Fig.~\ref{fig_tumag: spectroscopic_results} presents, in orange, the iodine cell measurements obtained during the assembly, integration, and verification (AIV) phase of TuMag's integration into the Post Focal Instruments (PFI) platform, which took place at the Max Planck Institute for Solar System Research (MPS) in Göttingen, Germany, in November 2023. Additionally, the dark blue line in the figure represents a simulation of the iodine spectrum observations. This simulation was generated using an analytical model of the transmission profile of collimated etalons (see section \ref{susec_etalon_theory: collimated} for a detailed overview of the model). The results confirm that the spectral resolution achieved in the iodine cell observations is consistent with the estimated 0.87 pm resolution. Furthermore, these observations enabled the calculation of the etalon's tuning constant by identifying the corresponding line cores between the simulation and observation and applying a least squares fitting to establish the relationship, which was measured in 3300 V/\r{A}.
 
-ADD POSITION IN VOLTS OF SPECTRAL LINES.
-
-
 \begin{figure}
     \includegraphics[width=\textwidth]{figures/TuMag/secondorder.pdf}
     \caption{
@@ -161,4 +167,52 @@ ADD POSITION IN VOLTS OF SPECTRAL LINES.
 
 An observation of the solar spectrum with the 517 nm pre-filter, conducted at INTA facilities in December 2021 during the end-to-end calibration tests, is presented in Fig.~\ref{fig_tumag:second-order_cont}, along with the corresponding pre-filter measurement. The magnesium line core is detected at approximately -2200 V using the primary order of the etalon and reappears around 3750 V with a secondary order. A fitting of the solar spectrum\footnote{Reference} is also shown for both orders. These results reveal significant contamination from the secondary order near the pre-filter's minimum transmittance. At around 0 volts, the observed spectrum (orange line) is a composite of contributions from both the primary (red line) and secondary (green line) orders. This contamination is particularly relevant for data processing, as continuum measurements of the magnesium line are typically conducted at -80 V. The broader profile of the magnesium line necessitates continuum measurements farther from the line core, making it more susceptible to this contamination. In contrast, the narrower iron lines do not require such extensive offsets for continuum measurements and are thus less affected.
 
+\subsection{\label{sect:intro polarimetric}Polarimetric performance.}
 
+Their advantages for airborne instruments lie in their lightweight and compact design, the low voltage required for operation ([$0 - 10$]V), and their efficiency in producing either four linearly independent modulation states for full-Stokes polarimetry or only two states for measuring the longitudinal component of the magnetic field through Stokes V. This versatility is a specific advantage of LCVRs, not found in quarter-waveplate-based PMPs \citep{pmp-advantages}.
+
+To measure the full Stokes vector, TuMag operates using the so-called vectorial modulation scheme, where four distinct polarization states are generated. These four modulations are achieved by introducing specific retardances for each LCVR. Howver the specific values of the retardances introduced must yield a modulation matrix whose properties fulfill those of an optimized modulation scheme (see section \ref{sect:intro polarimetric}). Such a modulation schem was selected for TuMag and its details are included in table \ref{table: polarimetric configs}. In order to ensure that the retardances introduced by the PMP coincide with those selected for the modulation scheme a prior calibration of the LCVRs is required.   \citep{fine-tunin}
+
+\begin{table}
+    \centering
+   \begin{tabular}{cc|cccc|cc}
+    \hline
+    \hline
+     & & \multicolumn{4}{c}{Vectorial} & \multicolumn{2}{|c}{Longitudinal}  \\
+    Spectral lines & Modulation & I1 & I2 & I3 & I4 & I1 & I2 \\
+    \hline
+    & LCVR 1 retardance  & 225$^\circ$  & 225 & 315$^\circ$ & 315$^\circ$ & 180$^\circ$  & 180$^\circ$\\
+    & LCVR 2 retardance  & 234.74$^\circ$ & 125.26$^\circ$ & 54.74$^\circ$ & 305.26$^\circ$ & 90$^\circ$ & 270$^\circ$ \\
+    \hline
+    525 nm & LCVR 1 voltage & & & & & 2.761 & 2.761 \\
+     & LCVR 2 voltage & & & & & 4.723 & 2.186 \\
+    \hline
+    517 nm & LCVR 1 voltage & & & &  & 2.797 & 2.797\\
+     & LCVR 2 voltage & & & & & 4.77 & 2.206\\
+    \hline
+    \hline
+    \end{tabular}
+    \caption{Tumag LCVR retardances and corresponding voltages for both modulation schemes and pre-filters. Note that a single value is provided for both iron pre-filters.}
+    \label{table: polarimetric configs}
+\end{table}
+
+
+
+The requirement of achieving a (S/N) of $10^3$ in the stokes measurments, impose a requirement of reaching a S/N of 1200 in each modulation for each camera, assuming a polarimetric performance close to optimal (see following discussions) and taking into account that dual-beam polarimetry increases the S/N by a factor of $\sqrt{2}$ when combining the observations of the two cameras. In order to reach these values a single shot in insufficient, since the sensors do not have enough capacity in their elecron wells. For this reason, multiple shots are captured and then summed (accumulated) in each observation. This staregy, that has been thourougly tested (see X, Y and Z) and proven compatible with image reconstruction techniques (see this), allows to increase (or decrease) the S/N levels depending on the scientific aim of the observation, compromising velocity for polarimetric sensitivity. 
+
+As discussed in the introduction, to achieve this levels of S/N, a optimum modulation scheme is mandatory (see section \ref{sect:intro polarimetric}). During the calibration of the system, the voltages of the LCVRs need to be calibrated in order to generate an optimum modulation scheme. With the fixed values for the retardances of the LCVRs, the modulation matrix must be carefully measured in order to be able to compute the stokes vector. 
+
+The voltages were fine-tuned etcc...
+
+Voltages Longitudinal: 525: [2.761, 2.761, 2.716, 2.716] [4.723, 2.186, 4.723, 2.186]. 517 [2.797, 2.797, 2.797, 2.797] [4.77, 2.206, 4.77, 2.206]. 
+
+The polarimetric calibration consists on a series of measurements where the instrument is fed with a light beam with a known polarization state generated by a rotating linear polarizer and a rotating quarter-waveplate. By combining different positions of these two devices, 40 different input polarization states were generated (in the E2E calibrations carried out at the PFI AIV and Sunrise III AIV phases) and measured employing the vecorial modulation scheme for the three pre-filters. 
+
+
+
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{figures/TuMag/Pol_efficiencies_map.png}
+    \caption{    
+      \label{fig_tumag:pol eff maps}}
+\end{figure}
