@@ -1,17 +1,30 @@
-\chapter{TuMag's design and calibration.}
+\chapter{Sunrise III and TuMag: Design and calibration.}
 
-In this chapter we take the first steps of the journey of developing an instrument to observe the Sun. We will define... 
+Equipped with a telescope with a 1m aperture, two slit-based spectropolarimeters and an imaging magnetograph, the Sunrise III observatory is the most complex solar telescope to ever leave the the ground. The coordination of three different scientific insturments allows Sunrise to simultaneously perform narrow-band polarimetric imaging in the visible while carrying out spectropolarimetry in the near-UV and near-IR, from the advantageous point of observation of $\sim$ 36 km of altitude whithout the anoying interference of the atmosphere's turbulence. 
 
-Fabry-Pérot interferometers (FPIs) are widely employed in the field of solar physics. Their spectroscopic and tunability properties make them especially suitable for selecting a narrow spectral band of incoming light. They also offer a two-dimensional view of the solar scene, hence allowing for the implementation of powerful and widespread image post-processing reconstruction techniques, such as phase diversity \citep{PD_etalon} and multi-object multi-frame blind deconvolution (MOMFBD; \citealt{mombfd}), which are difficult to implement in slit-based spectrographs (\citealt{image_spectro}, \citealt{image_spectro_2}). Many state-of-the-art instruments use FPIs as narrowband tunable filters. Among others, these instruments include the spaceborne Polarimetric and Helioseismic Imager \citep[][]{PHI} aboard the Solar Orbiter mission \citep[][]{SO} (SO/PHI); the Imaging Magnetograph Experiment (IMaX) instrument \citep[][]{IMaX}, which flew on the first two flights of the balloon-born SUNRISE observatory (\citealt{SunriseI}, \citealt{SunriseII}); and the Tunable Magnetograph (TuMag) instrument for its third edition. These instruments are based on solid LiNbO$_3$ etalons. Regarding ground-based instruments, some examples include the Crisp Imaging Spectro-Polarimeter (CRISP) at the Swedish 1-m Solar telescope \citep[][]{crisp} at the Observatorio del Roque de los Muchachos in La Palma, Canary Islands; the GREGOR Fabry-Perot Interferometer (GFPI; \citealt{GFPI}, \citealt{GREGOR}) at the Observatorio del Teide in Tenerife, Canary Islands; the Visible Tunable Filter \citep[VTF;][]{VTF} developed for the \textit{Daniel K. Inouye} Solar Telescope \citep[DKIST;][]{DKIST} of the Haleakal\=a Observatory in Hawaii; and the future Tunable Imaging Spectropolarimeter (TIS) of the European Solar Telescope \citep{EST}, all of which are based on air-gapped etalons. 
+The three instruments aboard Sunrise III have been carefully designed to complement each other and address the scientific purposes of the mission. The Tunable Magnetograph (TuMag, REF), developed by the Spanish Solar Space Consortium (S³PC), carries out high-spatial-resolution imaging spectropolarimetry in the visible range of light. Able to tune to three different spectral lines, namely the highly Zeeman-sensitive iron lines at 525.02 and 525.06 nm, and the Mg I b$_2$ line, TuMag can probe the photosphere and low chromosphere quasi-simultanously. 
 
-The SUNRISE III mission aims to study and stablish the relations and couplings between the phenomena ocurring at different layers of the Sun's surface. With this purpose in mind, three different post-focal instruments were included in the design, each of them responsible of observing at different regions of the spectrum. The SUNRISE UV Spectropolarimeter and Imager (SUSI, \textbf{REFERENCIA}), which will observe the spectra between 309 nm and 417 nm; The Sunrise Chromospheric Infrared spectroPolarimeter (SCIP, \textbf{REFERENCIA}), which will observe the near-infrared; and lastly, the Tunable Magnetograph (TuMag), which will observe three spectral lines in the visible, at 525.02 nm, 525.06 nm and 517 nm. 
+The absence of atmosphere allows the Sunrise Spectropolarimeter and Imager (SUSI, Ref), developed by the Max planck), to observe in the near-UV, performing imaging and spectropolarimetry in the range of 309-417 nm. The high polarimetric sensitivity and large number of spectral lines present in this range, many of which are sensible to the Hanle effect, allows SUSI to sample many heights in the solar atmosphere at the same time while measuring the weak magnetic fields. 
 
-The design from scratch of an instrument such as this is very complex. There are many things that have to be meticulously designed and tested which span many fields of expertise, like optics, electronics, software, hardware, or thermal design. To avoid undue extension of this thesis, we will focus on the aspects of the design directly related to the optical properties, that is, regarding the spectral, imaging and polarimetric capabilities of the instrument. 
+In the same way that the atmosphere complictaes the observations of the UV range from the ground, observations of many lines in the near-IR are also unfeasable with ground-based instruments due to the telluric contamination of the atmosphere. The Sunrise Chromospheric Infrared spectro-Polarimeter (SCIP, REF), developed by ...,  takes advantage of the abscence of atmosphere and observes two of the Ca II triplets lines. Spectropolarimetry measurments of these lines provides information of the 3-D structure of the chromosphere and its magnetic fields, derived thanks to the high zeeman sensitivity of the selected lines. Furthermore, the large number of available photons at these wavelengths ensures a high (S/N) and polarimetric sensitivities. 
+
+The ability to probe simultanously the near-IR, the visible and the near-UV, perfoming high-resolution polarimetric imaging and spectroscopy makes Sunrise III an unique observatory, capable of studying the the connection  and interaction of the small-scale phenomena ocurring at different layers of the solar's atmosphere with unprecedented detail and completeness. 
 
 \section{Sunrise III}
 
-Sunrise III description.
 
+\begin{figure}
+    \includegraphics[width=\textwidth]{figures/TuMag/Sunrise_schematic.png}
+    \caption{
+      USAF target measurements for both cameras and the three pre-filters performed during E2E tests at INTA facilities on December 2021. The white boxes highlight the second element of the test group 5 (35.9 lp/mm). The scale of the images is set in digital counts.}
+      \label{fig: SunriseIII}
+\end{figure}
+
+Sunrise III is the result of many years of work carried out by many people belonging to various international institutions.  While the scientific instruments are central to the research facilitated by Sunrise, several additional subsystems play a crucial role, each contributing to the overall success of the mission.
+
+The structural framework housing all components of the observatory, as well as the interface connecting the observatory to the flight apparatus, is provided by the gondola. This gondola was engineered by the Johns Hopkins University Applied Physics Laboratory (APL, USA). Beyond safeguarding the instruments and telescope during ascent and landing, the gondola is tasked with ensuring the stability of the pointing system. Given that the observatory is suspended from a balloon, it is subject to wind-induced motion and pendulum-like oscillations, which threaten the stability required for prolonged observations. The gondola’s pointing control system (PCS) must actively counteract these disturbances in real time by making precise adjustments to the telescope’s elevation and azimuth. In conjunction with the Correlating Wavefront Sensor (CWS), developed by the Institut für Sonnenphysik (KIS, Germany), which is responsible for image stabilization and autofocus, the PCS was required to achieve a pointing accuracy better than 0.005" root mean square (rms) over extended periods to facilitate long-duration observations.
+
+The Sunrise III telescope is a Gregory-type reflector with a 1-meter aperture, featuring a 234 mm central obscuration and an effective focal length of 24.2 meters. This configuration provides a field of view (FoV) of 3.4', corresponding to approximately 150 Mm on the solar surface. The telescope directs light to the post-focus instrumentation platform (PFI), positioned atop the telescope. The PFI houses the three scientific instruments and the CWS, and is responsible for distributing light among these four instruments. This task is accomplished by the Image Stabilization and Light Distribution Unit (ISLiD).
 
 \section{The Tunable magnetograph: TuMag}
 
@@ -82,7 +95,7 @@ The results show a better optical performance for the 517 nm pre-filter than the
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figures/TuMag/mtfs.pdf}
-    \caption{Hola      
+    \caption{MTFs derived for camera 1 (very similar results for camera 2) for the three pre-filters from measurements of the stand-alone AIV phase performed at INTA in December 2021.  
       \label{fig_tumag:mtfs}}
 \end{figure}
 
@@ -169,9 +182,7 @@ An observation of the solar spectrum with the 517 nm pre-filter, conducted at IN
 
 \subsection{\label{sect:intro polarimetric}Polarimetric performance.}
 
-Their advantages for airborne instruments lie in their lightweight and compact design, the low voltage required for operation ([$0 - 10$]V), and their efficiency in producing either four linearly independent modulation states for full-Stokes polarimetry or only two states for measuring the longitudinal component of the magnetic field through Stokes V. This versatility is a specific advantage of LCVRs, not found in quarter-waveplate-based PMPs \citep{pmp-advantages}.
-
-To measure the full Stokes vector, TuMag operates using the so-called vectorial modulation scheme, where four distinct polarization states are generated. These four modulations are achieved by introducing specific retardances for each LCVR. Howver the specific values of the retardances introduced must yield a modulation matrix whose properties fulfill those of an optimized modulation scheme (see section \ref{sect:intro polarimetric}). Such a modulation schem was selected for TuMag and its details are included in table \ref{table: polarimetric configs}. In order to ensure that the retardances introduced by the PMP coincide with those selected for the modulation scheme a prior calibration of the LCVRs is required.   \citep{fine-tunin}
+TuMag modulates the incoming light through a PMP composed of two anti-parallel LCVRs. These devices can modify the phase retardance induced to the light that goes through them by changing the alignment of their molecules when subject to a voltage potential. Their advantages for airborne instruments lie in their lightweight and compact design, the low voltage required for operation ([$0 - 10$]V), and their efficiency in producing either four linearly independent modulation states for full-Stokes polarimetry or only two states for measuring the longitudinal component of the magnetic field through Stokes V. This versatility is a specific advantage of LCVRs, not found in quarter-waveplate-based PMPs \citep{pmp-advantages}.
 
 \begin{table}
     \centering
@@ -179,40 +190,37 @@ To measure the full Stokes vector, TuMag operates using the so-called vectorial 
     \hline
     \hline
      & & \multicolumn{4}{c}{Vectorial} & \multicolumn{2}{|c}{Longitudinal}  \\
-    Spectral lines & Modulation & I1 & I2 & I3 & I4 & I1 & I2 \\
+     Spectral lines & Modulation & I1 & I2 & I3 & I4 & I1 & I2 \\
     \hline
-    & LCVR 1 retardance  & 225$^\circ$  & 225 & 315$^\circ$ & 315$^\circ$ & 180$^\circ$  & 180$^\circ$\\
-    & LCVR 2 retardance  & 234.74$^\circ$ & 125.26$^\circ$ & 54.74$^\circ$ & 305.26$^\circ$ & 90$^\circ$ & 270$^\circ$ \\
+    525 \& 517 nm & LCVR1 retardance  & 225$^\circ$  & 225 & 315$^\circ$ & 315$^\circ$ & 180$^\circ$  & 180$^\circ$\\
+    525 \& 517 nm  & LCVR2 retardance  & 234.74$^\circ$ & 125.26$^\circ$ & 54.74$^\circ$ & 305.26$^\circ$ & 90$^\circ$ & 270$^\circ$ \\
     \hline
-    525 nm & LCVR 1 voltage & & & & & 2.761 & 2.761 \\
-     & LCVR 2 voltage & & & & & 4.723 & 2.186 \\
+    525 nm & LCVR1 voltage & & & & & 2.761 & 2.761 \\
+     & LCVR2 voltage & & & & & 4.723 & 2.186 \\
     \hline
-    517 nm & LCVR 1 voltage & & & &  & 2.797 & 2.797\\
-     & LCVR 2 voltage & & & & & 4.77 & 2.206\\
+    517 nm & LCVR1 voltage & & & &  & 2.797 & 2.797\\
+     & LCVR2 voltage & & & & & 4.77 & 2.206\\
     \hline
     \hline
     \end{tabular}
-    \caption{Tumag LCVR retardances and corresponding voltages for both modulation schemes and pre-filters. Note that a single value is provided for both iron pre-filters.}
+    \caption{Tumag LCVR retardances and corresponding voltages for both modulation schemes and the three pre-filters. Note that a single value is provided for both iron pre-filters.}
     \label{table: polarimetric configs}
 \end{table}
 
+TuMag's polarimetric measurement approach is divided into the two modulation schemes already mentioned: vectorial and longitudinal. In the vectorial scheme, four linearly independent modulation states are generated in rapid succession by the PMP, enabling the calculation of the full Stokes vector. Conversely, the longitudinal approach generates only two modulation states, providing information on just two components. This modulation is designed to compute Stokes V by determining the quantities $I\pm V$.
 
+Both modulation schemes are required to operate under an optimal modulation scheme. Such a scheme is defined by a modulation matrix with the following polarimetric efficiencies: $\varepsilon _{opt} \geqslant [1, \frac{1}{\sqrt{3}}, \frac{1}{\sqrt{3}}, \frac{1}{\sqrt{3}}]$. The selected modulation scheme was based on the retardances outlined in Table \ref{table: polarimetric configs}. A thorough calibration of the liquid crystal variable retarders (LCVRs) was conducted to accurately determine the voltages necessary to produce the specified retardances \citep{fine-tunin}.
 
-The requirement of achieving a (S/N) of $10^3$ in the stokes measurments, impose a requirement of reaching a S/N of 1200 in each modulation for each camera, assuming a polarimetric performance close to optimal (see following discussions) and taking into account that dual-beam polarimetry increases the S/N by a factor of $\sqrt{2}$ when combining the observations of the two cameras. In order to reach these values a single shot in insufficient, since the sensors do not have enough capacity in their elecron wells. For this reason, multiple shots are captured and then summed (accumulated) in each observation. This staregy, that has been thourougly tested (see X, Y and Z) and proven compatible with image reconstruction techniques (see this), allows to increase (or decrease) the S/N levels depending on the scientific aim of the observation, compromising velocity for polarimetric sensitivity. 
+Considerations on the (S/N) are critical for ensuring the required polarimetric sensitivity. Achieving an S/N of $10^3$ in the Stokes measurements imposes a requirement of $S/N \approx 1200$  for each modulation measurement per camera. This calculation assumes near-optimal polarimetric performance, and takes into account the dual-beam polarimetry technique, which increases the S/N by a factor of $\sqrt{2}$ when combining data from the two cameras. A single shot of the cameras is insufficient to reach these S/N values, as the sensors do not have enough capacity in their electron wells. To address this, multiple exposures are captured and subsequently summed during each observation. This \textit{accumulation} strategy, extensively tested and employed in various polarimeters (e.g., \citealt{accs1}, \citealt{accs2}, \citealt{accs3}), has proven compatible with image reconstruction techniques \citep{accs-image1, accs-image2}. It allows for adjusting S/N levels depending on the scientific objectives of the observation, balancing between velocity and polarimetric sensitivity.
 
-As discussed in the introduction, to achieve this levels of S/N, a optimum modulation scheme is mandatory (see section \ref{sect:intro polarimetric}). During the calibration of the system, the voltages of the LCVRs need to be calibrated in order to generate an optimum modulation scheme. With the fixed values for the retardances of the LCVRs, the modulation matrix must be carefully measured in order to be able to compute the stokes vector. 
+However, in order to fulfill the polarimetric sensitivity requirements, the modulation matrix of the instrument must be carefully addressed during the polarimetric calibrations. Any deviation in the computation of the modulation matrix, will introduce spurious signals in the polarization measurements, known as cross-talk. The polarimetric calibration involves a series of measurements using a light beam with a known polarization state, generated by a rotating linear polarizer and a rotating quarter-waveplate. By varying the positions of these two devices, 40 different input polarization states were produced and measured with three pre-filters. These measurements allowed for the precise determination of the modulation matrix by solving the system of equations \eqref{eq_intro:modultaion_eqs}, where the only unknown is the modulation matrix $\textbf{M}$, as both the measured modulation and the Stokes components of the incoming light are known.
 
-The voltages were fine-tuned etcc...
-
-Voltages Longitudinal: 525: [2.761, 2.761, 2.716, 2.716] [4.723, 2.186, 4.723, 2.186]. 517 [2.797, 2.797, 2.797, 2.797] [4.77, 2.206, 4.77, 2.206]. 
-
-The polarimetric calibration consists on a series of measurements where the instrument is fed with a light beam with a known polarization state generated by a rotating linear polarizer and a rotating quarter-waveplate. By combining different positions of these two devices, 40 different input polarization states were generated (in the E2E calibrations carried out at the PFI AIV and Sunrise III AIV phases) and measured employing the vecorial modulation scheme for the three pre-filters. 
-
-
+The results of the polarimetric calibration performed during the end-to-end (E2E) tests at INTA in December 2021 are presented in Fig.~\ref{fig_tumag:pol eff maps}. The figure shows the results for camera one; however, camera two demonstrated nearly identical efficiencies. The polarimetric efficiencies across the entire field of view (FoV) exceed the required thresholds $\varepsilon _{req} \geqslant [0.95, 0.45, 0.45, 0.45]$, and approach the optimal values.
 
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figures/TuMag/Pol_efficiencies_map.png}
-    \caption{    
-      \label{fig_tumag:pol eff maps}}
+    \caption{Polarimetric efficiencies for camera 1 and the three pre-filters (from top to bottom, the different rows show the results for 517 nm, 525.02 nm, and 525.06 nm). The different columns correspond to the efficiencies of the different Stokes components. The colormap measures the differences in efficiencies along the FoV. Results obtained during the E2E tests performed at INTA in December 2021, during the stand-alone AIV phase. 
+    \label{fig_tumag:pol eff maps}}
 \end{figure}
+
