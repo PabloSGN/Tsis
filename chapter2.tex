@@ -1,5 +1,10 @@
 \chapter{Sunrise III and TuMag: Design and calibration.}
 
+The first chapter ...
+
+
+\section{Sunrise III}
+
 Equipped with a telescope with a 1m aperture, two slit-based spectropolarimeters and an imaging magnetograph, the Sunrise III observatory is the most complex solar telescope to ever leave the the ground. The coordination of three different scientific insturments allows Sunrise to simultaneously perform narrow-band polarimetric imaging in the visible while carrying out spectropolarimetry in the near-UV and near-IR, from the advantageous point of observation of $\sim$ 36 km of altitude whithout the anoying interference of the atmosphere's turbulence. 
 
 The three instruments aboard Sunrise III have been carefully designed to complement each other and address the scientific purposes of the mission. The Tunable Magnetograph (TuMag, REF), developed by the Spanish Solar Space Consortium (S³PC), carries out high-spatial-resolution imaging spectropolarimetry in the visible range of light. Able to tune to three different spectral lines, namely the highly Zeeman-sensitive iron lines at 525.02 and 525.06 nm, and the Mg I b$_2$ line, TuMag can probe the photosphere and low chromosphere quasi-simultanously. 
@@ -10,21 +15,40 @@ In the same way that the atmosphere complictaes the observations of the UV range
 
 The ability to probe simultanously the near-IR, the visible and the near-UV, perfoming high-resolution polarimetric imaging and spectroscopy makes Sunrise III an unique observatory, capable of studying the the connection  and interaction of the small-scale phenomena ocurring at different layers of the solar's atmosphere with unprecedented detail and completeness. 
 
-\section{Sunrise III}
-
-
 \begin{figure}
     \includegraphics[width=\textwidth]{figures/TuMag/Sunrise_schematic.png}
     \caption{
-      USAF target measurements for both cameras and the three pre-filters performed during E2E tests at INTA facilities on December 2021. The white boxes highlight the second element of the test group 5 (35.9 lp/mm). The scale of the images is set in digital counts.}
+      Drawing design of the Sunrise III observatory. Image reproduced from XXXXX with permission. \textcolor{red}{No he pedido permiso para esta aún, que es del paper de Sunrise III que mandó Andi, pero creo que quedaría bien algo enseñando el observatorio. Al no estar pulicado el paper de Sunrise no se muy bien cual coger.}}
       \label{fig: SunriseIII}
 \end{figure}
+
+\subsection{Observatory's design}
 
 Sunrise III is the result of many years of work carried out by many people belonging to various international institutions.  While the scientific instruments are central to the research facilitated by Sunrise, several additional subsystems play a crucial role, each contributing to the overall success of the mission.
 
 The structural framework housing all components of the observatory, as well as the interface connecting the observatory to the flight apparatus, is provided by the gondola. This gondola was engineered by the Johns Hopkins University Applied Physics Laboratory (APL, USA). Beyond safeguarding the instruments and telescope during ascent and landing, the gondola is tasked with ensuring the stability of the pointing system. Given that the observatory is suspended from a balloon, it is subject to wind-induced motion and pendulum-like oscillations, which threaten the stability required for prolonged observations. The gondola’s pointing control system (PCS) must actively counteract these disturbances in real time by making precise adjustments to the telescope’s elevation and azimuth. In conjunction with the Correlating Wavefront Sensor (CWS), developed by the Institut für Sonnenphysik (KIS, Germany), which is responsible for image stabilization and autofocus, the PCS was required to achieve a pointing accuracy better than 0.005" root mean square (rms) over extended periods to facilitate long-duration observations.
 
-The Sunrise III telescope is a Gregory-type reflector with a 1-meter aperture, featuring a 234 mm central obscuration and an effective focal length of 24.2 meters. This configuration provides a field of view (FoV) of 3.4', corresponding to approximately 150 Mm on the solar surface. The telescope directs light to the post-focus instrumentation platform (PFI), positioned atop the telescope. The PFI houses the three scientific instruments and the CWS, and is responsible for distributing light among these four instruments. This task is accomplished by the Image Stabilization and Light Distribution Unit (ISLiD).
+The Sunrise III telescope is a Gregory-type reflector with a 1-meter aperture, featuring a 234 mm central obscuration and an effective focal length of 24.2 meters. This configuration provides a field of view (FoV) of 3.4', corresponding to approximately 150 Mm on the solar surface. The telescope directs light to the post-focus instrumentation platform (PFI), located above the telescope. The PFI houses the three scientific instruments and the CWS, and is responsible for distributing light among these four instruments. This distribution, performed by the Image Stabilization and Light Distribution Unit (ISLiD), must efficiently separate the different wavelengths in a photon-efficient manner to provide the highest number of available photons to each instrument. 
+
+While all the subsystems discussed thus far directly influence the optical performance, it is equally important to recognize the crucial role played by other subsystems, such as the electronics and software control. In particular, the Instrument Control System (ICS) is responsible for the management of the observatory, gathering housekeeping and issuing commands to the electronic units of each instrument. As will be elaborated in the following chapter, Sunrise III observations were designed to operate in a semi-autonomous manner through the use of pre-programmed timelines. This approach requires that all electronic systems function in synchrony, with minimal human intervention. 
+
+\subsection{Science with Sunrise.}
+
+As previously mentioned, the absence of Earth's atmosphere opens the window for IR and UV observations and offers a level of image stability that cannot be achieved in ground-based observatories due to atmospheric seeing. However, these advantages are also present in spaceborne missions, such as the Spectro-Polarimeter and Narrowband Filter Imager aboard the Solar Optical Telescope (SP/NFI-SOT) of the Hinode mission (\citealt{Hinode}, \citealt{sot}), or the Polarimetric and Helioseismic Imager aboard Solar Orbiter (SO-PHI) (\citealt{PHI}, \citealt{SO}), among others. Nonetheless, spaceborne missions have strong restrictions regarding payload, mass and data rate. 
+
+The abscence of these restrictions in balloon-borne observatories allows for a more complex and versatile instrumentation than the one present in space missions. The combinnation of these two factors, namely the absence of atmosphere and the complex and advanced instrumentation they can carry, places observatories such as Sunrise in an unique position, and provides them with unique presepectives on solar phenomena.
+
+Many aspects of the physical processes driving our Sun remain unresolved. The mechanisms underlying various solar phenomena are still the subject of debate, ranging from the origin and removal of magnetic flux in the solar photosphere to the processes responsible for heating the chromosphere and corona, as well as the small-scale dynamics of solar plasma. The three instruments aboard Sunrise work in consoncance to provide novel insights into these phenomena, potentially helping to unravel the mysteries surrounding them.
+
+The magnetic field, present across multiple scales and heights, is the principal driver of solar activity. Understanding the magnetic field is essential for comprehending the processes that govern solar phenomena, energy distribution, and plasma dynamics. Thus, numerous works direct their efforts to the study of the structures and evolution of magnetic fields. For instance, several works study  the emergence of magnetic flux in the photosphere, such as, \cite{flux_emergence_1} and \cite{flux_emergence_2}, where they utilized Sunrise I IMaX data to examine small-scale flux emergence events occurring within solar granules. Likewise, the processes responsible for magnetic flux removal are not fully known. Several studies, such as \cite{flux_removal_1} and \cite{flux_emergence_2}, have proposed mechanisms for flux removal in the photosphere; however, no model is favoured over the other by current observations.
+
+A thorough 3-dimensional analysis of the magnetic fields is essential to study these events. The combination of spectropolarimeters and vector magnetographs aboard Sunrise, which are capable of measuring strong magnetic fields through the Zeeman effect, and detecting weaker, more turbulent \citep{quiet_sun_living_review} magnetic fieldsusing the Hanle effect - particularly sensible in the UV - can provide a new and complete perspective of these events.  
+
+Chromosphere
+
+
+Helioseismology. 
+
 
 \section{The Tunable magnetograph: TuMag}
 
@@ -61,7 +85,7 @@ The Tunable Magnetograph (TuMag) is a tunable imaging spectropolarimeter designe
     \label{fig_tumag:scheme}}
 \end{figure}
 
-Light is delivered to TuMag by the ISLiD system and subsequently re-imaged onto two cameras where the images are recorded. Before reaching the cameras, the light passes through all the different subsystems of the optical unit. The first components encountered by the light are a blocking prefilter and the filter wheels (box A in Fig. ~\ref{fig_tumag:scheme}). The blocking prefilter, with a wide bandpass centered at 520 nm, is employed to eliminate unwanted spectral ranges. The filter wheels  are comprised by a double-disk system \citep{filter-wheels} that houses the prefilters for selecting specific spectral lines and a series of calibration modules. Specifically, three prefilters are mounted on the second disk of the filter wheel, corresponding to the spectral lines Fe I 5250.2 \r{A}, Fe I 5250.6 \r{A}, and Mg I $b_2$ 5172.7 \r{A}. A detailed overview of the spectral properties of these prefilters will be provided in Section \textcolor{red}{XX}. Additionally, the filter wheel includes a PD plate, which is used to introduce a known defocus into the final image to facilitate image reconstruction techniques, along with a linear polarizer, a plate of micropolarizers, and a pinhole set.
+Light is delivered to TuMag by the ISLiD system and subsequently re-imaged onto two cameras where the images are recorded. Before reaching the cameras, the light passes through all the different subsystems of the optical unit. The first components encountered by the light are a blocking prefilter and the filter wheels (box A in Fig. ~\ref{fig_tumag:scheme}). The blocking prefilter, with a wide bandpass centered at 520 nm, is employed to eliminate unwanted spectral ranges. The filter wheels  are comprised by a double-disk system \citep{filter-wheels} that houses the prefilters for selecting specific spectral lines and a series of calibration modules. Specifically, three prefilters are mounted on the second disk of the filter wheel, corresponding to the spectral lines Fe I 5250.2 \r{A}, Fe I 5250.6 \r{A}, and Mg I $b_2$ 5172.7 \r{A}. Additionally, the filter wheels include a PD plate, which is used to introduce a known defocus into the final image to facilitate image reconstruction techniques, along with a linear polarizer, a plate of micropolarizers, and a pinhole set, employed during calibration observations.
 
 After passing through the filter wheels, the light is directed into the Polarization Modulation Package (PMP), a subsystem derived from the SO/PHI instrument (\citealt{pmp1}, \citealt{PHI}), highlighted with the red box in Fig.\ref{fig_tumag:scheme}. The PMP's primary function is to modulate the light to produce the different polarization states required to deduce the Stokes components. This is achieved using two liquid crystal variable retarders (LCVRs), which are oriented with their fast axes at 45$^\circ$ relative to each other. These LCVRs induce a retardance on the transmitted light that varies with the voltage applied across the crystals. The system can operate in two distinct modulation schemes: a vector modulation scheme, which generates four independent linear combinations of equally-weighted Stokes components across consecutive observations, allowing for the retrieval of the full Stokes vector after demodulation; and a longitudinal modulation scheme, which generates only two modulations, providing information solely on the intensity and circular polarization.
 
@@ -195,11 +219,11 @@ TuMag modulates the incoming light through a PMP composed of two anti-parallel L
     525 \& 517 nm & LCVR1 retardance  & 225$^\circ$  & 225 & 315$^\circ$ & 315$^\circ$ & 180$^\circ$  & 180$^\circ$\\
     525 \& 517 nm  & LCVR2 retardance  & 234.74$^\circ$ & 125.26$^\circ$ & 54.74$^\circ$ & 305.26$^\circ$ & 90$^\circ$ & 270$^\circ$ \\
     \hline
-    525 nm & LCVR1 voltage & & & & & 2.761 & 2.761 \\
-     & LCVR2 voltage & & & & & 4.723 & 2.186 \\
+    525 nm & LCVR1 voltage & 2.291 & 2.533 & 1.992 & 1.947 & 2.761 & 2.761 \\
+     & LCVR2 voltage & 2.375 & 3.360 & 6.433 & 2.016 & 4.723 & 2.186 \\
     \hline
-    517 nm & LCVR1 voltage & & & &  & 2.797 & 2.797\\
-     & LCVR2 voltage & & & & & 4.77 & 2.206\\
+    517 nm & LCVR1 voltage & 2.343 & 2.580 & 2.031 & 1.972 & 2.797 & 2.797\\
+     & LCVR2 voltage & 2.371 & 3.416 & 6.548 & 2.051 & 4.77 & 2.206\\
     \hline
     \hline
     \end{tabular}
