@@ -89,7 +89,7 @@ The OTF describes how different spatial frequencies are transferred from the obj
   M _ {\nu} = \frac{I_{max} ^{\nu} - I_{min} ^{\nu}}{I_{max} ^{\nu} + I_{min} ^{\nu}}.
 \end{equation}
 
-The function that encodes the dependency of the modulation with spatial frequencies is called the modulation transfer function (MTF), ands strictly related to the OTF as the ratio of the modulation of the object $MTF_{obj}$ and that of the image $MTF_{im} $can be computed from the magnude of the OTF \citep{OTF}:
+The function that encodes the dependency of the modulation with spatial frequencies is called the modulation transfer function (MTF), and is strictly related to the OTF as the ratio of the modulation of the object $MTF_{obj}$ and that of the image $MTF_{im} $can be computed from the magnude of the OTF \citep{OTF}:
 
 \begin{equation}
   MTF = \frac{MTF_{im}(\nu)}{MTF_{obj}(\nu)} = | OTF(\nu) |.
@@ -106,13 +106,13 @@ It is common to see requirements or assessment of the optical quality in terms o
 \end{equation}
 where $A$ is the area of the aperture. 
 
-This value, essentially the standard deviation of the wavefront across the FoV, is closely tied to beam propagation quality. In fact, it can be demonstrated that the wavefront variance can be derived from the Strehl ratio, or conversely, the Strehl ratio can be computed from the wavefront error. The Strehl ratio is defined as the ratio of the peak intensity of a point source in an aberrated system to that of an ideal system operating at the diffraction limit. It is one of the most widely used metrics for assessing the optical quality of a system, ranging from 1, for a perfect, unaberrated system, to 0. For small aberrations, the Strehl ratio (SR) and WFE are related by the following expression \citep{WFE_def}: 
+This value, essentially the standard deviation of the wavefront across the aperture, is closely tied to beam propagation quality. In fact, it can be demonstrated that the wavefront variance can be derived from the Strehl ratio, or conversely, the Strehl ratio can be computed from the wavefront error. The Strehl ratio is defined as the ratio of the peak intensity of a point source in an aberrated system to that of an ideal system operating at the diffraction limit. It is one of the most widely used metrics for assessing the optical quality of a system, ranging from 1, for a perfect, unaberrated system, to 0. For small aberrations, the Strehl ratio (SR) and WFE are related by the following expression \citep{WFE_def}: 
 
 \begin{equation}
   SR \simeq \exp \left[ - \left(\frac{2\pi WFE}{\lambda}\right) ^2 \right].
 \end{equation}
 
-Although the Strehl ratio and rms WFE provide a concise measure of the optical quality of a system, the WFE contains additional information that can further elucidate imaging performance. Rather than relying solely on a single averaged value (such as the standard deviation), the wavefront can be represented as a two-dimensional map projected onto a plane normal to the light path, typically the image plane. To carry out such a representation analytically, it is essential to select an appropriate mathematical framework. Given the widespread use of circular apertures in telescopes, mirrors, lenses, and other optical components, it is advantageous to approach the problem using polar coordinates, $\rho$ and $\theta$, and in particular, to employ an orthonormal basis for theinterpretability of the results. Among the multiple (infinite) sets of polynomials that fullfill these requirements, the Zernike polynimals \citep{Zernike} offer some distinct advantages. The Zernike polynomials are a sequence of polynomials that compose an orthonormal basis over a unit circle. Given an arbitrary wavefront, ($W(\rho, \theta)$), the expansion in terms of the Zernike polynomials can be expressed as:
+Although the Strehl ratio and rms WFE provide a concise measure of the optical quality of a system, the WFE contains additional information regarding imaging performance. Rather than relying solely on a single averaged value (such as the standard deviation), the wavefront can be represented as a two-dimensional map projected onto a plane normal to the light path, typically the image plane. To carry out such a representation analytically, it is essential to select an appropriate mathematical framework. Given the widespread use of circular apertures in telescopes, mirrors, lenses, and other optical components, it is advantageous to approach the problem using polar coordinates, $\rho$ and $\theta$, and in particular, to employ an orthonormal basis for theinterpretability of the results. Among the multiple (infinite) sets of polynomials that fullfill these requirements, the Zernike polynimals \citep{Zernike} offer some distinct advantages. The Zernike polynomials are a sequence of polynomials that compose an orthonormal basis over a unit circle. Given an arbitrary wavefront, ($W(\rho, \theta)$), the expansion in terms of the Zernike polynomials can be expressed as:
 \begin{equation}
   W(\rho, \theta) = \sum_{n, m} C _n ^m Z _ n ^m(\rho, \theta),
 \end{equation}
@@ -132,7 +132,7 @@ where $R _ n ^m (\rho)$ are the radial functions given by:
   R_n^m(\rho)=\sum_{l=0}^{(n-m) / 2} \frac{(-1)^l(n-l)!}{l!\left[\frac{1}{2}(n+m)-l\right]!\left[\frac{1}{2}(n-m)l-\right]!}\rho ^{n - 2l} \ .
 \end{equation}
 
-This representation of the wavefront is particularly valuable because each mode, defined by a specific pair of $n$ and $m$ values, corresponds to a distinct aberration in the wavefront, with the associated coefficient representing the rms WFE for that specific aberration. Furthermore, the orthogonality of the Zernike basis ensures that adding additional terms to the expansion does not influence the values of previously calculated coefficients. In other words, the Zernike polynomial expansion enables the wavefront to be expressed as the sum of individual aberrations, providing a clear decomposition of the wavefront errors.
+This representation of the wavefront is particularly valuable because each mode, defined by a specific pair of $n$ and $m$ values, corresponds to a distinct aberration in the wavefront, with the associated coefficient representing the contribution to the rms WFE for that specific aberration. Furthermore, the orthogonality of the Zernike basis ensures that adding additional terms to the expansion does not influence the values of previously calculated coefficients. In other words, the Zernike polynomial expansion enables the wavefront to be expressed as the sum of individual aberrations, providing a clear decomposition of the wavefront errors.
 
 Figure~\ref{fig_intro: zernikes} presents an example of a simulated wavefront, including a two-dimensional cross-section and the individual Zernike components of the simulation. The simulation incorporates only the first ten Zernike polynomials, corresponding to polynomials with $n \leqslant 3$, which account for aberrations such as defocus, astigmatism, coma, and trefoil, among others. For a comprehensive overview of the Zernike expansion in wavefront characterization, we direct the reader to \citet{Zernike_guide}.
 
@@ -143,7 +143,7 @@ Figure~\ref{fig_intro: zernikes} presents an example of a simulated wavefront, i
   \label{fig_intro: zernikes}
 \end{figure}
 
-Although properties such as the PSF and WFE provide us with a lot of information to evaluate the instruments performance they are not known a priori. Instruments need to be equipped with means to measure these quantitites in order to assees the performance and correct for any defects. The strategy to follow depends on the properties of the instrument, for instance, onground instruments may be equpiided with adaptive optics technology where the wavefront is directly measured and corrected for in real time. (REFERENCIAS). However, this approach is not feasble in all instruments, such as space-born instruments, for example, thus, other methods are required. One apprach  of special relevance for this purpose is the phase diversity technique.
+Although properties such as the PSF and WFE provide us with a lot of information to evaluate the instruments performance they are not known a priori. Instruments need to be equipped with means to measure these quantitites in order to assees the performance and correct for any defects. The strategy to follow depends on the specific characteristics of the instrument. For instance, ground-based instruments can be equipped with adaptive optics systems, where the wavefront is directly measured and corrected in real time (REFERENCES). However, this approach is not feasible for all instruments due to the technical demands required to implement such corrections. In these cases, alternative techniques, such as the phase diversity method, are necessary.
 
 The phase diversity algorithm \citep{PD_original} is a method to infer the aberrations present in an optical system by obtaining, at least, two simultaneous, or quasi-simutaneous, images of the same object introducing an additional and known aberration to one of the images.  
 
@@ -152,7 +152,7 @@ The algorithm works by minimizing a cost function that depends on the OTF of the
 \begin{equation}
   \mathcal{L} (C) = \sum _ {k} \frac{|I_1 (u) S_2 (u, C) - I_2(u) S_1(u, C)| ^2}{|S_1(u, C)| ^2 + |S_2(u, C)| ^2} , 
 \end{equation}
-where k represents the pairs of aberrated (subindex 1) and unaberrated (subindex 2) images, u is the frequency vector in the Fourier domain, I stands for the intensity distributions, S for the system's OTF expressed in terms of a Zernike expansion with coeffiecients C. 
+where k represents the pairs of aberrated (subindex 1) and unaberrated (subindex 2) images, u is the frequency vector in the Fourier domain, I stands for the intensity distributions, and S for the system's OTF expressed in terms of a Zernike expansion with coeffiecients C. 
 
 By finding the coefficients of the zernike expansion that minimize $\mathcal{L}$, we are able to characterize the wavefront and identify the aberrations present in the optical system. Thus, determining the OTF, and consequently the PSF. 
 
@@ -169,9 +169,6 @@ where we added a term accounting for the noise present in real meaurmeents $\nu 
 The determination of $O(\xi, \eta)$ is easier to compute in the fourier domain, since the convolution operator can be expressed as the product of the corresponding fourier transformation. Taking this into account and doing a simple rearrangement of equation \eqref{eq_imaging: conv}, we can determine the object through:
 
 FILTRO OPTIMO?
-
-RESUMEN? 
-
 
 \subsection{Spectroscopy}
 
@@ -261,31 +258,15 @@ When designing the modulation scheme for a given instrument, it is essential to 
 \end{equation}
 From equations \eqref{eq_intro: sn_and_efficiencies} and \eqref{eq_intro:optimum_efficiencies} it is clear that the sensitivities for computing Stokes Q, U, and V will always be lower than that of Stokes I, as their corresponding efficiencies are smaller. To achieve an SNR of $10^3$ in Stokes measurements, which is the sensitivity required to detect weak polarization signals, an SNR of at least $ \left(S/N \right)_0 \gtrapprox 1700$ is necessary in the measurement of Stokes I for a quasi-optimal modulation scheme.
 
-\subsection{\label{susec_spectropolarimeters: Imaging}Imaging}
-
-\textcolor{red}{The high-resolution imaging that etalon-based instruments are capable of is one of the pivotal reasons for their extended use. The ability to capture a two-dimensional scene of the solar surface makes them ideal for studying solar plasma structures, which require resolutions close to 100 km on the solar surface. However, it is essential to achieve these resolutions while maintaining a sufficiently high signal-to-noise ratio to ensure the required polarimetric sensitivity.}
-
-Spectropolarimeters ultimately combine measurements in polarization, spectral, and spatial (image) domains. Consequently, the final observed intensity depends on all three properties simultaneously. By integrating the spectral behavior of the etalon and pre-filter with the polatrimetric measurements, and taking into account the spatial dependence of these measurements, the observed intensity for a modulation $j$ at any point of the focal plane $\eta, \xi$ when the etalon is tuned at a wavelength $\lambda _ s$ is determined by:
-
+Spectropolarimeters ultimately combine measurements in polarization, spectral, and spatial (image) domains. Consequently, the final observed intensity depends on all three properties simultaneously. By integrating the spectral behavior of the etalon and pre-filter with the polatrimetric measurements, and taking into account the spatial dependence of these measurements, we can revisit equation \eqref{eq_imaging: intensity_simple} and reqrite it for FPI-based spectropolarimeters. in that case, the observed intensity for a modulation $j$ at any point of the focal plane $\eta, \xi$ when the etalon is tuned at a wavelength $\lambda _ s$ is determined by:
 \begin{equation}
   I_ j\left(\xi, \eta ; \lambda_{s}\right)=g(\xi, \eta)\int_{0}^{\infty} T(\lambda) \iint  O _ j\left(\xi_0, \eta_0 ; \lambda\right)  \mathcal{S}\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)  \mathrm{d} \xi_{0} \mathrm{~d} \eta_{0}\mathrm{d} \lambda ,
   \label{eq_spectro: General_Intensity}
 \end{equation}
-where $T(\lambda)$ accounts for the presence of the order-sorting pre-filter, $S\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)$ accounts for the imaging response of the instrument when tuned at the wavelength $\lambda_{s}$, $g(\xi, \eta)$ represents a spatial gain factor that accounts for any wavelength independent pixel-to-pixel intensity fluctuations ocurring in the focal plane, and $O _ j(\xi_0, \eta_ 0;\lambda)$ is the intensity distribution of the incoming light for a modulation j and is given by:
+where $T(\lambda)$ accounts for the presence of the order-sorting pre-filter, $S\left(\xi_0, \eta_0; \xi , \eta; \lambda-\lambda_{s}\right)$ accounts for the imaging response of the instrument when the etalon is tuned at the wavelength $\lambda_{s}$, $g(\xi, \eta)$ represents a spatial gain factor that accounts for any wavelength independent pixel-to-pixel intensity fluctuations ocurring in the focal plane, and $O _ j(\xi_0, \eta_ 0;\lambda)$ is the intensity distribution of the incoming light for a modulation j and is given by:
 \begin{equation}
   O _ j(\xi_0, \eta_ 0;\lambda) = m_{00} ^jI_{in}(\xi_0, \eta_ 0;\lambda) + m_{01}^jQ_{in}(\xi_0, \eta_ 0;\lambda) + m_{02}^jU_{in}(\xi_0, \eta_ 0;\lambda) + m_{03}^jV_{in}(\xi_0, \eta_ 0;\lambda)
 \end{equation}
-
-Determining the imaging response of the instrument can be quite complex , as it is influenced not only by their physical characteristics but also by their optical configuration, whether collimated or telecentric. In Chapter 2, we provide a detailed overview of the properties of each configuration, their differences, and the challenges involved in using these devices for data correction.
-
-Strehl ratio and Wfront error. 
-Wilson, R. N. (2004). Reflecting Telescope Optics I: Basic Design Theory and its Historical Development. Springer.
-Schroeder, D. J. (2000). Astronomical Optics. Academic Press.
-Beckers, J. M. (1993). "Adaptive Optics for Astronomy: Principles, Performance, and Applications". Annual Review of Astronomy and Astrophysics, 31, 13-62.
-
-SPEAK ABOUT PD. 
-
-\textcolor{red}{ADD noise Discussion?}
  
 \subsection{What do spectrpolarimeters tell us about the Sun?}
 
