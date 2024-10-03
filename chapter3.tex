@@ -105,7 +105,22 @@ TuMag observations are very sensible to spectral shifts either from the pre-filt
 
 In order to verify the spectral behaviour of the prefilter, as well as the position of the spectral line, a series of observations were carried out, usually before and after the scientific observations, where a spectral scan with a rich spectral smapling was taken for all the pre-filters employed in the observation. These scans, measure the voltage range of the specific line with a sampling of \textcolor{red}{100V} and without modulating. 
 
-PLOT of the prefilters. 
+
+
+
+\begin{figure}[t]
+    \begin{minipage}[c]{0.67\textwidth}
+      \includegraphics[width=\textwidth]{figures/Pipeline/Prefilter_scans.png}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.29\textwidth}
+      \caption{
+       Schematic representation of the voltage range covered by all observing modes. The dashed lines indicate the position of the line core as measured during the E2E tests performed at INTA in December 2021. The black lines represent the voltage limits that cannot be crossed in an observing mode.
+       \label{fig_pipeline:  prefilter_scans}
+      } 
+    \end{minipage}
+  \end{figure}
+
+
 \subsubsection{Phase diversity.}
 
 Lastly, TuMag is equipped with the capability to perform phase diversity for image reconstruction. As discussed in previous chapters, applying image reconstruction techniques is essential to meet the optical quality requirements. To this end, TuMag includes a PD plate in the first filter wheel that introduces a known defocus in the images. Capturing images with and without this plate enables the computation of the instrument's PSF, which can then be deconvolved from the data.
