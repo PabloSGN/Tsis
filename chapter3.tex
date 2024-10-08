@@ -1,10 +1,17 @@
 \chapter{\label{CH:Pipeline}TuMag's pipeline and data.}
-INtro? tumag flew on bla vla. The data was recovered bla bla,
-The reduction process started on bla bla and is ongoing right now bla bla. 
+
+
+The 2024 observational campaign of the third edition of the Sunrise observatory was an outstanding success. In contrast to previous flights, where technical challenges severely limited the number of useful observations, all subsystems performed exceptionally well during this third flight, allowing for nearly continuous instrument operation over more than six days. From TuMag’s perspective, the campaign yielded approximately 10 terabytes of data, consisting of over 40 scientific observation blocks and 250 calibration observations.
+
+The substantial volume of data recorded by the three instruments, of which TuMag captured the least (in digital space) due to the instrument’s nature, required that it be physically recovered on-site, as it could not be broadcasted from the observatory to the operations center. Recovery activities began immediately after landing and lasted until early August, during which all surviving components, along with the data vaults, were transported to Yellowknife, Canada, the nearest city to the landing site. The data vaults arrived at MPS in early August, where a backup was created before the data associated with each instrument was sent to the respective IP institution. TuMag’s data arrived at  IAA in late August, marking the official start of the reduction process.
+
+The reduction process began by labeling all images and identifying the more than 600 000 images captured by TuMag. Once the observations were correctly identified, the reduction process commenced and, at the time of writing, remains ongoing. Due to the relevance of the pipeline development and results for this thesis, this chapter will provide an overview of TuMag's data and the state of its pipleine, although the results remain preliminary.
+
+The discussion will begin by introducing TuMag’s various observing modes, both scientific and calibration, followed by a brief review of the observation campaign, outlining the different observation programs and their scientific objectives. The chapter will conclude with an examination of the data reduction process, detailing the pipeline and presenting some initial results. It is important to note that, due to the late arrival of the data, this thesis had to be written in parallel with the reduction process. Therefore, the results presented here are preliminary, and the final product may differ as additional reduction steps are incorporated.
 
 \section{TuMag's observing modes}
 
-TuMag operates through a series of so-called observing modes. The observing modes are a list of pre-configured settings for the observations that fullfill different scientific puprposes and are meant to allow an almost automatic operation of the instrument during flight. 
+With the purpose of simplifying the operation activities, TuMag operates through a series of so-called observing modes. The observing modes are a list of pre-configured settings tailored for various observations, including both calibration and scientific purposes. Each mode is designed to fulfill the specific objectives of the corresponding observation and enables nearly automatic operation of the instrument during flight.
 
 \begin{table}
     \centering
@@ -104,7 +111,7 @@ To address this contamination, TuMag performed a series of observations using a 
 
 TuMag observations are very sensible to spectral shifts either from the pre-filters or from the observed spectral line position. The shift of the pre-filters can happen due to changes in the physical conditions of the filter wheels such as changes in temperatures which spectraly shift the behavior of the pre-fitlers. The position of the pre-filter greatly affect the measurements as it reduces the intensity of the measurements that are obtained in the wings of the pre-filter. Due to solar rotation, or changes in the conditions of the etalon, although these are less likely, the spectral position at which the spectral lines are recorded can change. This effect is specially important in observing modes that require great spectral accuracy, such as the deep modes, where only three spectral positions close to the line core are employed. 
 
-In order to verify the spectral behaviour of the prefilter, as well as the position of the spectral line, a series of observations were carried out, usually before and after the scientific observations, where a spectral scan with a rich spectral smapling was taken for all the pre-filters employed in the observation. These scans, measure the voltage range of the specific line with a sampling of \textcolor{red}{100V} and without modulating. 
+In order to verify the spectral behaviour of the prefilter, as well as the position of the spectral line, a series of observations were carried out, usually before and after the scientific observations, where a spectral scan with a rich spectral smapling was taken for all the pre-filters employed in the observation. These scans, measure the voltage range of the specific line with a sampling of 100V and without modulating. 
 
 \begin{figure}[t]
     \begin{minipage}[c]{0.67\textwidth}
@@ -123,7 +130,7 @@ In order to verify the spectral behaviour of the prefilter, as well as the posit
 
 Lastly, TuMag is equipped with the capability to perform phase diversity for image reconstruction. As discussed in previous chapters, applying image reconstruction techniques is essential to meet the optical quality requirements. To this end, TuMag includes a PD plate in the first filter wheel that introduces a known defocus in the images. Capturing images with and without this plate enables the computation of the instrument's PSF, which can then be deconvolved from the data.
 
-PD measurements require quasi-simultaneous pairs of aberrated and unaberrated images. Therefore, TuMag's PD observations consist of a series of 32 or 40 rapid, non-accumulated shots with the PD plate, followed by a corresponding series without the PD plate. The feasibility of this sequential scheme for phase diversity techniques has been confirmed in \cite{PD_sequential}. A pair of focused-defocused images of quiet-sun observations is shown in the last column of figure \ref{fig_pipeline: cal_examples}.   
+PD measurements require quasi-simultaneous pairs of aberrated and unaberrated images. Therefore, TuMag's PD observations consist of a series of 32 or 40 rapid, non-accumulated shots with the PD plate, followed by a corresponding series without the PD plate. The feasibility of this sequential scheme for phase diversity techniques has been confirmed in \cite{PD_sequential}. A pair of focused-defocused images of quiet-sun observations is shown in the last column of figure \ref{fig_pipeline: cal_examples}.
 
 \section{Timelines}
 
@@ -136,6 +143,13 @@ Prior to the first flight of Sunrise III in 2022, a series of timelines were dev
 Observing proposals that could be fulfilled by targeting the same solar feature, while considering its disk position, were grouped into a single timeline. Each timeline included not only the necessary scientific observation blocks but also the required calibration observations to ensure data accuracy. Thus, timelines consist of a sequence of scientific and calibration observation blocks. The observing blocks within a timeline could vary in content depending on the scientific objectives and the status of the other instruments involved.
 
 For simplicity, operations related to SCIP and SUSI will be excluded from the discussion, save for a few important remarks. In the case of TuMag, each observing block was composed either of a combination of two observing modes executed consecutively, or a single observing mode repeated throughout the block.  
+
+\begin{figure}[t]
+  \includegraphics[width=\textwidth]{figures/Pipeline/timelines_Examples.pdf}
+  \caption{
+    Continuum images of the first modulation of the first observation mode from different timelines. The image shown has been flat-fielded and dark-corrected. The timestamp provided corresponds to the first image of the observation mode. The colorbar is given in counts.}
+    \label{fig_pipeline: timeline_examples}
+\end{figure}
 
 The timelines of the Sunrise III observation campaign can be gropued in the following blocks: 
 
@@ -153,20 +167,25 @@ The timelines of the Sunrise III observation campaign can be gropued in the foll
   \Myitem Center-to-limb variation (CLV) observations were intended to target regions of the solar disk characterized by $\mu$ values that had not been previously observed. The parameter $\mu$, defined as the cosine of the angle between the surface normal and the observer's line of sight, serves as a useful indicator of a region's proximity to the disk center. Specifically, $\mu$ ranges from 1 at the disk center to 0 at the limb \citep{thompson2006coordinate}. Conducting CLV observations at previously unmeasured $\mu$ values enables us to capture data from different regions across the disk, facilitating studies of how observational features vary with their position on the disk. 
 \end{itemize}
 
-However for a more detailed description of the timelines \dots
+During the Sunrise III observation campaign, 38 timelines were run, including calibration timelines in addition to the scientific programs presented here. Some examples of the different targets employed during the campaign are shown in fig. \ref{fig_pipeline: timeline_examples}.  A detailed record of TuMag's observations can be found online both in the pipeline's repository and in TuMag's official data website\footnote{\url{https://www.uv.es/jublanro/tumag_data_test.html}}.  
 
-This work is currently an on going process... 
+
 \section{Pipeline}
 
-All astronomical data has to undergo a process where raw data is process in order to remove instrumental artifacts and produce the scientific products. This process, usually known as data reduction, is specific to each instrument as different instruments have different needs and physical components that affect the light in different ways. In the case of TuMag, a specific software has been developed for this end.  
+Revisar esto. 
 
-In this section, we will present and briefly describe and discuss some aspects of this code. The code is available in an online public repository\footnote{\url{https://github.com/PabloSGN/TuMags_Reduction_Pipeline}} and is important to note that it is, at the moment of writing of this thesis, in current development due to the late arrival of the data of Sunrise III. 
+When light traverses any astronomical instrument, the optical components it encounters between the aperture and the detector can inadvertently alter the light. These modifications give rise to artifacts that must be corrected prior to the scientific exploitation of the observations, as they can distort the results if left unaddressed. The process of eliminating these spurious effects is typically referred to as data reduction and is specific to each instrument; different optical elements necessitate distinct corrections.
 
-The steps that are required to take during a data reduction process can vary depending on the nature of the observation. However, there is a basic reduction that has to be applied to any observation, which involves the standard dark-current and flat-fielding corrections, previously mentioned. Nonetheless, TuMag is a spectropolarimeter, and thus, is not only interested in the imaging side of the instrument, but also in the polarimetric and spectroscopic side of the data. This means that additional steps within the data reduction process must be taken to provide the corrected stokes components.
+In the case of TuMag, data reduction is executed through a streamlined process known as the data pipeline, which accounts for the effects present in all observations. This process includes additional steps that may be applied depending on the nature of the observations. As a spectropolarimeter, TuMag’s data pipeline must also demodulate the observations and derive the Stokes vector of the measured light for all recorded spectral positions.
 
-Therefore, the data reduction of any TuMag nominal observing consists on the following mandatory steps: firstly, all individual measurements must be corrected for the dark current. Second, all measurements must be flat-fielded by the corresponding flat-field, that is, the measurment at the same modulation and spectral position. In the third place, the four modulations for each camera have to be demodulated to produce the four stokes components. Once the four stokes components have been computed, the data from both cameras can be combined in order to remove some spurious effects. And lasty, the contamination between components, known as cross-talk, has to be evaluated and corrected, if present. We will enter into a more detailed explanaition of these steps in the following sections. 
+This section presents the software specifically developed for this purpose. The discussion will cover the various steps that data must undergo before becoming science-ready, as well as the tools created to facilitate this process. All codes related to TuMag's data reduction are publicly available in a GitHub repository\footnote{\url{https://github.com/PabloSGN/TuMags_Reduction_Pipeline}}, and it is important to note that this software is still under development at the time of writing this thesis.
 
-However, the extra calibration blocks allow us to ... 
+
+When light traverses any astonomical instrument, the optical components that the light encounters between the aperture and the detector can modify the light in unintended ways. These modifications lead to artifacts in the onbservations that must be corrected before scientific exploitations of the observations, since they can falsify the results obtained from them if not taken care of. The process of removing these spurious effects, is usually refered to as data reduction, and is specific to each instrument, and different optical elements require different corrections. 
+
+In the case of TuMag, the data reduction is performed through a streamlined process, the data's pipeline, that accounts for the effects present in all observations, with some additional steps that may or may not be applied, depending on the nature of the observations. As a spectropolarimeter, TuMag's data pipeline must, in addition, demodulate the observations and provide the stokes vector of the measured light, and do so for all the recorded spectral positions.  
+
+In this section, we present the software that has been specifically developed for this purpose. We will discuss the different steps that data has to undergo before being science-ready, and present the tools that have been derived to do so. All codes related to TuMag's data reduction are public in a Github repository\footnote{\url{https://github.com/PabloSGN/TuMags_Reduction_Pipeline}} and is important to note that it is on development at the time of writing of this thesis.  
 
 \subsection{Standard data reduccion process.}
 
@@ -198,7 +217,7 @@ Once data has been corrected for the dark current and flat-fielded, the stokes c
     \end{pmatrix} \ \ , 
     \label{pipeline: Demod}
 \end{equation}
-where the matrix D is the one computed during the polarimetric calibrations (see section XX).
+where the matrix D is the inverse of the modulation matrix of the corresponding camera and pre-filter that were computed during the calibrations (see sec. \ref{sect:tumag_cal polarimetric}).
 
 
 

@@ -88,7 +88,7 @@ TuMag is an FPI-based tunable imaging spectropolarimeter, capable of measuring t
 
 In this section, we present an overview of the design of TuMag  and its performance. It is important to note that this discussion will primarily focus on the instrument's optical design and performance—specifically its polarimetric, spectral, and imaging properties. The thermal design and control software, while crucial to the instrument’s functionality, will not be covered here to avoid excessive length. Nonetheless, it is essential to acknowledge that these aspects are integral to TuMag’s overall performance and represent a substantial portion of the effort contributing to its success.
 
-\section{TuMag's design and light path.}
+\subsection{TuMag's design and light path.}
 
 As a polarimeter, TuMag must be able to measure the full Stokes vector of the incoming light. To achieve this, it must generate four distinct modulation states and measure them in an almost simultaneously manner. As a spectrometer, TuMag must possess the capability to select specific wavelengths along multiple spectral lines. This selection process involves, first filtering the light with a pre-filter, which selects a "broad" spectral range, followed by an etalon that further narrows the bandpass within the selected range. Throughout this procedure, stringent requirements regarding polarimetric sensitivity (efficiency), spectral resolution, and imaging quality must be maintained. A summary of these requirements is presented in Table \ref{table: Tumags requirements}.
 
@@ -108,11 +108,11 @@ The final optical element the light encounters before reaching the cameras is a 
 
 Light then reaches the cameras, shown with pink boxes (boxes E) in the scheme, where images from both are recorded and stored. After mission recovery, the data is processed on-ground to combine images from the different cameras, modulation states, and spectral lines, ultimately deriving the scientific products. This processing and reduction of the data is accomplished using software specifically developed for TuMag, which will be extensively discussed in Chapter \ref{CH:Pipeline}. 
 
-\section{Instrument performance and verification.}
+\subsection{Instrument performance and verification.}
 
 All subsystems within the TuMag light path function collaboratively to deliver high-resolution spectroscopic data of the solar spectrum. To ensure data quality, TuMag underwent multiple verification and calibration processes, during which its spectral, polarimetric, and imaging properties were meticulously tested. These procedures, commonly referred to as end-to-end (E2E) calibration tests (see \cite{e2e-tests-inta} for a detailed description of the tests), were conducted at various stages of the mission. Specifically, they were performed during the assembly, integration, and verification (AIV) activities with the stand-alone instrument at INTA facilities in Madrid, Spain; during the AIV phase of the PFI platform at MPS facilities in Göttingen, Germany; and during the TuMag AIV phase in the Sunrise III mission at ESRANGE facilities in Kiruna, Sweden. These tests were designed not only to validate the instrument's capabilities but also to measure critical parameters such as the tuning constant of the etalon, modulation matrices, and best-focus position—each of which is vital for the optimal operation of TuMag and the subsequent data processing. We will now delve into the details of the imaging, spectral and polarimetric properties of the instrument as well as the verification processes and results, as the two are intimately related.  
 
-\subsection{Imaging performance.}
+\subsubsection{Imaging performance.}
 TuMag captures photons using two custom-made cameras \citep{tumag-cams} equipped with GPIXEL back-illuminated GSENSE400BSI detectors, each featuring a $2k \times 2k$ pixel array, and specifically designed to meet TuMag's scientific requirements. These cameras provide a broad FoV of $63'' \times 63''$, sufficient to encompass an entire medium-sized active region, with a plate scale of $0.0378''$/pixel.
 
 In order to fulfill the requirement of the wavefront error of $W \sim \lambda / 14$, the instrument must have means to correct for the additional aberrations introduced by the telescope, the image stabilization and light distribution (ISLiD) system and uncorrected jittering. For this purpose, TuMag is equipped with a PD plate in the filter wheel that allows for the assesment of the PSF during the observations to apply image restoration techniques during the data processing.  
@@ -175,7 +175,7 @@ Figure \ref{tumag : PD} shows the measurements and results of the PD analysis fo
 
 The PD analysis indicates a small amplitude for most aberrations, with coefficients beyond Z15 approaching zero, except for the spherical aberration ($Z_{11}$, $Z_4 ^0$) which is the dominant contribution to the rms wfe. However, the results exhibit significant dispersion, as reflected by error bars that reach values up to 0.025$\lambda$ for the first coefficients. Both the defocus and astigmatism are pretty low (Zernike indexes 4, 5 and 6, $Z _ 2 ^0$, $Z _ 2 ^{-2}$ and $Z _ 2 ^2$, respectively), agreeing with the results obtained from the MTF analysis which showed a good resolution in both vertical and horizontal directions. The overall rms WFE obtained from this analysis is $\lambda / 11.4$. It is important to note that the PD analysis shown here was carried out at the final stages of the calibration campaign, with TuMag mounted on the PFI and the with the light being fed to the instrument through the telescope and ISLiD system, whereas the MTF determination was conducted in the stand-alone AIV phase, without the aberrations introduced by these systems. Nevertheless, both analyses agree on a WFE better than $\lambda / 10$, indicating very high optical quality, despite the fact that the FPI of TuMag operates in a collimated configuration, which is known to degrade optical performance \citep{ghosts-etalon}.
 
-\subsection{Spectral performance.}
+\subsubsection{Spectral performance.}
 
 TuMag filters wavelengths through a sequential process, beginning with a broad blocking pre-filter that eliminates unwanted regions of the solar spectrum, and followed by a second narrow-band pre-filter that is tuned to the three selected spectral lines. Finally, the LiNbO$_3$ Fabry-Pérot etalon is encharged of selecting a very narrow band around specific wavelengths along the spectral lines. The narrow-band pre-filter and the etalon are critical to TuMag's spectroscopic performance and require careful evaluation during calibration.
 
@@ -217,7 +217,7 @@ TuMag's etalon (see Table \ref{table: Tumags etalon}) operates in a collimated s
 
 An observation of the solar spectrum with the 517 nm pre-filter, conducted at INTA facilities in December 2021 during the end-to-end calibration tests, is presented in Fig.~\ref{fig_tumag:second-order_cont}, along with the corresponding pre-filter measurement. The magnesium line core is detected at approximately -2200 V using the primary order of the etalon and reappears around 3750 V with a secondary order. A fitting of the solar spectrum\footnote{Reference} is also shown for both orders. These results reveal significant contamination from the secondary order near the pre-filter's minimum transmittance. At around 0 volts, the observed spectrum (orange line) is a composite of contributions from both the primary (red line) and secondary (green line) orders. This contamination is particularly relevant for data processing, as continuum measurements of the magnesium line are typically conducted at -80 V. The broader profile of the magnesium line necessitates continuum measurements farther from the line core, making it more susceptible to this contamination. In contrast, the narrower iron lines do not require such extensive offsets for continuum measurements and are thus less affected.
 
-\subsection{\label{sect:intro polarimetric}Polarimetric performance.}
+\subsubsection{\label{sect:tumag_cal polarimetric}Polarimetric performance.}
 
 TuMag modulates the incoming light through a PMP composed of two anti-parallel LCVRs. These devices can modify the phase retardance induced to the light that goes through them by changing the alignment of their molecules when subject to a voltage potential. Their advantages for airborne instruments lie in their lightweight and compact design, the low voltage required for operation ([$0 - 10$]V), and their efficiency in producing either four linearly independent modulation states for full-Stokes polarimetry or only two states for measuring the longitudinal component of the magnetic field through Stokes V. This versatility is a specific advantage of LCVRs, not found in quarter-waveplate-based PMPs \citep{pmp-advantages}.
 
@@ -256,7 +256,52 @@ Both modulation schemes are required to operate under an optimal modulation sche
 
 Considerations on the (S/N) are critical for ensuring the required polarimetric sensitivity. Achieving an S/N of $10^3$ in the Stokes measurements imposes a requirement of $S/N \approx 1200$  for each modulation measurement per camera. This calculation assumes near-optimal polarimetric performance, and takes into account the dual-beam polarimetry technique, which increases the S/N by a factor of $\sqrt{2}$ when combining data from the two cameras. A single shot of the cameras is insufficient to reach these S/N values, as the sensors do not have enough capacity in their electron wells. To address this, multiple exposures are captured and subsequently summed during each observation. This \textit{accumulation} strategy, extensively tested and employed in various polarimeters (e.g., \citealt{accs1}, \citealt{accs2}, \citealt{accs3}), has proven compatible with image reconstruction techniques \citep{accs-image1, accs-image2}. It allows for adjusting S/N levels depending on the scientific objectives of the observation, balancing between velocity and polarimetric sensitivity.
 
-However, in order to fulfill the polarimetric sensitivity requirements, the modulation matrix of the instrument must be carefully addressed during the polarimetric calibrations. Any deviation in the computation of the modulation matrix, will introduce spurious signals in the polarization measurements, known as cross-talk. The polarimetric calibration involves a series of measurements using a light beam with a known polarization state, generated by a rotating linear polarizer and a rotating quarter-waveplate. By varying the positions of these two devices, 40 different input polarization states were produced and measured with three pre-filters. These measurements allowed for the precise determination of the modulation matrix by solving the system of equations \eqref{eq_intro:modultaion_eqs}, where the only unknown is the modulation matrix $\textbf{M}$, as both the measured modulation and the Stokes components of the incoming light are known.
+However, in order to fulfill the polarimetric sensitivity requirements, the modulation matrix of the instrument must be carefully addressed during the polarimetric calibrations. Any deviation in the computation of the modulation matrix, will introduce spurious signals in the polarization measurements, known as cross-talk. The polarimetric calibration involves a series of measurements using a light beam with a known polarization state, generated by a rotating linear polarizer and a rotating quarter-waveplate. By varying the positions of these two devices, 40 different input polarization states were produced and measured with three pre-filters. These measurements allowed for the precise determination of the modulation matrix by solving the system of equations \eqref{eq_intro:modultaion_eqs}, where the only unknown is the modulation matrix $\textbf{M}$, as both the measured modulation and the Stokes components of the incoming light are known. The modulation matrices for both cameras (indicated through the subindex) and all pre-filters that were determined through this process during the polarimetric E2E tests conducted at the Sunrise III AIV phase in Kiruna, Sweden, in 2022, are:
+\[
+\begin{matrix}
+M_0 ^{517} = \begin{bmatrix}
+            0.951 & -0.612 & 0.474 & 0.459 \\
+            0.955 & -0.331 & -0.758 & -0.382 \\
+            1.058 & 0.456 & 0.562 & -0.712 \\
+            1.036 & 0.747 & -0.260 & 0.600
+            \end{bmatrix}
+& \quad
+M_1 ^{517} = \begin{bmatrix}
+            1.054 & 0.763 & -0.394 & -0.524 \\
+            1.036 & 0.497 & 0.793 & 0.306 \\
+            0.953 & -0.282 & -0.475 & 0.683 \\
+            0.958 & -0.585 & 0.320 & -0.613
+            \end{bmatrix}
+\\ \\
+M _ 0 ^{525.02} = \begin{bmatrix}
+    0.954 & -0.694 & 0.406 & 0.414 \\
+    0.969 & -0.390 & -0.803 & -0.368 \\
+    1.042 & 0.418 & 0.495 & -0.705 \\
+    1.035 & 0.710 & -0.266 & 0.612
+    \end{bmatrix}
+& \quad
+M _ 1 ^{525.02} = \begin{bmatrix}
+    1.059 & 0.771 & -0.449 & -0.433 \\
+    1.024 & 0.449 & 0.723 & 0.335 \\
+    0.965 & -0.344 & -0.543 & 0.650 \\
+    0.953 & -0.606 & 0.191 & -0.641
+    \end{bmatrix}
+\\ \\
+M _ 0 ^{525.06} = \begin{bmatrix}
+    0.951 & -0.687 & 0.403 & 0.424 \\
+    0.962 & -0.373 & -0.800 & -0.339 \\
+    1.048 & 0.415 & 0.500 & -0.728 \\
+    1.038 & 0.736 & -0.236 & 0.601
+    \end{bmatrix}
+& \quad
+M _ 1 ^{525.06} = \begin{bmatrix}
+    1.060 & 0.777 & -0.403 & -0.463 \\
+    1.032 & 0.471 & 0.754 & 0.290 \\
+    0.960 & -0.306 & -0.497 & 0.681 \\
+    0.948 & -0.620 & 0.205 & -0.619
+    \end{bmatrix}
+\end{matrix}
+\]
 
 The results of the polarimetric calibration performed during the end-to-end (E2E) tests at INTA in December 2021 are presented in Fig.~\ref{fig_tumag:pol eff maps}. The figure shows the results for camera one; however, camera two demonstrated nearly identical efficiencies. The polarimetric efficiencies across the entire field of view (FoV) exceed the required thresholds $\varepsilon _{req} \geqslant [0.95, 0.45, 0.45, 0.45]$, and approach the optimal values. Furthermore, efficiency variations along the FoV are generally low, with standard deviations lower than 0.01. This hmogeneity of the polarimetric performance makes the data reduction easier as no special treatment is requiered for specific regions.  
 
