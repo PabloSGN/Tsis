@@ -144,22 +144,68 @@ The timelines of the Sunrise III observation campaign can be gropued in the foll
   
   There are four distinct timelines in this category: three standard timelines, which ewmploy the nominal observing modes, and a different timeline, the (QSDC{\_}HC). This timeline employs high-cadence variations of the standard observing modes specifically designed to enhance the temporal resolution between images, which is crucial for helioseismology techniques.
   \Myitem Sunspot observations (SP) are specifically designed to study sunspots. There are four different timelines for this purpose. Some of these are short programs used to track the same sunspot over multiple days, with the goal of studying the evolution and decay of the sunspot. Others are more extensive programs aimed at examining, in greater detail, the magnetic activity of sunspots and their penumbral structures.
-  \Myitem Polar observations (PL) target the region close to the limb in both poles of the Sun. These areas are of special interest as they provide the opportunity to measure faint signals outside the main solar disk, such as spicules in the lower chromosphere, observed outside the continuum disk of iron. Additionally, these regions are less well-studied compared to the solar disk center, largely due to the technical challenges involved in their observation. Two different instances of these timelines are conceived in the observation campaign, mostly differenciated in TuMag by the selected spectral lines.
-  \Myitem 
-  Active regions (AR) observations are designed to study areas exhibiting solar activity, excluding those specifically focused on in the sunspot programs. These observations typically consist of two-hour series, employing the standard combination of the iron 525.02 nm and magnesium lines, using modes 1 and 2.02, which represent the most common observation block for TuMag. Although five different AR timelines were planned for the Sunrise campaign, only three were executed.
+  \Myitem Polar observations (PL) target the region close to the limb in both poles of the Sun. These areas are of special interest due to their distinct magnetic behavior compared to the disk center. Additionally, these regions provide the opportunity to measure faint signals outside the main solar disk, such as spicules in the lower chromosphere, observed outside the continuum disk of iron. Two different instances of these timelines are conceived in the observation campaign, mostly differenciated in TuMag by the selected spectral lines.
+  \Myitem East and West limb (EW) observations are designed to target the equatorial regions of the solar limb. In addition to exhibiting magnetic structures distinctly different from those observed at the poles, the reason for having a separate timeline from the PL timelines lies in the orientation and technical constraints related to SCIP and SUSI's slits. The relative positioning of the regions and the inclination of the telescope introduce unique challenges. In these EW observations, the spectrometer slits are aligned parallel to the limb, contrasting with the PL timelines, where the slit is positioned perpendicular to the limb.
+  \Myitem Active regions (AR) observations are designed to study areas exhibiting solar activity, excluding those specifically focused on in the sunspot programs. These observations typically consist of two-hour series, employing the standard combination of the iron 525.02 nm and magnesium lines, using modes 1 and 2.02, which represent the most common observation block for TuMag. Although five different AR timelines were planned for the Sunrise campaign, only three were executed.
   \Myitem Emergence flux (EMF) programs are specifically desinged to study active regions that exhibit a large flux emercence. For TuMag, the observation blocks are shared with those of a the AR programs, namely, the combination of mode 1 and 2.02 for series of around 2 hours. 
   \Myitem Full spectral scan (FS) observations are primarily designed for SUSI and SCIP, where their complete set of spectral bands is utilized. These scans are intended to be carried out in both quiet Sun and active regions. For TuMag, FS observations consist of long series focusing on the iron spectral line in quiet Sun regions, while in active regions, they include a combination of iron and magnesium observations.
   \Myitem The flares programs (FL) were designed for target oportunities of a flaring region. These programs were intended to be activated only when an active region showed signs of flaring. For TuMag, the observations during these programs consist of the standard combination of iron 525.02 nm and magnesium spectral lines.
-  \Myitem Center to limb variation (CLV)  Ni idea macho 
+  \Myitem Center-to-limb variation (CLV) observations were intended to target regions of the solar disk characterized by $\mu$ values that had not been previously observed. The parameter $\mu$, defined as the cosine of the angle between the surface normal and the observer's line of sight, serves as a useful indicator of a region's proximity to the disk center. Specifically, $\mu$ ranges from 1 at the disk center to 0 at the limb \citep{thompson2006coordinate}. Conducting CLV observations at previously unmeasured $\mu$ values enables us to capture data from different regions across the disk, facilitating studies of how observational features vary with their position on the disk. 
 \end{itemize}
 
 However for a more detailed description of the timelines \dots
 
 This work is currently an on going process... 
 \section{Pipeline}
-A specific software has been desgned for the processing of TuMag data. 
+
+All astronomical data has to undergo a process where raw data is process in order to remove instrumental artifacts and produce the scientific products. This process, usually known as data reduction, is specific to each instrument as different instruments have different needs and physical components that affect the light in different ways. In the case of TuMag, a specific software has been developed for this end.  
+
+In this section, we will present and briefly describe and discuss some aspects of this code. The code is available in an online public repository\footnote{\url{https://github.com/PabloSGN/TuMags_Reduction_Pipeline}} and is important to note that it is, at the moment of writing of this thesis, in current development due to the late arrival of the data of Sunrise III. 
+
+The steps that are required to take during a data reduction process can vary depending on the nature of the observation. However, there is a basic reduction that has to be applied to any observation, which involves the standard dark-current and flat-fielding corrections, previously mentioned. Nonetheless, TuMag is a spectropolarimeter, and thus, is not only interested in the imaging side of the instrument, but also in the polarimetric and spectroscopic side of the data. This means that additional steps within the data reduction process must be taken to provide the corrected stokes components.
+
+Therefore, the data reduction of any TuMag nominal observing consists on the following mandatory steps: firstly, all individual measurements must be corrected for the dark current. Second, all measurements must be flat-fielded by the corresponding flat-field, that is, the measurment at the same modulation and spectral position. In the third place, the four modulations for each camera have to be demodulated to produce the four stokes components. Once the four stokes components have been computed, the data from both cameras can be combined in order to remove some spurious effects. And lasty, the contamination between components, known as cross-talk, has to be evaluated and corrected, if present. We will enter into a more detailed explanaition of these steps in the following sections. 
+
+However, the extra calibration blocks allow us to ... 
 
 \subsection{Standard data reduccion process.}
+
+As stated before, the data reduction starts by processing the dark-current observations. These observations consist on 50 images per camera at 50 accumulations. The processing of these observations consists on averaging all images for each camera and providing the dark-current per camera and accumulation. The current derived from this computation has to be substracted from every image used during the reduction process. 
+
+The second step is the processing of the flat-field observations. These observations, as menioned before, are a modified version of the nominal mode with an increased $\lambda_{\text{rep}}$ that are run $N_{\text{rep}}$ times. The processing of these observations consists on averaging all the images taken at a specific wavelength, for the same modulation, after substracting the dark-current to each measurement. Thus, $\lambda _ {\text{rep}} \times N_{\text{rep}}$ images are averaged to generate a single frame of the flat-field. In order to preserve the spectral line information, flat-fields must be normalized to their mean value. The reason for this, is that flat-fields taken at the core of the line will have lower levels of intensity than those of the continuum. But we are only interested in correcting relative changes of intensity within a single frame. 
+
+With the dark-current for each camera and the flat-fields for each camera, modulation and spectral position, the scientific images can be corrected as explained, that is, by substracting the dark-current to each osbervation and dividing the observation by the flat-field of the corresponding spectral position and modulation. 
+
+Once data has been corrected for the dark current and flat-fielded, the stokes components can be computed. The demodulation is carried at each wavelength individually and consists on the matrix multplication of the demodulation matrix and the four stokes components:
+\begin{equation}
+  \begin{pmatrix}
+  I \\
+  Q \\
+  U \\
+  V
+  \end{pmatrix} = 
+  \underbrace{\begin{pmatrix} 
+      d _ {00} & d _ {01} & d _ {02} & d _ {03} \\ 
+      d _ {10} & d _ {11} & d _ {12} & d _ {13} \\
+      d _ {20} & d _ {21} & d _ {22} & d _ {23} \\
+      d _ {30} & d _ {31} & d _ {32} & d _ {33} 
+  \end{pmatrix}}_ {\textbf{D}}
+  \begin{pmatrix}
+    I _ {1} \\
+    I _ {2} \\
+    I _ {3} \\
+    I _ {4}
+    \end{pmatrix} \ \ , 
+    \label{pipeline: Demod}
+\end{equation}
+where the matrix D is the one computed during the polarimetric calibrations (see section XX).
+
+
+
+
+
+
+
 
 \subsection{Extra calibration blocks.}
 
