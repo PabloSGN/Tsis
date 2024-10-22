@@ -205,6 +205,14 @@ The second step is the flat-field computation. These observations, as previously
 
 Since TuMag operates in a dual-beam configuration, data from both cameras must be combined during processing. However, the images from each camera are not initially aligned. To determine the camera alignment, a two-dimensional cross-correlation is performed using the pinhole target from both cameras. Additionally, the field stop position is required for alignment, as TuMag's detectors are larger than its FoV. A specific function identifies the field stop positions from the processed flat-fields, marking the boundary between dark pixels and those within TuMag's FoV. Figure XX provides a representation of both the pinhole alignment and the field-stop finder.
 
+\begin{figure}[t]
+  \includegraphics[width=\textwidth]{figures/Pipeline/Spectral_scans_ecample.pdf}
+  \caption{
+    Block diagram of the standard reduction process: Blue boxes represent the individual steps that make up the reduction, while ellipses indicate the different sets of observations and the final product (yellow ellipse). }
+    \label{fig_pipeline: spectral_scans}
+\end{figure}
+
+
 Having computed the dark-current and the flat-fields, the scientific observations can be corrected by substracting the dark-current and dividing the resulting image by the flat-field of the corresponding wavelength and modulation. 
 
 With the dark-corrected and flat-fielded observations, the stokes components can be computed. The demodulation is carried at each wavelength separately and consists on the matrix multplication of the demodulation matrix and the four stokes components:
@@ -243,16 +251,10 @@ The correction of the cross-talk from I to any other component starts by measuri
 \end{equation}
 where the relation between the stokes component $S_{orig}$ and stokes I $I_{orig}$ has been fitted to the line: $S_{orig} =  I_{orig} * a + b$
 
-
-
-
-
-
-
-
-
-
 \subsection{Extra calibration blocks.}
 
-
+\subsection{Image reconstruction.}
+\subsubsection{Linear polarizer calibration.}
+\subsubsection{Micropolarizerss calibration.}
+\subsubsection{Prefilter scans.}
 
