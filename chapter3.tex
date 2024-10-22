@@ -171,17 +171,15 @@ During the Sunrise III observation campaign, 38 timelines were run, including ca
 
 \section{Pipeline}
 
-When light traverses any astronomical instrument, the optical components it encounters between the aperture and the detector can alter the light in unintended ways. These modifications give rise to artifacts that must be corrected prior to the scientific exploitation of the observations, as they can falsify the results if left unaddressed. The process of eliminating these spurious effects is typically referred to as data reduction and is specific to each instrument, as different optical elements require different corrections.
+Before data can be employed for scientific purposes, it has to undergo a process where all the instrumental and spurious effects are removed and the necessary computations for the scientific aim are carried out. This process, usually refered to as data reduction, has to be specifically designed for each instrument, as the particular properties of the instrument come into play. Being a spectropolarimeter, TuMag's data reduction pipeline must, in addition to removing the instrumental artifacts, compute the stokes components of the incoming light.
 
-As a spectropolarimeter, TuMag's final data product are not \textit{simply} the measured images but the Stokes components of the incoming light, when either modulation scheme is employed. Consequently, TuMag's data pipeline must not only remove all instrumental artifacts but also include the necessary procedures to demodulate the data and derive the Stokes components for each wavelength along the spectral line.
-
-This section presents the software specifically developed for this purpose. The discussion will cover the various steps that data must undergo before becoming science-ready, as well as the tools created to facilitate this process. All codes related to TuMag's pipleine are publicly available in a GitHub repository\footnote{\url{https://github.com/PabloSGN/TuMags_Reduction_Pipeline}}, and it is important to note that this software is still under development at the time of writing this thesis.
+In this section we introduce the software that has been developed for TuMag's data processing. Due to the proximity of the data's arrival to the end of this thesis, its important to note that the data reduction is still in development, with some calibration steps still undeveloped. In the following, we present the current status of the pipeline, along with a few examples of the results. The pipeline is publicly available in a GitHub repository\footnote{\url{https://github.com/PabloSGN/TuMags_Reduction_Pipeline}}.  
 
 \subsection{Standard data reduccion process.}
 
-We have divided the discussion of the pipeline in two sections, the so-called "standard data reduction process" and the extra calibration blocks. The first being all the steps that are mandatory to process am individual observing mode and produce the Stokes components with the most basic corrections. These are the minimal steps to produce data that can start to be analyzed scientifically. The second block is comprised of all the additional corrections and considerations that may or may not be applied to the data, depedning on the nature of the observation. While this division may not be entirely accurate, as science-ready data will likely require the application of additional calibrations, such as image reconstruction, for instance, we have adopted it to simplify the discussion of the pipeline.
+The specific steps that have to be applied to a particular observation depends on the observation mode, and scientific aim of the observation, as different observations may require additional steps prior to the sicientific exploitation. However, any observing mode thats empoys either two of the modulation schemes, share a series of common steps that must be followed. Taking into account that save for the high cadence timelines, and the observing mode 0s, all observations follow this scheme, this is the process that the majority of TuMag data has to undergo. 
 
-All data corresponding to an observing mode whose final product consists of the Stokes components of the incoming light (i.e., all nominal modes except for the 0s mode) must follow the standard reduction process. This process is illustrated in the block diagram in fig. \ref{fig_pipeline: block_diagram} and consists of the following steps:
+These steps include the basic corrections that have to be applied to all images, namely flat-fielding and dark current corrections. But additionally, the final steps must combine the data from both cameras, and compute the stokes components. This process is illustrated in the block diagram in fig. \ref{fig_pipeline: block_diagram} and consists of the following steps:
 \begin{enumerate}
   \item Dark current processing. 
   \item Flat-fielding processing.
@@ -193,7 +191,7 @@ All data corresponding to an observing mode whose final product consists of the 
   \end{enumerate}
 
 \begin{figure}[t]
-  \includegraphics[width=\textwidth]{figures/Pipeline/block_diagram.pdf}
+  \includegraphics[width=\textwidth]{figures/Pipeline/pipeline_diagram.PNG}
   \caption{
     Block diagram of the standard reduction process: Blue boxes represent the individual steps that make up the reduction, while ellipses indicate the different sets of observations and the final product (yellow ellipse). }
     \label{fig_pipeline: block_diagram}
@@ -203,7 +201,7 @@ The data reduction process begins with the dark-current processing, which involv
 
 The second step is the flat-field computation. These observations, as previously mentioned, are a modified version of the nominal mode with an increased $\lambda_{\text{rep}}$ and are repeated $N_{\text{rep}}$ times. The processing involves averaging all images taken at a specific wavelength for the same modulation. Thus, $\lambda_{\text{rep}} \times N_{\text{rep}}$ images are averaged to produce a single flat-field frame. To maintain spectral line information, flat-fields are normalized to their mean value, as flat-fields taken at the line core have lower intensity than those in the continuum. The goal is to correct intensity variations within a single frame without altering relative intensities across different spectral points.
 
-Since TuMag operates in a dual-beam configuration, data from both cameras must be combined during processing. However, the images from each camera are not initially aligned. To determine the camera alignment, a two-dimensional cross-correlation is performed using the pinhole target from both cameras. Additionally, the field stop position is required for alignment, as TuMag's detectors are larger than its FoV. A specific function identifies the field stop positions from the processed flat-fields, marking the boundary between dark pixels and those within TuMag's FoV. Figure XX provides a representation of both the pinhole alignment and the field-stop finder.
+Having computed the dark-current and the flat-fields, the scientific observations can be corrected by substracting the dark-current and dividing the resulting image by the flat-field of the corresponding wavelength and modulation. 
 
 \begin{figure}[t]
   \includegraphics[width=\textwidth]{figures/Pipeline/Spectral_scans_ecample.pdf}
@@ -212,10 +210,9 @@ Since TuMag operates in a dual-beam configuration, data from both cameras must b
     \label{fig_pipeline: spectral_scans}
 \end{figure}
 
+After flat-fielding and dark current correction, the different modulations and the two cameras are combined to infer the stokes components for every measured wavelength. However, in order to combine the data from different cameras and modulations, the images have to be aligned beforehand. The alignment is carried out with the already corrected images and consists on a sequential process where the four modulations of the camera one are first aligned, and then the images of the second camera are aligned with respect to the image of the camera one and the corresponding modulation. The alignment is performed at subpixel accuraccy employing the methosd described in \cite{alignment}, where the alignement is computed employing a two-dimensional cross-correlation in the fourier domain. 
 
-Having computed the dark-current and the flat-fields, the scientific observations can be corrected by substracting the dark-current and dividing the resulting image by the flat-field of the corresponding wavelength and modulation. 
-
-With the dark-corrected and flat-fielded observations, the stokes components can be computed. The demodulation is carried at each wavelength separately and consists on the matrix multplication of the demodulation matrix and the four stokes components:
+After alignment, the stokes components are derived through a process known as demodulation. This process is carried independently at different wavelengths and consists on a matrix multiplication employing the demodulation matrix and the four modulations in the vectroial scheme:
 \begin{equation}
   \begin{pmatrix}
   I \\
@@ -237,12 +234,26 @@ With the dark-corrected and flat-fielded observations, the stokes components can
     \end{pmatrix} \ \ , 
     \label{pipeline: Demod}
 \end{equation}
-\textcolor{red}{Modo Longitudinal??}
-where the matrix D is the inverse of the modulation matrix of the corresponding camera and pre-filter that were computed during the calibrations (see sec. \ref{sect:tumag_cal polarimetric}).
+where the matrix D is the inverse of the modulation matrix of the corresponding camera and pre-filter that were computed during the calibrations (see sec. \ref{sect:tumag_cal polarimetric}). And for the longitudinal scheme:
+\begin{equation}
+  \begin{pmatrix}
+  I + V\\
+  I - V
+  \end{pmatrix} = 
+  \begin{pmatrix} 
+      d _ {00} & d _ {01} \\ 
+      d _ {10} & d _ {11}
+  \end{pmatrix}
+  \begin{pmatrix}
+    I _ {1} \\
+    I _ {2} 
+  \end{pmatrix} \ .
+    \label{pipeline: Demod_long}
+\end{equation}
 
 From the matrix multiplication the stokes components for each camera are derived. However, the demodulation is never perfect, due to small deviations of the demodulation matrix from the real one, or instrumental artifacts that have been uncorrected by the flat-fielding. These defects result in a contaminated stokes components, where information from one component appears in other components, typically from Stokes I into Q, U, and or V. Nonetheless, these contamination, known as cross-talk, can be extracted from the data. 
 
-The cross-talk correction is a manual process since different data sets require different corrections. For instance, some data sets may not show contamination from I to U while others do. Moreover, the correction might require to be applied using the information from the whole FoV or only of a small region. Thus, this is a correction that has to be carefully applied and its hard to standarize to the whole set of observations. However, the concept of the correction is the same. 
+The cross-talk correction is a manual process as different data sets require different corrections. For instance, some data sets may not show contamination from I to U while others do. Moreover, the correction might require to be applied using the information from the whole FoV or only of a small region. Thus, this is a correction that has to be carefully applied and its hard to standarize to the whole set of observations. Nonetheless, the concept of the correction is the same. 
 
 The correction of the cross-talk from I to any other component starts by measuring the relation between the two components by fitting through a least-squares method, a polynomial of first order in order to compute the tendency, if there is one. Once this relation has been stablished, and the strength of the cross-talk (\textit{i.e.} the value of the slope) measured, the correction is applied by simply, removing the tendency of the data: 
 
