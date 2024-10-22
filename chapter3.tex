@@ -253,6 +253,13 @@ where the matrix D is the inverse of the modulation matrix of the corresponding 
 
 From the matrix multiplication the stokes components for each camera are derived. However, the demodulation is never perfect, due to small deviations of the demodulation matrix from the real one, or instrumental artifacts that have been uncorrected by the flat-fielding. These defects result in a contaminated stokes components, where information from one component appears in other components, typically from Stokes I into Q, U, and or V. Nonetheless, these contamination, known as cross-talk, can be extracted from the data. 
 
+\begin{figure}[t]
+  \includegraphics[width=\textwidth]{figures/Pipeline/Example_demodulation.pdf}
+  \caption{
+    Hola hola karakola }
+    \label{fig_pipeline: demodulated_data}
+\end{figure}
+
 The cross-talk correction is a manual process as different data sets require different corrections. For instance, some data sets may not show contamination from I to U while others do. Moreover, the correction might require to be applied using the information from the whole FoV or only of a small region. Thus, this is a correction that has to be carefully applied and its hard to standarize to the whole set of observations. Nonetheless, the concept of the correction is the same. 
 
 The correction of the cross-talk from I to any other component starts by measuring the relation between the two components by fitting through a least-squares method, a polynomial of first order in order to compute the tendency, if there is one. Once this relation has been stablished, and the strength of the cross-talk (\textit{i.e.} the value of the slope) measured, the correction is applied by simply, removing the tendency of the data: 
