@@ -107,7 +107,7 @@ Not all the light that reaches the detector is necessarily the intended signal f
 
 To address this contamination, TuMag performed a series of observations using a target that blocks part of the FoV (see the bottom panel of the second column of figure \ref{fig_pipeline: cal_examples}). By analyzing the dark region in these observations, it becomes possible to measure and model the straylight reaching the instrument, allowing for its subsequent removal from the data.
 
-\subsubsection{Prefilter scans.}
+\subsubsection{\label{ref:spectral_scans}Prefilter scans.}
 
 TuMag observations are very sensible to spectral shifts either from the pre-filters or from the observed spectral line position. The shift of the pre-filters can happen due to changes in the physical conditions of the filter wheels such as changes in temperatures which spectraly shift the behavior of the pre-fitlers. The position of the pre-filter greatly affect the measurements as it reduces the intensity of the measurements that are obtained in the wings of the pre-filter. Due to solar rotation, or changes in the conditions of the etalon, although these are less likely, the spectral position at which the spectral lines are recorded can change. This effect is specially important in observing modes that require great spectral accuracy, such as the deep modes, where only three spectral positions close to the line core are employed. 
 
@@ -126,7 +126,7 @@ In order to verify the spectral behaviour of the prefilter, as well as the posit
   \end{figure}
 
 
-\subsubsection{Phase diversity.}
+\subsubsection{\label{susec: PD_measurements}Phase diversity.}
 
 Lastly, TuMag is equipped with the capability to perform phase diversity for image reconstruction. As discussed in previous chapters, applying image reconstruction techniques is essential to meet the optical quality requirements. To this end, TuMag includes a PD plate in the first filter wheel that introduces a known defocus in the images. Capturing images with and without this plate enables the computation of the instrument's PSF, which can then be deconvolved from the data.
 
@@ -171,6 +171,13 @@ During the Sunrise III observation campaign, 38 timelines were run, including ca
 
 \section{Pipeline}
 
+\begin{figure}[t]
+  \includegraphics[width=\textwidth]{figures/Pipeline/pipeline_diagram.PNG}
+  \caption{
+    Block diagram of the standard reduction process: Blue boxes represent the individual steps that make up the reduction, while ellipses indicate the different sets of observations and the final product (yellow ellipse). }
+    \label{fig_pipeline: block_diagram}
+\end{figure}
+
 Before data can be employed for scientific purposes, it has to undergo a process where all the instrumental and spurious effects are removed and the necessary computations for the scientific aim are carried out. This process, usually refered to as data reduction, has to be specifically designed for each instrument, as the particular properties of the instrument come into play. Being a spectropolarimeter, TuMag's data reduction pipeline must, in addition to removing the instrumental artifacts, compute the stokes components of the incoming light.
 
 In this section we introduce the software that has been developed for TuMag's data processing. Due to the proximity of the data's arrival to the end of this thesis, its important to note that the data reduction is still in development, with some calibration steps still undeveloped. In the following, we present the current status of the pipeline, along with a few examples of the results. The pipeline is publicly available in a GitHub repository\footnote{\url{https://github.com/PabloSGN/TuMags_Reduction_Pipeline}}.  
@@ -189,30 +196,20 @@ These steps include the basic corrections that have to be applied to all images,
   \item Demodulation. 
   \item Cross-talk correction and cameras combination.
   \end{enumerate}
-
-\begin{figure}[t]
-  \includegraphics[width=\textwidth]{figures/Pipeline/pipeline_diagram.PNG}
-  \caption{
-    Block diagram of the standard reduction process: Blue boxes represent the individual steps that make up the reduction, while ellipses indicate the different sets of observations and the final product (yellow ellipse). }
-    \label{fig_pipeline: block_diagram}
-\end{figure}
-
 The data reduction process begins with the dark-current processing, which involves averaging all individual dark frames within a specific set to generate a single dark-current frame per camera. This dark current is then subtracted from all images used in the reduction, including flat-fields, pinholes, and scientific observations, after rescaling the dark-current to the appropriate number of accumulations.
 
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{figures/Pipeline/Example_demodulation.pdf}
+  \caption{Stokes maps in magnesium and iron 525.06 nm lines wings, measured at -50 m\r{A} and +120 m\r{A} from the line core, respectively. The observation corresponds to a FS timeline ran in a flaring active region. Timestamp of the first observation mode (mode 1) : 2024/07/13 12:28:00.  }
+    \label{fig_pipeline: demodulated_data}
+\end{figure}
 The second step is the flat-field computation. These observations, as previously mentioned, are a modified version of the nominal mode with an increased $\lambda_{\text{rep}}$ and are repeated $N_{\text{rep}}$ times. The processing involves averaging all images taken at a specific wavelength for the same modulation. Thus, $\lambda_{\text{rep}} \times N_{\text{rep}}$ images are averaged to produce a single flat-field frame. To maintain spectral line information, flat-fields are normalized to their mean value, as flat-fields taken at the line core have lower intensity than those in the continuum. The goal is to correct intensity variations within a single frame without altering relative intensities across different spectral points.
 
 Having computed the dark-current and the flat-fields, the scientific observations can be corrected by substracting the dark-current and dividing the resulting image by the flat-field of the corresponding wavelength and modulation. 
 
-\begin{figure}[t]
-  \includegraphics[width=\textwidth]{figures/Pipeline/Spectral_scans_ecample.pdf}
-  \caption{
-    Block diagram of the standard reduction process: Blue boxes represent the individual steps that make up the reduction, while ellipses indicate the different sets of observations and the final product (yellow ellipse). }
-    \label{fig_pipeline: spectral_scans}
-\end{figure}
+After flat-fielding and dark current correction, the different modulations and the two cameras are combined to infer the stokes components for every measured wavelength. However, in order to combine the data from different cameras and modulations, the images have to be aligned beforehand. The alignment is carried out with the already corrected images and consists on a sequential process where the four modulations of the camera one are first aligned, and then the images of the second camera are aligned with respect to the image of the camera one and the corresponding modulation. The alignment is performed at subpixel accuraccy employing the method described in \cite{alineamiento}, where the alignement is computed employing a two-dimensional cross-correlation in the fourier domain. 
 
-After flat-fielding and dark current correction, the different modulations and the two cameras are combined to infer the stokes components for every measured wavelength. However, in order to combine the data from different cameras and modulations, the images have to be aligned beforehand. The alignment is carried out with the already corrected images and consists on a sequential process where the four modulations of the camera one are first aligned, and then the images of the second camera are aligned with respect to the image of the camera one and the corresponding modulation. The alignment is performed at subpixel accuraccy employing the methosd described in \cite{alignment}, where the alignement is computed employing a two-dimensional cross-correlation in the fourier domain. 
-
-After alignment, the stokes components are derived through a process known as demodulation. This process is carried independently at different wavelengths and consists on a matrix multiplication employing the demodulation matrix and the four modulations in the vectroial scheme:
+After alignment, the stokes components are derived through a process known as demodulation. This process is carried independently at different wavelengths and consists on a matrix multiplication employing the demodulation matrix and the four modulations. For the vectroial scheme this multiplication can be expressed as:
 \begin{equation}
   \begin{pmatrix}
   I \\
@@ -251,16 +248,17 @@ where the matrix D is the inverse of the modulation matrix of the corresponding 
     \label{pipeline: Demod_long}
 \end{equation}
 
-From the matrix multiplication the stokes components for each camera are derived. However, the demodulation is never perfect, due to small deviations of the demodulation matrix from the real one, or instrumental artifacts that have been uncorrected by the flat-fielding. These defects result in a contaminated stokes components, where information from one component appears in other components, typically from Stokes I into Q, U, and or V. Nonetheless, these contamination, known as cross-talk, can be extracted from the data. 
+The result of the matrix multiplication is the stokes components for each camera. However, the demodulation is never perfect due to small deviations of the demodulation matrix from the real one, or instrumental artifacts that have been uncorrected by the flat-fielding. These defects result in a contaminated stokes components, where information from one component appears in other components, typically from Stokes I into Q, U, and or V. Nonetheless, these contamination, known as cross-talk, can be extracted from the data. Figure \ref{fig_pipeline: demodulated_data} shows an example of the demodulated stokes maps for an observing mode 1 (magnesium) and a 2.06 (iron 525.06 nm) at the wings of the spectral line, not corrected from cross-talk. The intensity map in the magnesium shows the beginning of a flare around the central sunspot. 
 
-\begin{figure}[t]
-  \includegraphics[width=\textwidth]{figures/Pipeline/Example_demodulation.pdf}
-  \caption{
-    Hola hola karakola }
-    \label{fig_pipeline: demodulated_data}
-\end{figure}
+
 
 The cross-talk correction is a manual process as different data sets require different corrections. For instance, some data sets may not show contamination from I to U while others do. Moreover, the correction might require to be applied using the information from the whole FoV or only of a small region. Thus, this is a correction that has to be carefully applied and its hard to standarize to the whole set of observations. Nonetheless, the concept of the correction is the same. 
+
+\begin{figure}[ht]
+  \includegraphics[width=\textwidth]{figures/Pipeline/xtalk_example.pdf}
+  \caption{Example of a cross-talk correction in a small region of the FoV. Each row shows a different stokes parameter. The left column shows quiet Sun stokes maps after demodulation, the central column shows the dispersion between the intensity and the corresponding stokes parameter, and the right column shows the corrected maps. }
+    \label{fig_pipeline: xtalk}
+\end{figure}
 
 The correction of the cross-talk from I to any other component starts by measuring the relation between the two components by fitting through a least-squares method, a polynomial of first order in order to compute the tendency, if there is one. Once this relation has been stablished, and the strength of the cross-talk (\textit{i.e.} the value of the slope) measured, the correction is applied by simply, removing the tendency of the data: 
 
@@ -268,11 +266,52 @@ The correction of the cross-talk from I to any other component starts by measuri
   S_{corr} = S_{orig} - (I_{orig} * a + b),
 \end{equation}
 where the relation between the stokes component $S_{orig}$ and stokes I $I_{orig}$ has been fitted to the line: $S_{orig} =  I_{orig} * a + b$
+Figure \ref{fig_pipeline: xtalk} shows an example of a cross-talk correction in a small region of the FoV in the continuum of a quiet Sun observation. The granulation structure is clearly visible in Q and U before the correction, where no signal in linear polarizaron should be present. The central panel shows the dispersion between the corresponding  stokes component and the intensity, along with the fitted relation. In the case of Q and U, the relation is clearly strongert than in V, where the slope is almost 0. The right columns shows the result of the correction, with Q and U without the majority of influence of the instensity, although some traces can be found. Nevertheless, the cross-talk before the correction is below the 1\%, and thus, the polarimetric sensitivity is larger than $10^{-3}$.
+
 
 \subsection{Extra calibration blocks.}
 
-\subsection{Image reconstruction.}
-\subsubsection{Linear polarizer calibration.}
-\subsubsection{Micropolarizerss calibration.}
-\subsubsection{Prefilter scans.}
+As previously presented, TuMag observations include a series of calibrating observing modes that are not employed in the standard reduction process, namely, polarizers observations, both the lineal polarizer and the micropolarizers set, the pinholes observations, prefilter scans, or PD. These sets of calibrations are ment to be processed separately to aid with the data reduction in observing modes that require it.
+
+The processing of these steps is still in an early stage, and are expected to be fully developed in the following months. However, we present now the idea of these observations and how they will be employed during the reduction process. 
+\subsubsection{Image reconstruction.}
+
+\begin{figure}[h]
+  \begin{minipage}[c]{0.67\textwidth}
+    \includegraphics[width=\textwidth]{figures/Pipeline/Image_restoration.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.29\textwidth}
+    \caption{
+     Example of image reconstruction in the FS timeline for both the 517 nm (Obs. Mode 1) and 525.06 nm (Obs. Mode 2.06) prefilters. The data set for the PD measuremtns was taken on the 13$^{th}$ at 11:42. The timestamp of the first image of the first observation mode is: 2024/07/13 12:28:00. PD computation made by F.J. Bailén.
+     \label{fig_pipeline:  image_restoration}} 
+  \end{minipage}
+\end{figure}
+
+The image reconstruction is in truth one of the steps in the main data's pipeline, and in the future it will be implemented as an additional step that has to be applied to all data sets to exploit the full potential of TuMag's spatial resolution. However, we have separated it in this description since it is not yet fully developed and ready to be automatically processed for all data sets. 
+
+The image reconstruction technique consists on deconvolving the PSF of the instrument from the data through a Wiener filter. PD measurements (see sec. \ref{susec: PD_measurements}) are employed to derive the PSF though the determination of the zernike parameters that describe the WFE. These PD measurements are taken before and after scientific observations to ensure the aplicability of the reconstruction throughout the whole data series.
+
+Figure \ref{fig_pipeline:  image_restoration} shows an example of such a reconstruction, for the 517 nm and 525.06 prefilters. The reconstruction employs the closest PD measurement dataset to the observation and 21 zernikes for the PSF determination.   
+
+\subsubsection{On-flight polarimetric calibration.}
+
+The presence of cross-talk in the observations can be originated from deviations of the modulation of the instrument with respect to the one derived during on-ground calibrations. In that case, the demodulation matrix employed in the pipeline deviates from the ideal one, resulting in a suboptimal demodulaion process. However, TuMag is equipped with both the linear polarizer and micropolarizer targets to assess the demodulation schemes. 
+
+Both polarizer targets can be employed to assess the level of cross-talk in continuum observations as no linear polarization should reach the detector in such cases. Thus, the level of signal in Q and U in such a scenario is a straightforward assessment of the closeness to the ideal demodulation scheme. 
+
+Moreover, the micropolarizer observations allow us to perform this assessment as a funciton of the region within the FoV. The micropolarizers are composed by arrays of 3x3 small linear polarizers oriented in different directions. Thus, the same assessment as the one employing the linear polarizer can be done but with each individual polarizer. 
+
+
+\subsubsection{On-flight spectral calibration.}
+
+One of the most important calibration procedures that is still undeveloped is the on-flight spectral calibration or prefilter extraction. We know from the on ground calibrations and from the spectral scans taken during flight (see sect. \ref{ref:spectral_scans}) that the prefilters are not perfectly centered ant the measured instenisty is modified in different ways along the lines. In particular, magnesium line observations are the most affected by this. Figure \ref{fig_pipeline: spectral_scans} shows the average intensity along the spectral scan for the two most common observation modes in the observation campaign. The spectral profile of Obs. Mode 1 shows a continuum measurement with very low intensity due to both the prefilter and the etalon's second order contamination.
+
+\begin{figure}[t]
+  \includegraphics[width=\textwidth]{figures/Pipeline/Spectral_scans_ecample.pdf}
+  \caption{
+    Average intensities along the iron 525.02 nm (mode 2.02) and magnesium (mode 1) lines. The different colors show the different modulations. The scans correspond to observations taken during the minimum success observations taken on the 2024/07/10 at 13:20.}
+    \label{fig_pipeline: spectral_scans}
+\end{figure}
+
+Although still undeveloped due to the lack of time, a correction addressing this issue is planned for the near future. Employing the prefilter scans, where the spectral line is recorded with a rich spectral sampling and using an analitical model of the etalon's transmission profile, the contribution of both the second order and the effect of the prefilter can be carefully asessed through a fitting procedure. Software to carry out a very similar analysis has already been developed in other works. In the following chapters we delve into the theoretical modeling of etalons and the development of software to axtract its contributions from the data. Minor modifications to this software will allow us to correct for both the aforementioned effects in TuMag's data. 
 
