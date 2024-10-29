@@ -3,11 +3,11 @@
 
 The 2024 observational campaign of the third edition of the Sunrise observatory was an outstanding success. In contrast to previous flights, where technical challenges severely limited the number of useful observations, all subsystems performed exceptionally well during this third flight, allowing for nearly continuous instrument operation over more than six days. From TuMag’s perspective, the campaign yielded approximately 10 terabytes of data, consisting of over 40 scientific observation blocks and 250 calibration observations.
 
-The substantial volume of data recorded by the three instruments, of which TuMag captured the least (in digital space) due to the instrument’s nature, required that it be physically recovered on-site, as it could not be broadcasted from the observatory to the operations center. Recovery activities began immediately after landing and lasted until early August, during which all surviving components, along with the data vaults, were transported to Yellowknife, Canada, the nearest city to the landing site. The data vaults arrived at MPS in early August, where a backup was created before the data associated with each instrument was sent to the respective IP institution. TuMag’s data arrived at  IAA in late August, marking the official start of the reduction process.
+The substantial volume of data recorded by the three instruments, required that it be physically recovered on-site, as it could not be broadcasted from the observatory to the operations center. Recovery activities began immediately after landing and lasted until early August, during which all surviving components, along with the data vaults, were transported to Yellowknife, Canada, the nearest city to the landing site. The data vaults arrived at MPS in early August, where a backup was created before the data associated with each instrument was sent to the respective IP institution. TuMag’s data arrived at  IAA in late August, marking the official start of the reduction process.
 
-The reduction process began by labeling all images and identifying the more than 600 000 images captured by TuMag. Once the observations were correctly identified, the reduction process commenced and, at the time of writing, remains ongoing. Due to the relevance of the pipeline development and results for this thesis, this chapter will provide an overview of TuMag's data and the state of its pipleine, although the results remain preliminary.
+The reduction process began by labeling all images and identifying the more than 600 000 images captured by TuMag. Once the observations were correctly identified, the reduction process commenced and, at the time of writing, remains ongoing. Due to the relevance of the pipeline development and results for this thesis, this chapter will provide an overview of TuMag's data and the current state of its pipleine, although the results remain preliminary.
 
-The discussion will begin by introducing TuMag’s various observing modes, both scientific and calibration, followed by a brief review of the observation campaign, outlining the different observation programs and their scientific objectives. The chapter will conclude with an examination of the data reduction process, detailing the pipeline and presenting some initial results. It is important to note that, due to the late arrival of the data, this thesis had to be written in parallel with the reduction process. Therefore, the results presented here are preliminary, and the final product may differ as additional reduction steps are incorporated.
+The discussion will begin by introducing TuMag’s various observing modes, both scientific and calibration, followed by a brief review of the observation campaign, outlining the different observation programs and their scientific objectives. The chapter will conclude with an examination of the data reduction process, detailing the pipeline and presenting some initial results. It is important to note that, due to the late arrival of the data, this thesis had to be written in parallel with the reduction process. Therefore, the results presented here are preliminary, and the final product will differ as additional reduction steps are incorporated.
 
 \section{TuMag's observing modes}
 
@@ -30,7 +30,7 @@ With the purpose of simplifying the operation activities, TuMag operates through
     \hline
     \hline
     \end{tabular}
-    \caption{Scientific observing modes. From left to righ, the columns are: observing mode identiicator, measured spectral lines, number of wavelengths, of modulations, of accumulations, of cycles, the total timeand the polarimetric SNR.}
+    \caption{Scientific observing modes. From left to right, the columns are: observing mode identiicator, measured spectral lines, number of wavelengths, of modulations, of accumulations, of cycles, the total timeand the polarimetric SNR.}
     \label{table: scientific observing modes}
 \end{table}
 
@@ -40,10 +40,9 @@ Three observing modes are configured for the iron lines. Mode 2 employs a vector
 
 Although most of the parameters are set up by the observing mode and cannot be changed, there are some configurable parameters that allow to slightly modify the observing modes to fit the specific goal of a particular. These parameters are the following:
 
-Solo estos? o había más? 
 \begin{itemize}
-    \Myitem $\lambda _ {\text{rep}}$ : A parameter that allows to repeat all the observations carried out at every spectral position before changing wavelength. This parameter is employed for flat-field observations (see the following section). By default is set to 1.
-    \Myitem Etalon offset : A parameter that allows for the introduction of a global shift to the spectral sampling by offsetting the absolute voltages (and thus, wavelengths) of the scan. This parameter was used to center the spectral line in shorter observing modes affected by solar rotation or other effects that might shift the spectral position. The default value is set to 0 V.
+    \Myitem $\lambda _ {\text{rep}}$ : A parameter that allows to repeat all the observations carried out at every spectral position before changing wavelength. This parameter is employed for flat-field observations (see the following section) or enhancing thge S7N of a specific observation. By default is set to 1.
+    \Myitem Etalon offset : A parameter that allows for the introduction of a global shift to the spectral sampling by offsetting the absolute voltages of the scan, and thus, the wavelengths. This parameter was used to center the spectral line in shorter observing modes affected by solar rotation or other effects that might shift the spectral position. The default value is set to 0 V.
     \Myitem $N_a$ : Even though the number of accumulations is fixed in nominal observing modes, this parameter was set as configurable in order to allow modifications for faster observations when needed. The  default value depends on the observing mode.  
 \end{itemize}
 
@@ -61,10 +60,10 @@ Solo estos? o había más?
     \end{minipage}
 \end{figure}
 
-Figure \ref{fig_pipeline: Observing modes ranges} presents a schematic representation of the voltage ranges for the observing modes when converting spectral sampling to volts. The black lines indicate the voltage boundaries that cannot be surpassed during an observation due to technical constraints. These limits are set at $\pm 3750$ V as the maximum and minimum values, with an additional limitation at 0 V, since a polarity change poses technical challenges that could not be addressed within an observation mode. These restrictions are significant in two cases: firstly, for Magnesium observation modes, specifically modes 1 and 0, where the continuum measurement is positioned as far from the core as possible, at -80 V, due to the 0 V crossing limitation. Secondly, these constraints are relevant when applying an etalon offset to shift the spectral positions of a particular observing mode, as the offset cannot cause the final positions to exceed these boundaries.
+Figure \ref{fig_pipeline: Observing modes ranges} presents a schematic representation of the voltage ranges for the observing modes when converting spectral sampling to volts. The black lines indicate the voltage boundaries that cannot be surpassed during an observation due to technical constraints. These limits are set at $\pm 3750$ V as the maximum and minimum values, with an additional limitation at 0 V, since a polarity change poses technical challenges that could not be addressed during an observation mode. These restrictions are important for two cases: first, for Magnesium observation modes, specifically modes 1 and 0, where the continuum measurement is positioned as far from the core as possible, at -80 V, due to the 0 V crossing limitation. Second, when applying an etalon offset to shift the spectral positions of a particular observing mode as the offset cannot cause the final positions to exceed these boundaries.
 
 \subsection{Calibration modes}
-An additional type of observing modes are also designed aimed at carrying out calibration observations. These calibration observing modes are more flexible than scientific ones, and allow for the configuration of several parameters to match the observations to the aim of the scientific observation. 
+An additional type of observing modes are also designed for carrying out calibration observations. These calibration observing modes are more flexible than nominal ones, and allow for the configuration of several parameters to match the observations to the aim of the scientific observation. 
 
 \begin{figure}[t]
     \includegraphics[width=\textwidth]{figures/Pipeline/cal_modes_examples.pdf}
@@ -75,17 +74,17 @@ An additional type of observing modes are also designed aimed at carrying out ca
 
 \subsubsection{Flat-field observations}
 
-One of the essential calibration procedures in any telescope-based astronomical observation is the acquisition of flat-field images. These observations are designed to measure intensity variations across the FoV, which arise from several factors, including intensity gradients induced by the etalon, dust particles, or pixel efficiency variations, among other sources. The aim is to capture a region with no discernible structure, ideally producing a uniformly flat intensity distribution. However, achieving such flat-field observations is not always straightforward, particularly for certain instruments. While ground-based telescopes can utilize twilight periods to observe areas of the sky devoid of stars, space-borne or balloon-borne solar telescopes, such as Sunrise III, are unable to the dame and must look for alternative methods. 
+One of the essential calibration procedures in any telescope-based astronomical observation is the acquisition of flat-field images. These observations are designed to measure intensity variations across the FoV, which arise from several factors, including intensity gradients induced by the etalon, dust particles, or pixel efficiency variations, among other sources. The aim is to produce an observation with a uniformly flat intensity distribution. However, achieving such flat-field observations is not always straightforward, particularly for certain instruments. While ground-based telescopes can utilize twilight periods to observe areas of the sky devoid of stars, space-borne or balloon-borne solar telescopes, such as Sunrise III, must look for alternative methods. 
 
-In Sunrise III, flat-field images are generated by deliberately blurring the solar image through rapid movements of the mirror. This process effectively removes any solar structure from the FoV when averaging out multiple blurred observations, resulting in a flat-field image devoid of solar features.
+In Sunrise III, flat-field images are generated by deliberately blurring quiet Sun observations through rapid movements of the mirror. This process effectively removes the solar structure from the FoV when averaging out multiple blurred observations, resulting in a flat-field image devoid of solar features.
 
-In the case of TuMag, flat-field observations are performed using a modified version of the nominal observing mode, where the $\lambda_{\text{rep}}$ is set to 4. Additionally, multiple consecutive instances ($N_{\text{reps}}$) of these observations are executed, typically 5 or 7. During data processing, a single flat-field is generated for each wavelength position and modulation state by averaging all corresponding observations.
+In the case of TuMag, flat-field observations are performed using a modified version of the nominal observing mode, where the $\lambda_{\text{rep}}$ is set to 4. Additionally, multiple consecutive instances ($N_{\text{reps}}$) of these observations are executed, typically 5 or 7. During data processing, a single flat-field is generated for each wavelength and modulation state by averaging all corresponding observations.
 
 Figure \ref{fig_pipeline: cal_examples} shows an example of a flat-field observation, for one camera, modulation and wavelength (bottom left panel). The image shows a clear deviation from flatness in the measurment, primarly due to the etalon intensity gradient, which accounts for the change in intensity between the brighter bottom half and the darker top half, and some minor inhomogeneities over the FoV. 
 
 \subsubsection{Dark-current observations}
 
-A second critical calibration procedure for any observation involving electronic cameras is the measurement of dark current. In the absence of incident photons, electrons within the camera's wells can still be randomly excited. This spontaneous excitation can be incorrectly interpreted as photon-induced counts when analyzing the data. Dark current observations are designed to characterize these random electronic excitations, which are primarily influenced by the camera's physical conditions, particularly temperature, so that they can be accurately subtracted from the final images.
+A second critical calibration procedure for any observation involving electronic cameras is the measurement of the dark current. In the absence of incident photons, electrons within the camera's wells can still be randomly excited. This spontaneous excitation can be incorrectly interpreted as photon-induced counts when analyzing the data. Dark current observations are designed to characterize these random electronic excitations, which are primarily influenced by the camera's physical conditions, particularly temperature, so that they can be accurately subtracted from the final images.
 
 For TuMag, dark current calibration involved capturing a series of 50 images with $N_a = 50$ with no light entering the instrument. As with flat-field observations, a single dark current frame for each camera is generated by averaging all individual observations. In the top left panel of fig. \ref{fig_pipeline: cal_examples} a dark current shot is depicted, characterized by the vertical strips pattern.  
 
@@ -111,7 +110,7 @@ To address this contamination, TuMag performed a series of observations using a 
 
 TuMag observations are very sensible to spectral shifts either from the pre-filters or from the observed spectral line position. The shift of the pre-filters can happen due to changes in the physical conditions of the filter wheels such as changes in temperatures which spectraly shift the behavior of the pre-fitlers. The position of the pre-filter greatly affect the measurements as it reduces the intensity of the measurements that are obtained in the wings of the pre-filter. Due to solar rotation, or changes in the conditions of the etalon, although these are less likely, the spectral position at which the spectral lines are recorded can change. This effect is specially important in observing modes that require great spectral accuracy, such as the deep modes, where only three spectral positions close to the line core are employed. 
 
-In order to verify the spectral behaviour of the prefilter, as well as the position of the spectral line, a series of observations were carried out, usually before and after the scientific observations, where a spectral scan with a rich spectral smapling was taken for all the pre-filters employed in the observation. These scans, measure the voltage range of the specific line with a sampling of 100V and without modulating. 
+In order to verify the spectral behaviour of the prefilter, as well as the position of the spectral line, a series of observations were carried out, usually before and after the scientific observations, where a spectral scan with a rich spectral smapling was taken for all the pre-filters employed in the observation. These scans measure the voltage range of the specific line with a sampling of 100V and without modulating. 
 
 \begin{figure}[t]
     \begin{minipage}[c]{0.67\textwidth}
@@ -119,7 +118,7 @@ In order to verify the spectral behaviour of the prefilter, as well as the posit
     \end{minipage}\hfill
     \begin{minipage}[c]{0.29\textwidth}
       \caption{
-       Schematic representation of the voltage range covered by all observing modes. The dashed lines indicate the position of the line core as measured during the E2E tests performed at INTA in December 2021. The black lines represent the voltage limits that cannot be crossed in an observing mode.
+       Average intensities per accumulation in the center of the FoV of the pre-filter scans performed during the commisioning of the instruments during the first hours of the Sunrise III 2025 campaign.  
        \label{fig_pipeline:  prefilter_scans}
       } 
     \end{minipage}
@@ -134,7 +133,7 @@ PD measurements require quasi-simultaneous pairs of aberrated and unaberrated im
 
 \section{Timelines}
 
-The operations of Sunrise III were designed to be nearly autonomous to ensure synchronization between the scientific instruments, the telescope, and the CWS. Given the limited time available for the observation campaign, this autonomy also helps to speed up operations, thus enabling more observation programs to be accommodated within the mission's duration.
+The operations of Sunrise III were designed to be nearly autonomous to ensure synchronization between the scientific instruments, the telescope, and the CWS. Given the limited time available for the observation campaign, this autonomy also helps to speed up operations, enabling more observation programs to be accommodated within the mission's duration.
 
 The Sun is a highly dynamic system, exhibiting a wide range of behaviors and phenomena, from large-scale structures such as active regions, sunspots, and flares, to smaller, quiet Sun structures where interactions at small scales drive the evolution of magnetic flux. This diversity, observable in various spectral lines and across different regions of the solar disk, demands multiple observations with distinct characteristics.
 
@@ -154,9 +153,9 @@ For simplicity, operations related to SCIP and SUSI will be excluded from the di
 The timelines of the Sunrise III observation campaign can be gropued in the following blocks: 
 
 \begin{itemize}
-  \Myitem Quiet Sun observations at disk center (QSDC), as the name implies , focus in regions near the solar disk center that are free from significant solar activity. These timelines typically involvve long series of observations aimed at studying the small-scale structure and magnetic flux evolution in the quiet Sun. 
+  \Myitem Quiet Sun observations at disk center (QSDC), as the name implies , focus in regions near the solar disk center that are free from significant solar activity. These timelines typically involve long series of observations aimed at studying the small-scale structure and magnetic flux evolution in the quiet Sun. 
   
-  There are four distinct timelines in this category: three standard timelines, which ewmploy the nominal observing modes, and a different timeline, the (QSDC{\_}HC). This timeline employs high-cadence variations of the standard observing modes specifically designed to enhance the temporal resolution between images, which is crucial for helioseismology techniques.
+  There are four distinct timelines in this category: three standard timelines, which employ the nominal observing modes, and a different timeline, the (QSDC{\_}HC). This timeline employs high-cadence variations of the standard observing modes specifically designed to enhance the temporal resolution between images, which is crucial for helioseismology techniques.
   \Myitem Sunspot observations (SP) are specifically designed to study sunspots. There are four different timelines for this purpose. Some of these are short programs used to track the same sunspot over multiple days, with the goal of studying the evolution and decay of the sunspot. Others are more extensive programs aimed at examining, in greater detail, the magnetic activity of sunspots and their penumbral structures.
   \Myitem Polar observations (PL) target the region close to the limb in both poles of the Sun. These areas are of special interest due to their distinct magnetic behavior compared to the disk center. Additionally, these regions provide the opportunity to measure faint signals outside the main solar disk, such as spicules in the lower chromosphere, observed outside the continuum disk of iron. Two different instances of these timelines are conceived in the observation campaign, mostly differenciated in TuMag by the selected spectral lines.
   \Myitem East and West limb (EW) observations are designed to target the equatorial regions of the solar limb. In addition to exhibiting magnetic structures distinctly different from those observed at the poles, the reason for having a separate timeline from the PL timelines lies in the orientation and technical constraints related to SCIP and SUSI's slits. The relative positioning of the regions and the inclination of the telescope introduce unique challenges. In these EW observations, the spectrometer slits are aligned parallel to the limb, contrasting with the PL timelines, where the slit is positioned perpendicular to the limb.
@@ -196,77 +195,40 @@ These steps include the basic corrections that have to be applied to all images,
   \item Demodulation. 
   \item Cross-talk correction and cameras combination.
   \end{enumerate}
-The data reduction process begins with the dark-current processing, which involves averaging all individual dark frames within a specific set to generate a single dark-current frame per camera. This dark current is then subtracted from all images used in the reduction, including flat-fields, pinholes, and scientific observations, after rescaling the dark-current to the appropriate number of accumulations.
+The data reduction process begins with the dark-current processing, which involves averaging all individual dark frames within a specific set to generate a single dark-current frame per camera. This dark current is then subtracted from all images used in the reduction, including flat-fields, scientific observations, and any ther calibration observation, after rescaling the dark-current to the appropriate number of accumulations.
 
 \begin{figure}[h]
   \includegraphics[width=\textwidth]{figures/Pipeline/Example_demodulation.pdf}
-  \caption{Stokes maps in magnesium and iron 525.06 nm lines wings, measured at -50 m\r{A} and +120 m\r{A} from the line core, respectively. The observation corresponds to a FS timeline ran in a flaring active region. Timestamp of the first observation mode (mode 1) : 2024/07/13 12:28:00.  }
+  \caption{Stokes maps in magnesium (top row) and iron 525.06 nm (bottom row) lines wings, measured at -50 m\r{A} and +120 m\r{A} from the line core, respectively. No cross-talk correction has been applied. The observation corresponds to a FS timeline ran in a flaring active region. Timestamp of the first observation mode (mode 1) : 2024/07/13 12:28:00.  }
     \label{fig_pipeline: demodulated_data}
 \end{figure}
-The second step is the flat-field computation. These observations, as previously mentioned, are a modified version of the nominal mode with an increased $\lambda_{\text{rep}}$ and are repeated $N_{\text{rep}}$ times. The processing involves averaging all images taken at a specific wavelength for the same modulation. Thus, $\lambda_{\text{rep}} \times N_{\text{rep}}$ images are averaged to produce a single flat-field frame. To maintain spectral line information, flat-fields are normalized to their mean value, as flat-fields taken at the line core have lower intensity than those in the continuum. The goal is to correct intensity variations within a single frame without altering relative intensities across different spectral points.
+The second step is the flat-field computation. These observations, as previously mentioned, are a modified version of the nominal mode with an increased $\lambda_{\text{rep}}$ and are repeated $N_{\text{rep}}$ times. The processing involves averaging all images taken at a specific wavelength for the same modulation. Thus, $\lambda_{\text{rep}} \times N_{\text{rep}}$ images are averaged to produce a single flat-field frame. To maintain spectral line information, each flat-field frame is normalized to its mean value, as flat-fields taken at the line core have lower intensity than those in the continuum. The goal is to correct intensity variations within a single frame without altering relative intensities across different spectral points.
 
 Having computed the dark-current and the flat-fields, the scientific observations can be corrected by substracting the dark-current and dividing the resulting image by the flat-field of the corresponding wavelength and modulation. 
 
-After flat-fielding and dark current correction, the different modulations and the two cameras are combined to infer the stokes components for every measured wavelength. However, in order to combine the data from different cameras and modulations, the images have to be aligned beforehand. The alignment is carried out with the already corrected images and consists on a sequential process where the four modulations of the camera one are first aligned, and then the images of the second camera are aligned with respect to the image of the camera one and the corresponding modulation. The alignment is performed at subpixel accuraccy employing the method described in \cite{alineamiento}, where the alignement is computed employing a two-dimensional cross-correlation in the fourier domain. 
-
-After alignment, the stokes components are derived through a process known as demodulation. This process is carried independently at different wavelengths and consists on a matrix multiplication employing the demodulation matrix and the four modulations. For the vectroial scheme this multiplication can be expressed as:
-\begin{equation}
-  \begin{pmatrix}
-  I \\
-  Q \\
-  U \\
-  V
-  \end{pmatrix} = 
-  \underbrace{\begin{pmatrix} 
-      d _ {00} & d _ {01} & d _ {02} & d _ {03} \\ 
-      d _ {10} & d _ {11} & d _ {12} & d _ {13} \\
-      d _ {20} & d _ {21} & d _ {22} & d _ {23} \\
-      d _ {30} & d _ {31} & d _ {32} & d _ {33} 
-  \end{pmatrix}}_ {\textbf{D}}
-  \begin{pmatrix}
-    I _ {1} \\
-    I _ {2} \\
-    I _ {3} \\
-    I _ {4}
-    \end{pmatrix} \ \ , 
-    \label{pipeline: Demod}
-\end{equation}
-where the matrix D is the inverse of the modulation matrix of the corresponding camera and pre-filter that were computed during the calibrations (see sec. \ref{sect:tumag_cal polarimetric}). And for the longitudinal scheme:
-\begin{equation}
-  \begin{pmatrix}
-  I + V\\
-  I - V
-  \end{pmatrix} = 
-  \begin{pmatrix} 
-      d _ {00} & d _ {01} \\ 
-      d _ {10} & d _ {11}
-  \end{pmatrix}
-  \begin{pmatrix}
-    I _ {1} \\
-    I _ {2} 
-  \end{pmatrix} \ .
-    \label{pipeline: Demod_long}
-\end{equation}
-
-The result of the matrix multiplication is the stokes components for each camera. However, the demodulation is never perfect due to small deviations of the demodulation matrix from the real one, or instrumental artifacts that have been uncorrected by the flat-fielding. These defects result in a contaminated stokes components, where information from one component appears in other components, typically from Stokes I into Q, U, and or V. Nonetheless, these contamination, known as cross-talk, can be extracted from the data. Figure \ref{fig_pipeline: demodulated_data} shows an example of the demodulated stokes maps for an observing mode 1 (magnesium) and a 2.06 (iron 525.06 nm) at the wings of the spectral line, not corrected from cross-talk. The intensity map in the magnesium shows the beginning of a flare around the central sunspot. 
-
-
-
-The cross-talk correction is a manual process as different data sets require different corrections. For instance, some data sets may not show contamination from I to U while others do. Moreover, the correction might require to be applied using the information from the whole FoV or only of a small region. Thus, this is a correction that has to be carefully applied and its hard to standarize to the whole set of observations. Nonetheless, the concept of the correction is the same. 
-
-\begin{figure}[ht]
+After flat-fielding and dark current correction, the different modulations and the two cameras are combined to infer the stokes components for every measured wavelength. However, in order to do so, images have to be accurately aligned. The alignment is carried out with the already corrected images and consists on a sequential process where the four modulations of the one camera are first aligned between them, and then the images of the second camera are aligned with respect to the corresponding modulation of the first camera. The alignment is performed at subpixel accuraccy employing the method described in \cite{alineamiento}, where the alignement is computed employing a two-dimensional cross-correlation in the fourier domain. 
+\begin{figure}
   \includegraphics[width=\textwidth]{figures/Pipeline/xtalk_example.pdf}
   \caption{Example of a cross-talk correction in a small region of the FoV. Each row shows a different stokes parameter. The left column shows quiet Sun stokes maps after demodulation, the central column shows the dispersion between the intensity and the corresponding stokes parameter, and the right column shows the corrected maps. }
     \label{fig_pipeline: xtalk}
 \end{figure}
 
-The correction of the cross-talk from I to any other component starts by measuring the relation between the two components by fitting through a least-squares method, a polynomial of first order in order to compute the tendency, if there is one. Once this relation has been stablished, and the strength of the cross-talk (\textit{i.e.} the value of the slope) measured, the correction is applied by simply, removing the tendency of the data: 
+The stokes parameters are computed by multiplying the aligned and corrected modulations by the demodulation matrix, derived during the polarimetric calibration of the instrument (see sec. \ref{sect:tumag_cal polarimetric}). If the polarimetric behaviour is similar inb all pixels of the FoV, the same demodulation matrix (teh average) can be used at evry eregion of the FoV. However, if the system shows large differences along the FoV, a two-dimensional demodulation process is required, where an individual matrix is employed for each pixel, as large differences from the ideal demodulation cannot be easily corrected. TuMag's pipeline has both strategies implemented and can be selected depending on the demodulation performance. 
+
+Figure \ref{fig_pipeline: demodulated_data} shows an example of the demodulated stokes maps for an observing mode 1 (magnesium) and a 2.06 (iron 525.06 nm) at the wings of the spectral line. The intensity map in the magnesium shows the beginning of a flare around the central sunspot. 
+
+Either due to the small variations from pixel to pixel when employing the average demodulation matrix or or instrumental artifacts that have been uncorrected by the flat-fielding, the demodulation is usually not perfect. The defects in the demodulation process result in contaminated stokes components, where information from one component appears in other components, typically from Stokes I into Q, U, and or V. However, if the demodulation matrix is not far from the real one, this contamination, known as cross-talk, can be corrected for. 
+
+The cross-talk correction between two given stokes components can be measured in regions of the FoV without solar structure and employing the continuum. In these regions, no linear polarization should reach the detector few signals should be seen in Stokes V. One approach to quantify the level of cross talk from one component ($S_{orig}$) to another ($S_{cont}$) is by fitting a line to the dispersion mapr created by plotting one component versus the other. The slope of the line measures the intensity of the cross-talk as no relation should be observed ion quiet Sun areas. Once this relation has been stablished, and the strength of the cross-talk measured, the correction is applied by simply, removing the tendency of the data: 
 
 \begin{equation}
-  S_{corr} = S_{orig} - (I_{orig} * a + b),
+  S_{corr} = S_{cont} - (S_{orig} * a + b),
 \end{equation}
-where the relation between the stokes component $S_{orig}$ and stokes I $I_{orig}$ has been fitted to the line: $S_{orig} =  I_{orig} * a + b$
+where the relation between the stokes component $S_{orig}$ and $S_{cont}$ has been fitted to the line: $S_{cont} =  S_{orig} * a + b$.
+
 Figure \ref{fig_pipeline: xtalk} shows an example of a cross-talk correction in a small region of the FoV in the continuum of a quiet Sun observation. The granulation structure is clearly visible in Q and U before the correction, where no signal in linear polarizaron should be present. The central panel shows the dispersion between the corresponding  stokes component and the intensity, along with the fitted relation. In the case of Q and U, the relation is clearly strongert than in V, where the slope is almost 0. The right columns shows the result of the correction, with Q and U without the majority of influence of the instensity, although some traces can be found. Nevertheless, the cross-talk before the correction is below the 1\%, and thus, the polarimetric sensitivity is larger than $10^{-3}$.
+
+The cross-talk correction is a manual process as different data sets require different corrections. For instance, some data sets may not show contamination from I to U while others do. Moreover, the correction might require to be applied using the information from the whole FoV or only of a small region. Thus, this is a correction that has to be carefully applied and its hard to standarize to the whole set of observations. Nonetheless, the concept of the correction is the same.
 
 
 \subsection{Extra calibration blocks.}
@@ -294,12 +256,17 @@ The image reconstruction technique consists on deconvolving the PSF of the instr
 Figure \ref{fig_pipeline:  image_restoration} shows an example of such a reconstruction, for the 517 nm and 525.06 prefilters. The reconstruction employs the closest PD measurement dataset to the observation and 21 zernikes for the PSF determination.   
 
 \subsubsection{On-flight polarimetric calibration.}
-
+\begin{figure}[t]
+  \includegraphics[width=\textwidth]{figures/Pipeline/Micrpols_edit.pdf}
+  \caption{
+   Micropolarizer obsservation with the limits of the array of linear polarizers overplotted. The right panel shows thwe orientation of the linear polarizer that compose each array. }
+    \label{fig_pipeline: micropols_calib}
+\end{figure}
 The presence of cross-talk in the observations can be originated from deviations of the modulation of the instrument with respect to the one derived during on-ground calibrations. In that case, the demodulation matrix employed in the pipeline deviates from the ideal one, resulting in a suboptimal demodulaion process. However, TuMag is equipped with both the linear polarizer and micropolarizer targets to assess the demodulation schemes. 
 
 Both polarizer targets can be employed to assess the level of cross-talk in continuum observations as no linear polarization should reach the detector in such cases. Thus, the level of signal in Q and U in such a scenario is a straightforward assessment of the closeness to the ideal demodulation scheme. 
 
-Moreover, the micropolarizer observations allow us to perform this assessment as a funciton of the region within the FoV. The micropolarizers are composed by arrays of 3x3 small linear polarizers oriented in different directions. Thus, the same assessment as the one employing the linear polarizer can be done but with each individual polarizer. 
+Moreover, the micropolarizer observations allow us to perform this assessment as a funciton of the region within the FoV. The micropolarizers are composed by arrays of 3x3 small linear polarizers oriented in different directions (see Fig. \ref{fig_pipeline: micropols_calib}). Thus, the same assessment as the one employing the linear polarizer can be done but with each individual polarizer. 
 
 
 \subsubsection{On-flight spectral calibration.}
