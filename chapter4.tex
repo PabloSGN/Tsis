@@ -46,7 +46,7 @@ The transmission profile of the etalon ($S$) is defined as the average ratio bet
 \begin{figure}
   \centering
   \includegraphics[width = \textwidth]{figures/EtalonChallenges/EtalonConfigurations.pdf}
-  \caption{Schematic representation of the two optical setups of an FPI, collimated (left) and telecentric (right). The different colors represent distinct light rays originating from various points on the object plane. The white boxes in the etalon highlight the sections that are traversed by the light rays.
+  \caption[Etalon's configuration schematic.]{Schematic representation of the two optical setups of an FPI, collimated (left) and telecentric (right). The different colors represent distinct light rays originating from various points on the object plane. The white boxes in the etalon highlight the sections that are traversed by the light rays.
   } \label{fig_etalon_theory: Etalon configurations}
 \end{figure}
 
@@ -116,7 +116,7 @@ The transmission profile in this case is influenced by the angle of incidence of
 \begin{figure}
     \centering
     \includegraphics[width = \textwidth]{figures/EtalonChallenges/etalon_setups_profiles.pdf}
-    \caption{\textit{Left}: central peak of the etalon's spectral transmission profile for the three different configurations. \textit{Right}: Spatial PSF of the imperfect telecentric etalon at $\lambda _ 0$. The parameters of the etalon are $R = 0.92$, $n = 2.29$, $d = 251 \, \mu \mathrm{m}$, $f\#=56$, $\theta = 0 ^{\circ}$ (collimated and perfect telecentric), and $\Theta = 0.3\,^{\circ}$ (imperfect telecentric).}
+    \caption[Etalon's spectral and spatial PSFs.]{\textit{Left}: central peak of the etalon's spectral transmission profile for the three different configurations. \textit{Right}: Spatial PSF of the imperfect telecentric etalon at $\lambda _ 0$. The parameters of the etalon are $R = 0.92$, $n = 2.29$, $d = 251 \, \mu \mathrm{m}$, $f\#=56$, $\theta = 0 ^{\circ}$ (collimated and perfect telecentric), and $\Theta = 0.3\,^{\circ}$ (imperfect telecentric).}
     \label{fig_etalon_theory:Profiles-configs}
 \end{figure}
 
@@ -156,7 +156,7 @@ We also need to simulate flat-field observations in order to correct the data. T
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figures/Mancha/Inputs_mancha.pdf}
-    \caption{
+    \caption[Sunspot simulation inputs.]{
       Inputs for the simulation of the sunspot observation. The top row shows, from left to right, the continuum of the MHD simulation, the cavity map expressed as the corresponding shift in \r{A} and the gain map. The bottom row shows, again from left to right, a representation of the quiet-sun average profile with all the scanned wavelengths, and the transmission profile of the two different FPI configurations, the symmetric (perfect telecentric) and asymmetric (imperfect telecentric). The parametets employed for the etalon are: $R=0.892$, $n = 2.3268$, $d = 281$ $\mu m$, $f = 60$, $\Theta = 0^{\circ}$ (symmetric), $\Theta = 0.5^{\circ}$ (asymmetric).
       \label{fig_mancha: Inputs}}
 \end{figure}
@@ -185,7 +185,7 @@ In principle, the flat-field correction is straightforward: first, the measured 
     \includegraphics[width=\textwidth]{figures/Mancha/Flat_field_normalization.pdf}
   \end{minipage}\hfill
   \begin{minipage}[c]{0.27\textwidth}
-    \caption{
+    \caption[Flat-field profiles.]{
       The top row shows the observed flat-fields at the core of the line for both the simulations without (left) and with (right) cavity. The bottom row shows the spectral profile of the pixels marked with an "X" of the corresponding color, for both scenarios, and before and after the normalization.      
     \label{fig_mancha: flat_field normalization}} 
   \end{minipage}
@@ -200,7 +200,7 @@ From the normalized profiles for the scenario involving a cavity, it is evident 
     \includegraphics[width=\textwidth]{figures/Mancha/flatfield_norm_differences.pdf}
   \end{minipage}\hfill\hfill
   \begin{minipage}[c]{0.27\textwidth}
-    \caption{
+    \caption[Profiles after flat-field correction.]{
           The top panel shows four spectral profiles after the flat-field correction for the two scenarios, with and without cavity, and for the symmetric FPI. The selected pixels are the same than in Fig. ~\ref{fig_mancha: flat_field normalization}, and correspond to different values of the cavity map. The bottom panel shows the difference between the profiles with and witout cavities.
     \label{fig_mancha: Profiles_differences}} 
   \end{minipage}
@@ -228,7 +228,7 @@ We have computed the velocities employing the two flat-field correction strategi
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/Mancha/intensity_and_vlos_examples.pdf}
-  \caption{
+  \caption[Sunspot velocity errors.]{
     The top row shows, from left to right, the observed intensity in the continuum, the LOS velocity for for the standard approach and the LOS velocity for the continuum aproach, all three for the symmetric FPI and belonging to the simulations with cavity map. The bottom row shows, again from left to right, the velocity error associated with the cavity map, the error for the LOS velocity for the standard approach and the error for the LOS velocity of the continuum approach. The error is computed by substracting the measrument to the reference. All representations show the boundaries of the umbra and penumbra for an easier identification of the regions in the velocity and cavity maps.   
     \label{fig_mancha: int_and_vlos_examples}}
 \end{figure}
@@ -244,7 +244,7 @@ Moreover, the errors are significant, given that regions of the penumbra show er
     \includegraphics[width=\textwidth]{figures/Mancha/circular_cut_standard_cont.pdf}
   \end{minipage}\hfill\hfill
   \begin{minipage}[c]{0.27\textwidth}
-    \caption{
+    \caption[Velocity error, radial cut.]{
       The top row shows the velocity error maps for both the standard and continuum approaches, along with the cut position and an overlay of the degrees for easier interpretation of the plotted profiles. The bottom panel shows the velocities along the cut for both aproaches along with the value of the cavity map at the corresponding position.\label{fig_mancha: verror_circular_cut}} 
   \end{minipage}
 \end{figure}
@@ -258,7 +258,7 @@ It is evident from the previous analyses that the flat-field correction approach
     \includegraphics[width=\textwidth]{figures/Mancha/vlos_sym_vs_asym.pdf}
   \end{minipage}\hfill\hfill
   \begin{minipage}[c]{0.47\textwidth}
-    \caption{
+    \caption[Assymetry effect in velocity calculations.]{
       Difference in LOS velocities between the symmetric and assymetric FPIs (symmetric - asymmetric). The mean value of the difference has been substracted for the whole FoV. \label{fig_mancha: vlos_asym_vs_sym}} 
   \end{minipage}
 \end{figure}
@@ -277,7 +277,7 @@ To calculate $B_{LOS}$, we need to determine the circularly polarized component 
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/Mancha/blos_errors.pdf}
-  \caption{
+  \caption[Error in Blos calculation.]{
     From left to right, $B_{LOS}$ for the simulation with no cavity and a symmetric FPI, error in $B_{LOS}$ computation for the standard approach with a symmetric FPI, and error in $B_{LOS}$ computation for the continuum approach with a symmetric FPI. 
     \label{fig_mancha: blos_errors}}
 \end{figure}
@@ -323,7 +323,7 @@ with $\lambda _ c$ being the continuum wavelength. From a practical point of vie
 \begin{figure}
     \centering
     \includegraphics[width = \textwidth]{figures/EtalonPaper/ProfileMeasurement.pdf}
-    \caption{Simulated observation of the Fe I spectral line ($\lambda _ 0 = 6173.3$\r{A}) using a collimated mount and a total of $N_ \lambda = 6$ wavelengths that have been equally distributed along the spectral line, with the exception of the continuum measurement (light blue), which is selected at $300$ m\r{A} from the blue of the line core. The measured intensity is the result of computing the value given by Eq.~\ref{eq_eta_corr: Profile - General} at each wavelength and with $g = 1$.
+    \caption[Simulation of a spectral line scan.]{Simulated observation of the Fe I spectral line ($\lambda _ 0 = 6173.3$\r{A}) using a collimated mount and a total of $N_ \lambda = 6$ wavelengths that have been equally distributed along the spectral line, with the exception of the continuum measurement (light blue), which is selected at $300$ m\r{A} from the blue of the line core. The measured intensity is the result of computing the value given by Eq.~\ref{eq_eta_corr: Profile - General} at each wavelength and with $g = 1$.
     } \label{fig_etalon_corr: Prof-Measure}
 \end{figure}
 
@@ -331,10 +331,10 @@ For both the collimated and telecentric configurations, we modeled etalon and ga
 
 We modeled the etalon defects as changes in $\Delta a$ in such a way that the maximum displacement reaches $3$ pm. The spatial distribution of the values of  $\Delta a $ follows an increasing radial distribution, as shown in Fig.~ \ref{fig_etalon_corr: Inputs} (bottom panel). Such a spatial distribution coincides with the expected one in collimated etalons due to the change in the incidence angle across the FoV. Telecentric mounts do not exhibit a spatial distribution of their defects such as this, but using the same spatial distribution in the two cases allowed us to compare the performance of the method for both setups in a systematic way. Since $\Delta a$ accounts for relative perturbations, it is by definition an adimensional parameter. However, to grant it a physical meaning, we express the values of $\Delta a$ in \r{A}, representing the associated shift of the transmission profile with respect to the original position determined by $a$.
 
-\begin{figure}
+\begin{figure}[t]
   \centering
     \includegraphics[width=\textwidth]{figures/EtalonPaper/Gain_Da_Inputs.pdf}
-    \caption{
+    \caption[Simulation inputs.]{
       Input maps introduced when simulating the observations. The left panel represents the gain generated as white Gaussian noise, with values ranging from 0.8 to 1.2. A dust speck was introduced by creating a group of four pixels with low values of $g=0.2$ for the gain. The right panel shows the spatial distribution of the defects in the etalon. The distribution follows a radial pattern starting from the center of the FoV. The defects vary from $0\,\%$ deviation to up to $5\times 10 ^{-4}\,\%$, which corresponds to a shift of 3~pm. Both possible directions for the deviations have been considered. The sign of the deviation is negative at the very center, which introduces a redshift, while it is positive at the corners, causing a shift of the profile into the blue.
       \label{fig_etalon_corr: Inputs}}
 \end{figure}
@@ -364,7 +364,7 @@ Figure \ref{fig_etalon_corr: Derivatives} shows the derivatives of the error met
     \includegraphics[width=\textwidth]{figures/EtalonPaper/Derivadas.pdf}
   \end{minipage}\hfill
   \begin{minipage}[c]{0.37\textwidth}
-    \caption{
+    \caption[Derivatives of metrit function]{
       Derivatives of the error metric as a function of wavelength. The derivative with respect to $\Delta a$ has been normalized in order to fit the three curves in the same plot. \label{fig_etalon_corr: Derivatives}} 
   \end{minipage}
 \end{figure}
@@ -375,7 +375,7 @@ A few key aspects arise when analyzing the merit function and its applicability 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{figures/EtalonPaper/Deconvolution.pdf}
-\caption{Deconvolution of the object with a measurement of the Fe I spectral line using $N_\lambda = 9$. All points of the FoV have been used to compute the average profiles (blue crosses). The deconvolution (orange) is the result of deconvolving the mean profile interpolation (dashed line) with the displayed etalon transmission profile (red).\label{fig_etalon_corr:Deconvolution} }
+\caption[Object deconvolution.]{Deconvolution of the object with a measurement of the Fe I spectral line using $N_\lambda = 9$. All points of the FoV have been used to compute the average profiles (blue crosses). The deconvolution (orange) is the result of deconvolving the mean profile interpolation (dashed line) with the displayed etalon transmission profile (red).\label{fig_etalon_corr:Deconvolution} }
 \end{figure}
 
 We employed Newton's method to minimize the merit function, Eq.~\eqref{eq_eta_corr: Merit Function}, as it has been proven to quickly converge (in five iterations or fewer, usually). The method begins by assuming an initial guess for the gain $g_j$ and $\Delta a_j$ parameters. Then, provided the initial guess is sufficiently close to the solution and that the merit function is continuous and differentiable, the gain $g_j$ and $\Delta a_j$ encoded in the vector, $\mathbf{x}_j$, can be updated iteratively at each iteration, $j$, as
@@ -400,7 +400,7 @@ We restricted imperfections in the telecentrism to arise only for one scenario, 
 \begin{figure}
     \centering
      \includegraphics[width=\textwidth]{figures/EtalonPaper/SNR_plot_imperfect.pdf}
-    \caption{Absolute errors of the gain (left) and etalon defect (right) derivations averaged over all the FoV. The number of wavelengths corresponds to the parameter $N_\lambda$ of wavelengths used to scan the profile.\label{fig_etalon_corr:SNR_both}}
+    \caption[Errors in etalon parameters derivation.]{Absolute errors of the gain (left) and etalon defect (right) derivations averaged over all the FoV. The number of wavelengths corresponds to the parameter $N_\lambda$ of wavelengths used to scan the profile.\label{fig_etalon_corr:SNR_both}}
 \end{figure}
 
 Figure \ref{fig_etalon_corr:SNR_both} shows the average absolute error in $g$ (left panel) and in $\Delta a$ (right panel) over the whole FoV as a function of the wavelength sampling, $N_\lambda$. The error in $g$ is expressed as a percentage of its real value. Errors in $\Delta a$ are given in meters per second since they are mostly responsible for shifting the profile. Errors in $\Delta a$ can be translated into velocity errors by computing the doppler velocity (Eq. \eqref{eq_spectro: Doppler}) associated to the spectral shift of the transmission ppeak produce by the error in $\Delta a$.
@@ -415,7 +415,7 @@ The optical configuration of the etalon has a very small impact on the accuracy 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/EtalonPaper/Maps_Fov_Hist.pdf}
-    \caption{Distribution of the errors in the $\Delta a$ computation for the three configurations (first three rows) and different spectral samplings (columns). In the bottom panels of each column, the error distribution for the corresponding spectral sampling is shown for the three configurations. }
+    \caption[Error distribution along the FoV,]{Distribution of the errors in the $\Delta a$ computation for the three configurations (first three rows) and different spectral samplings (columns). In the bottom panels of each column, the error distribution for the corresponding spectral sampling is shown for the three configurations. }
    \label{fig_etalon_corr:FOV}
 \end{figure}
 
@@ -430,7 +430,7 @@ To infer the error of the algorithm when the object is unknown, we compared the 
 \begin{figure}
     \centering
      \includegraphics[width=\textwidth]{figures/EtalonPaper/Deconvolution_results.pdf}
-    \caption{Errors in gain determination and etalon properties averaged over all the FoV with a signal-to-noise ratio of 200 and a collimated configuration.}
+    \caption[Errors for the deconvolution approach.]{Errors in gain determination and etalon properties averaged over all the FoV with a signal-to-noise ratio of 200 and a collimated configuration.}
     \label{fig_etalon_corr:Deconvolution-results}
 \end{figure}
 
@@ -442,12 +442,12 @@ For $\Delta a$, the performance of the method is slightly worse than for the ide
 
 The fact that the sensitivity of the model to the gain and to the $\Delta a$ parameters are different guarantees (to some extent) that the parameters can be separated from each other. The treatment of the problem is very different between etalon configurations, and therefore full knowledge of the setup is critical. However, this is not always feasible due to the unavoidable presence of errors, misalignment, and imperfections on the instrument. Approximations to describe the optical setup are also common in the pipeline of an FPI instrument because they reduce computational efforts. For instance, telecentric mounts are usually simplified as collimated setups, as the f-numbers employed in solar instruments are usually very large. Imperfections of telecentrism are commonly neglected, too. In this section, we analyze the impact of assuming an incorrect etalon mounting. To do so, we repeated the previous exercise, starting from a perfect and imperfect telecentric configuration but assuming that the transmission profile shape corresponds to a collimated one.    
 
-\begin{figure}
+\begin{figure}[t]
     \begin{minipage}[c]{0.6\textwidth}
       \includegraphics[width=\textwidth]{figures/EtalonPaper/histograms.pdf}
     \end{minipage}\hfill
     \begin{minipage}[c]{0.37\textwidth}
-      \caption{
+      \caption[Error distribution for imperfect telecentrism.]{
         Distribution of the errors in the determination of $\Delta a$ for the crossover scenarios (different configuration in the observation generation and minimization algorithm) for both perfect and imperfect configurations. Only results for the two extreme spectral samplings ($N_ \lambda = 5$ and $N_\lambda = 21$) are shown.
       } \label{fig_etalon_corr:Crossover_histograms}
     \end{minipage}
@@ -459,9 +459,9 @@ Figure \ref{fig_etalon_corr:Crossover_histograms} shows the error distributions 
 
 The similarity in the error distributions for the calculation of $\Delta a$ in the two scenarios demonstrates that the error incurred when assuming a collimated etalon does not significantly impact the determination of the cavity maps of the etalon. This is because changes in $\Delta a$ mostly induce a shift of the transmission peak by an equal amount in both cases.
 
-\begin{figure}
+\begin{figure}[t]
   \includegraphics[width=\textwidth]{figures/EtalonPaper/means.pdf}
-  \caption{Average errors of the gain (left) and etalon defect (right) calculations over all the FoV for the two crossover cases and the standard case (also shown in Fig.~ \ref{fig_etalon_corr:SNR_both} as the collimated case with S/N = 200) for reference. All $\Delta a$ errors have been computed by correcting differential offsets of the transmission profile between the different mounts.\label{fig_etalon_corr:crossover}}  
+  \caption[Crossover case errors.]{Average errors of the gain (left) and etalon defect (right) calculations over all the FoV for the two crossover cases and the standard case (also shown in Fig.~ \ref{fig_etalon_corr:SNR_both} as the collimated case with S/N = 200) for reference. All $\Delta a$ errors have been computed by correcting differential offsets of the transmission profile between the different mounts.\label{fig_etalon_corr:crossover}}  
 \end{figure}
 
 We note, however, that the amplitude, width, and shape of the transmission profile differ significantly between the telecentric and collimated configurations, leading to an expected higher error in gain calculation. Figure \ref{fig_etalon_corr:crossover} shows the absolute errors in gain and $\Delta a$ calculations for both crossover scenarios and the ideal case after correcting the wavelength shift between the different mounts. For $\Delta a$, the performance of the method is very similar in the three setups, as also observed earlier. This behavior is nevertheless anticipated since the properties selected for simulating the imperfect etalon were chosen to mirror those of the SO-PHI etalon, which were adjusted to closely resemble the behavior of a collimated etalon to the greatest extent possible.
@@ -476,9 +476,9 @@ While simulated tests are crucial for understanding the algorithm's behavior as 
 
 The observation we used corresponds to a flat-field observation employing six points to scan the 6173 \r{A} line (five along the spectral line and an additional continuum measurement) conducted on March 9, 2022. The FPI aboard SO/PHI is illuminated in a telecentric mount, with an expected degree of telecentrism of about $0.3^\circ$. The tests conducted with this dataset have the same procedure as the ones employed for simulated data, that is, we only fit the gain and $\Delta a$ parameters, and we employed the deconvolution approach (Sect. \ref{sect: fitting_deconv}).
 
-\begin{figure}
+\begin{figure}[t]
   \includegraphics[width=\textwidth]{figures/EtalonPaper/Comparison_HRT.pdf}
-  \caption{Comparison between the observed flat-field and cavity map (top row, left and center columns, respectively) and the derived flat-field (gain) and cavity map ($\Delta a$; bottom row, left and center columns, respectively). The right column in both rows showcases a zoomed-in region of each cavity map. The area corresponding to the zoomed-in region is indicated with a black square in the full cavity map to its left. The properties used to simulate SO/PHI's etalon are $R = 0.925$, $n=2.29$, $d = 251.63\ \mu m$, $f\# = 60$, $\Theta = 0.23 ^{\circ}$.\label{fig_etalon_corr:HRT}}  
+  \caption[Comparison of results and real data.]{Comparison between the observed flat-field and cavity map (top row, left and center columns, respectively) and the derived flat-field (gain) and cavity map ($\Delta a$; bottom row, left and center columns, respectively). The right column in both rows showcases a zoomed-in region of each cavity map. The area corresponding to the zoomed-in region is indicated with a black square in the full cavity map to its left. The properties used to simulate SO/PHI's etalon are $R = 0.925$, $n=2.29$, $d = 251.63\ \mu m$, $f\# = 60$, $\Theta = 0.23 ^{\circ}$.\label{fig_etalon_corr:HRT}}  
 \end{figure}
 
 Figure \ref{fig_etalon_corr:HRT} shows the results obtained when applying the algorithm to HRT-SO/PHI data. The top row shows, from left to right, the observed flat at the continuum, the cavity map measured under laboratory conditions (on ground), and a selected region of the cavity map. In the bottom row, the same cases are shown but for the results inferred by the algorithm. That is, the flat-field (i.e., the gain) and the cavity map (i.e., $\Delta a$).
@@ -487,18 +487,13 @@ The results obtained for the cavity map closely resemble the laboratory measurem
 
 Concerning the results for the gain determination, the comparison depicted in Fig.~ \ref{fig_etalon_corr:HRT} suggests that pixel-to-pixel gain variations can also be determined accurately with our method, as both small-scale and large-scale variations are reproduced with detail. 
 
-\begin{figure}
+\begin{figure}[t]
   \centering
   \includegraphics[width=\textwidth]{figures/EtalonPaper/fitting_chisq_hor.pdf}
-  \caption{Comparison between the measured (solid lines) and fitted profiles (dashed lines) for three pixels, each representing varying degrees of accuracy (top panel). The FTS is shown as a reference. The bottom panel displays the distribution of $\chi^2$ values for all pixels. Among the three selected cases, one demonstrates an average fit (depicted in pink, with $\chi^2$ close to the mean value), while the other two correspond with extreme cases—one with a notably good fit and the other with a poor fit (depicted in yellow and blue, respectively). The value for $\chi ^2$ has been computed employing equation \eqref{eq_eta_corr: Merit Function}\label{fig_etalon_corr: xisq_hrt}}  
+  \caption[Fitting accuracy.]{Comparison between the measured (solid lines) and fitted profiles (dashed lines) for three pixels, each representing varying degrees of accuracy (top panel). The FTS is shown as a reference. The bottom panel displays the distribution of $\chi^2$ values for all pixels. Among the three selected cases, one demonstrates an average fit (depicted in pink, with $\chi^2$ close to the mean value), while the other two correspond with extreme cases—one with a notably good fit and the other with a poor fit (depicted in yellow and blue, respectively). The value for $\chi ^2$ has been computed employing equation \eqref{eq_eta_corr: Merit Function}\label{fig_etalon_corr: xisq_hrt}}  
 \end{figure}
 
 A more quantitative analysis of the results is depicted in Fig.~\ref{fig_etalon_corr: xisq_hrt}. The upper panel shows a comparison between the fitted and observed profiles for three distinct cases with varying degrees of precision, while the bottom panel shows the distribution of $\chi^2$ for all pixels. In the worst-case scenario, small differences between the real profile and the fit can be seen in both the line wing and the line core. In any other case, the fittings are rather satisfactory.
-
-
-\subsection{Algorithm applied at the Sunspot}
-
-No estoy seguro de añadir esto. En principio sale algo mejor pero los resultados no son muy distintos y tampoco quería alargar demasiado el capítulo. 
 
 \section{Conclusions.}
 

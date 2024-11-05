@@ -1,5 +1,6 @@
 \documentclass[12pt]{mythesis}
-
+\usepackage{amsmath, amssymb}
+\usepackage{dsfont}
  % \makeglossaries
  % % \loadglsentries{glossaries_entries}
  % %%% A
@@ -59,7 +60,6 @@
   \chapter[#1: {\itshape#2}]{#1\\[2ex]\Large\itshape#2}
 }
 
-
 \begin{document}
 \frontmatter %Use lowercase Roman numerals for page numbers
 \maketitle
@@ -79,26 +79,27 @@
 %Summary of the thesis
 
 \tableofcontents
+\listoffigures
 
 \mainmatter % Now Use Arabic nume
-rals for page numbers
+
 % INTRODUCTION
 \input{chapter1.tex}
 
 % Spectropolarimters and Tumag
-%\input{chapter2.tex}
+\input{chapter2.tex}
 
 % Pipeline
 \input{chapter3.tex}
 
 % Challenges in data reduction
-%\input{chapter4.tex}
+\input{chapter4.tex}
 
 % Persistsent homology
-%\input{chapter5.tex}
+\input{chapter5.tex}
 
-%\chapter{Summary and conclusions}
-%The conclusions are \dots
+\chapter{Summary and conclusions}
+The conclusions are \dots
 
 %\appendix
 %\chapter{Profile derivatvies}
