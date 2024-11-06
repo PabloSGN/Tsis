@@ -1,5 +1,13 @@
 \chapter{\label{CH:Science}Scientific exploitation.}
 
+
+In earlier chapters, we explored data collection and reduction, along with the instrumental challenges involved. Once data has been appropriately reduced, the next step is scientific exploitation, as this is the ultimate goal of all instrumentation.
+
+This chapter presents an example of exploiting spectropolarimetric data through the study of magnetic field intensity maps, or magnetograms, recorded by HMI. Aligned with the computational focus of this thesis, we apply a novel data processing approach for studying solar magnetograms: a topological data analysis technique known as persistent homology. The research in this chapter stems from work completed during a two-month stay at NAOJ between the first and second Sunrise III flights, leading to the publication of the article "Persistent Homology Analysis for Solar Magnetograms" \footnote{DOI:\url{10.3847/1538-4357/ad26e8}}.
+
+The chapter begins by explaining the motivation for using new techniques to study solar magnetograms and the specific advantages of persistent homology. This is followed by a general overview of the method and its tools. Finally, we present our analysis, demonstrating how persistent homology aids in characterizing magnetic structures and processes in both quiet Sun and active regions.
+
+
 \section{Persistent Homology in Solar Magnetograms.}
 The ability to encode and simplify all information about the shape and distribution of data has made Topological Data Analysis (TDA) one of the most relevant fields in state-of-the-art data analysis. In recent years, we have witnessed a rise of studies based on TDA techniques in many fields of science, such as biomedicine \citep{brain-PH}, atomic physics \citep{atomic}, image recognition \citep{Image-recognition} or cosmology \citep{cosmology}, among many others.
 
@@ -88,11 +96,14 @@ PIs are a condensed form of a persistence diagram, offering a concise and easy-t
 
 where $(B, D)$ are the corresponding birth-death coordinates in the diagram. A feature with a large persistence is present at different scales in the data and therefore is more likely to represent the real behavior of the data. On the contrary, short-lived features are typically associated with the noise distribution and usually do not provide much information about the data.
 
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=12cm]{figures/PersistentHomology/PI_Example.pdf}
+\begin{figure}
+  \begin{minipage}[c]{0.67\textwidth}
+    \includegraphics[width=\textwidth]{figures/PersistentHomology/PI_Example.pdf}
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.3\textwidth}
     \caption[Persistent image examples.]{Panel a) shows an example of a persistence diagram as a 2D histogram. The color of each bin represents its multiplicity, with the red spots corresponding to higher values. Panels b), c), and d) show three different examples of PIs. The three parameters given in the legends of the PIs are: the standard deviation ($\sigma$) of the Gaussian kernel ($K (z)$), the weighting function, and the resolution of the image PI in pixels (p).}
    \label{fig_ph: PI Example}
+  \end{minipage}
 \end{figure}
 
 When constructing a PI, a weighting function, $\omega (\pi)$, is employed to assign weights to each point in the diagram, ensuring that longer-lived features have greater weights than shorter-lived ones. There are multiple choices for the shape of the weighting function, which are entirely dependent on the aims of the study and data type. The simplest example is often a linear or power-law relation ($\omega (\pi) = a \pi ^b$), where $a$ and $b$ can be tuned to assign progressively higher weights to higher persistencies, thus focusing the study on the longer-lived components. On the other hand, if the objective is to filter out noise while assigning similar weights to all non-noise points so that all points have a similar relevance in the analysis, the chosen function is usually an arc-tangent.
@@ -197,7 +208,7 @@ Lastly, the presence or absence of ring-like structures provides insights into h
 
 An example of how the three features allow us to classify ARs depending on their morphologies is shown in Figure \ref{fig: AR-classification}, where three different ARs and their corresponding PIs are displayed. Although at first sight, the PIs appear to be very similar, especially the ones shown in panels d) and f), upon closer inspection, it is possible to find the differences when focusing on the three features mentioned previously. The first AR (panel a)), also shown in Fig. ~\ref{fig:  AR - Complexity}, shows a very complex morphology, where the magnetic field of both positive and negative polarities is distributed in multiple connected structures. This behavior is displayed in the PI through the high density in the isolated and connected features in equal proportions (i.e. with no prominent features) and with the presence of ring-like features in both polarities. In contrast, the second AR (panel b) shows a simpler magnetic structure with weaker signals. The PI for this case shows an absence of ring-like features in both polarities and a very low density in the regions for connected and isolated features. Lastly, panel c) shows an AR where the positive magnetic field is concentrated in one main area whereas the negative polarity magnetic field shows a fragmented structure. Comparing the corresponding PI with that of the initial case (panels f and d, respectively), a similarity is evident in the region corresponding to negative polarities, observed in both the density of connected components and the presence of ring-type structures. Nevertheless, when examining the positive polarity, it becomes evident that, unlike its negative counterpart, there are only a few prominent isolated structures and a notably low density of connected structures. Furthermore, this asymmetry between the positive and negative distributions is underscored by the absence of ring-like structures in the former.
 
-\begin{figure}
+\begin{figure}[t]
     \centering
      \includegraphics[width=15cm]{figures/PersistentHomology/AR_classification.pdf}
     \caption[Morphology of persistent images.]{SDO/HMI magnetograms of three different active regions and their corresponding persistence images. a) NOAA AR 11158, date: 2011-02-13 at 06:34. b) NOAA AR 11098, date: 2010-08-12 at 20:58. c) NOAA AR 11072, date: 2010-05-22 at 20:58. All persistence images have been generated with the following parameters: Resolution =  1000 pixels$^2$ (4 G), weighting function: $\omega (\pi) = \arctan (5\times 10 ^{-8} \pi ^{3})$ and a gaussian kernel with $\sigma = 40\ G$.}
