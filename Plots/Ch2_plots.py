@@ -88,7 +88,7 @@ axs.fill_between(Wavelengths - l0, np.zeros(len(Wavelengths)), prefilter, color 
 axs2 = axs.twinx()
 
 axs2.plot([10, 10], [0.5, 0.6], ls = '-', c = 'k', lw = 2, label = "Transmission profile")
-axs2.plot([10, 10], [0.5, 0.6], ls = '--', c = 'k', lw = 1.5, label = "Blocked transmission")
+axs2.plot([10, 10], [0.5, 0.6], ls = '--', c = 'k', lw = 1.5, label = "Filtered transmission")
 
 
 axs.legend(loc = 'upper right', edgecolor = 'k')
