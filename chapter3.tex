@@ -173,9 +173,9 @@ During the Sunrise III observation campaign, 38 timelines were run, including ca
 \section{Pipeline}
 
 \begin{figure}[t]
-  \includegraphics[width=\textwidth]{figures/Pipeline/pipeline_diagram.PNG}
+  \includegraphics[width=\textwidth]{figures/Pipeline/pipeline_diagram.pdf}
   \caption[Reduction pipeline block diagram.]{
-    Block diagram of the standard reduction process: Blue boxes represent the individual steps that make up the reduction, while ellipses indicate the different sets of observations and the final product (yellow ellipse). }
+    Block diagram of the standard reduction process: Blue boxes represent image processing steps, and purple boxes the main reduction computations. Red circles represent raw observations, orange circles represent calibration products generated during the reduction, and finally, the yellow circle represents the final product, the Stokes components. }
     \label{fig_pipeline: block_diagram}
 \end{figure}
 
@@ -192,6 +192,7 @@ The specific steps that have to be applied to a particular observation depend on
   \item Flat-fielding computation (dark-current corrected).
   \item Observing mode images computation (dark-current corrected). 
   \item Apply flat-field correction.
+  \item Correction of camera 2 readout issue.
   \item Image alignment between modulations and cameras. 
   \item Demodulation. 
   \item Cross-talk correction and cameras combination.
@@ -203,11 +204,23 @@ The second step is the flat-field computation. These observations, as previously
 
 Having computed the dark-current and the flat-fields, the scientific observations can be corrected by substracting the dark-current and dividing the resulting image by the flat-field of the corresponding wavelength and modulation. 
 
-In addition to dark-current and flat-field corrections, an additional adjustment is required before proceeding with further computations. During operations, the second camera developed a readout issue that was not present during calibrations. This malfunction introduces a recurring spurious pattern in all frames taken by this camera (see Fig. XXX). Fortunately, this structure is consistent and shows a specific frequency that can be identified in the Fourier domain (see Fig. XXX), allowing it to be effectively filtered out.    
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/Pipeline/readout_problem.pdf}
+  \caption[Readout pattern filtering]{Left) Uncorrected Stokes U map in the magnesium wing of quiet Sun observations. Center) Power spectrum of the stokes map showcasing the spatial frequencies of the pattern created due to the readout malfunciton. Right) Same map as on the left with the filtered frequencies of the readout pattern.}
+    \label{fig_pipeline: readout}
+\end{figure}
+
+In addition to dark-current and flat-field corrections, an additional adjustment is required before proceeding with further computations. During operations, the second camera developed a readout issue that was not present during calibrations. This malfunction introduces a recurring spurious pattern in all frames taken by this camera (see the left panel of fig.~\ref{fig_pipeline: readout}). Fortunately, this structure is consistent throughout all measurements and is characterized by a repetitive pattern whose intrinsic spatial frequencies can be identified in the power spectrum (see central panel of fig.~\ref{fig_pipeline: readout}), allowing it to be effectively filtered out, as shown in the right panel of fig.~\ref{fig_pipeline: readout}.  
 
 Before computing the Stokes components, the images from different cameras and modulations have to be accurately aligned. The alignement process is carried sequentially: first, images belonging to the first camera of different modulations are aligned between them; then, the images captured by the second camera are aligned with respect to the images of the corresponding modulation of the first. This alignment is performed with subpixel accuracy using the method described in \cite{alineamiento}, which calculates the alignment via a two-dimensional cross-correlation in the Fourier domain.
 
 The Stokes parameters are then computed by applying the demodulation matrix to the aligned and corrected modulations. If the polarimetric response is consistent across the FoV, an average demodulation matrix can be applied uniformly. However, if the system exhibits significant variation across the FoV, a two-dimensional demodulation approach where a unique matrix is assigned to each pixel is required, as large deviations from ideal demodulation are challenging to correct. TuMag's pipeline incorporates both approaches, allowing selection based on the demodulation performance. 
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/Pipeline/Example_demodulation.pdf}
+  \caption[Stokes maps for magnesium and iron.]{Stokes maps in magnesium (top row) and iron 525.06 nm (bottom row) lines wings, measured at -50 m\r{A} and +120 m\r{A} from the line core, respectively. No cross-talk correction has been applied. The observation corresponds to a FS timeline ran in a flaring active region. Timestamp of the first observation mode (mode 1) : 2024/07/13 12:28:00.  }
+    \label{fig_pipeline: demodulated_data}
+\end{figure}
 
 Figure \ref{fig_pipeline: demodulated_data} shows an example of the demodulated stokes maps for observing mode 1 (magnesium) and 2.06 (iron 525.06 nm) at the wings of the spectral line. The intensity map in the magnesium shows the beginning of a flare around the central sunspot. 
 
@@ -220,26 +233,14 @@ Cross-talk contamination between two given Stokes components can be assessed in 
 \end{equation}
 where the relation between the stokes component $S_{orig}$ and $S_{cont}$ has been fitted to the line: $S_{cont} =  S_{orig} * a + b$.
 
-Figure \ref{fig_pipeline: xtalk} shows an example of a cross-talk correction in a small region of the FoV in the continuum of a quiet Sun observation. The granulation structure is clearly visible in Q and U before the correction. The central panel shows the dispersion between the corresponding  stokes component and the intensity, along with the fitted relation. In the case of Q and U, the relation is clearly stronger than in V, where the slope is almost 0. The right columns shows the result of the correction, with Q and U without the majority of influence of the instensity, although some traces can be found. Nevertheless, the cross-talk before the correction is below the 1\%, and thus, the polarimetric sensitivity is larger than $10^{-3}$.
-
-XXXXXXXXXXX
-sa
-\begin{figure}[h]
-  \includegraphics[width=\textwidth]{figures/Pipeline/Example_demodulation.pdf}
-  \caption[Stokes maps for magnesium and iron.]{Stokes maps in magnesium (top row) and iron 525.06 nm (bottom row) lines wings, measured at -50 m\r{A} and +120 m\r{A} from the line core, respectively. No cross-talk correction has been applied. The observation corresponds to a FS timeline ran in a flaring active region. Timestamp of the first observation mode (mode 1) : 2024/07/13 12:28:00.  }
-    \label{fig_pipeline: demodulated_data}
-\end{figure}
-
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/Pipeline/xtalk_example.pdf}
-  \caption[Cross-talk correction.]{Example of a cross-talk correction in a small region of the FoV. Each row shows a different stokes parameter. The left column shows quiet Sun stokes maps after demodulation, the central column shows the dispersion between the intensity and the corresponding stokes parameter, and the right column shows the corrected maps. }
+  \caption[Cross-talk correction.]{Example of a cross-talk correction in a small region of the FoV. Each row shows a different stokes parameter. The left column shows quiet Sun stokes maps after demodulation, the central column shows the dispersion between the intensity and the corresponding stokes parameter, and the right column shows the corrected maps. In this data set, the readout problem has not been assessed and is clearly discernible in Stokes U.}
     \label{fig_pipeline: xtalk}
 \end{figure}
 
 
-
-
-
+Figure \ref{fig_pipeline: xtalk} shows an example of a cross-talk correction in a small region of the FoV in the continuum of a quiet Sun observation. The granulation structure is clearly visible in Q and U before the correction. The central panel shows the dispersion between the corresponding  stokes component and the intensity, along with the fitted relation. In the case of Q and U, the relation is clearly stronger than in V, where the slope is almost 0. The right columns shows the result of the correction, with Q and U without the majority of influence of the instensity, although some traces can be found. Nevertheless, the cross-talk before the correction is below the 1\%, and thus, the polarimetric sensitivity is larger than $10^{-3}$.
 \subsection{Extra calibration blocks.}
 
 As previously presented, TuMag observations include a series of calibrating observing modes that are not employed in the standard reduction process, namely, polarizers observations, both the lineal polarizer and the micropolarizers set, the pinholes observations, prefilter scans, or PD. These sets of calibrations are ment to be processed separately to aid with the data reduction in observing modes that require it.
