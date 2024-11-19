@@ -224,6 +224,13 @@ The Stokes parameters are then computed by applying the demodulation matrix to t
 
 Figure \ref{fig_pipeline: demodulated_data} shows an example of the demodulated stokes maps for observing mode 1 (magnesium) and 2.06 (iron 525.06 nm) at the wings of the spectral line. The intensity map in the magnesium shows the beginning of a flare around the central sunspot. 
 
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/Pipeline/xtalk_example.pdf}
+  \caption[Cross-talk correction.]{Example of a cross-talk correction in a small region of the FoV. Each row shows a different stokes parameter. The left column shows quiet Sun stokes maps after demodulation, the central column shows the dispersion between the intensity and the corresponding stokes parameter, and the right column shows the corrected maps. In this data set, the readout problem has not been assessed and is clearly discernible in Stokes U.}
+    \label{fig_pipeline: xtalk}
+\end{figure}
+
+
 Due to minor pixel-to-pixel variations when using the average demodulation matrix or residual instrumental artifacts not corrected by flat-fielding, the demodulation process is often imperfect. These imperfections result in contaminated Stokes components, where information from one component appears in others, typically with leakage from Stokes I into Q, U, and/or V. However, if the demodulation matrix closely approximates the ideal matrix, this contamination, known as cross-talk, can be corrected.
 
 Cross-talk contamination between two given Stokes components can be assessed in regions of the FoV without solar structure, using the continuum. In these regions, linear polarization signals should be absent, and minimal signals should appear in Stokes V. One method to quantify cross-talk from one component ($S_{orig}$) to another ($S_{cont}$) involves fitting a line to the dispersion map created by plotting one component against the other. The slope of this line indicates the cross-talk level, as no correlation should exist in quiet Sun areas. Once this relationship is established and the cross-talk intensity is measured, the correction is applied by removing this linear trend from the data:
@@ -232,13 +239,6 @@ Cross-talk contamination between two given Stokes components can be assessed in 
   S_{corr} = S_{cont} - (S_{orig} * a + b),
 \end{equation}
 where the relation between the stokes component $S_{orig}$ and $S_{cont}$ has been fitted to the line: $S_{cont} =  S_{orig} * a + b$.
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{figures/Pipeline/xtalk_example.pdf}
-  \caption[Cross-talk correction.]{Example of a cross-talk correction in a small region of the FoV. Each row shows a different stokes parameter. The left column shows quiet Sun stokes maps after demodulation, the central column shows the dispersion between the intensity and the corresponding stokes parameter, and the right column shows the corrected maps. In this data set, the readout problem has not been assessed and is clearly discernible in Stokes U.}
-    \label{fig_pipeline: xtalk}
-\end{figure}
-
 
 Figure \ref{fig_pipeline: xtalk} shows an example of a cross-talk correction in a small region of the FoV in the continuum of a quiet Sun observation. The granulation structure is clearly visible in Q and U before the correction. The central panel shows the dispersion between the corresponding  stokes component and the intensity, along with the fitted relation. In the case of Q and U, the relation is clearly stronger than in V, where the slope is almost 0. The right columns shows the result of the correction, with Q and U without the majority of influence of the instensity, although some traces can be found. Nevertheless, the cross-talk before the correction is below the 1\%, and thus, the polarimetric sensitivity is larger than $10^{-3}$.
 \subsection{Extra calibration blocks.}
@@ -269,7 +269,7 @@ Figure \ref{fig_pipeline:  image_restoration} shows an example of such a reconst
 \begin{figure}[t]
   \includegraphics[width=\textwidth]{figures/Pipeline/Micrpols_edit.pdf}
   \caption[Micropolarizer observations.]{
-   Micropolarizer obsservation with the limits of the array of linear polarizers overplotted. The right panel shows thwe orientation of the linear polarizer that compose each array. }
+   Micropolarizer observation with the boundaries of the array of linear polarizers overplotted. The right panel in the top row shows the orientation of the linear polarizer that compose each array.}
     \label{fig_pipeline: micropols_calib}
 \end{figure}
 The presence of cross-talk in the observations can arise from deviations of the instrument's modulation with respect to the modulation derived during on-ground calibrations. In such cases, the demodulation matrix used in the pipeline diverges from the ideal matrix, resulting in a suboptimal demodulation process. However, TuMag is equipped with both linear polarizer and micropolarizer targets to evaluate the demodulation schemes.
@@ -281,16 +281,23 @@ Additionally, micropolarizer observations enable this assessment to be conducted
 
 \subsubsection{\label{sect:pipeline_prefilter_scans_fit}On-flight spectral calibration.}
 
-One of the most important calibration procedures that is still undeveloped is the on-flight spectral calibration or prefilter extraction. From both the on-ground calibrations and the spectral scans conducted during flight (see Sect. \ref{ref:spectral_scans}), it is evident that the prefilters are not perfectly centered, and the measured instenisty is modified in different manners along the spectral lines. In particular, magnesium line observations are the most affected by this.
-
-Figure \ref{fig_pipeline: spectral_scans} illustrates the average intensity along the spectral scan for the two most common observation modes employed during the observation campaign. The spectral profile of Observation Mode 1 reveals a continuum measurement with significantly low intensity, attributed to both the prefilter and the etalon's second-order contamination.
+One of the most important calibration procedures that is still under development is the on-flight spectral calibration or prefilter extraction. From both the on-ground calibrations and the spectral scans conducted during flight (see Sect. \ref{ref:spectral_scans}), it is evident that the prefilters are not perfectly centered, and the measured instenisty is affected differently depending on the spectral position. In particular, magnesium line observations are the most affected by this due to the width of the spectral line.
 
 \begin{figure}[t]
-  \includegraphics[width=\textwidth]{figures/Pipeline/Spectral_scans_ecample.pdf}
-  \caption[Spectral profile of observing modes 1 and 2.02.]{
-    Average intensities along the iron 525.02 nm (mode 2.02) and magnesium (mode 1) lines. The different colors show the different modulations. The scans correspond to observations taken during the minimum success observations taken on the 2024/07/10 at 13:20.}
-    \label{fig_pipeline: spectral_scans}
+  \includegraphics[width=\textwidth]{figures/Pipeline/Prefilterfit.pdf}
+  \caption[Prefilter fitting.]{
+    Fitting of the 517 nm pre-filter scan recorded on the 10$^\text{th}$ of July at 14:21 UTC during the commisioning phase. The pre-filter measurements (orange crosses) have been normalized to the expected intensity of the spectral line for better comparison. The dark blue line shows the expected scan for the fitted pre-filter (solid pink line) and the etalon transmission profile (red).}
+    \label{fig_pipeline: prefilter_fit}
 \end{figure}
 
-Although still underdeveloped due to time constraints, a correction addressing this issue is planned for the near future. By employing the prefilter scans, where the spectral line is recorded with rich spectral sampling, and utilizing an analytical model of the etalon's transmission profile, the contributions of both the second order and the effects of the prefilter can be carefully assessed through a fitting procedure. Software to conduct a similar analysis has already been developed in other works. In the following chapters, we will delve into the theoretical modeling of etalons and the development of software to extract these contributions from the data. Minor modifications to this software will enable us to correct for both the aforementioned effects in TuMag's data.
+
+By analyzing the prefilter scans—recorded with rich spectral sampling—and using an analytical model of the etalon's transmission profile, we can carefully assess the contributions of both the second order and the prefilter effects through a fitting procedure. Specifically, we compare the expected intensities for a given prefilter position and etalon parameter set to the observed intensities. This comparison enables us to fit the prefilter and/or etalon properties to match the observations.
+
+Figure \ref{fig_pipeline: prefilter_fit} illustrates an example of this analysis for the magnesium prefilter, where only the width and spectral position of the prefilter’s peak transmission were fitted. The results indicate a slight redshift of the prefilter relative to the line core. While small, this shift allows contamination from the etalon’s second order, introducing light from the spectral line at $\sim$5171.6 \r{A} into the measurements of the magnesium line's right wing. These kind of studies enable the correction of prefilter effects and the quantification of second-order contamination, allowing its removal from the measurements.
+
+These results are preliminary and require enhancements, such as replacing the Gaussian model with the actual prefilter transmission profile and incorporating a more complex etalon model that includes stray-light contamination. The fitting procedure employs Newton's method, utilizing analytical expressions for the transmission profiles and their derivatives. This method, originally developed for other works, was designed with TuMag applications in mind and will be discussed in detail in the next chapter  
+
+
+
+
 
