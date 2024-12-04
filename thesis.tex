@@ -70,13 +70,23 @@
 
 %Agradecimientos
 
-%\chapter*{Resumen}
+\chapter*{Resumen}
 
-%Resumen de la tesis
+En física solar, como en cualquier otra disciplina en astronomía, nuestro conocimiento del sol se sustenta sobre nuestra capacidad para analizar la luz que nos llega. Es por ello, que el desarrollo de nuevos instrumentos que sean capaces de explorar características del Sol previamente desconocidas, y nuestra capacidad para procesar e interpretar esas medidas son de fundamental importancia para el desarrollo de nuestra ciencia. Con esta tésis buscamos remarcar la importancia que tienen los primeros pasos de cualquier descubrimiento astronómico: el diseño, calibración de los instrumentos y la reducción de los datos para su preparacion para la explotación científica. 
 
-%\chapter*{Summary}
+La tésis gira alrededor del instrumento TuMag de la misión Sunrise III. 
 
-%Summary of the thesis
+\chapter*{Summary}
+
+In this thesis, we present a complete overview of the process of acquiring and analyzing solar observations. Starting with the design and calibration of the TuMag instrument aboard the Sunrise III mission, we proceed through its operations and observations, detail the data-reduction process, address specific challenges related to Fabry-Pérot-based spectropolarimeters, and conclude with an example of data analysis focusing on solar magnetograms.
+
+The Sunrise III mission represents the third flight of the Sunrise observatory, a one-meter solar telescope operating at an altitude of 37 km, supported by a stratospheric balloon. For this flight, the observatory introduced a completely new set of post-focal instruments. These include two slit-based spectropolarimeters, SCIP and SUSI, operating in the near-IR and UV, respectively, alongside the Tunable Magnetograph (TuMag), a filtergraph spectropolarimeter. Developed entirely by the Spanish Space Solar Consortium, TuMag is an FPI-based spectropolarimeter capable of observing three spectral lines: Fe I 5250.2 Å, Fe I 5250.6 Å, and Mg I b2 5172.7 Å. Calibration tests confirmed TuMag’s exceptional performance, with optical quality exceeding $\lambda/10$, spectral resolution better than 9 pm, and polarimetric efficiencies near ideal, enabling a signal-to-noise ratio (S/N) exceeding 1700 in intensity measurements.
+
+The Sunrise III flight occurred on July 10–11, during which all subsystems operated nearly flawlessly. Data-reduction pipeline development was well underway by the time data recovery began, and the reduction process started promptly. While ongoing due to the close timing of data arrival and thesis preparation, preliminary results showcase the exceptional quality of TuMag’s data.
+
+Although many steps in the reduction process are straightforward, certain corrections require more detailed attention. For instance, addressing instrumental artifacts in FPI-based spectropolarimeters like TuMag is particularly challenging. Using a simulated sunspot observation with a telecentric FPI, we demonstrate the importance of accurately correcting cavity map effects. We show that incomplete corrections can lead to velocity calculation errors of approximately 200 m/s and emphasize the role of flat-field correction in mitigating these effects. Additionally, we introduce an algorithm that models the etalon's transmission profile to better correct cavity errors in flat-field observations, aiming to enhance corrections for telecentric FPI-based spectropolarimeters, such as SO/PHI.
+
+Once the data has been thoroughly reduced, it becomes ready for scientific analysis. To illustrate this, we conclude with an application of persistent homology—a topological data analysis technique—on solar magnetograms. This approach demonstrates how magnetic features can be automatically identified, potentially enabling the automatic detection of high-activity regions with elevated flaring probabilities.
 
 \tableofcontents
 \listoffigures
