@@ -146,7 +146,7 @@ In the case of TuMag, each observing block was composed either of a combination 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/Pipeline/timelines_Examples.pdf}
   \caption[Timelines mosaic.]{
-    Continuum images of the first modulation of the first observation mode from different timelines. The timestamp provided corresponds to the first image of the observation mode. The colorbar is given in counts. All images have been dark-current corrected and flat-fielded. A single flat-field has been employed for all images, instead of the corresponding flat-field for each observation, resulting in some images displaying some intensity gradient.} 
+    Continuum images of the first modulation of the first observation mode (all modes 2.02 except the FS\_1 timeline which corresponds to a 2.06 mode) from different timelines. The timestamp provided corresponds to the first image of the time series. The colorbar is given in counts. All images have been dark-current corrected and flat-fielded. A single flat-field has been employed for all images, instead of the corresponding flat-field for each observation, resulting in some images displaying some intensity gradient.} 
     \label{fig_pipeline: timeline_examples}
 \end{figure}
 
@@ -209,7 +209,6 @@ Having computed the dark-current and the flat-fields, the scientific observation
 \end{figure}
 
 In addition to dark-current and flat-field corrections, an additional adjustment is required before proceeding with further computations. During operations, the second camera developed a readout issue that was not present during calibrations. This malfunction introduces a recurring spurious pattern in all frames taken by this camera (see the left panel of Figure \ref{fig_pipeline: readout}). Fortunately, this structure is consistent throughout all measurements and is characterized by a repetitive pattern whose intrinsic spatial frequencies can be identified in the power spectrum (see central panel of Fig.~\ref{fig_pipeline: readout}), allowing it to be effectively filtered out by manually setting the corresponding frequencies to zero in the fourier domain before reconstructing the image from their power spectrum. The result of this procedure is shown in the right panel of Figure \ref{fig_pipeline: readout}.  
-
 
 Before computing the Stokes components, the images from different cameras and modulations must be accurately aligned, as they will be combined during demodulation. Any misalignment of the solar structures in the images results in the apparition of spurious polarization signals. The alignement process is carried sequentially: first, images belonging to the first camera of different modulations are aligned between them; then, the images captured by the second camera are aligned with respect to the images of the corresponding modulation of the first. This alignment is performed with subpixel accuracy using the method described in \cite{alineamiento}, which calculates the alignment via a two-dimensional cross-correlation in the Fourier domain.
 
